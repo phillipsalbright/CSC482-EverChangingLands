@@ -19,7 +19,7 @@ public class SpriteProcessor : AssetPostprocessor
         {
             texture.textureType = TextureImporterType.Sprite;
             texture.spriteImportMode = SpriteImportMode.Single;
-            texture.spritePixelsPerUnit = 32;
+            texture.spritePixelsPerUnit = 64;
             texture.filterMode = FilterMode.Point;
             texture.SaveAndReimport();
             string textureName = Path.GetFileNameWithoutExtension(texture.assetPath);
