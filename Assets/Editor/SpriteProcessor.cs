@@ -25,7 +25,11 @@ public class SpriteProcessor : AssetPostprocessor
             string textureName = Path.GetFileNameWithoutExtension(texture.assetPath);
             IsometricRuleTile isometricRuleTile = new IsometricRuleTile();
             string loc = Path.Combine("Assets", _TILE_FOLDER, textureName) + ".asset";
-            AssetDatabase.CreateAsset(isometricRuleTile, loc);
+            if (!File.Exists(loc))
+            {
+                AssetDatabase.CreateAsset(isometricRuleTile, loc);
+
+            }
         }
     }
 }
