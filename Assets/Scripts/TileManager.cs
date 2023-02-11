@@ -62,6 +62,7 @@ public class TileManager : Singleton<TileManager>
                 }
                 Tile t = new Tile(tileType);
                 tiles.Add(pos, t);
+                LinkTiles(t, pos);
                 tilemap.SetTile(new Vector3Int(spawnPos.x, spawnPos.y, 0), TileInfo.Instance.GetTile(tileType));
             }
         }
@@ -70,5 +71,62 @@ public class TileManager : Singleton<TileManager>
     public Vector2Int GetMapSize()
     {
         return mapSize;
+    }
+
+    public void LinkTiles(Tile t, Vector2Int pos)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                LinkTileWithRelative(t, pos, new Vector2Int(i, j));
+            }
+        }
+    }
+
+    public void LinkTileWithRelative(Tile t, Vector2Int pos, Vector2Int relative)
+    {
+        Tile linkTile = null;
+        Vector2Int otherPos = pos;
+        if (relative.x == 1)
+        {
+            if (relative.y == 0)
+            {
+                otherPos += new Vector2Int(-1,0);
+            }
+            else
+            {
+                otherPos += new Vector2Int(1, 0);
+            }
+        }
+        else
+        {
+            if (relative.y == 0)
+            {
+                otherPos += new Vector2Int(0,-1);
+            }
+            else
+            {
+                otherPos += new Vector2Int(0,1);
+            }
+        }
+        if (tiles.ContainsKey(otherPos))
+        {
+            linkTile = tiles[otherPos];
+        }
+        t.AddTile(relative, linkTile);
+        if (linkTile != null)
+        {
+            Vector2Int newRelPos = new Vector2Int(relative.x, relative.y);
+            if (relative.y == 0)
+            {
+                newRelPos.y = 1;
+            }
+            else
+            {
+                newRelPos.y = 0;
+            }
+            tiles[pos].AddTile(newRelPos, t);
+        }
     }
 }
