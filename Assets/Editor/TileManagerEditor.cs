@@ -16,6 +16,7 @@ public class TileManagerEditor : Editor
         {
             if (manager.IsSceneBound())
             {
+                TileInfo.Instance.SetupDictionaries();
                 manager.GenerateMap();
             }
         }
