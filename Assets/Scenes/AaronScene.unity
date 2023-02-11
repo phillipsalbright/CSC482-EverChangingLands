@@ -276,7 +276,7 @@ MonoBehaviour:
   tilemap: {fileID: 151229390}
   seed: 0
   testing: 0
-  mapSize: {x: 1000, y: 1000}
+  mapSize: {x: 100, y: 100}
   tileScale: 20
   biomeScale: 20
   islandMode: 1
