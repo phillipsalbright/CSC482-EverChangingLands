@@ -1,48 +1,147 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 
 public class TileInfo : Singleton<TileInfo>
 {
+    public enum Biomes
+    {
+        Grass,
+        Water,
+        Sand,
+    }
+    [Serializable]
+    public struct TileComponents
+    {
+        public Tile.TileTypes tileType;
+        public IsometricRuleTile isometricTile;
+        [Range(0,1)]
+        public float chance;
+    }
+    [Serializable]
+    public struct BiomeList
+    {
+        public Biomes biome;
+        [Range (0,1)]
+        public float chance;
+        public List<TileComponents> tiles;
+    }
     [SerializeField]
-    private List<Tile.TileTypes> tileTypes = new List<Tile.TileTypes>();
+    private List<BiomeList> biomeLists = new List<BiomeList>();
+    private Dictionary<Biomes, BiomeList> biomeDict = new Dictionary<Biomes, BiomeList>();
+    private Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>> tilesDict = new Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>>();
+    private Dictionary<Biomes, float> tilesChanceSumDict = new Dictionary<Biomes, float>();
+    private Dictionary<Tile.TileTypes, IsometricRuleTile> isometricTiles = new Dictionary<Tile.TileTypes, IsometricRuleTile>();
+    private float biomeChanceSum = 0;
     [SerializeField]
-    private List<IsometricRuleTile> isometricRules = new List<IsometricRuleTile>();
-    [SerializeField, Range(0, 1)]
-    private List<float> chances = new List<float>();
-    private Dictionary<Tile.TileTypes, IsometricRuleTile> tileDictionary = new Dictionary<Tile.TileTypes, IsometricRuleTile>();
-    private Dictionary<Tile.TileTypes, float> chanceDictionary = new Dictionary<Tile.TileTypes, float>();
-
+    private IsometricRuleTile deepWaterTile;
+    [SerializeField, Range(0,1)]
+    private float deepWaterStart;
     void Awake()
     {
-        for (int i = 0; i < tileTypes.Count && i < isometricRules.Count && i < chances.Count; i++)
-        {
-            tileDictionary.Add(tileTypes[i], isometricRules[i]);
-            chanceDictionary.Add(tileTypes[i], chances[i]);
-        }
+        SetupDictionaries();
     }
 
-    public float GetChance(Tile.TileTypes tileType)
+    public void SetupDictionaries()
     {
-        return chanceDictionary[tileType];
+        biomeDict.Clear();
+        isometricTiles.Clear();
+        tilesChanceSumDict.Clear();
+        tilesDict.Clear();
+        biomeChanceSum = 0;
+        isometricTiles.Add(Tile.TileTypes.DeepWater, deepWaterTile);
+        foreach (BiomeList biomeList in biomeLists)
+        {
+            biomeDict.Add(biomeList.biome, biomeList);
+            tilesDict.Add(biomeList.biome, new Dictionary<Tile.TileTypes, TileComponents>());
+            tilesChanceSumDict.Add(biomeList.biome, 0);
+            foreach (TileComponents tileComp in biomeList.tiles)
+            {
+                tilesDict[biomeList.biome].Add(tileComp.tileType, tileComp);
+                tilesChanceSumDict[biomeList.biome] += tileComp.chance;
+                isometricTiles.Add(tileComp.tileType, tileComp.isometricTile);
+            }
+            biomeChanceSum += biomeList.chance;
+        }
     }
 
     public IsometricRuleTile GetTile(Tile.TileTypes tileType)
     {
-        return tileDictionary[tileType];
+        return isometricTiles[tileType];
     }
 
-    public Tile.TileTypes GetTileType(float rand)
+    public Tile.TileTypes GetTileType(float biomeRand, float tileRand)
     {
+        biomeRand *= biomeChanceSum;
         float totalChance = 0;
-        foreach (Tile.TileTypes tileType in tileTypes)
+        foreach (Biomes biome in biomeDict.Keys)
         {
-            totalChance += chanceDictionary[tileType];
-            if (rand < totalChance)
+            float totalMin = totalChance;
+            totalChance += biomeDict[biome].chance;
+            if (biomeRand <= totalChance)
             {
-                return tileType;
+                return GetTileFromBiome(tileRand, biome);
             }
         }
         return Tile.TileTypes.Desert;
+    }
+
+    public Tile.TileTypes GetTileFromBiome(float rand, Biomes biome)
+    {
+        rand *= tilesChanceSumDict[biome];
+        float totalChance = 0;
+        foreach (KeyValuePair<Tile.TileTypes, TileComponents> tiles in tilesDict[biome])
+        {
+            totalChance += tiles.Value.chance;
+            if (rand <= totalChance)
+            {
+                return tiles.Key;
+            }
+        } 
+        return Tile.TileTypes.Grass;
+    }
+
+    public Tile.TileTypes GetTileTypeWaterEdge(float biomeRand, float tileRand, Vector2 distToEdge)
+    {
+        biomeRand *= biomeChanceSum;
+        float distance = Mathf.Clamp(distToEdge.magnitude-deepWaterStart,0,1);
+        distance /= (1-deepWaterStart);
+        float totalChance = distance;
+        float nonWaterChance = biomeChanceSum - distance;
+        if (biomeRand < distance) {
+            return GetTileFromBiomeWaterEdge(tileRand, Biomes.Water, distance);
+        }
+        foreach (KeyValuePair<Biomes, BiomeList> biomes in biomeDict)
+        {
+            float randMin = totalChance;
+            totalChance += (biomes.Value.chance / biomeChanceSum) * nonWaterChance;
+            if (biomeRand <= totalChance)
+            {
+                return GetTileFromBiomeWaterEdge(tileRand, biomes.Key, distance);
+            }
+        }
+        return Tile.TileTypes.DeepWater;    
+    }
+
+    public Tile.TileTypes GetTileFromBiomeWaterEdge(float rand, Biomes biome, float distance)
+    {
+        rand *= tilesChanceSumDict[biome];
+        float totalChance = distance;
+        float nonWaterChance = tilesChanceSumDict[biome] - distance;
+        if (rand < distance)
+        {
+            return Tile.TileTypes.DeepWater;
+        }
+        foreach (KeyValuePair<Tile.TileTypes, TileComponents> tiles in tilesDict[biome])
+        {
+            totalChance += (tiles.Value.chance / tilesChanceSumDict[biome]) * nonWaterChance;
+            if (rand <= totalChance)
+            {
+                return tiles.Key;
+            }
+        } 
+        return Tile.TileTypes.Grass;
     }
 }

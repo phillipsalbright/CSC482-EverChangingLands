@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e6f3fbb560bd6041a202ea918fa4f23, type: 3}
-  m_Name: grass
+  m_Name: forest
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: 016a7325a80d9894eb5b5e08c53bacf1, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: 338e57e51ea14da43aae864be7e8e7b6, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules: []
