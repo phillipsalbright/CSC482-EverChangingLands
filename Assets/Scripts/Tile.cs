@@ -40,6 +40,10 @@ public class Tile
         currentTileType = tileType;
     }
 
+    public void PlayerChangeTileType(TileTypes tileType){
+        SetCurrentTileType(tileType);
+    }
+
     public TileTypes GetCurrentTileType()
     {
         return currentTileType;
@@ -58,5 +62,14 @@ public class Tile
     public void AddTile(Vector2Int location, Tile t)
     {
         adjacentTiles[location.x, location.y] = t;
+    }
+
+    public void CheckNextType(){
+        nextTileType = TileRules.GetNewTileType(currentTileType,adjacentTiles);
+    }
+
+    public void NextTurn(){
+        currentTileType = nextTileType;
+        CheckNextType();
     }
 }
