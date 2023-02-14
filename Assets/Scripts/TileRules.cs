@@ -12,6 +12,7 @@ public static class TileRules
         //first, check the number of surrounding tiles of each terrain type for use in rule checking.
         Dictionary<Tile.TileTypes, int> terrainCounts =  new Dictionary<Tile.TileTypes, int>();
         foreach(Tile tile in adjacentTiles){
+            if (tile == null) continue;
             Tile.TileTypes currentTileType = tile.GetCurrentTileType();
             bool exists = terrainCounts.ContainsKey(currentTileType);
             if(exists){

@@ -69,6 +69,10 @@ public class TileInfo : Singleton<TileInfo>
 
     public IsometricRuleTile GetTile(Tile.TileTypes tileType)
     {
+        if (!isometricTiles.ContainsKey(tileType))
+        {
+            return deepWaterTile;
+        }
         return isometricTiles[tileType];
     }
 
