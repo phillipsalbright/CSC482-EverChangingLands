@@ -20,5 +20,12 @@ public class TileManagerEditor : Editor
                 manager.GenerateMap();
             }
         }
+        if (GUILayout.Button("Next Turn"))
+        {
+            if (manager.IsSceneBound())
+            {
+                manager.AdvanceTurn();
+            }
+        }
     }
 }

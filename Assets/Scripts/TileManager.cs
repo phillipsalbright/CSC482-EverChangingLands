@@ -9,6 +9,8 @@ public class TileManager : Singleton<TileManager>
     [SerializeField]
     private Tilemap tilemap;
     [SerializeField]
+    private Tilemap changeMap;
+    [SerializeField]
     private int seed;
     [SerializeField, Tooltip("Keeps entered seed")]
     private bool testing;
@@ -23,10 +25,41 @@ public class TileManager : Singleton<TileManager>
     private Vector2 biomeOffset;
     [SerializeField, Tooltip("Generates surrounding ocean")]
     private bool islandMode;
+    private int turn = 0;
     // Start is called before the first frame update
     void Start()
     {
         GenerateMap();
+        CheckTiles();
+    }
+
+    public void AdvanceTurn()
+    {
+        foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
+        {
+            kvp.Value.SetCurrentTileType(kvp.Value.GetNextTileType());
+        }
+        Tilemap temp = tilemap;
+        tilemap = changeMap;
+        tilemap.gameObject.SetActive(true);
+        changeMap = temp;
+        changeMap.gameObject.SetActive(false);
+        if (turn % 2 == 0)
+            WeatherManager.Instance.SetNewWeather();
+        CheckTiles();
+        turn++;
+    }
+
+    public void CheckTiles()
+    {
+        changeMap.ClearAllTiles();
+        foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
+        {
+            Tile.TileTypes newTileType = TileRules.GetNewTileType(kvp.Value.GetCurrentTileType(), kvp.Value.GetAdjacentTiles());
+            kvp.Value.SetNextTileType(newTileType);
+            changeMap.SetTile(new Vector3Int(kvp.Key.x, kvp.Key.y, -1), TileInfo.Instance.GetTile(newTileType));
+        }
+        changeMap.gameObject.SetActive(false);
     }
 
     public void GenerateMap()
@@ -61,9 +94,9 @@ public class TileManager : Singleton<TileManager>
                     tileType = TileInfo.Instance.GetTileType(biomeRand, tileRand);
                 }
                 Tile t = new Tile(tileType);
-                tiles.Add(pos, t);
-                LinkTiles(t, pos);
-                tilemap.SetTile(new Vector3Int(spawnPos.x, spawnPos.y, 0), TileInfo.Instance.GetTile(tileType));
+                tiles.Add(spawnPos, t);
+                LinkTiles(t, spawnPos);
+                tilemap.SetTile(new Vector3Int(spawnPos.x, spawnPos.y, 0), TileInfo.Instance.GetTile(t.GetCurrentTileType()));
             }
         }
     }
@@ -113,6 +146,15 @@ public class TileManager : Singleton<TileManager>
         if (tiles.ContainsKey(otherPos))
         {
             linkTile = tiles[otherPos];
+            if (tiles[otherPos].GetCurrentTileType() == Tile.TileTypes.DeepWater && t.GetCurrentTileType() != Tile.TileTypes.DeepWater && t.GetCurrentTileType() != Tile.TileTypes.Water)
+            {
+                t.SetCurrentTileType(Tile.TileTypes.Water);
+            }
+            else if (t.GetCurrentTileType() == Tile.TileTypes.DeepWater && tiles[otherPos].GetCurrentTileType() != Tile.TileTypes.DeepWater && tiles[otherPos].GetCurrentTileType() != Tile.TileTypes.Water)
+            {
+                tiles[otherPos].SetCurrentTileType(Tile.TileTypes.Water);
+                tilemap.SetTile(new Vector3Int(otherPos.x, otherPos.y, 0), TileInfo.Instance.GetTile(tiles[otherPos].GetCurrentTileType()));
+            }
         }
         t.AddTile(relative, linkTile);
         if (linkTile != null)

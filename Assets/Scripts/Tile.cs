@@ -72,4 +72,9 @@ public class Tile
         currentTileType = nextTileType;
         CheckNextType();
     }
+
+    public Tile[,] GetAdjacentTiles()
+    {
+        return adjacentTiles;
+    }
 }
