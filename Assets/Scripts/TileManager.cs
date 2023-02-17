@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -25,7 +26,8 @@ public class TileManager : Singleton<TileManager>
     private Vector2 biomeOffset;
     [SerializeField, Tooltip("Generates surrounding ocean")]
     private bool islandMode;
-    private int turn = 0;
+
+    private bool viewingPrediction = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,10 @@ public class TileManager : Singleton<TileManager>
 
     public void AdvanceTurn()
     {
+        if (viewingPrediction)
+        {
+            this.ViewChangeMap();
+        }
         foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
         {
             kvp.Value.SetCurrentTileType(kvp.Value.GetNextTileType());
@@ -44,10 +50,9 @@ public class TileManager : Singleton<TileManager>
         tilemap.gameObject.SetActive(true);
         changeMap = temp;
         changeMap.gameObject.SetActive(false);
-        if (turn % 2 == 0)
+        if (GameManager.Instance.GetTurnNum() % 2 == 0)
             WeatherManager.Instance.SetNewWeather();
         CheckTiles();
-        turn++;
     }
 
     public void CheckTiles()
@@ -170,5 +175,27 @@ public class TileManager : Singleton<TileManager>
             }
             tiles[pos].AddTile(newRelPos, t);
         }
+    }
+
+    // Predict ahead
+    public void ViewChangeMap()
+    {
+        if (!viewingPrediction)
+        {
+            changeMap.gameObject.SetActive(true);
+            tilemap.gameObject.SetActive(false);
+            viewingPrediction = true;
+        }
+        else
+        {
+            changeMap.gameObject.SetActive(false);
+            tilemap.gameObject.SetActive(true);
+            viewingPrediction = false;
+        }
+    }
+
+    public bool IsViewingPrediction()
+    {
+        return viewingPrediction;
     }
 }
