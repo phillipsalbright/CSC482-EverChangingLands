@@ -78,6 +78,9 @@ MonoBehaviour:
   - biome: 0
     chance: 0.4
     tiles:
+    - tileType: 4
+      isometricTile: {fileID: 11400000, guid: 6286e5af240c6b540a788748743755a0, type: 2}
+      chance: 0.3
     - tileType: 1
       isometricTile: {fileID: 11400000, guid: b38135a27300bf741877bcfc78c4966d, type: 2}
       chance: 0.7

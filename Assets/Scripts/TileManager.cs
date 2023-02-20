@@ -43,6 +43,8 @@ public class TileManager : Singleton<TileManager>
         }
         foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
         {
+            if (kvp.Value.GetCurrentTileType() == Tile.TileTypes.DeepWater)
+                continue;
             kvp.Value.SetCurrentTileType(kvp.Value.GetNextTileType());
         }
         Tilemap temp = tilemap;
@@ -60,8 +62,12 @@ public class TileManager : Singleton<TileManager>
         changeMap.ClearAllTiles();
         foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
         {
-            Tile.TileTypes newTileType = TileRules.GetNewTileType(kvp.Value.GetCurrentTileType(), kvp.Value.GetAdjacentTiles());
-            kvp.Value.SetNextTileType(newTileType);
+            Tile.TileTypes newTileType = Tile.TileTypes.DeepWater;
+            if (kvp.Value.GetCurrentTileType() != Tile.TileTypes.DeepWater)
+            {
+                newTileType = TileRules.GetNewTileType(kvp.Value.GetCurrentTileType(), kvp.Value.GetAdjacentTiles());
+                kvp.Value.SetNextTileType(newTileType);
+            }
             changeMap.SetTile(new Vector3Int(kvp.Key.x, kvp.Key.y, -1), TileInfo.Instance.GetTile(newTileType));
         }
         changeMap.gameObject.SetActive(false);
@@ -197,5 +203,11 @@ public class TileManager : Singleton<TileManager>
     public bool IsViewingPrediction()
     {
         return viewingPrediction;
+    }
+
+    public Vector2Int GetTileLocation(Vector2 ClickPos)
+    {
+        Vector3Int worldPos = tilemap.WorldToCell(ClickPos);
+        return new Vector2Int(worldPos.x, worldPos.y);
     }
 }
