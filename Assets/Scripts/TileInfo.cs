@@ -71,6 +71,7 @@ public class TileInfo : Singleton<TileInfo>
     {
         if (!isometricTiles.ContainsKey(tileType))
         {
+            Debug.LogError("Failure to find tile " + tileType);
             return deepWaterTile;
         }
         return isometricTiles[tileType];
