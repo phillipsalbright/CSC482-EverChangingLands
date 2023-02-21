@@ -17,6 +17,8 @@ public class TileManager : Singleton<TileManager>
     private bool testing;
     [SerializeField, Tooltip("Works with pretty much any size (does not need to be equal)")]
     private Vector2Int mapSize;
+    [SerializeField, Tooltip("How much deep water to add onto ends")]
+    private Vector2Int oceanExtension;
     [SerializeField, Range(0.1f,50), Tooltip("Smaller the number, larger the groups")]
     private float tileScale;
     [SerializeField, Range(0.1f, 50), Tooltip("Smaller the number, larger the biomes")]
@@ -26,13 +28,15 @@ public class TileManager : Singleton<TileManager>
     private Vector2 biomeOffset;
     [SerializeField, Tooltip("Generates surrounding ocean")]
     private bool islandMode;
+    private int width;
+    private int height;
 
     private bool viewingPrediction = false;
     // Start is called before the first frame update
     void Start()
     {
         GenerateMap();
-        CheckTiles();
+        CheckTiles(true);
     }
 
     public void AdvanceTurn()
@@ -54,12 +58,11 @@ public class TileManager : Singleton<TileManager>
         changeMap.gameObject.SetActive(false);
         if (GameManager.Instance.GetTurnNum() % 2 == 0)
             WeatherManager.Instance.SetNewWeather();
-        CheckTiles();
+        CheckTiles(false);
     }
 
-    public void CheckTiles()
+    public void CheckTiles(bool initial)
     {
-        changeMap.ClearAllTiles();
         foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
         {
             Tile.TileTypes newTileType = Tile.TileTypes.DeepWater;
@@ -68,7 +71,12 @@ public class TileManager : Singleton<TileManager>
                 newTileType = TileRules.GetNewTileType(kvp.Value.GetCurrentTileType(), kvp.Value.GetAdjacentTiles());
                 kvp.Value.SetNextTileType(newTileType);
             }
-            changeMap.SetTile(new Vector3Int(kvp.Key.x, kvp.Key.y, -1), TileInfo.Instance.GetTile(newTileType));
+            IsometricRuleTile newTile = TileInfo.Instance.GetTile(newTileType);
+            Vector3Int loc = new Vector3Int(kvp.Key.x, kvp.Key.y, 0);
+            if (changeMap.GetSprite(loc) != newTile.m_DefaultSprite)
+            {
+                changeMap.SetTile(loc, newTile);
+            }
         }
         changeMap.gameObject.SetActive(false);
     }
@@ -86,30 +94,44 @@ public class TileManager : Singleton<TileManager>
         tileOffset.y = UnityEngine.Random.Range(0f, 9999f);
         biomeOffset.x = -tileOffset.x;
         biomeOffset.y = -tileOffset.y;
-        for (int r = 0; r < mapSize.x; r++)
+        width = mapSize.x / 2;
+        height = mapSize.y / 2;
+        for (int r = -width - oceanExtension.x; r < width + oceanExtension.x; r++)
         {
-            for (int c = 0; c < mapSize.y; c++)
+            for (int c = -height - oceanExtension.x; c < height + oceanExtension.x; c++)
             {
-                Vector2Int pos = new Vector2Int(r, c);
-                Vector2Int spawnPos = new Vector2Int(r-mapSize.x / 2,c-mapSize.y /2);
-                float tileRand = Noise.Get2DPerlin(pos, mapSize, tileScale, tileOffset);
-                float biomeRand = Noise.Get2DPerlin(pos, mapSize, biomeScale, biomeOffset);
-                Tile.TileTypes tileType;
-                if (islandMode)
+                if (Mathf.Abs(r) < width && Mathf.Abs(c) < height)
                 {
-                    Vector2 dist = new Vector2(2 * (float)Mathf.Abs(spawnPos.x) / mapSize.x, 2 * (float)Mathf.Abs(spawnPos.y) / mapSize.y);
-                    tileType = TileInfo.Instance.GetTileTypeWaterEdge(biomeRand, tileRand, dist);
+                    ActualMapFillIn(r, c);
                 }
                 else
                 {
-                    tileType = TileInfo.Instance.GetTileType(biomeRand, tileRand);
+                    tilemap.SetTile(new Vector3Int(r, c, 0), TileInfo.Instance.GetTile(Tile.TileTypes.DeepWater));
                 }
-                Tile t = new Tile(tileType);
-                tiles.Add(spawnPos, t);
-                LinkTiles(t, spawnPos);
-                tilemap.SetTile(new Vector3Int(spawnPos.x, spawnPos.y, 0), TileInfo.Instance.GetTile(t.GetCurrentTileType()));
             }
         }
+    }
+
+    private void ActualMapFillIn(int r, int c)
+    {
+        //Vector2Int pos = new Vector2Int(r, c);
+        Vector2Int spawnPos = new Vector2Int(r, c);
+        float tileRand = Noise.Get2DPerlin(spawnPos, mapSize, tileScale, tileOffset);
+        float biomeRand = Noise.Get2DPerlin(spawnPos, mapSize, biomeScale, biomeOffset);
+        Tile.TileTypes tileType;
+        if (islandMode)
+        {
+            Vector2 dist = new Vector2(2 * (float)Mathf.Abs(spawnPos.x) / mapSize.x, 2 * (float)Mathf.Abs(spawnPos.y) / mapSize.y);
+            tileType = TileInfo.Instance.GetTileTypeWaterEdge(biomeRand, tileRand, dist);
+        }
+        else
+        {
+            tileType = TileInfo.Instance.GetTileType(biomeRand, tileRand);
+        }
+        Tile t = new Tile(tileType);
+        tiles.Add(spawnPos, t);
+        LinkTiles(t, spawnPos);
+        tilemap.SetTile(new Vector3Int(spawnPos.x, spawnPos.y, 0), TileInfo.Instance.GetTile(t.GetCurrentTileType()));
     }
 
     public Vector2Int GetMapSize()

@@ -493,7 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraSpeed: 5
   xbounds: {x: -27, y: 27}
-  ybounds: {x: -14, y: 14}
+  ybounds: {x: -16, y: 16}
   sizebounds: {x: 3, y: 10}
   ui: {fileID: 0}
 --- !u!114 &2955910477991509548
