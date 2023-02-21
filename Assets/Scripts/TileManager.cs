@@ -210,4 +210,9 @@ public class TileManager : Singleton<TileManager>
         Vector3Int worldPos = tilemap.WorldToCell(ClickPos);
         return new Vector2Int(worldPos.x, worldPos.y);
     }
+
+    public Tile GetTileAtLocation(Vector2 ClickPos)
+    {
+        return tiles[GetTileLocation(ClickPos)];
+    }
 }
