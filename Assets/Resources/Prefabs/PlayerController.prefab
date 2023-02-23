@@ -496,6 +496,7 @@ MonoBehaviour:
   ybounds: {x: -16, y: 16}
   sizebounds: {x: 3, y: 10}
   ui: {fileID: 0}
+  cursorSpeed: 5
 --- !u!114 &2955910477991509548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +574,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2de9ebaa-a767-4c5a-96b1-efa8d2292c67
     m_ActionName: PlayerActions/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2955910477991509549}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7cf6d9ff-58da-47f7-a0a7-38e6d8354fb5
+    m_ActionName: PlayerActions/Select[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2955910477991509549}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: CursorMovementInputChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3abf2b54-018a-46ae-b1e7-1987c1e87565
+    m_ActionName: PlayerActions/CursorMovement[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: MapControls
   m_DefaultActionMap: PlayerActions
