@@ -42,18 +42,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Select",
-                    "type": "Button",
-                    "id": "7cf6d9ff-58da-47f7-a0a7-38e6d8354fb5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CursorMovement",
+                    "name": "Move Cursor",
                     "type": "Value",
-                    "id": "3abf2b54-018a-46ae-b1e7-1987c1e87565",
+                    "id": "67680de4-b4bf-4f92-b46c-cfb1dc1f1bbd",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -184,6 +175,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c492fefc-2340-4ccb-a142-795914f3939f",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c023d52b-1cb6-4b40-80ab-dedae1e1ee5a",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -250,45 +252,12 @@
                 },
                 {
                     "name": "",
-                    "id": "b1e8702d-1a44-43ce-b58e-be2676305562",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "456ca553-45ca-4b38-bb80-e3d8e7cb615d",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1be45ae3-2178-4125-8144-78615ef5f12b",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CursorMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dd3f75d8-2996-4134-9ae2-12f9efd6589c",
+                    "id": "0f36609a-448e-4fe9-b9c6-f6732321682c",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "CursorMovement",
+                    "groups": "Gamepad",
+                    "action": "Move Cursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -306,18 +275,24 @@
             "bindingGroup": "MapControls",
             "devices": [
                 {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": true,
-                    "isOR": false
-                },
-                {
                     "devicePath": "<Keyboard>",
-                    "isOptional": true,
+                    "isOptional": false,
                     "isOR": false
                 },
                 {
                     "devicePath": "<Mouse>",
                     "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
                     "isOR": false
                 }
             ]
