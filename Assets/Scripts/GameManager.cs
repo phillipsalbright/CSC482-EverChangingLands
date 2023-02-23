@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
     {
         get
         {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<GameManager>();
+            }
             return _instance;
         }
     }
