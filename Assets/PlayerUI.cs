@@ -126,4 +126,15 @@ public class PlayerUI : MonoBehaviour
         _rightStick = context.ReadValue<Vector2>();
     }
 
+    public void ControllerSelect(InputAction.CallbackContext context)
+    {
+        Debug.Log("Select");
+        if(context.performed)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);
+            TileManager tm = FindObjectOfType<TileManager>();
+            Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());
+        }
+    }
+
 }
