@@ -28,7 +28,13 @@ public class PlayerController : MonoBehaviour
     {
         transform.Translate(inputVector * _cameraSpeed * Time.deltaTime);
         transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);
-        cam.orthographicSize += zoomInput * Time.deltaTime / -2;
+        float zoomScalar = 1;
+        if (this.GetComponent<PlayerInput>().currentControlScheme == "Gamepad")
+        {
+            zoomScalar = 5;
+        }
+        
+        cam.orthographicSize += zoomInput * zoomScalar * Time.deltaTime / -2;
         cam.orthographicSize = Math.Clamp(cam.orthographicSize, sizebounds.x, sizebounds.y);
     }
 
