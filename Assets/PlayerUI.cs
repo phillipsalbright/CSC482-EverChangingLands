@@ -140,8 +140,11 @@ public class PlayerUI : MonoBehaviour
             SettlerManager sm = FindObjectOfType<SettlerManager>();
             if(sm.GetCurrentNumberOfSettlers() < sm.GetInitialNumberOfSettlers())
             {
-                Vector3Int coordinate = tm.GetTilemap().WorldToCell(ray.GetPoint(10f));
-                sm.AddSettlerAtTile(tile, tm.GetTilemap().GetCellCenterWorld(coordinate));
+                sm.AddSettlerAtTile(tile);
+            }
+            else
+            {
+                sm.GetSettlers()[0].GetComponent<Settler>().MoveSettler(tile);
             }
         }
     }
