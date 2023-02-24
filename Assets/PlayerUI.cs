@@ -85,7 +85,7 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         bool _isGamepad = this.GetComponentInParent<PlayerInput>().currentControlScheme == "Gamepad";
-        Debug.Log(this.GetComponentInParent<PlayerInput>().currentControlScheme);
+       // Debug.Log(this.GetComponentInParent<PlayerInput>().currentControlScheme);
         if (!_isGamepad)
         {
             if (Mouse.current != null && !_isGamepad)
@@ -133,7 +133,9 @@ public class PlayerUI : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);
             TileManager tm = FindObjectOfType<TileManager>();
+            GameManager.Instance.SelectTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
             Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());
+            
         }
     }
 

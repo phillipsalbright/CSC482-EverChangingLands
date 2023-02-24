@@ -61,7 +61,7 @@ public class BuildingManager : Singleton<BuildingManager>
     }
 
     public List<BuildingName> getAvailableBuildings(Tile.TileTypes tileType) {
-        List<BuildingName> list = new List<BuildingName>;
+        List<BuildingName> list = new List<BuildingName>();
         foreach(Building b in buildingList) {
             if(b.acceptedTiles.Contains(tileType)) {
                 list.Add(b.buildingType);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
     private UnityEvent<int> _onTurnChanged = new();
     private int _foodRemaining;
     private int _turn;
+    private Tile selectedTile;
+    [SerializeField] private Tilemap selectionMap;
 
     public int FoodRemaining
     {
@@ -88,6 +91,11 @@ public class GameManager : MonoBehaviour
         _turn++;
         _onTurnChanged.Invoke(_turn);
         tileManager.AdvanceTurn();
+    }
+
+    public void SelectTile(Tile tile)
+    {
+        selectionMap.ClearAllTiles();
     }
 
 
