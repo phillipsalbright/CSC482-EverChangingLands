@@ -50,6 +50,7 @@ public class TileManager : Singleton<TileManager>
             if (kvp.Value.GetCurrentTileType() == Tile.TileTypes.DeepWater)
                 continue;
             kvp.Value.SetCurrentTileType(kvp.Value.GetNextTileType());
+            changeMap.SetColor(new Vector3Int(kvp.Key.x, kvp.Key.y, 0), Color.white);
         }
         Tilemap temp = tilemap;
         tilemap = changeMap;
@@ -74,7 +75,11 @@ public class TileManager : Singleton<TileManager>
             Vector3Int loc = new Vector3Int(kvp.Key.x, kvp.Key.y, 0);
             if (changeMap.GetSprite(loc) != newTile.m_DefaultSprite)
             {
-                changeMap.SetTile(loc, newTile);
+                changeMap.SetTile(loc, newTile); 
+            }
+            if (newTileType != kvp.Value.GetCurrentTileType())
+            {
+                changeMap.SetColor(loc, Color.red);
             }
         }
         changeMap.gameObject.SetActive(false);
