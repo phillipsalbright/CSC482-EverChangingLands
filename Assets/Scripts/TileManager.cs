@@ -230,4 +230,14 @@ public class TileManager : Singleton<TileManager>
     {
         return tiles[GetTileLocation(ClickPos)];
     }
+
+    public Dictionary<Vector2Int, Tile> GetTileDictionary()
+    {
+        return tiles;
+    }
+
+    public Tilemap GetTilemap()
+    {
+        return tilemap;
+    }
 }
