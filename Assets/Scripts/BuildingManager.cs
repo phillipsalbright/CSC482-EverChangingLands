@@ -29,8 +29,6 @@ public class BuildingManager : Singleton<BuildingManager>
         public int amountProduced;
 
         public List<Tile.TileTypes> acceptedTiles;
-
-        public TileBase tile;
     }
 
     public struct ResourceCost
@@ -78,7 +76,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void buildBuilding(BuildingName name, Vector2Int p) {
         builtBuildings.Add(p, name);
-        buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), buildingDictionary[name].tile);
+        buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), buildingDictionary[name].isometricTile);
     }
 
     public bool isDestroyed(BuildingName name, Tile.TileTypes tileType) {
