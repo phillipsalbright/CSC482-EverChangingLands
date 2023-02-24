@@ -12,7 +12,7 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         Lumber,
         Farm,
-        WaterMill,
+        WaterWell,
     }
     
     [Serializable]
