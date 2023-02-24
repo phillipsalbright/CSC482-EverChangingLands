@@ -107,6 +107,7 @@ public class TileManager : Singleton<TileManager>
                 else
                 {
                     tilemap.SetTile(new Vector3Int(r, c, 0), TileInfo.Instance.GetTile(Tile.TileTypes.DeepWater));
+                    changeMap.SetTile(new Vector3Int(r, c, 0), TileInfo.Instance.GetTile(Tile.TileTypes.DeepWater));
                 }
             }
         }
