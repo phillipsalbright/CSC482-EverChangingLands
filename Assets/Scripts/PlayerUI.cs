@@ -13,8 +13,6 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text _turnText;
-    [SerializeField] private TMP_Text _woodText;
-    [SerializeField] private TMP_Text _foodText;
 
     [SerializeField] private Button nextTurnButton;
 
@@ -39,9 +37,6 @@ public class PlayerUI : MonoBehaviour
     {
         Cursor.visible = false;
         GameManager g = GameManager.Instance;
-        _turnText.text = "Turn " + g.GetTurnNum();
-        _woodText.text = "Wood: " + g.WoodRemaining;
-        _foodText.text = "Food: " + g.FoodRemaining;
         nextTurnButton.onClick.AddListener(g.AdvanceTurn);
         midScreen = new Vector2(Screen.width, Screen.height);
         _cursorPosition = midScreen;
@@ -50,8 +45,6 @@ public class PlayerUI : MonoBehaviour
     protected void OnEnable()
     {
         GameManager g = GameManager.Instance;
-        g.OnFoodChanged += HandleFoodChange;
-        g.OnWoodChanged += HandleWoodChange;
         g.OnTurnChanged += HandleTurnChange;
     }
 
@@ -62,25 +55,12 @@ public class PlayerUI : MonoBehaviour
         {
             return;
         }
-        g.OnFoodChanged -= HandleFoodChange;
-        g.OnWoodChanged -= HandleWoodChange;
         g.OnTurnChanged -= HandleTurnChange;
     }
 
     private void HandleTurnChange(int newTurn)
     {
         _turnText.text = "Turn " + newTurn;
-    }
-
-    private void HandleFoodChange(int oldFoodCount, int newFoodCount)
-    {
-        _foodText.text = "Wood: " + newFoodCount;
-    }
-
-    private void HandleWoodChange(int oldWoodCount, int newWoodCount)
-    {
-
-        _woodText.text = "Food: " + newWoodCount;
     }
 
     // Update is called once per frame
