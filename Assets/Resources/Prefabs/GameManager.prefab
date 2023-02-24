@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingFoodCount: 100
   _startingWoodCount: 100
+  selectionMap: {fileID: 0}
+  reticleTile: {fileID: 11400000, guid: 008d9c91db30e4a49ab816973e19f0f2, type: 2}

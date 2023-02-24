@@ -132,6 +132,7 @@ public class PlayerUI : MonoBehaviour
         if(context.performed)
         {
             Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);
+
             TileManager tm = FindObjectOfType<TileManager>();
             GameManager.Instance.SelectTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
             Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());

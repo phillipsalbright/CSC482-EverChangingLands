@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     public void ZoomInputChanged(InputAction.CallbackContext context)
     {
-        Debug.Log(context.action.ReadValue<float>());
+       // Debug.Log(context.action.ReadValue<float>());
         zoomInput = context.action.ReadValue<float>();
     }
 

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int _turn;
     private Tile selectedTile;
     [SerializeField] private Tilemap selectionMap;
+    [SerializeField] private TileBase reticleTile;
 
     public int FoodRemaining
     {
@@ -94,6 +95,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void SelectTile(Tile tile)
+    {
+        selectionMap.ClearAllTiles();
+        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticleTile);
+    }
+
+    public void DeleteSelection()
     {
         selectionMap.ClearAllTiles();
     }
