@@ -48,13 +48,20 @@ MonoBehaviour:
     sunnyChance: 0.6
     droughtChance: 0.2
     rainChance: 0.2
+    minTurns: 3
+    repeatChanceChange: 0.1
   drought:
     sunnyChance: 0.5
     droughtChance: 0.4
     rainChance: 0.1
+    minTurns: 3
+    repeatChanceChange: 0.1
   rain:
     sunnyChance: 0.5
     droughtChance: 0.05
     rainChance: 0.45
+    minTurns: 3
+    repeatChanceChange: 0.1
   currentWeather: 0
   nextWeather: 0
+  numTurns: 0
