@@ -56,8 +56,7 @@ public class TileManager : Singleton<TileManager>
         tilemap.gameObject.SetActive(true);
         changeMap = temp;
         changeMap.gameObject.SetActive(false);
-        if (GameManager.Instance.GetTurnNum() % 2 == 0)
-            WeatherManager.Instance.SetNewWeather();
+        WeatherManager.Instance.SetNewWeather();
         CheckTiles(false);
     }
 
@@ -107,6 +106,7 @@ public class TileManager : Singleton<TileManager>
                 else
                 {
                     tilemap.SetTile(new Vector3Int(r, c, 0), TileInfo.Instance.GetTile(Tile.TileTypes.DeepWater));
+                    changeMap.SetTile(new Vector3Int(r, c, 0), TileInfo.Instance.GetTile(Tile.TileTypes.DeepWater));
                 }
             }
         }
@@ -128,10 +128,11 @@ public class TileManager : Singleton<TileManager>
         {
             tileType = TileInfo.Instance.GetTileType(biomeRand, tileRand);
         }
-        Tile t = new Tile(tileType);
+        Vector3Int spawnPos3D = new Vector3Int(spawnPos.x, spawnPos.y, 0);
+        Tile t = new Tile(tileType, spawnPos3D);
         tiles.Add(spawnPos, t);
         LinkTiles(t, spawnPos);
-        tilemap.SetTile(new Vector3Int(spawnPos.x, spawnPos.y, 0), TileInfo.Instance.GetTile(t.GetCurrentTileType()));
+        tilemap.SetTile(spawnPos3D, TileInfo.Instance.GetTile(t.GetCurrentTileType()));
     }
 
     public Vector2Int GetMapSize()
