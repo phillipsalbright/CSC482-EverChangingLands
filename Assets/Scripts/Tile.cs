@@ -27,10 +27,18 @@ public class Tile
     [SerializeField]
     private bool tileChanging = false;
 
-    public Tile(TileTypes currentTileType)
+    private Vector3Int tilePos;
+
+    public Tile(TileTypes currentTileType, Vector3Int tileLoc)
     {
         SetCurrentTileType(currentTileType);
         SetNextTileType(currentTileType);
+        tilePos = tileLoc;
+    }
+
+    public Vector3Int GetTilePosition()
+    {
+        return tilePos;
     }
 
     //checks if the tile will change terrain next turn. use for forecasting
