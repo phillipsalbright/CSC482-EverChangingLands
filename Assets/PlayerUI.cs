@@ -32,6 +32,7 @@ public class PlayerUI : MonoBehaviour
     private Vector2 _cursorPosition;
 
     private Vector2 _rightStick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -133,7 +134,15 @@ public class PlayerUI : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);
             TileManager tm = FindObjectOfType<TileManager>();
-            Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());
+            Tile tile = tm.GetTileAtLocation(ray.GetPoint(10f));
+            Debug.Log(tile.GetCurrentTileType());
+
+            SettlerManager sm = FindObjectOfType<SettlerManager>();
+            if(sm.GetCurrentNumberOfSettlers() < sm.GetInitialNumberOfSettlers())
+            {
+                Vector3Int coordinate = tm.GetTilemap().WorldToCell(ray.GetPoint(10f));
+                sm.AddSettlerAtTile(tile, tm.GetTilemap().GetCellCenterWorld(coordinate));
+            }
         }
     }
 
