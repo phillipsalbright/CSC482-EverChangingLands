@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Settlers
+    uniqueID: 889666223
+    locked: 0
