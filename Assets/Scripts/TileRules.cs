@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TO ADD A NEW TERRAIN TYPE: 
+//  TO ADD A NEW TERRAIN TYPE: 
 //  FIRST ADD IT TO THE TILE ENUM, 
 //  THEN ADD A NEW STATIC RULES METHOD, 
 //  THEN ADD A NEW CASE TO THE SWITCH 
@@ -12,6 +12,7 @@ public static class TileRules
         //first, check the number of surrounding tiles of each terrain type for use in rule checking.
         Dictionary<Tile.TileTypes, int> terrainCounts =  new Dictionary<Tile.TileTypes, int>();
         foreach(Tile tile in adjacentTiles){
+            if (tile == null) continue;
             Tile.TileTypes currentTileType = tile.GetCurrentTileType();
             bool exists = terrainCounts.ContainsKey(currentTileType);
             if(exists){
@@ -93,6 +94,9 @@ public static class TileRules
                 else if(adjacentCounts[Tile.TileTypes.Desert] >= 2){
                     return Tile.TileTypes.Grass;
                 }
+                else if(adjacentCounts[Tile.TileTypes.Dirt] >= 4){
+                    return Tile.TileTypes.Grass;
+                }
                 break;
             case WeatherManager.WeatherTypes.Rain:
                 if(adjacentCounts[Tile.TileTypes.Desert] >= 4){
@@ -111,13 +115,13 @@ public static class TileRules
         }
         switch(weather){
             case WeatherManager.WeatherTypes.Sunny:
-                if(adjacentCounts[Tile.TileTypes.Dirt] >= 4){
+                if(adjacentCounts[Tile.TileTypes.Dirt] + adjacentCounts[Tile.TileTypes.Desert] >= 4){
                     return Tile.TileTypes.Dirt;
                 }
                 if(adjacentCounts[Tile.TileTypes.Desert] >= 3){
                     return Tile.TileTypes.Dirt;
                 }
-                if(adjacentCounts[Tile.TileTypes.Mud] >= 4){
+                if(adjacentCounts[Tile.TileTypes.Mud] + adjacentCounts[Tile.TileTypes.Water] >= 4){
                     return Tile.TileTypes.Mud;
                 }
                 if(adjacentCounts[Tile.TileTypes.Water] >= 3){
@@ -128,7 +132,7 @@ public static class TileRules
                 }
                 break;
             case WeatherManager.WeatherTypes.Drought:
-                if(adjacentCounts[Tile.TileTypes.Dirt] >= 3){
+                if(adjacentCounts[Tile.TileTypes.Dirt] + adjacentCounts[Tile.TileTypes.Desert] >= 3){
                     return Tile.TileTypes.Dirt;
                 }
                 if(adjacentCounts[Tile.TileTypes.Desert] >= 2){
@@ -151,7 +155,7 @@ public static class TileRules
                 if(adjacentCounts[Tile.TileTypes.Water] >= 2){
                     return Tile.TileTypes.Mud;
                 }
-                if(adjacentCounts[Tile.TileTypes.Mud] >= 3){
+                if(adjacentCounts[Tile.TileTypes.Mud] + adjacentCounts[Tile.TileTypes.Water] >= 3){
                     return Tile.TileTypes.Mud;
                 }
                 
@@ -200,13 +204,13 @@ public static class TileRules
                 if(adjacentCounts[Tile.TileTypes.Water] >= 3){
                     return Tile.TileTypes.Water;
                 }
-                if(adjacentCounts[Tile.TileTypes.Dirt] >= 4){
+                if(adjacentCounts[Tile.TileTypes.Dirt] + adjacentCounts[Tile.TileTypes.Desert] >= 4){
                     return Tile.TileTypes.Dirt;
                 }
                 if(adjacentCounts[Tile.TileTypes.Desert] >= 3){
                     return Tile.TileTypes.Dirt;
                 }
-                if(adjacentCounts[Tile.TileTypes.Grass] >= 4){
+                if(adjacentCounts[Tile.TileTypes.Grass] + adjacentCounts[Tile.TileTypes.Forest] >= 4){
                     return Tile.TileTypes.Grass;
                 }
                 if(adjacentCounts[Tile.TileTypes.Forest] >= 3){
@@ -217,7 +221,7 @@ public static class TileRules
                 if(adjacentCounts[Tile.TileTypes.Water] >= 4){
                     return Tile.TileTypes.Water;
                 }
-                if(adjacentCounts[Tile.TileTypes.Dirt] >= 3){
+                if(adjacentCounts[Tile.TileTypes.Dirt] + adjacentCounts[Tile.TileTypes.Desert] >= 3){
                     return Tile.TileTypes.Dirt;
                 }
                 if(adjacentCounts[Tile.TileTypes.Desert] >= 2){
@@ -234,7 +238,7 @@ public static class TileRules
                 if(adjacentCounts[Tile.TileTypes.Desert] >= 4){
                     return Tile.TileTypes.Dirt;
                 }
-                if(adjacentCounts[Tile.TileTypes.Grass] >= 3){
+                if(adjacentCounts[Tile.TileTypes.Grass] + adjacentCounts[Tile.TileTypes.Forest]  >= 3){
                     return Tile.TileTypes.Grass;
                 }
                 if(adjacentCounts[Tile.TileTypes.Forest] >= 2){
@@ -272,8 +276,14 @@ public static class TileRules
                 if(adjacentCounts[Tile.TileTypes.Forest] >= 4){
                     return Tile.TileTypes.Grass;
                 }
+                if(adjacentCounts[Tile.TileTypes.Grass] >= 4){
+                    return Tile.TileTypes.Dirt;
+                }
                 if(adjacentCounts[Tile.TileTypes.Water] >= 4){
                     return Tile.TileTypes.Mud;
+                }
+                if(adjacentCounts[Tile.TileTypes.Mud] >= 4){
+                    return Tile.TileTypes.Dirt;
                 }
                 if(adjacentCounts[Tile.TileTypes.Forest] >= 2){
                     return Tile.TileTypes.Dirt;
@@ -294,13 +304,13 @@ public static class TileRules
         }
         switch(weather){
             case WeatherManager.WeatherTypes.Sunny:
-                if(adjacentCounts[Tile.TileTypes.Grass] >= 4){
+                if(adjacentCounts[Tile.TileTypes.Grass] + adjacentCounts[Tile.TileTypes.Forest] >= 4){
                     return Tile.TileTypes.Grass;
                 }
                 if(adjacentCounts[Tile.TileTypes.Forest] >= 3){
                     return Tile.TileTypes.Grass;
                 }
-                if(adjacentCounts[Tile.TileTypes.Mud] >= 4){
+                if(adjacentCounts[Tile.TileTypes.Mud] + adjacentCounts[Tile.TileTypes.Water] >= 4){
                     return Tile.TileTypes.Mud;
                 }
                 if(adjacentCounts[Tile.TileTypes.Water] >= 3){
@@ -323,13 +333,13 @@ public static class TileRules
                 break;
                 //FIGURE OUT WHAT HAPPENS WITH 2 WATER 2 FOREST
             case WeatherManager.WeatherTypes.Rain:
-                if(adjacentCounts[Tile.TileTypes.Grass] >= 3){
+                if(adjacentCounts[Tile.TileTypes.Grass] + adjacentCounts[Tile.TileTypes.Forest] >= 3){
                     return Tile.TileTypes.Grass;
                 }
                 if(adjacentCounts[Tile.TileTypes.Forest] >= 2){
                     return Tile.TileTypes.Grass;
                 }
-                if(adjacentCounts[Tile.TileTypes.Mud] >= 3){
+                if(adjacentCounts[Tile.TileTypes.Mud] + adjacentCounts[Tile.TileTypes.Water] >= 3){
                     return Tile.TileTypes.Mud;
                 }
                 if(adjacentCounts[Tile.TileTypes.Water] >= 2){

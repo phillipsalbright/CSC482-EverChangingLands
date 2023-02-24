@@ -96,4 +96,9 @@ public class Tile
     public bool WillTileChange(){
         return tileChanging;
     }
+
+    public Tile[,] GetAdjacentTiles()
+    {
+        return adjacentTiles;
+    }
 }

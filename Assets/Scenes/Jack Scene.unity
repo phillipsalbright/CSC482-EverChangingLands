@@ -274,9 +274,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 151229390}
+  changeMap: {fileID: 0}
   seed: 0
   testing: 0
   mapSize: {x: 100, y: 100}
+  oceanExtension: {x: 0, y: 0}
   tileScale: 20
   biomeScale: 20
   islandMode: 1
@@ -409,16 +411,23 @@ MonoBehaviour:
     sunnyChance: 0.6
     droughtChance: 0.2
     rainChance: 0.2
+    minTurns: 3
+    repeatChanceChange: 0.1
   drought:
     sunnyChance: 0.5
     droughtChance: 0.4
     rainChance: 0.1
+    minTurns: 3
+    repeatChanceChange: 0.1
   rain:
     sunnyChance: 0.5
     droughtChance: 0.05
     rainChance: 0.45
+    minTurns: 3
+    repeatChanceChange: 0.1
   currentWeather: 0
   nextWeather: 0
+  numTurns: 1
 --- !u!4 &1450596719
 Transform:
   m_ObjectHideFlags: 0
