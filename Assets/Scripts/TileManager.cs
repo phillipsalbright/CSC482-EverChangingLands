@@ -102,7 +102,7 @@ public class TileManager : Singleton<TileManager>
         height = mapSize.y / 2;
         for (int r = -width - oceanExtension.x; r < width + oceanExtension.x; r++)
         {
-            for (int c = -height - oceanExtension.x; c < height + oceanExtension.x; c++)
+            for (int c = -height - oceanExtension.y; c < height + oceanExtension.x; c++)
             {
                 if (Mathf.Abs(r) < width && Mathf.Abs(c) < height)
                 {
@@ -114,6 +114,10 @@ public class TileManager : Singleton<TileManager>
                     changeMap.SetTile(new Vector3Int(r, c, 0), TileInfo.Instance.GetTile(Tile.TileTypes.DeepWater));
                 }
             }
+        }
+        foreach (Vector2Int pos in tiles.Keys)
+        {
+            LinkTiles(tiles[pos], pos);
         }
     }
 
@@ -136,7 +140,7 @@ public class TileManager : Singleton<TileManager>
         Vector3Int spawnPos3D = new Vector3Int(spawnPos.x, spawnPos.y, 0);
         Tile t = new Tile(tileType, spawnPos3D);
         tiles.Add(spawnPos, t);
-        LinkTiles(t, spawnPos);
+        //LinkTiles(t, spawnPos);
         tilemap.SetTile(spawnPos3D, TileInfo.Instance.GetTile(t.GetCurrentTileType()));
     }
 
@@ -185,30 +189,13 @@ public class TileManager : Singleton<TileManager>
         if (tiles.ContainsKey(otherPos))
         {
             linkTile = tiles[otherPos];
-            if (tiles[otherPos].GetCurrentTileType() == Tile.TileTypes.DeepWater && t.GetCurrentTileType() != Tile.TileTypes.DeepWater && t.GetCurrentTileType() != Tile.TileTypes.Water)
+            if (linkTile.GetCurrentTileType() == Tile.TileTypes.DeepWater && t.GetCurrentTileType() != Tile.TileTypes.DeepWater && t.GetCurrentTileType() != Tile.TileTypes.Water)
             {
                 t.SetCurrentTileType(Tile.TileTypes.Water);
-            }
-            else if (t.GetCurrentTileType() == Tile.TileTypes.DeepWater && tiles[otherPos].GetCurrentTileType() != Tile.TileTypes.DeepWater && tiles[otherPos].GetCurrentTileType() != Tile.TileTypes.Water)
-            {
-                tiles[otherPos].SetCurrentTileType(Tile.TileTypes.Water);
-                tilemap.SetTile(new Vector3Int(otherPos.x, otherPos.y, 0), TileInfo.Instance.GetTile(tiles[otherPos].GetCurrentTileType()));
+                tilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), TileInfo.Instance.GetTile(t.GetCurrentTileType()));
             }
         }
         t.AddTile(relative, linkTile);
-        if (linkTile != null)
-        {
-            Vector2Int newRelPos = new Vector2Int(relative.x, relative.y);
-            if (relative.y == 0)
-            {
-                newRelPos.y = 1;
-            }
-            else
-            {
-                newRelPos.y = 0;
-            }
-            tiles[pos].AddTile(newRelPos, t);
-        }
     }
 
     // Predict ahead
