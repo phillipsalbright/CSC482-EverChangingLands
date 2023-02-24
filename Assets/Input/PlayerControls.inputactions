@@ -186,28 +186,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c023d52b-1cb6-4b40-80ab-dedae1e1ee5a",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "MapControls;Default",
-                    "action": "ControllerSelect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "03da383f-3554-4c24-b2c7-94ed038dc3ba",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ControllerSelect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "cbaad869-bb17-4e18-9f44-d605342f3770",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
@@ -258,6 +236,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Move Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "852c1856-2f8e-4193-a144-afc8e6f9625c",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ControllerSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8fca678-3763-413b-a66f-4a4f19d65612",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MapControls",
+                    "action": "ControllerSelect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
