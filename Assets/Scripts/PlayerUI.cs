@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -133,13 +134,22 @@ public class PlayerUI : MonoBehaviour
         if(context.performed)
         {
             Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);
-
+            ray.direction = new Vector3(0, 0, 1);
+            int layer_mask = LayerMask.GetMask("Settler");
             TileManager tm = FindObjectOfType<TileManager>();
-            GameManager.Instance.SelectTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
-            Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());
             Tile tile = tm.GetTileAtLocation(ray.GetPoint(10f));
-            Debug.Log(tile.GetCurrentTileType());
+            Debug.Log(Physics.Raycast(ray, Mathf.Infinity, layer_mask));
+            if (Physics.Raycast(ray, Mathf.Infinity, layer_mask))
+            {
+                GameManager.Instance.SelectTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
+                Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());
+                Debug.Log(tile.GetCurrentTileType());
 
+            }
+
+
+
+            //Debug, set first three settlers
             SettlerManager sm = FindObjectOfType<SettlerManager>();
             if(sm.GetCurrentNumberOfSettlers() < sm.GetInitialNumberOfSettlers())
             {

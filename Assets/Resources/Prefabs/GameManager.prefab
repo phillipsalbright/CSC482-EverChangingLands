@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3186878524296449408}
   - component: {fileID: 3186878524296449409}
+  - component: {fileID: 1525271557}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,3 +49,18 @@ MonoBehaviour:
   _startingWoodCount: 100
   selectionMap: {fileID: 0}
   reticleTile: {fileID: 11400000, guid: 008d9c91db30e4a49ab816973e19f0f2, type: 2}
+--- !u!114 &1525271557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186878524296449422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0345f03ef05704044adc36ac0d25a0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settlers: []
+  initialNumberOfSettlers: 3
+  settlerPrefab: {fileID: 4285547668261436011, guid: 080fd1dd2e80b6a4cb8f574ee619ccd5, type: 3}
