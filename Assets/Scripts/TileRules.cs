@@ -8,11 +8,31 @@ using UnityEngine;
 //  THEN ADD A NEW CASE TO THE SWITCH 
 public static class TileRules
 {
+    public static TileRuleSet ruleSet;
+    public static bool debug = false;
+
+
+    public static void SetRuleSet(TileRuleSet newRuleSet){
+        ruleSet = newRuleSet;
+        Debug.Log("new rules set");
+    }
+
     public static Tile.TileTypes GetNewTileType(Tile.TileTypes startingType, Tile[,] adjacentTiles){
+        if(debug){
+            Debug.Log("check tile of " + startingType);
+        }
         //first, check the number of surrounding tiles of each terrain type for use in rule checking.
         Dictionary<Tile.TileTypes, int> terrainCounts =  new Dictionary<Tile.TileTypes, int>();
         foreach(Tile tile in adjacentTiles){
-            if (tile == null) continue;
+            if (tile == null){
+                if(debug){
+                    Debug.Log("tile null");
+                }
+                continue;
+            }
+            if(debug){
+                Debug.Log(tile.GetCurrentTileType());
+            }
             Tile.TileTypes currentTileType = tile.GetCurrentTileType();
             bool exists = terrainCounts.ContainsKey(currentTileType);
             if(exists){
