@@ -41,12 +41,14 @@ public class TileManager : Singleton<TileManager>
         GenerateMap();
         CheckTiles(true);
         if(tileRuleSet == null){
+            Debug.Log("Ruleset was null. checking components");
             tileRuleSet = gameObject.GetComponent<TileRuleSet>();
             
         }
         if(tileRuleSet != null){
-                TileRules.SetRuleSet(tileRuleSet);
-            }
+            Debug.Log("ruleset not null. trying to set.");
+            TileRules.SetRuleSet(tileRuleSet);
+        }
     }
 
     public void AdvanceTurn()
