@@ -31,12 +31,22 @@ public class TileManager : Singleton<TileManager>
     private int width;
     private int height;
 
+    [SerializeField, Tooltip("this game's tile ruleset")]
+    private TileRuleSet tileRuleSet;
+
     private bool viewingPrediction = false;
     // Start is called before the first frame update
     void Start()
     {
         GenerateMap();
         CheckTiles(true);
+        if(tileRuleSet == null){
+            tileRuleSet = gameObject.GetComponent<TileRuleSet>();
+            
+        }
+        if(tileRuleSet != null){
+                TileRules.SetRuleSet(tileRuleSet);
+            }
     }
 
     public void AdvanceTurn()

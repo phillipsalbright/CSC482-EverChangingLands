@@ -8,7 +8,15 @@ using UnityEngine;
 //  THEN ADD A NEW CASE TO THE SWITCH 
 public static class TileRules
 {
+    public static TileRuleSet ruleSet;
     public static bool debug = false;
+
+
+    public static void SetRuleSet(TileRuleSet newRuleSet){
+        ruleSet = newRuleSet;
+        Debug.Log("new rules set");
+    }
+
     public static Tile.TileTypes GetNewTileType(Tile.TileTypes startingType, Tile[,] adjacentTiles){
         if(debug){
             Debug.Log("check tile of " + startingType);
