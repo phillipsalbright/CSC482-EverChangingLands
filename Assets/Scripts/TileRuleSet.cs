@@ -6,13 +6,31 @@ using UnityEngine;
 public class TileRuleSet : MonoBehaviour
 {
     public enum Operators{
-        Greater,GreaterEquals,Equals,LessEquals,Less
+        Greater,GreaterEquals,Equals,LessEquals,Less,NotEquals,Always
+    }
+
+    [Serializable]
+    public struct AllRules{
+        [Tooltip("the rules to run for all tiles, regardless of tile type")]
+        public AllTilesRuleset allTilesRules;
+        [Tooltip("the rules to run for specific tile types")]
+        public List<Ruleset> tileRules;
+    }
+
+    [Serializable]
+    public struct AllTilesRuleset{
+        [Tooltip("the set of rule conditions that run regardless of weather")]
+        public List<RuleCondition> nonWeatherConditions;
+        [Tooltip("the set of rules for this ruleset")]
+        public List<Rule> rules;
     }
 
     [Serializable]
     public struct Ruleset{
         [Tooltip("the starting tile type for this ruleset")]
         public Tile.TileTypes tileType;
+        [Tooltip("the set of rule conditions that run regardless of weather")]
+        public List<RuleCondition> nonWeatherConditions;
         [Tooltip("the set of rules for this ruleset")]
         public List<Rule> rules;
     }
@@ -33,12 +51,14 @@ public class TileRuleSet : MonoBehaviour
         public Operators conditional;
         [Tooltip("The number to compare the tile counts against"), Range(0,4)]
         public int NumTiles;
+        [Tooltip("The tile that will be changed into if this condition is met")]
+        public Tile.TileTypes goalTile;
     }
 
     [SerializeField]
-    private Ruleset currentRuleset;
+    private AllRules currentRuleset;
 
-    public Ruleset getRuleset(){
+    public AllRules getRuleset(){
         return currentRuleset;
     }
 }
