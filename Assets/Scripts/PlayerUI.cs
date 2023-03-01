@@ -24,6 +24,8 @@ public class PlayerUI : MonoBehaviour
 
     [SerializeField] private Image _hoverCursorImage;
 
+    [SerializeField] private PlayerController _playerController;
+
     private Vector2 midScreen;
 
     private PlayerInput _controls;
@@ -32,6 +34,13 @@ public class PlayerUI : MonoBehaviour
 
     private Vector2 _rightStick;
 
+    [SerializeField] private GameObject _normalTurnHUD;
+    [SerializeField] private GameObject _startGameHUD;
+    [SerializeField] private GameObject _settlerActionHUD;
+    [SerializeField] private TMP_Text setSettlerText;
+    private int _settlersToPlace;
+    private Settler _selectedSettler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +48,20 @@ public class PlayerUI : MonoBehaviour
         GameManager g = GameManager.Instance;
         nextTurnButton.onClick.AddListener(g.AdvanceTurn);
         midScreen = new Vector2(Screen.width, Screen.height);
+        _playerController = GetComponentInParent<PlayerController>();
         _cursorPosition = midScreen;
+        SettlerManager sm = FindObjectOfType<SettlerManager>();
+        _settlersToPlace = sm.GetInitialNumberOfSettlers();
+        if (_settlersToPlace > 0)
+        {
+            setSettlerText.text = "Place Settlers: " + _settlersToPlace;
+            SetMode(PlayerController.mode.GameStart);
+        } else
+        {
+            SetMode(PlayerController.mode.BeginTurn);
+        }
+
+        _turnText.text = "Turn " + 1;
     }
 
     protected void OnEnable()
@@ -116,27 +138,95 @@ public class PlayerUI : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);
             ray.direction = new Vector3(0, 0, 1);
             int layer_mask = LayerMask.GetMask("Settler");
+            int button_mask = LayerMask.GetMask("UI");
             TileManager tm = FindObjectOfType<TileManager>();
             Tile tile = tm.GetTileAtLocation(ray.GetPoint(10f));
-            Debug.Log(Physics.Raycast(ray, Mathf.Infinity, layer_mask));
-            if (Physics.Raycast(ray, Mathf.Infinity, layer_mask))
+            //Debug.LogWarning(Physics.Raycast(Camera.main.ScreenPointToRay(_cursorPosition), Mathf.Infinity, button_mask));
+             RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity,  layer_mask))
             {
-                GameManager.Instance.SelectTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
-                Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());
-                Debug.Log(tile.GetCurrentTileType());
+                Settler s = hit.transform.gameObject.GetComponent<Settler>();
+                //GameManager.Instance.SelectTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
+                if (_playerController.currentControllerMode == PlayerController.mode.BeginTurn)
+                {
+                    GameManager.Instance.SelectTile(s.GetCurrentTile());
+                    _selectedSettler = s;
+                    //Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());
+                    //Debug.Log(tile.GetCurrentTileType());
+                    SetMode(PlayerController.mode.SettlerActions);
+                }
+            } else {
+                if (_playerController.currentControllerMode == PlayerController.mode.GameStart)
+                {
+                    SettlerManager sm = FindObjectOfType<SettlerManager>();
+                    if (sm.GetCurrentNumberOfSettlers() < sm.GetInitialNumberOfSettlers())
+                    {
+                        sm.AddSettlerAtTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
+                        _settlersToPlace--;
+                        setSettlerText.text = "Place Settlers: " + _settlersToPlace;
+                    }
+                    if (sm.GetCurrentNumberOfSettlers() >= sm.GetInitialNumberOfSettlers())
+                    {
+                        SetMode(PlayerController.mode.BeginTurn);
+                    }
 
-            }
-
-
-
-            //Debug, set first three settlers
-            SettlerManager sm = FindObjectOfType<SettlerManager>();
-            if(sm.GetCurrentNumberOfSettlers() < sm.GetInitialNumberOfSettlers())
-            {
-                Vector3Int coordinate = tm.GetTilemap().WorldToCell(ray.GetPoint(10f));
-                sm.AddSettlerAtTile(tile, tm.GetTilemap().GetCellCenterWorld(coordinate));
+                }  else if (_playerController.currentControllerMode == PlayerController.mode.MovingSettler)
+                {
+                    _selectedSettler.MoveSettler(tm.GetTileAtLocation(ray.GetPoint(10f)));
+                    SetMode(PlayerController.mode.BeginTurn);
+                } else 
+                {
+                    var raycastResult = new List<RaycastResult>();
+                    PointerEventData p = new PointerEventData(EventSystem.current);
+                    p.position = _cursorPosition;
+                    EventSystem.current.RaycastAll( p, raycastResult);
+                    if (raycastResult.Count <= 0)
+                    {
+                        SetMode(PlayerController.mode.BeginTurn);
+                    }
+                }
             }
         }
+    }
+
+    public void SetMode(PlayerController.mode newMode)
+    {
+        switch (newMode)
+        {
+            case PlayerController.mode.BeginTurn:
+                _normalTurnHUD.SetActive(true);
+                _startGameHUD.SetActive(false);
+                _settlerActionHUD.SetActive(false);
+                GameManager.Instance.DeleteSelection();
+                _playerController.currentControllerMode = PlayerController.mode.BeginTurn;
+                break;
+            case PlayerController.mode.GameStart:
+                _normalTurnHUD.SetActive(false);
+                _startGameHUD.SetActive(true);
+                _settlerActionHUD.SetActive(false);
+
+                _playerController.currentControllerMode = PlayerController.mode.GameStart;
+                break;
+            case PlayerController.mode.SettlerActions:
+                _normalTurnHUD.SetActive(false);
+                _startGameHUD.SetActive(false);
+                _settlerActionHUD.SetActive(true);
+
+                _playerController.currentControllerMode = PlayerController.mode.SettlerActions;
+                break;
+            case PlayerController.mode.MovingSettler:
+                _normalTurnHUD.SetActive(false);
+                _startGameHUD.SetActive(false);
+                _settlerActionHUD.SetActive(false);
+
+                _playerController.currentControllerMode = PlayerController.mode.MovingSettler;
+                break;
+        }
+    }
+
+    public void SetMode(int newMode)
+    {
+        SetMode((PlayerController.mode) newMode);
     }
 
 }

@@ -30,10 +30,16 @@ public class SettlerManager : MonoBehaviour
         return initialNumberOfSettlers;
     }
 
-    public void AddSettlerAtTile(Tile tile, Vector2 pos)
+    public List<GameObject> GetSettlers()
+    {
+        return settlers;
+    }
+
+    public void AddSettlerAtTile(Tile tile)
     {
         bool compatableTile = tile.GetCurrentTileType() != Tile.TileTypes.Water && tile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
         bool tileHasSettler = false;
+
         foreach(GameObject s in settlers)
         {
             if(s.GetComponent<Settler>().GetCurrentTile() == tile)
@@ -46,7 +52,7 @@ public class SettlerManager : MonoBehaviour
         if (compatableTile && !tileHasSettler)
         {
             GameObject settler = GameObject.Instantiate(settlerPrefab, Vector3.zero, Quaternion.identity);
-            settler.GetComponent<Settler>().SetCurrentTileAndPosition(tile, pos);
+            settler.GetComponent<Settler>().SetCurrentTileAndPosition(tile);
             settlers.Add(settler);
         }
     }
