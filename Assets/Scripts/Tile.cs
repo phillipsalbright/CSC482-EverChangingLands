@@ -29,6 +29,11 @@ public class Tile
 
     private Vector3Int tilePos;
 
+    public Vector2Int GetTilePos2()
+    {
+        return new Vector2Int(tilePos.x, tilePos.y);
+    }
+
     public Tile(TileTypes currentTileType, Vector3Int tileLoc)
     {
         SetCurrentTileType(currentTileType);
