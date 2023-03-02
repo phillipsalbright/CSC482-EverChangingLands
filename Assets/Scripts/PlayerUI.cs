@@ -161,9 +161,11 @@ public class PlayerUI : MonoBehaviour
                     SettlerManager sm = FindObjectOfType<SettlerManager>();
                     if (sm.GetCurrentNumberOfSettlers() < sm.GetInitialNumberOfSettlers())
                     {
-                        sm.AddSettlerAtTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
-                        _settlersToPlace--;
-                        setSettlerText.text = "Place Settlers: " + _settlersToPlace;
+                        if(sm.AddSettlerAtTile(tm.GetTileAtLocation(ray.GetPoint(10f))))
+                        {
+                            _settlersToPlace--;
+                            setSettlerText.text = "Place Settlers: " + _settlersToPlace;
+                        }
                     }
                     if (sm.GetCurrentNumberOfSettlers() >= sm.GetInitialNumberOfSettlers())
                     {
@@ -218,6 +220,8 @@ public class PlayerUI : MonoBehaviour
                 _normalTurnHUD.SetActive(false);
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(false);
+
+                GameObject.FindObjectOfType<GameManager>().DisplayMoveTiles(_selectedSettler.GetCurrentTile());
 
                 _playerController.currentControllerMode = PlayerController.mode.MovingSettler;
                 break;
