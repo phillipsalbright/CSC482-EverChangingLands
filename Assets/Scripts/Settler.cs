@@ -95,6 +95,11 @@ public class Settler : MonoBehaviour
         canMove = true;
     }
 
+    public bool GetCanMove()
+    {
+        return canMove;
+    }
+
     public Tile GetCurrentTile()
     {
         return currentTile;
