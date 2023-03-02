@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Tilemap selectionMap;
     [SerializeField] private TileBase reticleRedTile;
     [SerializeField] private TileBase reticleGreenTile;
+    [SerializeField] private TileBase reticleYellowTile;
+    [SerializeField] private TileBase reticleBlueTile;
+    [SerializeField] private TileBase reticlePurpleTile;
+    [SerializeField] private TileBase reticleOrangeTile;
 
     public static GameManager Instance
     {
@@ -62,7 +66,7 @@ public class GameManager : MonoBehaviour
     public void SelectTile(Tile tile)
     {
         selectionMap.ClearAllTiles();
-        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticleGreenTile);
+        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticleBlueTile);
     }
 
     public void DeleteSelection()
@@ -84,16 +88,20 @@ public class GameManager : MonoBehaviour
                     bool settlerAtTile = false;
                     foreach(GameObject s in settlerManager.GetSettlers())
                     {
-                        if(s.GetComponent<Settler>().GetCurrentTile() == t)
+                        if(s.GetComponent<Settler>().GetCurrentTile() == t && s.GetComponent<Settler>().GetCurrentTile() != tile)
                         {
                             settlerAtTile = true;
                             break;
                         }
                     }
 
-                    if (t != null && !settlerAtTile && t.GetCurrentTileType() != Tile.TileTypes.Water && t.GetCurrentTileType() != Tile.TileTypes.DeepWater)
+                    if(i == 0 && j == 0)
                     {
-                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleGreenTile);
+                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleBlueTile);
+                    }
+                    else if (t != null && !settlerAtTile && t.GetCurrentTileType() != Tile.TileTypes.Water && t.GetCurrentTileType() != Tile.TileTypes.DeepWater)
+                    {
+                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleYellowTile);
                     }
                     else
                     {

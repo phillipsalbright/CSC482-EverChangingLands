@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettlerManager : MonoBehaviour
+public class SettlerManager : Singleton<SettlerManager>
 {
     [SerializeField] private List<GameObject> settlers;
     [SerializeField] private int initialNumberOfSettlers = 3;
