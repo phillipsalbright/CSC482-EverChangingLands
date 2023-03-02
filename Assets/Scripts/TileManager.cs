@@ -105,6 +105,14 @@ public class TileManager : Singleton<TileManager>
         {
             seed = DateTime.UtcNow.ToString().GetHashCode();
         }
+        CustomMap customMap = FindObjectOfType<CustomMap>();
+        if (customMap != null)
+        {
+            mapSize = customMap.GetMapSize();
+            biomeScale = customMap.GetBiomeScale();
+            tileScale = customMap.GetTileScale();
+            seed = customMap.GetSeed();
+        }
         UnityEngine.Random.InitState(seed);
         tileOffset.x = UnityEngine.Random.Range(0f, 9999f);
         tileOffset.y = UnityEngine.Random.Range(0f, 9999f);
