@@ -214,6 +214,8 @@ public class PlayerUI : MonoBehaviour
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(true);
 
+                _settlerActionHUD.transform.Find("MoveSettlerButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanMove();
+
                 _playerController.currentControllerMode = PlayerController.mode.SettlerActions;
                 break;
             case PlayerController.mode.MovingSettler:
