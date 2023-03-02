@@ -16,7 +16,7 @@ public class House
     {
         if (settler == null)
         {
-            //spawn new settler at location
+            SettlerManager.Instance.AddSettlerAtTile(TileManager.Instance.GetTileDictionary()[location]);
         }
     }
 }
