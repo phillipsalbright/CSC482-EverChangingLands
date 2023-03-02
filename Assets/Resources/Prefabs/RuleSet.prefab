@@ -147,18 +147,22 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 3
           goalTile: 2
+        - TilesToCheck: 0500000003000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 3
     - tileType: 5
       nonWeatherConditions: []
       rules:
       - weatherType: 0
         ruleConditions:
-        - TilesToCheck: 05000000
+        - TilesToCheck: 0500000002000000
           conditional: 4
           NumTiles: 2
           goalTile: 2
       - weatherType: 1
         ruleConditions:
-        - TilesToCheck: 05000000
+        - TilesToCheck: 0500000002000000
           conditional: 4
           NumTiles: 1
           goalTile: 4
@@ -168,7 +172,7 @@ MonoBehaviour:
           goalTile: 2
       - weatherType: 2
         ruleConditions:
-        - TilesToCheck: 05000000
+        - TilesToCheck: 0500000002000000
           conditional: 4
           NumTiles: 1
           goalTile: 2
@@ -197,6 +201,10 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 3
           goalTile: 1
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 5
       - weatherType: 1
         ruleConditions:
         - TilesToCheck: 05000000
@@ -233,6 +241,10 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 2
           goalTile: 1
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 5
     - tileType: 0
       nonWeatherConditions: []
       rules:
@@ -264,7 +276,7 @@ MonoBehaviour:
           goalTile: 1
         - TilesToCheck: 0100000003000000
           conditional: 1
-          NumTiles: 4
+          NumTiles: 2
           goalTile: 4
         - TilesToCheck: 05000000
           conditional: 1
@@ -272,7 +284,7 @@ MonoBehaviour:
           goalTile: 2
         - TilesToCheck: 0500000002000000
           conditional: 1
-          NumTiles: 4
+          NumTiles: 2
           goalTile: 4
         - TilesToCheck: 05000000
           conditional: 1
