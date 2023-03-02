@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 public class CustomMap : MonoBehaviour
 {
     [Header("Default Values")]
-    [SerializeField, Range(0,1)]
+    [SerializeField, Range(0.1f,50)]
     private float biomeScale;
-    [SerializeField, Range(0, 1)]
+    [SerializeField, Range(0.1f, 50)]
     private float tileScale;
     private int seed;
     [SerializeField]
@@ -44,11 +44,14 @@ public class CustomMap : MonoBehaviour
 
     public void LoadCustom()
     {
-        if (!int.TryParse(seedField.text, out seed))
+        seed = seedField.text.GetHashCode();
+        /*if (!int.TryParse(seedField.text, out seed))
         {
             return;
-        }
+        }*/
         biomeScale = biomeField.value;
+        tileScale = tileField.value;
+        mapSize = new Vector2Int(int.Parse(mapX.text), int.Parse(mapY.text));
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

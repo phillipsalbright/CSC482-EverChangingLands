@@ -112,10 +112,13 @@ public class TileManager : Singleton<TileManager>
             biomeScale = customMap.GetBiomeScale();
             tileScale = customMap.GetTileScale();
             seed = customMap.GetSeed();
+            Debug.Log(biomeScale + " " + tileScale);
         }
+        Debug.Log(seed);
         UnityEngine.Random.InitState(seed);
         tileOffset.x = UnityEngine.Random.Range(0f, 9999f);
         tileOffset.y = UnityEngine.Random.Range(0f, 9999f);
+        Debug.Log(tileOffset);
         biomeOffset.x = -tileOffset.x;
         biomeOffset.y = -tileOffset.y;
         width = mapSize.x / 2;
