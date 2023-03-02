@@ -48,7 +48,18 @@ public class Settler : MonoBehaviour
 
     public void MoveSettler(Tile newTile)
     {
-        bool compatableTile = newTile.GetCurrentTileType() != Tile.TileTypes.Water && newTile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+        SettlerManager sm = FindObjectOfType<SettlerManager>();
+        bool settlerAtTile = false;
+        foreach(GameObject s in sm.GetSettlers())
+        {
+            if(s.GetComponent<Settler>().GetCurrentTile() == newTile)
+            {
+                settlerAtTile = true;
+                break;
+            }
+        }
+
+        bool compatableTile = !settlerAtTile && newTile.GetCurrentTileType() != Tile.TileTypes.Water && newTile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
         if(compatableTile)
         {
             Dictionary<Vector2Int, Tile> tiles = FindObjectOfType<TileManager>().GetTileDictionary();

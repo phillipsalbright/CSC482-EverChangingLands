@@ -328,6 +328,14 @@ PrefabInstance:
       propertyPath: selectionMap
       value: 
       objectReference: {fileID: 1746592470}
+    - target: {fileID: 3186878524296449409, guid: 13b7fb191a1e1874cb5241f5015e2d36, type: 3}
+      propertyPath: reticleRedTile
+      value: 
+      objectReference: {fileID: 11400000, guid: 008d9c91db30e4a49ab816973e19f0f2, type: 2}
+    - target: {fileID: 3186878524296449409, guid: 13b7fb191a1e1874cb5241f5015e2d36, type: 3}
+      propertyPath: reticleGreenTile
+      value: 
+      objectReference: {fileID: 11400000, guid: 0ab67ca57b882174fbf2f591d8928a77, type: 2}
     - target: {fileID: 3186878524296449422, guid: 13b7fb191a1e1874cb5241f5015e2d36, type: 3}
       propertyPath: m_Name
       value: GameManager

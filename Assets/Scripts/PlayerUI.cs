@@ -221,6 +221,8 @@ public class PlayerUI : MonoBehaviour
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(false);
 
+                GameObject.FindObjectOfType<GameManager>().DisplayMoveTiles(_selectedSettler.GetCurrentTile());
+
                 _playerController.currentControllerMode = PlayerController.mode.MovingSettler;
                 break;
         }

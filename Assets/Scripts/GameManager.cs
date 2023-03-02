@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     private TileManager tileManager;
+    private SettlerManager settlerManager;
     private UnityEvent<int> _onTurnChanged = new();
     private int _turn;
     private Tile selectedTile;
     [SerializeField] private Tilemap selectionMap;
-    [SerializeField] private TileBase reticleTile;
+    [SerializeField] private TileBase reticleRedTile;
+    [SerializeField] private TileBase reticleGreenTile;
 
     public static GameManager Instance
     {
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         _instance = this;
         tileManager = FindObjectOfType<TileManager>();
+        settlerManager = FindObjectOfType<SettlerManager>();
         _turn = 1;
 
     }
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
     public void SelectTile(Tile tile)
     {
         selectionMap.ClearAllTiles();
-        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticleTile);
+        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticleGreenTile);
     }
 
     public void DeleteSelection()
@@ -67,6 +70,39 @@ public class GameManager : MonoBehaviour
         selectionMap.ClearAllTiles();
     }
 
+    public void DisplayMoveTiles(Tile tile)
+    {
+        int maxMoveDistance = 5;
+        for(int i = -maxMoveDistance; i <= maxMoveDistance; i++)
+        {
+            for(int j = -maxMoveDistance; j <= maxMoveDistance; j++)
+            {
+                if((Mathf.Abs(i) + Mathf.Abs(j)) <= maxMoveDistance)
+                {
+                    Tile t = tileManager.GetTileDictionary()[new Vector2Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j)];
+
+                    bool settlerAtTile = false;
+                    foreach(GameObject s in settlerManager.GetSettlers())
+                    {
+                        if(s.GetComponent<Settler>().GetCurrentTile() == t)
+                        {
+                            settlerAtTile = true;
+                            break;
+                        }
+                    }
+
+                    if (t != null && !settlerAtTile && t.GetCurrentTileType() != Tile.TileTypes.Water && t.GetCurrentTileType() != Tile.TileTypes.DeepWater)
+                    {
+                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleGreenTile);
+                    }
+                    else
+                    {
+                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleRedTile);
+                    }
+                }
+            }
+        }
+    }
 
     // Update is called once per frame
     void Update()
