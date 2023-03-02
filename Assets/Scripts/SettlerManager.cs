@@ -35,7 +35,7 @@ public class SettlerManager : MonoBehaviour
         return settlers;
     }
 
-    public void AddSettlerAtTile(Tile tile)
+    public bool AddSettlerAtTile(Tile tile)
     {
         bool compatableTile = tile.GetCurrentTileType() != Tile.TileTypes.Water && tile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
         bool tileHasSettler = false;
@@ -54,6 +54,8 @@ public class SettlerManager : MonoBehaviour
             GameObject settler = GameObject.Instantiate(settlerPrefab, Vector3.zero, Quaternion.identity);
             settler.GetComponent<Settler>().SetCurrentTileAndPosition(tile);
             settlers.Add(settler);
+            return true;
         }
+        return false;
     }
 }

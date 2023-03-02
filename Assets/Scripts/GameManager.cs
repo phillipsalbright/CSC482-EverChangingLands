@@ -50,6 +50,10 @@ public class GameManager : MonoBehaviour
         _turn++;
         _onTurnChanged.Invoke(_turn);
         tileManager.AdvanceTurn();
+        foreach(Settler s in FindObjectsOfType<Settler>())
+        {
+            s.StartNewTurn();
+        }
     }
 
     public void SelectTile(Tile tile)

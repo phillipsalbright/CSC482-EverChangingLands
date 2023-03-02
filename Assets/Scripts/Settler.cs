@@ -11,6 +11,8 @@ public class Settler : MonoBehaviour
 
     private SpriteRenderer sprite;
 
+    public bool canMove = true;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -46,29 +48,40 @@ public class Settler : MonoBehaviour
 
     public void MoveSettler(Tile newTile)
     {
-        Dictionary<Vector2Int, Tile> tiles = FindObjectOfType<TileManager>().GetTileDictionary();
-        Vector2Int newTileCoordinates = new Vector2Int();
-
-        foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
+        bool compatableTile = newTile.GetCurrentTileType() != Tile.TileTypes.Water && newTile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+        if(compatableTile)
         {
-            if (kvp.Value == newTile)
-            {
-                newTileCoordinates = kvp.Key;
-            }
-        }
+            Dictionary<Vector2Int, Tile> tiles = FindObjectOfType<TileManager>().GetTileDictionary();
+            Vector2Int newTileCoordinates = new Vector2Int();
 
-        if(newTileCoordinates != null)
-        {
-            int xDifference = Mathf.Abs(positionInTilemap.x - newTileCoordinates.x);
-            int yDifference = Mathf.Abs(positionInTilemap.y - newTileCoordinates.y);
-
-            if (xDifference + yDifference <= maxMovementRange)
+            foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
             {
-                currentTile = newTile;
-                positionInTilemap = newTileCoordinates;
-                transform.position = FindObjectOfType<TileManager>().GetTilemap().GetCellCenterWorld(new Vector3Int(newTileCoordinates.x, newTileCoordinates.y, 0));
+                if (kvp.Value == newTile)
+                {
+                    newTileCoordinates = kvp.Key;
+                }
             }
-        }
+
+            if (canMove && newTileCoordinates != null)
+            {
+                int xDifference = Mathf.Abs(positionInTilemap.x - newTileCoordinates.x);
+                int yDifference = Mathf.Abs(positionInTilemap.y - newTileCoordinates.y);
+
+                if (xDifference + yDifference <= maxMovementRange)
+                {
+                    currentTile = newTile;
+                    positionInTilemap = newTileCoordinates;
+                    transform.position = FindObjectOfType<TileManager>().GetTilemap().GetCellCenterWorld(new Vector3Int(newTileCoordinates.x, newTileCoordinates.y, 0));
+
+                    canMove = false;
+                }
+            }
+        }   
+    }
+
+    public void StartNewTurn()
+    {
+        canMove = true;
     }
 
     public Tile GetCurrentTile()
