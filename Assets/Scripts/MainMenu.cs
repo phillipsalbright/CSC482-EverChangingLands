@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGameCustom()
     {
+        customMap.LoadCustom();
         SceneManager.LoadScene(1);
     }
 }
