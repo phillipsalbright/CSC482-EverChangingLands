@@ -13,6 +13,7 @@ public class BuildingManager : Singleton<BuildingManager>
         Lumber,
         Farm,
         WaterWell,
+        House,
     }
     
     [Serializable]
@@ -41,6 +42,7 @@ public class BuildingManager : Singleton<BuildingManager>
     public Tilemap buildingMap;
     public Dictionary<BuildingName, Building> buildingDictionary;
     public Dictionary<Vector2Int, BuildingName> builtBuildings;
+    private Dictionary<Vector2Int, House> houses;
 
     [SerializeField]
     public List<Building> buildingList = new List<Building>();
@@ -49,13 +51,17 @@ public class BuildingManager : Singleton<BuildingManager>
     public void AdvanceTurn() {
         foreach(Vector2Int p in builtBuildings.Keys) {
             BuildingName name = builtBuildings[p];
-            Tile t = TileManager.Instance.GetTileAtLocation(p);
+            Tile t = TileManager.Instance.GetTile(p);
             TileTypes tType = t.GetCurrentTileType();
             if(isDestroyed(name, tType)) {
                 builtBuildings.Remove(p);
                 buildingMap.SetTile( new Vector3Int(p.x, p.y, 1), null);
             } else {
                 produceResources(name);
+            }
+            if (houses.ContainsKey(p))
+            {
+                houses[p].AdvanceTurn();
             }
         }
     }
@@ -107,6 +113,10 @@ public class BuildingManager : Singleton<BuildingManager>
         if(canAfford(name)){
             Building b = buildingDictionary[name];
             builtBuildings.Add(p, name);
+            if (b.buildingType == BuildingName.House)
+            {
+                houses.Add(p, new House(p));
+            }
             buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
             //Take away resources to build
             foreach(ResourceCost c in b.resourceCostList){

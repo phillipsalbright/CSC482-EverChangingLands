@@ -16,7 +16,11 @@ public class House
     {
         if (settler == null)
         {
-            SettlerManager.Instance.AddSettlerAtTile(TileManager.Instance.GetTileDictionary()[location]);
+            SettlerManager.Instance.AddSettlerAtTile(TileManager.Instance.GetTile(location));
+        }
+        else if (settler.IsSettlerDead())
+        {
+            settler.SetCurrentTileAndPosition(TileManager.Instance.GetTile(location));
         }
     }
 }
