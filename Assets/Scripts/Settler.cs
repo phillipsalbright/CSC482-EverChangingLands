@@ -67,7 +67,7 @@ public class Settler : MonoBehaviour
                 {
                     currentTile = newTile;
                     positionInTilemap = newTileCoordinates;
-                    transform.position = FindObjectOfType<TileManager>().GetTilemap().GetCellCenterWorld(new Vector3Int(newTileCoordinates.x, newTileCoordinates.y, 0));
+                    transform.position = TileManager.Instance.GetTilemap().GetCellCenterWorld(new Vector3Int(newTileCoordinates.x, newTileCoordinates.y, 0));
 
                     canMove = false;
                 }
@@ -90,5 +90,10 @@ public class Settler : MonoBehaviour
     public Tile GetCurrentTile()
     {
         return currentTile;
+    }
+
+    public bool IsSettlerDead()
+    {
+        return isDead;
     }
 }

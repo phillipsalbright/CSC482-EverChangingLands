@@ -271,4 +271,13 @@ public class TileManager : Singleton<TileManager>
             kvp.Value.SetIsValid(false);
         }
     }
+
+    public Tile GetTile(Vector2Int loc)
+    {
+        if (!tiles.ContainsKey(loc))
+        {
+            return null;
+        }
+        return tiles[loc];
+    }
 }
