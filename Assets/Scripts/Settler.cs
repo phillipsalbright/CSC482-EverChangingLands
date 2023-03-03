@@ -11,7 +11,8 @@ public class Settler : MonoBehaviour
 
     private SpriteRenderer sprite;
 
-    public bool canMove = true;
+    private bool canMove = true;
+    private bool isDead = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -33,15 +34,8 @@ public class Settler : MonoBehaviour
             sprite.enabled = true;
         }
         currentTile = tile;
-        Dictionary<Vector2Int, Tile> tiles = FindObjectOfType<TileManager>().GetTileDictionary();
 
-        foreach(KeyValuePair<Vector2Int, Tile> kvp in tiles)
-        {
-            if(kvp.Value == currentTile)
-            {
-                positionInTilemap = kvp.Key;
-            }
-        }
+        positionInTilemap = tile.GetTilePos2();
 
         transform.position = FindObjectOfType<TileManager>().GetTilemap().GetCellCenterWorld(new Vector3Int(positionInTilemap.x, positionInTilemap.y, 0));
     }
@@ -59,19 +53,10 @@ public class Settler : MonoBehaviour
             }
         }
 
-        bool compatableTile = !settlerAtTile && newTile.GetCurrentTileType() != Tile.TileTypes.Water && newTile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+        bool compatableTile = !settlerAtTile && newTile.GetCurrentTileType() != Tile.TileTypes.Water && newTile.GetCurrentTileType() != Tile.TileTypes.DeepWater && newTile.GetIsValid();
         if(compatableTile)
         {
-            Dictionary<Vector2Int, Tile> tiles = FindObjectOfType<TileManager>().GetTileDictionary();
-            Vector2Int newTileCoordinates = new Vector2Int();
-
-            foreach (KeyValuePair<Vector2Int, Tile> kvp in tiles)
-            {
-                if (kvp.Value == newTile)
-                {
-                    newTileCoordinates = kvp.Key;
-                }
-            }
+            Vector2Int newTileCoordinates = newTile.GetTilePos2();
 
             if (canMove && newTileCoordinates != null)
             {
@@ -87,7 +72,9 @@ public class Settler : MonoBehaviour
                     canMove = false;
                 }
             }
-        }   
+        }
+
+        TileManager.Instance.ResetValidTilemap();
     }
 
     public void StartNewTurn()

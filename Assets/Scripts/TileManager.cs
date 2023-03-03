@@ -263,4 +263,12 @@ public class TileManager : Singleton<TileManager>
     {
         return tilemap;
     }
+
+    public void ResetValidTilemap()
+    {
+        foreach(KeyValuePair<Vector2Int, Tile> kvp in tiles)
+        {
+            kvp.Value.SetIsValid(false);
+        }
+    }
 }
