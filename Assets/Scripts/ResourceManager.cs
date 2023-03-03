@@ -50,4 +50,8 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         resourceTextDict[resourceType].text = resourceCounts[resourceType].ToString();
     }
+
+    public int getResourceCount(ResourceTypes resourceType) {
+        return resourceCounts[resourceType];
+    }
 }
