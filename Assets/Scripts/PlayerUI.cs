@@ -37,6 +37,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject _normalTurnHUD;
     [SerializeField] private GameObject _startGameHUD;
     [SerializeField] private GameObject _settlerActionHUD;
+    [SerializeField] private GameObject _buildingHUD;
     [SerializeField] private TMP_Text setSettlerText;
     private int _settlersToPlace;
     private Settler _selectedSettler;
@@ -226,6 +227,12 @@ public class PlayerUI : MonoBehaviour
                 GameObject.FindObjectOfType<GameManager>().DisplayMoveTiles(_selectedSettler.GetCurrentTile());
 
                 _playerController.currentControllerMode = PlayerController.mode.MovingSettler;
+                break;
+            case PlayerController.mode.Building:
+                _normalTurnHUD.SetActive(false);
+                _startGameHUD.SetActive(false);
+                _settlerActionHUD.SetActive(false);
+                _buildingHUD.SetActive(true);
                 break;
         }
     }
