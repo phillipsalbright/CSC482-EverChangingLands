@@ -53,7 +53,7 @@ public class Settler : MonoBehaviour
             }
         }
 
-        bool compatableTile = !settlerAtTile && newTile.GetCurrentTileType() != Tile.TileTypes.Water && newTile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+        bool compatableTile = !settlerAtTile && newTile.GetCurrentTileType() != Tile.TileTypes.Water && newTile.GetCurrentTileType() != Tile.TileTypes.DeepWater && newTile.GetIsValid();
         if(compatableTile)
         {
             Vector2Int newTileCoordinates = newTile.GetTilePos2();
@@ -72,7 +72,9 @@ public class Settler : MonoBehaviour
                     canMove = false;
                 }
             }
-        }   
+        }
+
+        TileManager.Instance.ResetValidTilemap();
     }
 
     public void StartNewTurn()
