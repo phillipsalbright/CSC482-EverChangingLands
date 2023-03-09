@@ -8,39 +8,17 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     private TileManager tileManager;
-    [SerializeField] private int _startingFoodCount;
-    private int _woodRemaining;
-    [SerializeField] private int _startingWoodCount;
-    private UnityEvent<int, int> _onFoodChanged = new();
-    private UnityEvent<int, int> _onWoodChanged = new();
+    private SettlerManager settlerManager;
     private UnityEvent<int> _onTurnChanged = new();
-    private int _foodRemaining;
     private int _turn;
     private Tile selectedTile;
     [SerializeField] private Tilemap selectionMap;
-    [SerializeField] private TileBase reticleTile;
-
-    public int FoodRemaining
-    {
-        get => _foodRemaining;
-        set
-        {
-            int temp = _foodRemaining;
-            _foodRemaining = value;
-            _onFoodChanged.Invoke(temp, _foodRemaining);
-        }
-    }
-
-    public int WoodRemaining
-    {
-        get => _woodRemaining;
-        set
-        {
-            int temp = _woodRemaining;
-            _woodRemaining = value;
-            _onFoodChanged.Invoke(temp, _woodRemaining);
-        }
-    }
+    [SerializeField] private TileBase reticleRedTile;
+    [SerializeField] private TileBase reticleGreenTile;
+    [SerializeField] private TileBase reticleYellowTile;
+    [SerializeField] private TileBase reticleBlueTile;
+    [SerializeField] private TileBase reticlePurpleTile;
+    [SerializeField] private TileBase reticleOrangeTile;
 
     public static GameManager Instance
     {
@@ -58,22 +36,9 @@ public class GameManager : MonoBehaviour
     {
         _instance = this;
         tileManager = FindObjectOfType<TileManager>();
+        settlerManager = FindObjectOfType<SettlerManager>();
         _turn = 1;
-        FoodRemaining = _startingFoodCount;
-        WoodRemaining = _startingWoodCount;
 
-    }
-
-    public event UnityAction<int, int> OnFoodChanged
-    {
-        add => _onFoodChanged.AddListener(value);
-        remove => _onFoodChanged.RemoveListener(value);
-    }
-
-    public event UnityAction<int, int> OnWoodChanged
-    {
-        add => _onWoodChanged.AddListener(value);
-        remove => _onWoodChanged.RemoveListener(value);
     }
 
     public event UnityAction<int> OnTurnChanged
@@ -92,12 +57,17 @@ public class GameManager : MonoBehaviour
         _turn++;
         _onTurnChanged.Invoke(_turn);
         tileManager.AdvanceTurn();
+        foreach(Settler s in FindObjectsOfType<Settler>())
+        {
+            s.StartNewTurn();
+        }
+        BuildingManager.Instance.AdvanceTurn();
     }
 
     public void SelectTile(Tile tile)
     {
         selectionMap.ClearAllTiles();
-        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticleTile);
+        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticleBlueTile);
     }
 
     public void DeleteSelection()
@@ -105,6 +75,82 @@ public class GameManager : MonoBehaviour
         selectionMap.ClearAllTiles();
     }
 
+    public void DisplayMoveTiles(Tile tile)
+    {
+        List<Tile> tiles = new List<Tile>();
+        List<Tile> toVisit = new List<Tile>();
+        List<Tile> visited = new List<Tile>();
+        toVisit.Add(tile);
+
+        int maxMoveDistance = 5;
+        for(int i = -maxMoveDistance; i <= maxMoveDistance; i++)
+        {
+            for(int j = -maxMoveDistance; j <= maxMoveDistance; j++)
+            {
+                if((Mathf.Abs(i) + Mathf.Abs(j)) <= maxMoveDistance)
+                {
+                    Tile t = tileManager.GetTileDictionary()[new Vector2Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j)];
+
+                    tiles.Add(t);
+                    selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleRedTile);
+
+                    /**
+
+                    if(i == 0 && j == 0)
+                    {
+                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleBlueTile);
+                    }
+                    else if (t != null && !settlerAtTile && t.GetCurrentTileType() != Tile.TileTypes.Water && t.GetCurrentTileType() != Tile.TileTypes.DeepWater)
+                    {
+                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleYellowTile);
+                    }
+                    else
+                    {
+                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleRedTile);
+                    }*/
+                }
+            }
+        }
+        
+        while(toVisit.Count > 0)
+        {
+            Tile atTile = toVisit[0];
+            foreach(Tile neighbor in atTile.GetAdjacentTiles())
+            {
+                bool compatibleTile = neighbor.GetCurrentTileType() != Tile.TileTypes.Water && neighbor.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+                if(!visited.Contains(neighbor) && tiles.Contains(neighbor) && compatibleTile)
+                {
+                    toVisit.Add(neighbor);
+                }
+            }
+
+            bool settlerAtTile = false;
+            foreach (GameObject s in settlerManager.GetSettlers())
+            {
+                if (s.GetComponent<Settler>().GetCurrentTile() == atTile && s.GetComponent<Settler>().GetCurrentTile() != tile)
+                {
+                    settlerAtTile = true;
+                    break;
+                }
+            }
+
+            if (atTile == tile)
+            {
+                selectionMap.SetTile(new Vector3Int(atTile.GetTilePos2().x, atTile.GetTilePos2().y, 0), reticleBlueTile);
+            }
+            else if (!settlerAtTile)
+            {
+                selectionMap.SetTile(new Vector3Int(atTile.GetTilePos2().x, atTile.GetTilePos2().y, 0), reticleYellowTile);
+            }
+
+            visited.Add(atTile);
+            atTile.SetIsValid(true);
+            toVisit.Remove(atTile);
+        }
+
+    }
+
+    
 
     // Update is called once per frame
     void Update()

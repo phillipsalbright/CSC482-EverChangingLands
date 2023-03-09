@@ -31,12 +31,26 @@ public class TileManager : Singleton<TileManager>
     private int width;
     private int height;
 
+    [SerializeField, Tooltip("this game's tile ruleset")]
+    private TileRuleSet tileRuleSet;
+
     private bool viewingPrediction = false;
-    // Start is called before the first frame update
+    private int selectedBuilding = -1;
+
+
     void Start()
     {
         GenerateMap();
         CheckTiles(true);
+        if(tileRuleSet == null){
+            Debug.Log("Ruleset was null. checking components");
+            tileRuleSet = gameObject.GetComponent<TileRuleSet>();
+            
+        }
+        if(tileRuleSet != null){
+            Debug.Log("ruleset not null. trying to set.");
+            TileRules.SetRuleSet(tileRuleSet);
+        }
     }
 
     public void AdvanceTurn()
@@ -92,6 +106,14 @@ public class TileManager : Singleton<TileManager>
         if (!testing)
         {
             seed = DateTime.UtcNow.ToString().GetHashCode();
+        }
+        CustomMap customMap = FindObjectOfType<CustomMap>();
+        if (customMap != null)
+        {
+            mapSize = customMap.GetMapSize();
+            biomeScale = customMap.GetBiomeScale();
+            tileScale = customMap.GetTileScale();
+            seed = customMap.GetSeed();
         }
         UnityEngine.Random.InitState(seed);
         tileOffset.x = UnityEngine.Random.Range(0f, 9999f);
@@ -239,5 +261,46 @@ public class TileManager : Singleton<TileManager>
     public Tilemap GetTilemap()
     {
         return tilemap;
+    }
+
+    public void ResetValidTilemap()
+    {
+        foreach(KeyValuePair<Vector2Int, Tile> kvp in tiles)
+        {
+            kvp.Value.SetIsValid(false);
+        }
+    }
+
+    public Tile GetTile(Vector2Int loc)
+    {
+        if (!tiles.ContainsKey(loc))
+        {
+            return null;
+        }
+        return tiles[loc];
+    }
+
+    public void SetTile(Vector2Int pos, Tile.TileTypes newTile)
+    {
+        tiles[pos].PlayerChangeTileType(newTile);
+        tilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), TileInfo.Instance.GetTile(newTile));
+        FillChangeMap();
+    }
+
+    public void FillChangeMap()
+    {
+        foreach (KeyValuePair<Vector2Int, Tile> tile in tiles)
+        {
+            Vector3Int loc = new Vector3Int(tile.Key.x, tile.Key.y, 0);
+            IsometricRuleTile tileImage = TileInfo.Instance.GetTile(tile.Value.GetNextTileType());
+            if (changeMap.GetSprite(loc) != tileImage.m_DefaultSprite)
+            {
+                changeMap.SetTile(loc, tileImage);
+            }
+            if (tile.Value.GetNextTileType() != tile.Value.GetCurrentTileType())
+            {
+                changeMap.SetColor(loc, Color.red);
+            }
+        }
     }
 }

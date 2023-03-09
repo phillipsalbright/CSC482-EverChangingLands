@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using Mono.Cecil;
 using UnityEngine;
 
 public class Tile
@@ -28,17 +29,34 @@ public class Tile
     private bool tileChanging = false;
 
     private Vector3Int tilePos;
+    private bool isValid;
+
+    public Vector2Int GetTilePos2()
+    {
+        return new Vector2Int(tilePos.x, tilePos.y);
+    }
 
     public Tile(TileTypes currentTileType, Vector3Int tileLoc)
     {
         SetCurrentTileType(currentTileType);
         SetNextTileType(currentTileType);
         tilePos = tileLoc;
+        isValid = false;
     }
 
     public Vector3Int GetTilePosition()
     {
         return tilePos;
+    }
+
+    public void SetIsValid(bool valid)
+    {
+        isValid = valid;
+    }
+
+    public bool GetIsValid()
+    {
+        return isValid;
     }
 
     //checks if the tile will change terrain next turn. use for forecasting
