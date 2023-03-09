@@ -16,11 +16,19 @@ public class House
     {
         if (settler == null)
         {
+            Debug.Log("No Settler so Spawning New One");
             SettlerManager.Instance.AddSettlerAtTile(TileManager.Instance.GetTile(location));
         }
-        else if (settler.IsSettlerDead())
+        else if (settler.isSettlerDead())
         {
-            settler.SetCurrentTileAndPosition(TileManager.Instance.GetTile(location));
+            settler.SetInitialTileAndPosition(TileManager.Instance.GetTile(location));
+            settler.gameObject.SetActive(true);
+            settler.Respawn();
         }
+    }
+
+    public void SetSettler(Settler s)
+    {
+        settler = s;
     }
 }
