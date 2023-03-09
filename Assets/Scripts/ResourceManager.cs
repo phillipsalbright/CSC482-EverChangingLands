@@ -11,6 +11,7 @@ public class ResourceManager : Singleton<ResourceManager>
         Wood,
         Water,
         Food,
+        None,
     }
 
     [Serializable]
@@ -36,6 +37,10 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public void AddResource(ResourceTypes resourceType, int amount)
     {
+        if (resourceType == ResourceTypes.None)
+        {
+            return;
+        }
         resourceCounts[resourceType] += amount;
         UpdateUI(resourceType);
     }

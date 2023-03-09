@@ -96,7 +96,19 @@ public class Settler : MonoBehaviour
 
     public void CollectResource()
     {
-        ResourceManager.Instance.AddResource(this.GetCurrentTile().GetResourceType(), 5);
+        ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5);
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+
+                if (this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
+                {
+                    ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+                }
+            }
+        }
+        canCollect = false;
     }
 
     public Tile GetCurrentTile()

@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         {
             s.StartNewTurn();
         }
+        BuildingManager.Instance.AdvanceTurn();
     }
 
     public void SelectTile(Tile tile)

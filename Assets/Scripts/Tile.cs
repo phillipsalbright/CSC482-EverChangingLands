@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using Mono.Cecil;
 using UnityEngine;
 
 public class Tile
@@ -29,8 +30,6 @@ public class Tile
 
     private Vector3Int tilePos;
     private bool isValid;
-
-    [SerializeField] private ResourceManager.ResourceTypes resourceType;
 
     public Vector2Int GetTilePos2()
     {
@@ -127,10 +126,5 @@ public class Tile
     public Tile[,] GetAdjacentTiles()
     {
         return adjacentTiles;
-    }
-
-    public ResourceManager.ResourceTypes GetResourceType()
-    {
-        return resourceType;
     }
 }

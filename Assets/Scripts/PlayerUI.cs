@@ -198,6 +198,7 @@ public class PlayerUI : MonoBehaviour
                 _normalTurnHUD.SetActive(true);
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(false);
+                _buildingHUD.SetActive(false);
                 GameManager.Instance.DeleteSelection();
                 _playerController.currentControllerMode = PlayerController.mode.BeginTurn;
                 break;
@@ -205,6 +206,7 @@ public class PlayerUI : MonoBehaviour
                 _normalTurnHUD.SetActive(false);
                 _startGameHUD.SetActive(true);
                 _settlerActionHUD.SetActive(false);
+                _buildingHUD.SetActive(false);
 
                 _playerController.currentControllerMode = PlayerController.mode.GameStart;
                 break;
@@ -212,16 +214,18 @@ public class PlayerUI : MonoBehaviour
                 _normalTurnHUD.SetActive(false);
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(true);
+                _buildingHUD.SetActive(false);
 
                 _settlerActionHUD.transform.Find("MoveSettlerButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanMove();
-                _settlerActionHUD.transform.Find("");
-
+                _settlerActionHUD.transform.Find("CollectResourceButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanCollect();
+                _settlerActionHUD.transform.Find("BuildStructureButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
                 _playerController.currentControllerMode = PlayerController.mode.SettlerActions;
                 break;
             case PlayerController.mode.MovingSettler:
                 _normalTurnHUD.SetActive(false);
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(false);
+                _buildingHUD.SetActive(false);
 
                 GameObject.FindObjectOfType<GameManager>().DisplayMoveTiles(_selectedSettler.GetCurrentTile());
 
@@ -232,6 +236,10 @@ public class PlayerUI : MonoBehaviour
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(false);
                 _buildingHUD.SetActive(true);
+                _buildingHUD.transform.Find("BuildLumberButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Lumber) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Lumber, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                _buildingHUD.transform.Find("BuildFarmButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Farm) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Farm, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                _buildingHUD.transform.Find("BuildWellButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.WaterWell) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.WaterWell, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                _buildingHUD.transform.Find("BuildHouseButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.House) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.House, _selectedSettler.GetCurrentTile().GetCurrentTileType());
                 break;
         }
     }
@@ -244,11 +252,12 @@ public class PlayerUI : MonoBehaviour
 
     public void SelectBuilding(int building)
     {
-
+        BuildingManager.Instance.buildBuilding((BuildingManager.BuildingName) building, _selectedSettler.GetCurrentTile().GetTilePos2());
     }
 
     public void CollectResource()
     {
         _selectedSettler.CollectResource();
+        _settlerActionHUD.transform.Find("CollectResourceButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanCollect();
     }
 }

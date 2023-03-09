@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.ExceptionServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TileInfo : Singleton<TileInfo>
@@ -19,6 +21,8 @@ public class TileInfo : Singleton<TileInfo>
         public IsometricRuleTile isometricTile;
         [Range(0,1)]
         public float chance;
+
+        public ResourceManager.ResourceTypes associatedResource;
     }
     [Serializable]
     public struct BiomeList
@@ -34,6 +38,7 @@ public class TileInfo : Singleton<TileInfo>
     private Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>> tilesDict = new Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>>();
     private Dictionary<Biomes, float> tilesChanceSumDict = new Dictionary<Biomes, float>();
     private Dictionary<Tile.TileTypes, IsometricRuleTile> isometricTiles = new Dictionary<Tile.TileTypes, IsometricRuleTile>();
+    private Dictionary<Tile.TileTypes, TileComponents> tileList = new Dictionary<Tile.TileTypes, TileComponents>();
     private float biomeChanceSum = 0;
     [SerializeField]
     private IsometricRuleTile deepWaterTile;
@@ -62,6 +67,7 @@ public class TileInfo : Singleton<TileInfo>
                 tilesDict[biomeList.biome].Add(tileComp.tileType, tileComp);
                 tilesChanceSumDict[biomeList.biome] += tileComp.chance;
                 isometricTiles.Add(tileComp.tileType, tileComp.isometricTile);
+                tileList.Add(tileComp.tileType, tileComp);
             }
             biomeChanceSum += biomeList.chance;
         }
@@ -75,6 +81,11 @@ public class TileInfo : Singleton<TileInfo>
             return deepWaterTile;
         }
         return isometricTiles[tileType];
+    }
+
+    public ResourceManager.ResourceTypes GetTileResourceTypes(Tile.TileTypes type)
+    {
+        return tileList[type].associatedResource;
     }
 
     public Tile.TileTypes GetTileType(float biomeRand, float tileRand)
