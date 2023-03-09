@@ -41,6 +41,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private TMP_Text setSettlerText;
     private int _settlersToPlace;
     private Settler _selectedSettler;
+    private bool _isGamepad;
 
     // Start is called before the first frame update
     void Start()
@@ -89,7 +90,7 @@ public class PlayerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool _isGamepad = this.GetComponentInParent<PlayerInput>().currentControlScheme == "Gamepad";
+        _isGamepad = this.GetComponentInParent<PlayerInput>().currentControlScheme == "Gamepad";
        // Debug.Log(this.GetComponentInParent<PlayerInput>().currentControlScheme);
         if (!_isGamepad)
         {
@@ -143,51 +144,78 @@ public class PlayerUI : MonoBehaviour
             TileManager tm = FindObjectOfType<TileManager>();
             Tile tile = tm.GetTileAtLocation(ray.GetPoint(10f));
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity,  layer_mask))
+
+            var raycastResult = new List<RaycastResult>();
+            PointerEventData p = new PointerEventData(EventSystem.current);
+            p.position = _cursorPosition;
+            EventSystem.current.RaycastAll(p, raycastResult);
+            if (raycastResult.Count <= 0)
             {
-                Settler s = hit.transform.gameObject.GetComponent<Settler>();
-                if (_playerController.currentControllerMode == PlayerController.mode.BeginTurn)
+                //SetMode(PlayerController.mode.BeginTurn);
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer_mask))
                 {
-                    GameManager.Instance.SelectTile(s.GetCurrentTile());
-                    _selectedSettler = s;
-                    SetMode(PlayerController.mode.SettlerActions);
-                }
-            } else {
-                if (_playerController.currentControllerMode == PlayerController.mode.GameStart)
-                {
-                    SettlerManager sm = FindObjectOfType<SettlerManager>();
-                    if (sm.GetCurrentNumberOfSettlers() < sm.GetInitialNumberOfSettlers())
+                    Settler s = hit.transform.gameObject.GetComponent<Settler>();
+                    if (/**_playerController.currentControllerMode == PlayerController.mode.BeginTurn*/true)
                     {
-                        if(sm.AddSettlerAtTile(tm.GetTileAtLocation(ray.GetPoint(10f))))
-                        {
-                            _settlersToPlace--;
-                            setSettlerText.text = "Place Settlers: " + _settlersToPlace;
-                            Tile t = tm.GetTileAtLocation(ray.GetPoint(10f));
-                            BuildingManager.Instance.PlaceInitialHouse(t.GetTilePos2());
-                        }
+                        GameManager.Instance.SelectTile(s.GetCurrentTile());
+                        _selectedSettler = s;
+                        SetMode(PlayerController.mode.SettlerActions);
                     }
-                    if (sm.GetCurrentNumberOfSettlers() >= sm.GetInitialNumberOfSettlers())
+                }
+                else
+                {
+                    if (_playerController.currentControllerMode == PlayerController.mode.GameStart)
                     {
+                        SettlerManager sm = FindObjectOfType<SettlerManager>();
+                        if (sm.GetCurrentNumberOfSettlers() < sm.GetInitialNumberOfSettlers())
+                        {
+                            if (sm.AddSettlerAtTile(tm.GetTileAtLocation(ray.GetPoint(10f))))
+                            {
+                                _settlersToPlace--;
+                                setSettlerText.text = "Place Settlers: " + _settlersToPlace;
+                                Tile t = tm.GetTileAtLocation(ray.GetPoint(10f));
+                                BuildingManager.Instance.PlaceInitialHouse(t.GetTilePos2());
+                            }
+                        }
+                        if (sm.GetCurrentNumberOfSettlers() >= sm.GetInitialNumberOfSettlers())
+                        {
+                            SetMode(PlayerController.mode.BeginTurn);
+                        }
+
+                    }
+                    else if (_playerController.currentControllerMode == PlayerController.mode.MovingSettler)
+                    {
+                        _selectedSettler.MoveSettler(tm.GetTileAtLocation(ray.GetPoint(10f)));
                         SetMode(PlayerController.mode.BeginTurn);
                     }
-
-                }  else if (_playerController.currentControllerMode == PlayerController.mode.MovingSettler)
-                {
-                    _selectedSettler.MoveSettler(tm.GetTileAtLocation(ray.GetPoint(10f)));
-                    SetMode(PlayerController.mode.BeginTurn);
-                }
-                else 
-                {
-                    var raycastResult = new List<RaycastResult>();
-                    PointerEventData p = new PointerEventData(EventSystem.current);
-                    p.position = _cursorPosition;
-                    EventSystem.current.RaycastAll( p, raycastResult);
-                    if (raycastResult.Count <= 0)
+                    else
                     {
+                        /**
+                        var raycastResult = new List<RaycastResult>();
+                        PointerEventData p = new PointerEventData(EventSystem.current);
+                        p.position = _cursorPosition;
+                        EventSystem.current.RaycastAll(p, raycastResult);
+                        if (raycastResult.Count <= 0)
+                        {
+                            SetMode(PlayerController.mode.BeginTurn);
+                        }
+                        */
                         SetMode(PlayerController.mode.BeginTurn);
                     }
                 }
             }
+            else if (_isGamepad)
+            {
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, button_mask))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+
+                }
+                Debug.Log(raycastResult[0]);
+                raycastResult[0].gameObject.GetComponentInParent<Button>().onClick.Invoke();
+            }
+
+           
         }
     }
 
@@ -254,6 +282,7 @@ public class PlayerUI : MonoBehaviour
     public void SelectBuilding(int building)
     {
         BuildingManager.Instance.buildBuilding((BuildingManager.BuildingName) building, _selectedSettler.GetCurrentTile().GetTilePos2());
+        SetMode(PlayerController.mode.SettlerActions);
     }
 
     public void CollectResource()
