@@ -15,6 +15,9 @@ public class Tile
         Dirt,
         Water,
         DeepWater,
+        Rocks,
+        Mountain,
+        SnowPeak,
     }
 
     private TileTypes currentTileType;
