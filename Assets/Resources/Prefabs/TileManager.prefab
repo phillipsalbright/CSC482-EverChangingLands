@@ -112,7 +112,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingMap: {fileID: 7805056821990959576}
-  buildingList: []
+  buildingList:
+  - buildingType: 0
+    isometricTile: {fileID: 11400000, guid: 66e909ce14528484c96ca4641077ebad, type: 2}
+    resourceProduced: 0
+    amountProduced: 5
+    acceptedTiles: 01000000
+  - buildingType: 3
+    isometricTile: {fileID: 11400000, guid: 47c5101612f337d4c946ec94a4e3529c, type: 2}
+    resourceProduced: 0
+    amountProduced: 0
+    acceptedTiles: 01000000
 --- !u!1001 &7066629160259157315
 PrefabInstance:
   m_ObjectHideFlags: 0

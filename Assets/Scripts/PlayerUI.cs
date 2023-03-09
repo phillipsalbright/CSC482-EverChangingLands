@@ -142,18 +142,14 @@ public class PlayerUI : MonoBehaviour
             int button_mask = LayerMask.GetMask("UI");
             TileManager tm = FindObjectOfType<TileManager>();
             Tile tile = tm.GetTileAtLocation(ray.GetPoint(10f));
-            //Debug.LogWarning(Physics.Raycast(Camera.main.ScreenPointToRay(_cursorPosition), Mathf.Infinity, button_mask));
-             RaycastHit hit;
+            RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity,  layer_mask))
             {
                 Settler s = hit.transform.gameObject.GetComponent<Settler>();
-                //GameManager.Instance.SelectTile(tm.GetTileAtLocation(ray.GetPoint(10f)));
                 if (_playerController.currentControllerMode == PlayerController.mode.BeginTurn)
                 {
                     GameManager.Instance.SelectTile(s.GetCurrentTile());
                     _selectedSettler = s;
-                    //Debug.Log(tm.GetTileAtLocation(ray.GetPoint(10f)).GetCurrentTileType());
-                    //Debug.Log(tile.GetCurrentTileType());
                     SetMode(PlayerController.mode.SettlerActions);
                 }
             } else {
@@ -166,6 +162,8 @@ public class PlayerUI : MonoBehaviour
                         {
                             _settlersToPlace--;
                             setSettlerText.text = "Place Settlers: " + _settlersToPlace;
+                            Tile t = tm.GetTileAtLocation(ray.GetPoint(10f));
+                            BuildingManager.Instance.PlaceInitialHouse(t.GetTilePos2());
                         }
                     }
                     if (sm.GetCurrentNumberOfSettlers() >= sm.GetInitialNumberOfSettlers())
@@ -216,6 +214,7 @@ public class PlayerUI : MonoBehaviour
                 _settlerActionHUD.SetActive(true);
 
                 _settlerActionHUD.transform.Find("MoveSettlerButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanMove();
+                _settlerActionHUD.transform.Find("");
 
                 _playerController.currentControllerMode = PlayerController.mode.SettlerActions;
                 break;
@@ -242,4 +241,9 @@ public class PlayerUI : MonoBehaviour
         SetMode((PlayerController.mode) newMode);
     }
 
+
+    public void SelectBuilding(int building)
+    {
+
+    }
 }

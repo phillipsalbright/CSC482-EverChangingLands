@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1902260090224827177
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1404,7 +1404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6819779293511196136
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1710,7 +1710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &372494212319224108
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3845,7 +3845,7 @@ MonoBehaviour:
   _normalTurnHUD: {fileID: 4088729561560020536}
   _startGameHUD: {fileID: 3710944894526329177}
   _settlerActionHUD: {fileID: 4384817730788522596}
-  _buildingHUD: {fileID: 0}
+  _buildingHUD: {fileID: 2572490078840505414}
   setSettlerText: {fileID: 4891089637819053983}
 --- !u!1 &9049802118655951749
 GameObject:

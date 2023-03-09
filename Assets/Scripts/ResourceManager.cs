@@ -29,8 +29,8 @@ public class ResourceManager : Singleton<ResourceManager>
         foreach (ResourceTexts resourceText in resourceTexts)
         {
             resourceTextDict.Add(resourceText.resourceType, resourceText.resourceText);
-            resourceCounts.Add(resourceText.resourceType, 0);
-            resourceText.resourceText.text = "0";
+            resourceCounts.Add(resourceText.resourceType, 10);
+            resourceText.resourceText.text = "10";
         }
     }
 

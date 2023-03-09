@@ -40,9 +40,9 @@ public class BuildingManager : Singleton<BuildingManager>
     }
 
     public Tilemap buildingMap;
-    public Dictionary<BuildingName, Building> buildingDictionary;
-    public Dictionary<Vector2Int, BuildingName> builtBuildings;
-    private Dictionary<Vector2Int, House> houses;
+    public Dictionary<BuildingName, Building> buildingDictionary = new Dictionary<BuildingName, Building>();
+    public Dictionary<Vector2Int, BuildingName> builtBuildings = new Dictionary<Vector2Int, BuildingName>();
+    private Dictionary<Vector2Int, House> houses = new Dictionary<Vector2Int, House>();
 
     [SerializeField]
     public List<Building> buildingList = new List<Building>();
@@ -123,6 +123,15 @@ public class BuildingManager : Singleton<BuildingManager>
                 ResourceManager.Instance.RemoveResource(c.resourceType, c.amount);
             }
         }
+    }
+
+    // for placing the free initial player houses
+    public void PlaceInitialHouse(Vector2Int p)
+    {
+        Building b = buildingDictionary[BuildingName.House];
+        builtBuildings.Add(p, BuildingName.House);
+        houses.Add(p, new House(p));
+        buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
     }
 
     public bool isDestroyed(BuildingName name, Tile.TileTypes tileType) {
