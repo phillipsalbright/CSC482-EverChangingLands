@@ -7,6 +7,7 @@ public class SettlerManager : Singleton<SettlerManager>
     [SerializeField] private List<GameObject> settlers;
     [SerializeField] private int initialNumberOfSettlers = 3;
     [SerializeField] private GameObject settlerPrefab;
+    [SerializeField] private int maxSettlerMovement = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,11 @@ public class SettlerManager : Singleton<SettlerManager>
     public int GetInitialNumberOfSettlers()
     {
         return initialNumberOfSettlers;
+    }
+
+    public int GetMaxSettlerMovement()
+    {
+        return maxSettlerMovement;
     }
 
     public List<GameObject> GetSettlers()
@@ -52,10 +58,22 @@ public class SettlerManager : Singleton<SettlerManager>
         if (compatableTile && !tileHasSettler)
         {
             GameObject settler = GameObject.Instantiate(settlerPrefab, Vector3.zero, Quaternion.identity);
-            settler.GetComponent<Settler>().SetCurrentTileAndPosition(tile);
+            settler.GetComponent<Settler>().SetInitialTileAndPosition(tile);
             settlers.Add(settler);
             return true;
         }
         return false;
+    }
+
+    public Settler GetSettlerAtPos(Vector2Int pos)
+    {
+        foreach(GameObject go in settlers)
+        {
+            if(go.GetComponent<Settler>().GetCurrentTile().GetTilePos2() == pos)
+            {
+                return go.GetComponent<Settler>();
+            }
+        }
+        return null;
     }
 }
