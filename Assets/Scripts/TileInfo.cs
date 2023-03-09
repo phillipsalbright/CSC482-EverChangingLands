@@ -15,6 +15,13 @@ public class TileInfo : Singleton<TileInfo>
         Sand,
     }
     [Serializable]
+    public struct TileSwitch
+    {
+        public Tile.TileTypes switchTile;
+        public List<ResourceManager.ResourceTypes> requiredResources;
+        public List<int> requiredResourcesCount;
+    }
+    [Serializable]
     public struct TileComponents
     {
         public Tile.TileTypes tileType;
@@ -23,6 +30,7 @@ public class TileInfo : Singleton<TileInfo>
         public float chance;
 
         public ResourceManager.ResourceTypes associatedResource;
+        public List<TileSwitch> tileSwitches;
     }
     [Serializable]
     public struct BiomeList
@@ -46,6 +54,7 @@ public class TileInfo : Singleton<TileInfo>
     private float deepWaterStart;
     void Awake()
     {
+        base.Awake();
         SetupDictionaries();
     }
 
@@ -159,5 +168,10 @@ public class TileInfo : Singleton<TileInfo>
             }
         } 
         return Tile.TileTypes.Grass;
+    }
+
+    public List<TileSwitch> GetTileSwitches(Tile.TileTypes tileType)
+    {
+        return tileList[tileType].tileSwitches;
     }
 }

@@ -114,13 +114,10 @@ public class TileManager : Singleton<TileManager>
             biomeScale = customMap.GetBiomeScale();
             tileScale = customMap.GetTileScale();
             seed = customMap.GetSeed();
-            Debug.Log(biomeScale + " " + tileScale);
         }
-        Debug.Log(seed);
         UnityEngine.Random.InitState(seed);
         tileOffset.x = UnityEngine.Random.Range(0f, 9999f);
         tileOffset.y = UnityEngine.Random.Range(0f, 9999f);
-        Debug.Log(tileOffset);
         biomeOffset.x = -tileOffset.x;
         biomeOffset.y = -tileOffset.y;
         width = mapSize.x / 2;
@@ -281,5 +278,29 @@ public class TileManager : Singleton<TileManager>
             return null;
         }
         return tiles[loc];
+    }
+
+    public void SetTile(Vector2Int pos, Tile.TileTypes newTile)
+    {
+        tiles[pos].PlayerChangeTileType(newTile);
+        tilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), TileInfo.Instance.GetTile(newTile));
+        FillChangeMap();
+    }
+
+    public void FillChangeMap()
+    {
+        foreach (KeyValuePair<Vector2Int, Tile> tile in tiles)
+        {
+            Vector3Int loc = new Vector3Int(tile.Key.x, tile.Key.y, 0);
+            IsometricRuleTile tileImage = TileInfo.Instance.GetTile(tile.Value.GetNextTileType());
+            if (changeMap.GetSprite(loc) != tileImage.m_DefaultSprite)
+            {
+                changeMap.SetTile(loc, tileImage);
+            }
+            if (tile.Value.GetNextTileType() != tile.Value.GetCurrentTileType())
+            {
+                changeMap.SetColor(loc, Color.red);
+            }
+        }
     }
 }
