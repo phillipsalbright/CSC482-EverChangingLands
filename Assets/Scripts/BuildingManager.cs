@@ -31,7 +31,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
         public List<Tile.TileTypes> acceptedTiles;
     }
-
+    [Serializable]
     public struct ResourceCost
     {
         public ResourceManager.ResourceTypes resourceType;
@@ -40,21 +40,24 @@ public class BuildingManager : Singleton<BuildingManager>
     }
 
     public Tilemap buildingMap;
-    public Dictionary<BuildingName, Building> buildingDictionary;
-    public Dictionary<Vector2Int, BuildingName> builtBuildings;
-    private Dictionary<Vector2Int, House> houses;
+    public Dictionary<BuildingName, Building> buildingDictionary = new Dictionary<BuildingName, Building>();
+    public Dictionary<Vector2Int, BuildingName> builtBuildings = new Dictionary<Vector2Int, BuildingName>();
+    private Dictionary<Vector2Int, House> houses = new Dictionary<Vector2Int, House>();
 
     [SerializeField]
     public List<Building> buildingList = new List<Building>();
 
 
     public void AdvanceTurn() {
+        Debug.LogWarning("ff");
+        List<Vector2Int> players = new List<Vector2Int>();
         foreach(Vector2Int p in builtBuildings.Keys) {
             BuildingName name = builtBuildings[p];
             Tile t = TileManager.Instance.GetTile(p);
             TileTypes tType = t.GetCurrentTileType();
             if(isDestroyed(name, tType)) {
-                builtBuildings.Remove(p);
+                //builtBuildings.Remove(p);
+                players.Add(p);
                 buildingMap.SetTile( new Vector3Int(p.x, p.y, 1), null);
             } else {
                 produceResources(name);
@@ -63,6 +66,11 @@ public class BuildingManager : Singleton<BuildingManager>
             {
                 houses[p].AdvanceTurn();
             }
+        }
+
+        foreach (Vector2Int p in players)
+        {
+            builtBuildings.Remove(p);
         }
     }
 
@@ -98,10 +106,16 @@ public class BuildingManager : Singleton<BuildingManager>
         return hasResources;
     }
 
-    //Return true if building is on proper tile
-    public bool canBuild(BuildingName name, Tile.TileTypes tileType) {
+    //Return true if building type is valid for a given tile
+    public bool canBuild(BuildingName name, Tile.TileTypes tile) {
         Building b = buildingDictionary[name];
-        return b.acceptedTiles.Contains(tileType);
+        return b.acceptedTiles.Contains(tile);
+    }
+
+    // Check if a given tile has a building already on it
+    public bool hasBuilding(Tile tile)
+    {
+        return !(buildingMap.GetTile(new Vector3Int(tile.GetTilePos2().x, tile.GetTilePos2().y, 1)));
     }
 
     public void produceResources(BuildingName name) {
@@ -123,6 +137,15 @@ public class BuildingManager : Singleton<BuildingManager>
                 ResourceManager.Instance.RemoveResource(c.resourceType, c.amount);
             }
         }
+    }
+
+    // for placing the free initial player houses
+    public void PlaceInitialHouse(Vector2Int p)
+    {
+        Building b = buildingDictionary[BuildingName.House];
+        builtBuildings.Add(p, BuildingName.House);
+        houses.Add(p, new House(p));
+        buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
     }
 
     public bool isDestroyed(BuildingName name, Tile.TileTypes tileType) {

@@ -35,7 +35,9 @@ public class TileManager : Singleton<TileManager>
     private TileRuleSet tileRuleSet;
 
     private bool viewingPrediction = false;
-    // Start is called before the first frame update
+    private int selectedBuilding = -1;
+
+
     void Start()
     {
         GenerateMap();
