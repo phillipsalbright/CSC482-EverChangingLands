@@ -12,6 +12,7 @@ public class Settler : MonoBehaviour
     private SpriteRenderer sprite;
 
     private bool canMove = true;
+    private bool canCollect = true;
     private bool isDead = false;
 
     // Start is called before the first frame update
@@ -80,11 +81,22 @@ public class Settler : MonoBehaviour
     public void StartNewTurn()
     {
         canMove = true;
+        canCollect = true;
     }
 
     public bool GetCanMove()
     {
         return canMove;
+    }
+
+    public bool GetCanCollect()
+    {
+        return canCollect;
+    }
+
+    public void CollectResource()
+    {
+        ResourceManager.Instance.AddResource(this.GetCurrentTile().GetResourceType(), 5);
     }
 
     public Tile GetCurrentTile()

@@ -246,4 +246,9 @@ public class PlayerUI : MonoBehaviour
     {
 
     }
+
+    public void CollectResource()
+    {
+        _selectedSettler.CollectResource();
+    }
 }
