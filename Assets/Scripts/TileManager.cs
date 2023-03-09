@@ -35,7 +35,9 @@ public class TileManager : Singleton<TileManager>
     private TileRuleSet tileRuleSet;
 
     private bool viewingPrediction = false;
-    // Start is called before the first frame update
+    private int selectedBuilding = -1;
+
+
     void Start()
     {
         GenerateMap();
@@ -262,5 +264,22 @@ public class TileManager : Singleton<TileManager>
     public Tilemap GetTilemap()
     {
         return tilemap;
+    }
+
+    public void ResetValidTilemap()
+    {
+        foreach(KeyValuePair<Vector2Int, Tile> kvp in tiles)
+        {
+            kvp.Value.SetIsValid(false);
+        }
+    }
+
+    public Tile GetTile(Vector2Int loc)
+    {
+        if (!tiles.ContainsKey(loc))
+        {
+            return null;
+        }
+        return tiles[loc];
     }
 }

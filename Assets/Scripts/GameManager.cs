@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         {
             s.StartNewTurn();
         }
+        BuildingManager.Instance.AdvanceTurn();
     }
 
     public void SelectTile(Tile tile)
@@ -76,6 +77,11 @@ public class GameManager : MonoBehaviour
 
     public void DisplayMoveTiles(Tile tile)
     {
+        List<Tile> tiles = new List<Tile>();
+        List<Tile> toVisit = new List<Tile>();
+        List<Tile> visited = new List<Tile>();
+        toVisit.Add(tile);
+
         int maxMoveDistance = 5;
         for(int i = -maxMoveDistance; i <= maxMoveDistance; i++)
         {
@@ -85,15 +91,10 @@ public class GameManager : MonoBehaviour
                 {
                     Tile t = tileManager.GetTileDictionary()[new Vector2Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j)];
 
-                    bool settlerAtTile = false;
-                    foreach(GameObject s in settlerManager.GetSettlers())
-                    {
-                        if(s.GetComponent<Settler>().GetCurrentTile() == t && s.GetComponent<Settler>().GetCurrentTile() != tile)
-                        {
-                            settlerAtTile = true;
-                            break;
-                        }
-                    }
+                    tiles.Add(t);
+                    selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleRedTile);
+
+                    /**
 
                     if(i == 0 && j == 0)
                     {
@@ -106,11 +107,50 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleRedTile);
-                    }
+                    }*/
                 }
             }
         }
+        
+        while(toVisit.Count > 0)
+        {
+            Tile atTile = toVisit[0];
+            foreach(Tile neighbor in atTile.GetAdjacentTiles())
+            {
+                bool compatibleTile = neighbor.GetCurrentTileType() != Tile.TileTypes.Water && neighbor.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+                if(!visited.Contains(neighbor) && tiles.Contains(neighbor) && compatibleTile)
+                {
+                    toVisit.Add(neighbor);
+                }
+            }
+
+            bool settlerAtTile = false;
+            foreach (GameObject s in settlerManager.GetSettlers())
+            {
+                if (s.GetComponent<Settler>().GetCurrentTile() == atTile && s.GetComponent<Settler>().GetCurrentTile() != tile)
+                {
+                    settlerAtTile = true;
+                    break;
+                }
+            }
+
+            if (atTile == tile)
+            {
+                selectionMap.SetTile(new Vector3Int(atTile.GetTilePos2().x, atTile.GetTilePos2().y, 0), reticleBlueTile);
+            }
+            else if (!settlerAtTile)
+            {
+                selectionMap.SetTile(new Vector3Int(atTile.GetTilePos2().x, atTile.GetTilePos2().y, 0), reticleYellowTile);
+            }
+
+            visited.Add(atTile);
+            atTile.SetIsValid(true);
+            toVisit.Remove(atTile);
+        }
+
     }
+
+    
 
     // Update is called once per frame
     void Update()

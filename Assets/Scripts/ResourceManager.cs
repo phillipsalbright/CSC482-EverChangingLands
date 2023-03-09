@@ -11,6 +11,7 @@ public class ResourceManager : Singleton<ResourceManager>
         Wood,
         Water,
         Food,
+        None,
     }
 
     [Serializable]
@@ -29,13 +30,17 @@ public class ResourceManager : Singleton<ResourceManager>
         foreach (ResourceTexts resourceText in resourceTexts)
         {
             resourceTextDict.Add(resourceText.resourceType, resourceText.resourceText);
-            resourceCounts.Add(resourceText.resourceType, 0);
-            resourceText.resourceText.text = "0";
+            resourceCounts.Add(resourceText.resourceType, 10);
+            resourceText.resourceText.text = "10";
         }
     }
 
     public void AddResource(ResourceTypes resourceType, int amount)
     {
+        if (resourceType == ResourceTypes.None)
+        {
+            return;
+        }
         resourceCounts[resourceType] += amount;
         UpdateUI(resourceType);
     }
