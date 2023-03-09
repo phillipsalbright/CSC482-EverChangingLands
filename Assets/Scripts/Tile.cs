@@ -30,6 +30,7 @@ public class Tile
 
     private Vector3Int tilePos;
     private bool isValid;
+    private bool isWalkable;
 
     public Vector2Int GetTilePos2()
     {
@@ -59,6 +60,11 @@ public class Tile
         return isValid;
     }
 
+    public bool GetIsWalkable()
+    {
+        return isWalkable;
+    }
+
     //checks if the tile will change terrain next turn. use for forecasting
     public bool IsChanging()
     {
@@ -69,6 +75,7 @@ public class Tile
     public void SetCurrentTileType(TileTypes tileType)
     {
         currentTileType = tileType;
+        isWalkable = currentTileType != Tile.TileTypes.Water && currentTileType != Tile.TileTypes.DeepWater;
     }
 
     //sets the current tile's terrain and recall forecast methods

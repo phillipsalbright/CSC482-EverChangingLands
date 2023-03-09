@@ -175,7 +175,8 @@ public class PlayerUI : MonoBehaviour
                 {
                     _selectedSettler.MoveSettler(tm.GetTileAtLocation(ray.GetPoint(10f)));
                     SetMode(PlayerController.mode.BeginTurn);
-                } else 
+                }
+                else 
                 {
                     var raycastResult = new List<RaycastResult>();
                     PointerEventData p = new PointerEventData(EventSystem.current);
