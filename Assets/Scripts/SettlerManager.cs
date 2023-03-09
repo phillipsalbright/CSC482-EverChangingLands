@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettlerManager : MonoBehaviour
+public class SettlerManager : Singleton<SettlerManager>
 {
     [SerializeField] private List<GameObject> settlers;
     [SerializeField] private int initialNumberOfSettlers = 3;
@@ -35,7 +35,7 @@ public class SettlerManager : MonoBehaviour
         return settlers;
     }
 
-    public void AddSettlerAtTile(Tile tile)
+    public bool AddSettlerAtTile(Tile tile)
     {
         bool compatableTile = tile.GetCurrentTileType() != Tile.TileTypes.Water && tile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
         bool tileHasSettler = false;
@@ -54,6 +54,8 @@ public class SettlerManager : MonoBehaviour
             GameObject settler = GameObject.Instantiate(settlerPrefab, Vector3.zero, Quaternion.identity);
             settler.GetComponent<Settler>().SetCurrentTileAndPosition(tile);
             settlers.Add(settler);
+            return true;
         }
+        return false;
     }
 }

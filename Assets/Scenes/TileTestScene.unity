@@ -699,6 +699,10 @@ PrefabInstance:
       propertyPath: oceanExtension.y
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4575140568971549967, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: biomeLists.Array.data[0].tiles.Array.data[1].chance
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
 --- !u!1001 &7716812223843897965
