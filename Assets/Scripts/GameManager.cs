@@ -93,21 +93,6 @@ public class GameManager : MonoBehaviour
 
                     tiles.Add(t);
                     selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleRedTile);
-
-                    /**
-
-                    if(i == 0 && j == 0)
-                    {
-                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleBlueTile);
-                    }
-                    else if (t != null && !settlerAtTile && t.GetCurrentTileType() != Tile.TileTypes.Water && t.GetCurrentTileType() != Tile.TileTypes.DeepWater)
-                    {
-                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleYellowTile);
-                    }
-                    else
-                    {
-                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleRedTile);
-                    }*/
                 }
             }
         }
