@@ -142,7 +142,7 @@ public class TileInfo : Singleton<TileInfo>
         float totalChance = distance;
         float nonWaterChance = biomeChanceSum - distance;
         if (biomeRand < distance) {
-            return GetTileFromBiomeWaterEdge(tileRand, Biomes.LowGround, distance);
+            return GetTileFromBiomeWaterEdge(tileRand, Biomes.Water, distance);
         }
         foreach (KeyValuePair<Biomes, BiomeList> biomes in biomeDict)
         {

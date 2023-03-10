@@ -67,3 +67,4 @@ MonoBehaviour:
   settlers: []
   initialNumberOfSettlers: 3
   settlerPrefab: {fileID: 4285547668261436011, guid: 080fd1dd2e80b6a4cb8f574ee619ccd5, type: 3}
+  maxSettlerMovement: 5

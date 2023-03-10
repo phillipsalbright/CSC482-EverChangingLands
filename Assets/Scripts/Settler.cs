@@ -114,19 +114,22 @@ public class Settler : MonoBehaviour
 
     public void CollectResource()
     {
-        ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5);
-        for (int i = 0; i < 2; i++)
+        if (this.canCollect)
         {
-            for (int j = 0; j < 2; j++)
+            ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5);
+            for (int i = 0; i < 2; i++)
             {
-
-                if (this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
+                for (int j = 0; j < 2; j++)
                 {
-                    ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+
+                    if (this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
+                    {
+                        ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+                    }
                 }
             }
+            canCollect = false;
         }
-        canCollect = false;
     }
 
     public Tile GetCurrentTile()
@@ -150,6 +153,7 @@ public class Settler : MonoBehaviour
     {
         housePos = pos;
     }
+
 
     public Vector2Int GetHousePos()
     {

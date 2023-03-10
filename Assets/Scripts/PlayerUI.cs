@@ -38,6 +38,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject _startGameHUD;
     [SerializeField] private GameObject _settlerActionHUD;
     [SerializeField] private GameObject _buildingHUD;
+    [SerializeField] private GameObject _tileFlippingHUD;
     [SerializeField] private TMP_Text setSettlerText;
     private int _settlersToPlace;
     private Settler _selectedSettler;
@@ -289,5 +290,13 @@ public class PlayerUI : MonoBehaviour
     {
         _selectedSettler.CollectResource();
         _settlerActionHUD.transform.Find("CollectResourceButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanCollect();
+    }
+
+    public void AllSettlersCollectResources()
+    {
+        for (int i = 0; i < SettlerManager.Instance.GetCurrentNumberOfSettlers(); i++)
+        {
+            SettlerManager.Instance.GetSettlers()[i].GetComponent<Settler>().CollectResource();
+        }
     }
 }
