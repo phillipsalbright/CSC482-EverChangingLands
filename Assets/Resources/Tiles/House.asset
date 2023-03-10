@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f3fbb560bd6041a202ea918fa4f23, type: 3}
   m_Name: house
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: 20d3e2610804eff4f945a8c16f73669a, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: 03e5c74da01039046b8ba97455a212e9, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules: []
