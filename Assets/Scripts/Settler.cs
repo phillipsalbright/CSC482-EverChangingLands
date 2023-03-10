@@ -7,13 +7,12 @@ public class Settler : MonoBehaviour
     [SerializeField] private Tile currentTile;
     [SerializeField] private Vector2Int positionInTilemap;
 
-    [SerializeField] private int maxMovementRange = 5;
-
     private SpriteRenderer sprite;
 
     private bool canMove = true;
     private bool canCollect = true;
     private bool isDead = false;
+    private Vector2Int housePos;
 
     // Start is called before the first frame update
     void Awake()
@@ -28,7 +27,7 @@ public class Settler : MonoBehaviour
         
     }
 
-    public void SetCurrentTileAndPosition(Tile tile)
+    public void SetInitialTileAndPosition(Tile tile)
     {
         if(!sprite.enabled)
         {
@@ -37,6 +36,7 @@ public class Settler : MonoBehaviour
         currentTile = tile;
 
         positionInTilemap = tile.GetTilePos2();
+        housePos = positionInTilemap;
 
         transform.position = FindObjectOfType<TileManager>().GetTilemap().GetCellCenterWorld(new Vector3Int(positionInTilemap.x, positionInTilemap.y, 0));
     }
@@ -64,7 +64,7 @@ public class Settler : MonoBehaviour
                 int xDifference = Mathf.Abs(positionInTilemap.x - newTileCoordinates.x);
                 int yDifference = Mathf.Abs(positionInTilemap.y - newTileCoordinates.y);
 
-                if (xDifference + yDifference <= maxMovementRange)
+                if (xDifference + yDifference <= SettlerManager.Instance.GetMaxSettlerMovement())
                 {
                     currentTile = newTile;
                     positionInTilemap = newTileCoordinates;
@@ -80,8 +80,26 @@ public class Settler : MonoBehaviour
 
     public void StartNewTurn()
     {
-        canMove = true;
-        canCollect = true;
+
+        if(!currentTile.GetIsWalkable())
+        {
+            Debug.Log("Settler Dies");
+            isDead = true;
+            canMove = false;
+            canCollect = false;
+            if(!BuildingManager.Instance.GetHouses().ContainsKey(housePos))
+            {
+                Debug.Log("House Gone");
+                SettlerManager.Instance.GetSettlers().Remove(gameObject);
+                Destroy(gameObject);
+            }
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            canMove = true;
+            canCollect = true;
+        }
     }
 
     public bool GetCanMove()
@@ -116,8 +134,25 @@ public class Settler : MonoBehaviour
         return currentTile;
     }
 
-    public bool IsSettlerDead()
+    public bool isSettlerDead()
     {
         return isDead;
+    }
+
+    public void Respawn()
+    {
+        isDead = false;
+        canMove = true;
+        canCollect = true;
+    }
+
+    public void SetHousePos(Vector2Int pos)
+    {
+        housePos = pos;
+    }
+
+    public Vector2Int GetHousePos()
+    {
+        return housePos;
     }
 }

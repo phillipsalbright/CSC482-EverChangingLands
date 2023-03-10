@@ -71,6 +71,10 @@ public class BuildingManager : Singleton<BuildingManager>
         foreach (Vector2Int p in players)
         {
             builtBuildings.Remove(p);
+            if(houses.ContainsKey(p))
+            {
+                houses.Remove(p);
+            }
         }
     }
 
@@ -127,9 +131,50 @@ public class BuildingManager : Singleton<BuildingManager>
         if(canAfford(name)){
             Building b = buildingDictionary[name];
             builtBuildings.Add(p, name);
+
+            Settler settler = null;
+
             if (b.buildingType == BuildingName.House)
             {
-                houses.Add(p, new House(p));
+                if(houses.Count < SettlerManager.Instance.GetCurrentNumberOfSettlers())
+                {
+                    foreach(GameObject go in SettlerManager.Instance.GetSettlers())
+                    {
+                        Settler s = go.GetComponent<Settler>();
+                        
+                        if(!houses.ContainsKey(s.GetHousePos()))
+                        {
+                            settler = s;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    Vector2Int spawnPos = p;
+                    foreach(Tile t in TileManager.Instance.GetTile(p).GetAdjacentTiles())
+                    {
+                        bool hasSettler = SettlerManager.Instance.GetSettlerAtPos(t.GetTilePos2()) != null;
+
+                        if(t.GetIsWalkable() && !hasSettler)
+                        {
+                            spawnPos = t.GetTilePos2();
+                        }
+                    }
+
+                    if(spawnPos != p)
+                    {
+                        SettlerManager.Instance.AddSettlerAtTile(TileManager.Instance.GetTile(spawnPos));
+                        settler = SettlerManager.Instance.GetSettlers()[SettlerManager.Instance.GetCurrentNumberOfSettlers() - 1].GetComponent<Settler>();
+                    }
+                }
+                
+                if(settler != null)
+                {
+                    House house = null;
+                    houses.Add(p, house = new House(p));
+                    house.SetSettler(settler);
+                }
             }
             buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
             //Take away resources to build
@@ -144,12 +189,22 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         Building b = buildingDictionary[BuildingName.House];
         builtBuildings.Add(p, BuildingName.House);
-        houses.Add(p, new House(p));
+        House h = null;
+        houses.Add(p, h = new House(p));
+
+        Settler s = SettlerManager.Instance.GetSettlerAtPos(p);
+        h.SetSettler(s);
+
         buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
     }
 
     public bool isDestroyed(BuildingName name, Tile.TileTypes tileType) {
         return !buildingDictionary[name].acceptedTiles.Contains(tileType);
+    }
+
+    public Dictionary<Vector2Int, House> GetHouses()
+    {
+        return houses;
     }
 
 

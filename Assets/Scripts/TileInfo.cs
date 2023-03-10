@@ -13,6 +13,9 @@ public class TileInfo : Singleton<TileInfo>
         Grass,
         Water,
         Sand,
+        LowGround,
+        MiddleGround,
+        HighGround,
     }
     [Serializable]
     public struct TileSwitch
@@ -73,10 +76,13 @@ public class TileInfo : Singleton<TileInfo>
             tilesChanceSumDict.Add(biomeList.biome, 0);
             foreach (TileComponents tileComp in biomeList.tiles)
             {
-                tilesDict[biomeList.biome].Add(tileComp.tileType, tileComp);
-                tilesChanceSumDict[biomeList.biome] += tileComp.chance;
-                isometricTiles.Add(tileComp.tileType, tileComp.isometricTile);
-                tileList.Add(tileComp.tileType, tileComp);
+                if (!tilesDict[biomeList.biome].Keys.Contains(tileComp.tileType))
+                {
+                    tilesDict[biomeList.biome].Add(tileComp.tileType, tileComp);
+                    tilesChanceSumDict[biomeList.biome] += tileComp.chance;
+                    isometricTiles.Add(tileComp.tileType, tileComp.isometricTile);
+                    tileList.Add(tileComp.tileType, tileComp);
+                }
             }
             biomeChanceSum += biomeList.chance;
         }
@@ -136,7 +142,7 @@ public class TileInfo : Singleton<TileInfo>
         float totalChance = distance;
         float nonWaterChance = biomeChanceSum - distance;
         if (biomeRand < distance) {
-            return GetTileFromBiomeWaterEdge(tileRand, Biomes.Water, distance);
+            return GetTileFromBiomeWaterEdge(tileRand, Biomes.LowGround, distance);
         }
         foreach (KeyValuePair<Biomes, BiomeList> biomes in biomeDict)
         {
