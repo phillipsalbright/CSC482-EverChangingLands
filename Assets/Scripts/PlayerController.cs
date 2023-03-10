@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerUI ui;
     private Camera cam;
     private Vector2 inputVector = Vector2.zero;
+    public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile};
+    public mode currentControllerMode;
 
     private float zoomInput;
     // Start is called before the first frame update
@@ -28,7 +30,13 @@ public class PlayerController : MonoBehaviour
     {
         transform.Translate(inputVector * _cameraSpeed * Time.deltaTime);
         transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);
-        cam.orthographicSize += zoomInput * Time.deltaTime / -2;
+        float zoomScalar = 1;
+        if (this.GetComponent<PlayerInput>().currentControlScheme == "Gamepad")
+        {
+            zoomScalar = 5;
+        }
+        
+        cam.orthographicSize += zoomInput * zoomScalar * Time.deltaTime / -2;
         cam.orthographicSize = Math.Clamp(cam.orthographicSize, sizebounds.x, sizebounds.y);
     }
 
@@ -39,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     public void ZoomInputChanged(InputAction.CallbackContext context)
     {
-        Debug.Log(context.action.ReadValue<float>());
+       // Debug.Log(context.action.ReadValue<float>());
         zoomInput = context.action.ReadValue<float>();
     }
 

@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3186878524296449422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3186878524296449408}
+  - component: {fileID: 3186878524296449409}
+  - component: {fileID: 1525271557}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3186878524296449408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186878524296449422}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 331.00262, y: 162.66116, z: -2.4843187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3186878524296449409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186878524296449422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac959598e0f0e1f43986076de1f42e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionMap: {fileID: 0}
+  reticles:
+  - {fileID: 11400000, guid: 008d9c91db30e4a49ab816973e19f0f2, type: 2}
+  - {fileID: 11400000, guid: 0ab67ca57b882174fbf2f591d8928a77, type: 2}
+  - {fileID: 11400000, guid: b6765181700e23f48a90960d247946b3, type: 2}
+  - {fileID: 11400000, guid: da599ca76cd20454a8c2e7ac59feea95, type: 2}
+  - {fileID: 11400000, guid: 9f5780ba764b3974eb48bc5743ec1b48, type: 2}
+  - {fileID: 11400000, guid: f476f9a2c0caef7418af9ff332abfa26, type: 2}
+  reticleRedTile: {fileID: 11400000, guid: 008d9c91db30e4a49ab816973e19f0f2, type: 2}
+  reticleGreenTile: {fileID: 11400000, guid: 0ab67ca57b882174fbf2f591d8928a77, type: 2}
+  reticleYellowTile: {fileID: 11400000, guid: b6765181700e23f48a90960d247946b3, type: 2}
+  reticleBlueTile: {fileID: 11400000, guid: da599ca76cd20454a8c2e7ac59feea95, type: 2}
+  reticlePurpleTile: {fileID: 11400000, guid: 9f5780ba764b3974eb48bc5743ec1b48, type: 2}
+  reticleOrangeTile: {fileID: 11400000, guid: f476f9a2c0caef7418af9ff332abfa26, type: 2}
+--- !u!114 &1525271557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186878524296449422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0345f03ef05704044adc36ac0d25a0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settlers: []
+  initialNumberOfSettlers: 3
+  settlerPrefab: {fileID: 4285547668261436011, guid: 080fd1dd2e80b6a4cb8f574ee619ccd5, type: 3}
+  maxSettlerMovement: 5

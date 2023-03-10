@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.ExceptionServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TileInfo : Singleton<TileInfo>
@@ -11,6 +13,16 @@ public class TileInfo : Singleton<TileInfo>
         Grass,
         Water,
         Sand,
+        LowGround,
+        MiddleGround,
+        HighGround,
+    }
+    [Serializable]
+    public struct TileSwitch
+    {
+        public Tile.TileTypes switchTile;
+        public List<ResourceManager.ResourceTypes> requiredResources;
+        public List<int> requiredResourcesCount;
     }
     [Serializable]
     public struct TileComponents
@@ -19,6 +31,9 @@ public class TileInfo : Singleton<TileInfo>
         public IsometricRuleTile isometricTile;
         [Range(0,1)]
         public float chance;
+
+        public ResourceManager.ResourceTypes associatedResource;
+        public List<TileSwitch> tileSwitches;
     }
     [Serializable]
     public struct BiomeList
@@ -34,6 +49,7 @@ public class TileInfo : Singleton<TileInfo>
     private Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>> tilesDict = new Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>>();
     private Dictionary<Biomes, float> tilesChanceSumDict = new Dictionary<Biomes, float>();
     private Dictionary<Tile.TileTypes, IsometricRuleTile> isometricTiles = new Dictionary<Tile.TileTypes, IsometricRuleTile>();
+    private Dictionary<Tile.TileTypes, TileComponents> tileList = new Dictionary<Tile.TileTypes, TileComponents>();
     private float biomeChanceSum = 0;
     [SerializeField]
     private IsometricRuleTile deepWaterTile;
@@ -41,6 +57,7 @@ public class TileInfo : Singleton<TileInfo>
     private float deepWaterStart;
     void Awake()
     {
+        base.Awake();
         SetupDictionaries();
     }
 
@@ -59,9 +76,13 @@ public class TileInfo : Singleton<TileInfo>
             tilesChanceSumDict.Add(biomeList.biome, 0);
             foreach (TileComponents tileComp in biomeList.tiles)
             {
-                tilesDict[biomeList.biome].Add(tileComp.tileType, tileComp);
-                tilesChanceSumDict[biomeList.biome] += tileComp.chance;
-                isometricTiles.Add(tileComp.tileType, tileComp.isometricTile);
+                if (!tilesDict[biomeList.biome].Keys.Contains(tileComp.tileType))
+                {
+                    tilesDict[biomeList.biome].Add(tileComp.tileType, tileComp);
+                    tilesChanceSumDict[biomeList.biome] += tileComp.chance;
+                    isometricTiles.Add(tileComp.tileType, tileComp.isometricTile);
+                    tileList.Add(tileComp.tileType, tileComp);
+                }
             }
             biomeChanceSum += biomeList.chance;
         }
@@ -71,9 +92,15 @@ public class TileInfo : Singleton<TileInfo>
     {
         if (!isometricTiles.ContainsKey(tileType))
         {
+            Debug.LogError("Failure to find tile " + tileType);
             return deepWaterTile;
         }
         return isometricTiles[tileType];
+    }
+
+    public ResourceManager.ResourceTypes GetTileResourceTypes(Tile.TileTypes type)
+    {
+        return tileList[type].associatedResource;
     }
 
     public Tile.TileTypes GetTileType(float biomeRand, float tileRand)
@@ -147,5 +174,10 @@ public class TileInfo : Singleton<TileInfo>
             }
         } 
         return Tile.TileTypes.Grass;
+    }
+
+    public List<TileSwitch> GetTileSwitches(Tile.TileTypes tileType)
+    {
+        return tileList[tileType].tileSwitches;
     }
 }

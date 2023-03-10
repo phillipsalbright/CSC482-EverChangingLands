@@ -1,0 +1,370 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8575862916341741530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8575862916341741528}
+  - component: {fileID: 8575862916341741529}
+  m_Layer: 0
+  m_Name: RuleSet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8575862916341741528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575862916341741530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8575862916341741529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575862916341741530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3433b3193f7ba14ca345640b39ce2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRuleset:
+    allTilesRules:
+      nonWeatherConditions:
+      - TilesToCheck: 06000000
+        conditional: 0
+        NumTiles: 0
+        goalTile: 5
+      rules: []
+    tileRules:
+    - tileType: 3
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 04000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+    - tileType: 1
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 0000000004000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 3
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 0000000004000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 3
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 3
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 2
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 0500000003000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 3
+    - tileType: 5
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 0500000002000000
+          conditional: 4
+          NumTiles: 2
+          goalTile: 2
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 0500000002000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 4
+          NumTiles: 3
+          goalTile: 2
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0500000002000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 2
+    - tileType: 2
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 5
+        - TilesToCheck: 0000000004000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 5
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 5
+        - TilesToCheck: 0000000004000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 5
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 5
+    - tileType: 0
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 0100000003000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+    - tileType: 4
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 0
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 0
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 2
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 0
+    - tileType: 6
+      nonWeatherConditions:
+      - TilesToCheck: 
+        conditional: 6
+        NumTiles: 0
+        goalTile: 6
+      rules:
+      - weatherType: 0
+        ruleConditions: []
+      - weatherType: 1
+        ruleConditions: []
+      - weatherType: 2
+        ruleConditions: []
