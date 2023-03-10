@@ -121,7 +121,8 @@ public class Settler : MonoBehaviour
     {
         if (this.canCollect)
         {
-            if(!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5))
+            //Now that most tiles have a resource, this if statement stops water from being collected
+            if(!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5) || true)
             {
                 bool collectedWater = false;
                 for (int i = 0; i < 2; i++)
