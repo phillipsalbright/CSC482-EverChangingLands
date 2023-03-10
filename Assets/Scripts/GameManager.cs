@@ -75,6 +75,52 @@ public class GameManager : MonoBehaviour
         selectionMap.ClearAllTiles();
     }
 
+    public void DisplayResourceTiles(Tile tile)
+    {
+        if(TileInfo.Instance.GetTileResourceTypes(tile.GetCurrentTileType()) != ResourceManager.ResourceTypes.None)
+        {
+            selectionMap.SetTile(tile.GetTilePosition(), reticleYellowTile);
+            tile.SetIsValid(true);
+        }
+        else
+        {
+            selectionMap.SetTile(tile.GetTilePosition(), reticleRedTile);
+        }
+
+        foreach(Tile t in tile.GetAdjacentTiles())
+        {
+            if (TileInfo.Instance.GetTileResourceTypes(t.GetCurrentTileType()) != ResourceManager.ResourceTypes.None)
+            {
+                selectionMap.SetTile(t.GetTilePosition(), reticleYellowTile);
+                t.SetIsValid(true);
+            }
+            else
+            {
+                selectionMap.SetTile(t.GetTilePosition(), reticleRedTile);
+            }
+        }
+    }
+
+    public void DisplayFlipTiles(Tile tile)
+    {
+        TileBase tileBase = ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) > 5 ? reticleYellowTile : reticleRedTile;
+
+        selectionMap.SetTile(tile.GetTilePosition(), tileBase);
+        if(tileBase == reticleYellowTile)
+        {
+            tile.SetIsValid(true);
+        }
+
+        foreach(Tile t in tile.GetAdjacentTiles())
+        {
+            selectionMap.SetTile(t.GetTilePosition(), tileBase);
+            if(tileBase == reticleYellowTile)
+            {
+                t.SetIsValid(true);
+            }
+        }
+    }
+
     public void DisplayMoveTiles(Tile tile)
     {
         List<Tile> tiles = new List<Tile>();
