@@ -13,9 +13,14 @@ public class TileInfo : Singleton<TileInfo>
         Grass,
         Water,
         Sand,
-        LowGround,
-        MiddleGround,
-        HighGround,
+        Mountain,
+    }
+
+    public enum BiomeGroupings
+    {
+        Water,
+        Primary,
+        Secondary,
     }
     [Serializable]
     public struct TileSwitch
@@ -44,6 +49,10 @@ public class TileInfo : Singleton<TileInfo>
         public List<TileComponents> tiles;
     }
     [SerializeField]
+    private Biomes primaryBiome;
+    [SerializeField]
+    private List<Biomes> secondaryBiomeList = new List<Biomes>();
+    [SerializeField]
     private List<BiomeList> biomeLists = new List<BiomeList>();
     private Dictionary<Biomes, BiomeList> biomeDict = new Dictionary<Biomes, BiomeList>();
     private Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>> tilesDict = new Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>>();
@@ -51,6 +60,7 @@ public class TileInfo : Singleton<TileInfo>
     private Dictionary<Tile.TileTypes, IsometricRuleTile> isometricTiles = new Dictionary<Tile.TileTypes, IsometricRuleTile>();
     private Dictionary<Tile.TileTypes, TileComponents> tileList = new Dictionary<Tile.TileTypes, TileComponents>();
     private float biomeChanceSum = 0;
+    private float secondaryBiomeChanceSum = 0;
     [SerializeField]
     private IsometricRuleTile deepWaterTile;
     [SerializeField, Range(0,1)]
@@ -85,6 +95,10 @@ public class TileInfo : Singleton<TileInfo>
                 }
             }
             biomeChanceSum += biomeList.chance;
+            if (secondaryBiomeList.Contains(biomeList.biome))
+            {
+                secondaryBiomeChanceSum += biomeList.chance;
+            }
         }
     }
 
