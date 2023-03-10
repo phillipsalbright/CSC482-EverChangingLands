@@ -36,14 +36,15 @@ public class ResourceManager : Singleton<ResourceManager>
         }
     }
 
-    public void AddResource(ResourceTypes resourceType, int amount)
+    public bool AddResource(ResourceTypes resourceType, int amount)
     {
         if (resourceType == ResourceTypes.None)
         {
-            return;
+            return false;
         }
         resourceCounts[resourceType] += amount;
         UpdateUI(resourceType);
+        return true;
     }
 
     public void RemoveResource(ResourceTypes resourceType, int amount)

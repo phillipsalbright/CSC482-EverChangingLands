@@ -397,6 +397,10 @@ PrefabInstance:
       propertyPath: changeMap
       value: 
       objectReference: {fileID: 1707517388}
+    - target: {fileID: 8398958537771632623, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: buildingList.Array.data[3].isometricTile
+      value: 
+      objectReference: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
 --- !u!1001 &6732775737338155586

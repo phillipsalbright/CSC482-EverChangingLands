@@ -150,7 +150,7 @@ MonoBehaviour:
     amountProduced: 5
     acceptedTiles: 01000000
   - buildingType: 3
-    isometricTile: {fileID: 11400000, guid: d093329226e62bb4d8e48a43c5936c79, type: 2}
+    isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
     resourceProduced: 0
     amountProduced: 0
