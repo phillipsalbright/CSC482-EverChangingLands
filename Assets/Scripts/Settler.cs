@@ -34,6 +34,8 @@ public class Settler : MonoBehaviour
             sprite.enabled = true;
         }
         currentTile = tile;
+        canMove = true;
+        canCollect = false;
 
         positionInTilemap = tile.GetTilePos2();
         housePos = positionInTilemap;
@@ -114,19 +116,26 @@ public class Settler : MonoBehaviour
 
     public void CollectResource()
     {
-        ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5);
-        for (int i = 0; i < 2; i++)
+        if (this.canCollect)
         {
-            for (int j = 0; j < 2; j++)
+            if(!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5))
             {
-
-                if (this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
+                bool collectedWater = false;
+                for (int i = 0; i < 2; i++)
                 {
-                    ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+                    for (int j = 0; j < 2; j++)
+                    {
+
+                        if (!collectedWater && this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
+                        {
+                            ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+                            collectedWater = true;
+                        }
+                    }
                 }
             }
+            canCollect = false;
         }
-        canCollect = false;
     }
 
     public Tile GetCurrentTile()
@@ -150,6 +159,7 @@ public class Settler : MonoBehaviour
     {
         housePos = pos;
     }
+
 
     public Vector2Int GetHousePos()
     {
