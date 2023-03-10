@@ -39,10 +39,13 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject _settlerActionHUD;
     [SerializeField] private GameObject _buildingHUD;
     [SerializeField] private GameObject _tileFlippingHUD;
+    [SerializeField] private GameObject _selectedTileToFlipHUD;
+    [SerializeField] private Button[] _tileFlippingButtons;
     [SerializeField] private TMP_Text setSettlerText;
     private int _settlersToPlace;
     private Settler _selectedSettler;
     private bool _isGamepad;
+    [SerializeField] private int foodToFlip = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -229,6 +232,8 @@ public class PlayerUI : MonoBehaviour
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(false);
                 _buildingHUD.SetActive(false);
+                _tileFlippingHUD.SetActive(false);
+                _selectedTileToFlipHUD.SetActive(false);
                 GameManager.Instance.DeleteSelection();
                 _playerController.currentControllerMode = PlayerController.mode.BeginTurn;
                 break;
@@ -237,7 +242,8 @@ public class PlayerUI : MonoBehaviour
                 _startGameHUD.SetActive(true);
                 _settlerActionHUD.SetActive(false);
                 _buildingHUD.SetActive(false);
-
+                _tileFlippingHUD.SetActive(false);
+                _selectedTileToFlipHUD.SetActive(false);
                 _playerController.currentControllerMode = PlayerController.mode.GameStart;
                 break;
             case PlayerController.mode.SettlerActions:
@@ -245,7 +251,8 @@ public class PlayerUI : MonoBehaviour
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(true);
                 _buildingHUD.SetActive(false);
-
+                _tileFlippingHUD.SetActive(false);
+                _selectedTileToFlipHUD.SetActive(false);
                 _settlerActionHUD.transform.Find("MoveSettlerButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanMove();
                 _settlerActionHUD.transform.Find("CollectResourceButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanCollect();
                 _settlerActionHUD.transform.Find("BuildStructureButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
@@ -256,7 +263,8 @@ public class PlayerUI : MonoBehaviour
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(false);
                 _buildingHUD.SetActive(false);
-
+                _tileFlippingHUD.SetActive(false);
+                _selectedTileToFlipHUD.SetActive(false);
                 GameObject.FindObjectOfType<GameManager>().DisplayMoveTiles(_selectedSettler.GetCurrentTile());
 
                 _playerController.currentControllerMode = PlayerController.mode.MovingSettler;
@@ -266,10 +274,41 @@ public class PlayerUI : MonoBehaviour
                 _startGameHUD.SetActive(false);
                 _settlerActionHUD.SetActive(false);
                 _buildingHUD.SetActive(true);
+                _tileFlippingHUD.SetActive(false);
+                _selectedTileToFlipHUD.SetActive(false);
                 _buildingHUD.transform.Find("BuildLumberButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Lumber) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Lumber, _selectedSettler.GetCurrentTile().GetCurrentTileType());
                 _buildingHUD.transform.Find("BuildFarmButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Farm) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Farm, _selectedSettler.GetCurrentTile().GetCurrentTileType());
                 _buildingHUD.transform.Find("BuildWellButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.WaterWell) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.WaterWell, _selectedSettler.GetCurrentTile().GetCurrentTileType());
                 _buildingHUD.transform.Find("BuildHouseButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.House) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.House, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                break;
+            case PlayerController.mode.Flipping:
+                _normalTurnHUD.SetActive(false);
+                _startGameHUD.SetActive(false);
+                _settlerActionHUD.SetActive(false);
+                _buildingHUD.SetActive(false);
+                _tileFlippingHUD.SetActive(true);
+                _selectedTileToFlipHUD.SetActive(false);
+                break;
+            case PlayerController.mode.SelectFlipTile:
+                _normalTurnHUD.SetActive(false);
+                _startGameHUD.SetActive(false);
+                _settlerActionHUD.SetActive(false);
+                _buildingHUD.SetActive(false);
+                _tileFlippingHUD.SetActive(false);
+                _selectedTileToFlipHUD.SetActive(true);
+                List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedSettler.GetCurrentTile().GetCurrentTileType());
+                for (int i = 0; i < _tileFlippingButtons.Length; i++)
+                {
+                    if (i < switches.Count)
+                    {
+                        _tileFlippingButtons[i].gameObject.SetActive(true);
+                        _tileFlippingButtons[i].gameObject.GetComponentInChildren<TMP_Text>().text = Enum.GetName(typeof(Tile.TileTypes), switches[i].switchTile);
+                    }
+                    else
+                    {
+                        _tileFlippingButtons[i].gameObject.SetActive(false);
+                    }
+                }
                 break;
         }
     }
@@ -298,5 +337,10 @@ public class PlayerUI : MonoBehaviour
         {
             SettlerManager.Instance.GetSettlers()[i].GetComponent<Settler>().CollectResource();
         }
+    }
+
+    public void SwapTile(int newTile)
+    {
+        
     }
 }

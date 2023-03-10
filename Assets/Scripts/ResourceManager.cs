@@ -11,6 +11,7 @@ public class ResourceManager : Singleton<ResourceManager>
         Wood,
         Water,
         Food,
+        Stone,
         None,
     }
 
