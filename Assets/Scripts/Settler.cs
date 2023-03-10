@@ -34,7 +34,8 @@ public class Settler : MonoBehaviour
             sprite.enabled = true;
         }
         currentTile = tile;
-        canMove = false;
+        canMove = true;
+        canCollect = false;
 
         positionInTilemap = tile.GetTilePos2();
         housePos = positionInTilemap;

@@ -43,7 +43,7 @@ public class SettlerManager : Singleton<SettlerManager>
 
     public bool AddSettlerAtTile(Tile tile)
     {
-        bool compatableTile = tile.GetCurrentTileType() != Tile.TileTypes.Water && tile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+        bool compatableTile = tile.GetIsWalkable() && tile.GetCurrentTileType() != Tile.TileTypes.Desert && tile.GetCurrentTileType() != Tile.TileTypes.Forest;
         bool tileHasSettler = false;
 
         foreach(GameObject s in settlers)
