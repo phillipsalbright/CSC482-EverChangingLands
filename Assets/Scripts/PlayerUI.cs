@@ -160,7 +160,7 @@ public class PlayerUI : MonoBehaviour
             if (raycastResult.Count <= 0)
             {
                 //SetMode(PlayerController.mode.BeginTurn);
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer_mask))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer_mask) && (_playerController.currentControllerMode == PlayerController.mode.BeginTurn || _playerController.currentControllerMode == PlayerController.mode.SettlerActions))
                 {
                     Settler s = hit.transform.gameObject.GetComponent<Settler>();
                     GameManager.Instance.SelectTile(s.GetCurrentTile(), 3);
@@ -211,6 +211,7 @@ public class PlayerUI : MonoBehaviour
                             _selectedTileToFlip = t;
                             GameManager.Instance.DisplayFlipTiles(_selectedSettler.GetCurrentTile());
                             GameManager.Instance.SelectTile(_selectedTileToFlip, 4);
+                            SetMode(PlayerController.mode.SelectFlipTile);
                         }
                     } else
                     {
@@ -312,7 +313,7 @@ public class PlayerUI : MonoBehaviour
                 _buildingHUD.SetActive(false);
                 _tileFlippingHUD.SetActive(false);
                 _selectedTileToFlipHUD.SetActive(true);
-                List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedSettler.GetCurrentTile().GetCurrentTileType());
+                List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
                 for (int i = 0; i < _tileFlippingButtons.Length; i++)
                 {
                     if (i < switches.Count)
@@ -366,7 +367,7 @@ public class PlayerUI : MonoBehaviour
 
     public void SwapTile(int newTile)
     {
-        List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedSettler.GetCurrentTile().GetCurrentTileType());
+        List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
         _selectedSettler.FlipTile(_selectedTileToFlip, switches[newTile].switchTile);
         for (int i = 0; i < switches[newTile].requiredResources.Count; i++)
         {
