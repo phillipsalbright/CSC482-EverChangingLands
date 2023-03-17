@@ -11,6 +11,7 @@ public class Settler : MonoBehaviour
 
     private bool canMove = true;
     private bool canCollect = true;
+    private bool canFlip = true;
     private bool isDead = false;
     private Vector2Int housePos;
 
@@ -34,6 +35,9 @@ public class Settler : MonoBehaviour
             sprite.enabled = true;
         }
         currentTile = tile;
+        canMove = true;
+        canCollect = false;
+        canFlip = true;
 
         positionInTilemap = tile.GetTilePos2();
         housePos = positionInTilemap;
@@ -99,6 +103,7 @@ public class Settler : MonoBehaviour
         {
             canMove = true;
             canCollect = true;
+            canFlip = true;
         }
     }
 
@@ -116,15 +121,20 @@ public class Settler : MonoBehaviour
     {
         if (this.canCollect)
         {
-            ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5);
-            for (int i = 0; i < 2; i++)
+            //Now that most tiles have a resource, this if statement stops water from being collected
+            if(!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5) || true)
             {
-                for (int j = 0; j < 2; j++)
+                bool collectedWater = false;
+                for (int i = 0; i < 2; i++)
                 {
-
-                    if (this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
+                    for (int j = 0; j < 2; j++)
                     {
-                        ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+
+                        if (!collectedWater && this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
+                        {
+                            ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+                            collectedWater = true;
+                        }
                     }
                 }
             }
@@ -158,5 +168,17 @@ public class Settler : MonoBehaviour
     public Vector2Int GetHousePos()
     {
         return housePos;
+    }
+
+    public void FlipTile(Tile t, Tile.TileTypes type)
+    {
+
+        TileManager.Instance.SetTile(t.GetTilePos2(), type);
+        canFlip = false;
+    }
+
+    public bool GetCanFlip()
+    {
+        return canFlip;
     }
 }

@@ -82,7 +82,16 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 0c0ac104578f4c94f9051c5c1ac1df83, type: 2}
       chance: 0.1
       associatedResource: 3
-      tileSwitches: []
+      tileSwitches:
+      - switchTile: 1
+        requiredResources: 
+        requiredResourcesCount: 
+      - switchTile: 4
+        requiredResources: 
+        requiredResourcesCount: 
+      - switchTile: 5
+        requiredResources: 
+        requiredResourcesCount: 
   - biome: 0
     chance: 0.4
     tiles:
@@ -90,17 +99,35 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 6286e5af240c6b540a788748743755a0, type: 2}
       chance: 0.3
       associatedResource: 3
-      tileSwitches: []
+      tileSwitches:
+      - switchTile: 2
+        requiredResources: 
+        requiredResourcesCount: 
+      - switchTile: 0
+        requiredResources: 
+        requiredResourcesCount: 
+      - switchTile: 1
+        requiredResources: 
+        requiredResourcesCount: 
     - tileType: 1
       isometricTile: {fileID: 11400000, guid: b38135a27300bf741877bcfc78c4966d, type: 2}
       chance: 0.7
       associatedResource: 3
-      tileSwitches: []
+      tileSwitches:
+      - switchTile: 3
+        requiredResources: 00000000
+        requiredResourcesCount: 19000000
+      - switchTile: 4
+        requiredResources: 
+        requiredResourcesCount: 
     - tileType: 3
       isometricTile: {fileID: 11400000, guid: 9352d5d9fefc4834c89f6e8c669a43ad, type: 2}
       chance: 0.3
       associatedResource: 0
-      tileSwitches: []
+      tileSwitches:
+      - switchTile: 1
+        requiredResources: 
+        requiredResourcesCount: 
   - biome: 2
     chance: 0.4
     tiles:
@@ -150,7 +177,7 @@ MonoBehaviour:
     amountProduced: 5
     acceptedTiles: 01000000
   - buildingType: 3
-    isometricTile: {fileID: 11400000, guid: d093329226e62bb4d8e48a43c5936c79, type: 2}
+    isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
     resourceProduced: 0
     amountProduced: 0
