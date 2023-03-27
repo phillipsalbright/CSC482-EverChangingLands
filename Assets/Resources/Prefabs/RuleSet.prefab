@@ -62,6 +62,10 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 3
           goalTile: 1
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
       - weatherType: 1
         ruleConditions:
         - TilesToCheck: 00000000
@@ -72,7 +76,19 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 2
           goalTile: 1
-        - TilesToCheck: 04000000
+        - TilesToCheck: 0400000000000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 080000000900000007000000
           conditional: 1
           NumTiles: 4
           goalTile: 1
@@ -82,19 +98,19 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 4
           goalTile: 1
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
     - tileType: 1
       nonWeatherConditions: []
       rules:
       - weatherType: 0
         ruleConditions:
-        - TilesToCheck: 0000000004000000
-          conditional: 1
-          NumTiles: 4
-          goalTile: 4
-        - TilesToCheck: 00000000
+        - TilesToCheck: 03000000
           conditional: 1
           NumTiles: 3
-          goalTile: 4
+          goalTile: 3
         - TilesToCheck: 0500000002000000
           conditional: 1
           NumTiles: 4
@@ -103,12 +119,32 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 3
           goalTile: 2
-        - TilesToCheck: 03000000
+        - TilesToCheck: 0000000004000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 00000000
           conditional: 1
           NumTiles: 3
-          goalTile: 3
+          goalTile: 4
+        - TilesToCheck: 080000000700000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
       - weatherType: 1
         ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 3
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
         - TilesToCheck: 0000000004000000
           conditional: 1
           NumTiles: 3
@@ -117,18 +153,18 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 2
           goalTile: 4
-        - TilesToCheck: 0500000002000000
-          conditional: 1
-          NumTiles: 4
-          goalTile: 2
-        - TilesToCheck: 05000000
+        - TilesToCheck: 090000000800000007000000
           conditional: 1
           NumTiles: 3
-          goalTile: 2
-        - TilesToCheck: 03000000
+          goalTile: 7
+        - TilesToCheck: 0900000008000000
           conditional: 1
-          NumTiles: 3
-          goalTile: 3
+          NumTiles: 2
+          goalTile: 7
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 7
       - weatherType: 2
         ruleConditions:
         - TilesToCheck: 00000000
@@ -151,6 +187,10 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 2
           goalTile: 3
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
     - tileType: 5
       nonWeatherConditions: []
       rules:
@@ -166,7 +206,7 @@ MonoBehaviour:
           conditional: 4
           NumTiles: 1
           goalTile: 4
-        - TilesToCheck: 05000000
+        - TilesToCheck: 0500000002000000
           conditional: 4
           NumTiles: 3
           goalTile: 2
@@ -181,6 +221,10 @@ MonoBehaviour:
       rules:
       - weatherType: 0
         ruleConditions:
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 5
         - TilesToCheck: 05000000
           conditional: 1
           NumTiles: 3
@@ -201,10 +245,14 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 3
           goalTile: 1
-        - TilesToCheck: 0200000005000000
+        - TilesToCheck: 080000000900000007000000
           conditional: 1
           NumTiles: 4
-          goalTile: 5
+          goalTile: 7
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
       - weatherType: 1
         ruleConditions:
         - TilesToCheck: 05000000
@@ -223,8 +271,24 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 4
           goalTile: 1
+        - TilesToCheck: 090000000800000007000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
+        - TilesToCheck: 0900000008000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 7
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 7
       - weatherType: 2
         ruleConditions:
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 5
         - TilesToCheck: 05000000
           conditional: 1
           NumTiles: 2
@@ -241,10 +305,10 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 2
           goalTile: 1
-        - TilesToCheck: 0200000005000000
+        - TilesToCheck: 0800000009000000
           conditional: 1
-          NumTiles: 3
-          goalTile: 5
+          NumTiles: 4
+          goalTile: 7
     - tileType: 0
       nonWeatherConditions: []
       rules:
@@ -258,6 +322,10 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 3
           goalTile: 4
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
       - weatherType: 1
         ruleConditions:
         - TilesToCheck: 03000000
@@ -268,6 +336,14 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 4
           goalTile: 4
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
       - weatherType: 2
         ruleConditions:
         - TilesToCheck: 03000000
@@ -294,11 +370,19 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 2
           goalTile: 4
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
     - tileType: 4
       nonWeatherConditions: []
       rules:
       - weatherType: 0
         ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 0
         - TilesToCheck: 0300000001000000
           conditional: 1
           NumTiles: 4
@@ -315,12 +399,20 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 3
           goalTile: 2
-        - TilesToCheck: 00000000
+        - TilesToCheck: 090000000800000007000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+        - TilesToCheck: 0900000008000000
           conditional: 1
           NumTiles: 3
-          goalTile: 0
+          goalTile: 7
       - weatherType: 1
         ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 0
         - TilesToCheck: 03000000
           conditional: 1
           NumTiles: 4
@@ -329,20 +421,24 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 4
           goalTile: 2
-        - TilesToCheck: 00000000
-          conditional: 1
-          NumTiles: 2
-          goalTile: 0
-      - weatherType: 2
-        ruleConditions:
-        - TilesToCheck: 0300000001000000
+        - TilesToCheck: 090000000800000007000000
           conditional: 1
           NumTiles: 3
-          goalTile: 1
-        - TilesToCheck: 03000000
+          goalTile: 7
+        - TilesToCheck: 0900000008000000
           conditional: 1
           NumTiles: 2
-          goalTile: 1
+          goalTile: 7
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 7
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 0
         - TilesToCheck: 0500000002000000
           conditional: 1
           NumTiles: 3
@@ -351,10 +447,18 @@ MonoBehaviour:
           conditional: 1
           NumTiles: 2
           goalTile: 2
-        - TilesToCheck: 00000000
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 0900000008000000
           conditional: 1
           NumTiles: 4
-          goalTile: 0
+          goalTile: 7
     - tileType: 6
       nonWeatherConditions:
       - TilesToCheck: 
@@ -368,3 +472,150 @@ MonoBehaviour:
         ruleConditions: []
       - weatherType: 2
         ruleConditions: []
+    - tileType: 7
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 07000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 8
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 07000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 8
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 07000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 8
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 3
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+    - tileType: 8
+      nonWeatherConditions:
+      - TilesToCheck: 08000000
+        conditional: 1
+        NumTiles: 4
+        goalTile: 9
+      - TilesToCheck: 05000000
+        conditional: 1
+        NumTiles: 3
+        goalTile: 7
+      - TilesToCheck: 03000000
+        conditional: 1
+        NumTiles: 3
+        goalTile: 7
+      - TilesToCheck: 00000000
+        conditional: 1
+        NumTiles: 3
+        goalTile: 7
+      rules:
+      - weatherType: 0
+        ruleConditions: []
+      - weatherType: 1
+        ruleConditions: []
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 7
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 7
+        - TilesToCheck: 01000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+    - tileType: 9
+      nonWeatherConditions:
+      - TilesToCheck: 0800000009000000
+        conditional: 4
+        NumTiles: 1
+        goalTile: 8
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 0800000009000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 8
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 0800000009000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 8
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0800000009000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 8
