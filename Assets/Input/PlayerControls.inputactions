@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "dd799ea4-271f-4319-8926-ae893f2c897c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -185,17 +194,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "cbaad869-bb17-4e18-9f44-d605342f3770",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwapView",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "1D Axis",
                     "id": "8d305d7d-de49-4f63-93a1-c022a91607dd",
                     "path": "1DAxis",
@@ -324,6 +322,39 @@
                     "processors": "",
                     "groups": "MapControls",
                     "action": "ControllerSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b40736c3-9911-4554-92de-9945ee76a096",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MapControls",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b2cffb18-d3ee-4139-9d80-e34e66a50275",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de19afa4-06f4-4fc1-957e-2f766be79205",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MapControls",
+                    "action": "SwapView",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

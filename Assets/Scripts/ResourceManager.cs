@@ -11,6 +11,7 @@ public class ResourceManager : Singleton<ResourceManager>
         Wood,
         Water,
         Food,
+        Stone,
         None,
     }
 
@@ -25,7 +26,7 @@ public class ResourceManager : Singleton<ResourceManager>
     private Dictionary<ResourceTypes, TMP_Text> resourceTextDict = new Dictionary<ResourceTypes, TMP_Text>();
     private Dictionary<ResourceTypes, int> resourceCounts = new Dictionary<ResourceTypes, int>();
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
         foreach (ResourceTexts resourceText in resourceTexts)
         {
@@ -35,14 +36,15 @@ public class ResourceManager : Singleton<ResourceManager>
         }
     }
 
-    public void AddResource(ResourceTypes resourceType, int amount)
+    public bool AddResource(ResourceTypes resourceType, int amount)
     {
         if (resourceType == ResourceTypes.None)
         {
-            return;
+            return false;
         }
         resourceCounts[resourceType] += amount;
         UpdateUI(resourceType);
+        return true;
     }
 
     public void RemoveResource(ResourceTypes resourceType, int amount)

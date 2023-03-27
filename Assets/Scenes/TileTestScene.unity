@@ -677,11 +677,11 @@ PrefabInstance:
       objectReference: {fileID: 1707517388}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: mapSize.x
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: mapSize.y
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: biomeScale

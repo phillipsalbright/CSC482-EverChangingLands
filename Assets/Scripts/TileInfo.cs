@@ -55,7 +55,7 @@ public class TileInfo : Singleton<TileInfo>
     private IsometricRuleTile deepWaterTile;
     [SerializeField, Range(0,1)]
     private float deepWaterStart;
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         SetupDictionaries();
@@ -142,7 +142,7 @@ public class TileInfo : Singleton<TileInfo>
         float totalChance = distance;
         float nonWaterChance = biomeChanceSum - distance;
         if (biomeRand < distance) {
-            return GetTileFromBiomeWaterEdge(tileRand, Biomes.LowGround, distance);
+            return GetTileFromBiomeWaterEdge(tileRand, Biomes.Water, distance);
         }
         foreach (KeyValuePair<Biomes, BiomeList> biomes in biomeDict)
         {
