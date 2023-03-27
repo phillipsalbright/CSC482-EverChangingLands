@@ -61,4 +61,23 @@ public class TileRuleSet : MonoBehaviour
     public AllRules getRuleset(){
         return currentRuleset;
     }
+
+    public String toString(){
+        return "";
+    }
+    public String allTileRulesString(){
+        return "";
+    }
+
+    public String ruleSetString(){
+        return "";
+    }
+
+    public String ruleConditionString(){
+        return "";
+    }
+
+    public String ruleString(){
+        return "";
+    }   
 }

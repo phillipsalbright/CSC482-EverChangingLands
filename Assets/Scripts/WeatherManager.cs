@@ -12,11 +12,24 @@ using System.Text;
 
 public class WeatherManager : Singleton<WeatherManager>
 {
+    
     public enum WeatherTypes{
         Sunny,
         Drought,
         Rain,
     }
+
+    [Serializable]
+    public struct WeatherNames{
+        [Tooltip("tile type")]
+        public WeatherTypes weatherType;
+        [Tooltip("tile name")]
+        public string weatherName;
+    }
+    [Tooltip("tile name mapping"), SerializeField]
+    private List<WeatherNames> weatherNameList = new List<WeatherNames>();
+    //map of tile names
+    private Dictionary<WeatherTypes, String> weatherNameMap;
 
 [Serializable]
     public struct weatherRngVals{
@@ -60,6 +73,14 @@ public class WeatherManager : Singleton<WeatherManager>
     private List<WeatherTypes> allWeatherTypes;
 
     void Start(){
+
+        weatherNameMap = new Dictionary<WeatherTypes, string>();
+        foreach(WeatherNames wn in weatherNameList){
+            weatherNameMap.Add(wn.weatherType, wn.weatherName);
+        }
+
+
+
         allWeatherTypes = new List<WeatherTypes>(0);
         allWeatherTypes.Add(WeatherTypes.Sunny);
         allWeatherTypes.Add(WeatherTypes.Rain);
@@ -169,4 +190,11 @@ public class WeatherManager : Singleton<WeatherManager>
     str.Append("}");
     return str.ToString();
 }
+
+public String getWeatherNameString(WeatherTypes type){
+        if(!weatherNameMap.ContainsKey(type)){
+            return "~WEATHER NOT SET~";
+        }
+        return weatherNameMap[type];
+    }
 }
