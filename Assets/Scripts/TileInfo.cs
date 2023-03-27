@@ -79,6 +79,7 @@ public class TileInfo : Singleton<TileInfo>
         tilesDict.Clear();
         biomeChanceSum = 0;
         isometricTiles.Add(Tile.TileTypes.DeepWater, deepWaterTile);
+
         foreach (BiomeList biomeList in biomeLists)
         {
             biomeDict.Add(biomeList.biome, biomeList);
@@ -120,6 +121,16 @@ public class TileInfo : Singleton<TileInfo>
     public Tile.TileTypes GetTileType(float biomeRand, float tileRand)
     {
         biomeRand *= biomeChanceSum;
+        if (biomeRand <= biomeDict[Biomes.Water].chance)
+        {
+            return GetTileFromBiome(tileRand, Biomes.Water);
+        }
+        else if (biomeRand <= biomeChanceSum - secondaryBiomeChanceSum)
+        {
+            return GetTileFromBiome(tileRand, primaryBiome);
+        }
+        biomeRand /= biomeChanceSum;
+        biomeRand *= secondaryBiomeChanceSum;
         float totalChance = 0;
         foreach (Biomes biome in biomeDict.Keys)
         {
