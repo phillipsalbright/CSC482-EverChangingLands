@@ -58,7 +58,149 @@ public class TileRuleSet : MonoBehaviour
     [SerializeField]
     private AllRules currentRuleset;
 
+    private Dictionary<Operators, string> operatorMap;
+
+    void Awake(){
+        operatorMap = new Dictionary<Operators, string>();
+        operatorMap.Add(Operators.Greater, "more than ");
+        operatorMap.Add(Operators.GreaterEquals, "at least ");
+        operatorMap.Add(Operators.Equals, "exactly ");
+        operatorMap.Add(Operators.LessEquals, "at most ");
+        operatorMap.Add(Operators.Less, "less than ");
+        operatorMap.Add(Operators.NotEquals, "not ");
+    }
+    void Start(){
+        
+
+        //Debug.Log(toString());
+    }
+
     public AllRules getRuleset(){
         return currentRuleset;
     }
+
+    //returns a string of the entire current ruleset
+    public String toString(){
+        String result = "RULESET:\n\n";
+        result += allTileRulesString(currentRuleset.allTilesRules);
+        foreach(Ruleset rs in currentRuleset.tileRules){
+            result += ruleSetString(rs);
+        }
+        return result;
+    }
+
+    //returns all rules that will run under the current weather conditions
+    public String toStringForWeather(WeatherManager.WeatherTypes thisWeather){
+        String result = "RULESET:\n\n";
+        result += allTileRulesStringForWeather(currentRuleset.allTilesRules, thisWeather);
+        foreach(Ruleset rs in currentRuleset.tileRules){
+            result += ruleSetStringForWeather(rs, thisWeather);
+        }
+        return result;
+    }
+
+    //turns the ruleset of rules that apply to all tile types into a string
+    public String allTileRulesString(AllTilesRuleset atrs){
+        String result = "For all tiles, check the following rules:\n";
+        result += "For all weather conditions, check the following rules:\n";
+        foreach(RuleCondition rc in atrs.nonWeatherConditions){
+            result += ruleConditionString(rc);
+        }
+        result += "\n";
+        foreach(Rule r in atrs.rules){
+            result += ruleString(r);
+        }
+        result += "\n";
+        return result;
+    }
+
+    //turns the ruleset of rules that apply to all tile types for a given weatherinto a string
+    public String allTileRulesStringForWeather(AllTilesRuleset atrs, WeatherManager.WeatherTypes thisWeather){
+        String result = "For all tiles, check the following rules:\n";
+        foreach(RuleCondition rc in atrs.nonWeatherConditions){
+            result += ruleConditionString(rc);
+        }
+        result += "\n";
+        foreach(Rule r in atrs.rules){
+            if(r.weatherType == thisWeather){
+                result += ruleStringForWeather(r);
+            }
+        }
+        result += "\n";
+        return result;
+    }
+
+    //turns a ruleset into a string
+    public String ruleSetString(Ruleset rs){
+        String result = "For Tile type " + TileManager.Instance.getTileNameString(rs.tileType) + ", check the following rules:\n";
+        result += "For all weather conditions, check the following rules:\n";
+        foreach(RuleCondition rc in rs.nonWeatherConditions){
+            result += ruleConditionString(rc);
+        }
+        foreach(Rule r in rs.rules){
+            result += ruleString(r);
+        }
+        result += "\n";
+        return result;
+    }
+
+    //turns a ruleset into a string of rules that run on a given weather
+    public String ruleSetStringForWeather(Ruleset rs, WeatherManager.WeatherTypes thisWeather){
+        String result = "For Tile type " + TileManager.Instance.getTileNameString(rs.tileType) + ", check the following rules:\n";
+        foreach(RuleCondition rc in rs.nonWeatherConditions){
+            result += ruleConditionString(rc);
+        }
+        foreach(Rule r in rs.rules){
+            if(r.weatherType == thisWeather){
+                result += ruleStringForWeather(r);
+            }
+        }
+        result += "\n";
+        return result;
+    }
+
+    //turns a rule condition into a string
+    public String ruleConditionString(RuleCondition rc){
+        string result = "";
+        if(rc.conditional == Operators.Always){
+            result = "Always ";
+        }
+        else{
+            result = "If count of adjacent ";
+            for( int i = 0; i < rc.TilesToCheck.Count; i++){
+                result += TileManager.Instance.getTileNameString(rc.TilesToCheck[i]);
+                if(i == rc.TilesToCheck.Count - 2){
+                    result += ", and ";
+                }
+                else if(i < rc.TilesToCheck.Count - 1){
+                    result += ", ";
+                }         
+            }
+            result += " tiles is " + operatorMap[rc.conditional] + rc.NumTiles + ",";
+           
+            
+        }
+        result += "change to " + TileManager.Instance.getTileNameString(rc.goalTile) + ".\n";
+        return result;
+    }
+
+    //turns a rule into a string
+    public String ruleString(Rule r){
+        string result = "When weather is " + WeatherManager.Instance.getWeatherNameString(r.weatherType) + ", check the following conditions:\n";
+        foreach(RuleCondition rc in r.ruleConditions){
+            result += ruleConditionString(rc);
+        }
+        result += "\n";
+        return result;
+    }   
+
+    //turns a rule into a string for a given weather type
+    public String ruleStringForWeather(Rule r){
+        string result = "";
+        foreach(RuleCondition rc in r.ruleConditions){
+            result += ruleConditionString(rc);
+        }
+        result += "\n";
+        return result;
+    }   
 }

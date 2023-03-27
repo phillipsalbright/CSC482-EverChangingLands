@@ -65,7 +65,7 @@ public class TileInfo : Singleton<TileInfo>
     private IsometricRuleTile deepWaterTile;
     [SerializeField, Range(0,1)]
     private float deepWaterStart;
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         SetupDictionaries();

@@ -10,15 +10,18 @@ public class GameManager : MonoBehaviour
     private TileManager tileManager;
     private SettlerManager settlerManager;
     private UnityEvent<int> _onTurnChanged = new();
-    private int _turn;
+    private int _turn = 0;
     private Tile selectedTile;
     [SerializeField] private Tilemap selectionMap;
+    [SerializeField] private TileBase[] reticles;
+    /**
     [SerializeField] private TileBase reticleRedTile;
     [SerializeField] private TileBase reticleGreenTile;
     [SerializeField] private TileBase reticleYellowTile;
     [SerializeField] private TileBase reticleBlueTile;
     [SerializeField] private TileBase reticlePurpleTile;
     [SerializeField] private TileBase reticleOrangeTile;
+    */
 
     public static GameManager Instance
     {
@@ -64,10 +67,10 @@ public class GameManager : MonoBehaviour
         BuildingManager.Instance.AdvanceTurn();
     }
 
-    public void SelectTile(Tile tile)
+    public void SelectTile(Tile tile, int colorindex)
     {
-        selectionMap.ClearAllTiles();
-        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticleBlueTile);
+        //selectionMap.ClearAllTiles();
+        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x, tile.GetTilePosition().y, 0), reticles[colorindex]);
     }
 
     public void DeleteSelection()
@@ -79,46 +82,73 @@ public class GameManager : MonoBehaviour
     {
         if(TileInfo.Instance.GetTileResourceTypes(tile.GetCurrentTileType()) != ResourceManager.ResourceTypes.None)
         {
-            selectionMap.SetTile(tile.GetTilePosition(), reticleYellowTile);
+            selectionMap.SetTile(tile.GetTilePosition(), reticles[2]);
             tile.SetIsValid(true);
         }
         else
         {
-            selectionMap.SetTile(tile.GetTilePosition(), reticleRedTile);
+            selectionMap.SetTile(tile.GetTilePosition(), reticles[0]);
         }
 
         foreach(Tile t in tile.GetAdjacentTiles())
         {
             if (TileInfo.Instance.GetTileResourceTypes(t.GetCurrentTileType()) != ResourceManager.ResourceTypes.None)
             {
-                selectionMap.SetTile(t.GetTilePosition(), reticleYellowTile);
+                selectionMap.SetTile(t.GetTilePosition(), reticles[2]);
                 t.SetIsValid(true);
             }
             else
             {
-                selectionMap.SetTile(t.GetTilePosition(), reticleRedTile);
+                selectionMap.SetTile(t.GetTilePosition(), reticles[0]);
             }
         }
     }
 
     public void DisplayFlipTiles(Tile tile)
     {
-        TileBase tileBase = ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) > 5 ? reticleYellowTile : reticleRedTile;
+        //TileBase tileBase = ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) > 5 ? reticles[2] : reticles[0];
+        // TileBase tileBase = reticles[2];
+        /**
+       selectionMap.SetTile(tile.GetTilePosition(), tileBase);
+       if(tileBase == reticles[2])
+       {
+           tile.SetIsValid(true);
+       }
 
-        selectionMap.SetTile(tile.GetTilePosition(), tileBase);
-        if(tileBase == reticleYellowTile)
-        {
+       foreach(Tile t in tile.GetAdjacentTiles())
+       {
+           selectionMap.SetTile(t.GetTilePosition(), tileBase);
+           if(tileBase == reticles[2])
+           {
+               t.SetIsValid(true);
+           }
+       }
+       */
+        if (BuildingManager.Instance.hasBuilding(tile))
+        {   
+            selectionMap.SetTile(tile.GetTilePosition(), reticles[2]);
             tile.SetIsValid(true);
         }
-
-        foreach(Tile t in tile.GetAdjacentTiles())
+        else
         {
-            selectionMap.SetTile(t.GetTilePosition(), tileBase);
-            if(tileBase == reticleYellowTile)
+            selectionMap.SetTile(tile.GetTilePosition(), reticles[0]);
+            tile.SetIsValid(false);
+        }
+
+        foreach (Tile t in tile.GetAdjacentTiles())
+        {
+            if (BuildingManager.Instance.hasBuilding(t))
             {
+                selectionMap.SetTile(t.GetTilePosition(), reticles[2]);
                 t.SetIsValid(true);
             }
+            else
+            {
+                selectionMap.SetTile(t.GetTilePosition(), reticles[0]);
+                t.SetIsValid(false);
+            }
         }
+  
     }
 
     public void DisplayMoveTiles(Tile tile)
@@ -138,7 +168,7 @@ public class GameManager : MonoBehaviour
                     Tile t = tileManager.GetTileDictionary()[new Vector2Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j)];
 
                     tiles.Add(t);
-                    selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticleRedTile);
+                    selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticles[0]);
                 }
             }
         }
@@ -167,11 +197,11 @@ public class GameManager : MonoBehaviour
 
             if (atTile == tile)
             {
-                selectionMap.SetTile(new Vector3Int(atTile.GetTilePos2().x, atTile.GetTilePos2().y, 0), reticleBlueTile);
+                selectionMap.SetTile(new Vector3Int(atTile.GetTilePos2().x, atTile.GetTilePos2().y, 0), reticles[3]);
             }
             else if (!settlerAtTile)
             {
-                selectionMap.SetTile(new Vector3Int(atTile.GetTilePos2().x, atTile.GetTilePos2().y, 0), reticleYellowTile);
+                selectionMap.SetTile(new Vector3Int(atTile.GetTilePos2().x, atTile.GetTilePos2().y, 0), reticles[2]);
             }
 
             visited.Add(atTile);

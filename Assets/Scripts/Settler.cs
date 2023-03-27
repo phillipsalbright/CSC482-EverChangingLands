@@ -11,6 +11,7 @@ public class Settler : MonoBehaviour
 
     private bool canMove = true;
     private bool canCollect = true;
+    private bool canFlip = true;
     private bool isDead = false;
     private Vector2Int housePos;
 
@@ -36,6 +37,7 @@ public class Settler : MonoBehaviour
         currentTile = tile;
         canMove = true;
         canCollect = false;
+        canFlip = true;
 
         positionInTilemap = tile.GetTilePos2();
         housePos = positionInTilemap;
@@ -101,6 +103,7 @@ public class Settler : MonoBehaviour
         {
             canMove = true;
             canCollect = true;
+            canFlip = true;
         }
     }
 
@@ -118,7 +121,8 @@ public class Settler : MonoBehaviour
     {
         if (this.canCollect)
         {
-            if(!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5))
+            //Now that most tiles have a resource, this if statement stops water from being collected
+            if(!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5) || true)
             {
                 bool collectedWater = false;
                 for (int i = 0; i < 2; i++)
@@ -164,5 +168,17 @@ public class Settler : MonoBehaviour
     public Vector2Int GetHousePos()
     {
         return housePos;
+    }
+
+    public void FlipTile(Tile t, Tile.TileTypes type)
+    {
+
+        TileManager.Instance.SetTile(t.GetTilePos2(), type);
+        canFlip = false;
+    }
+
+    public bool GetCanFlip()
+    {
+        return canFlip;
     }
 }

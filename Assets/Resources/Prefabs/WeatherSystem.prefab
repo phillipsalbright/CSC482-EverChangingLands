@@ -44,6 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ef62dd57879ee4bbb031e7367bbab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weatherNameList:
+  - weatherType: 0
+    weatherName: Sunny
+  - weatherType: 1
+    weatherName: Drought
+  - weatherType: 2
+    weatherName: Rain
   sunny:
     sunnyChance: 0.6
     droughtChance: 0.2
