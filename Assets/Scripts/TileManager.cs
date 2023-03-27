@@ -7,6 +7,18 @@ using UnityEngine.Tilemaps;
 
 public class TileManager : Singleton<TileManager>
 {
+    [Serializable]
+    public struct TileNames{
+        [Tooltip("tile type")]
+        public Tile.TileTypes tileType;
+        [Tooltip("tile name")]
+        public string tileName;
+    }
+    [Tooltip("tile name mapping"), SerializeField]
+    private List<TileNames> tileNameList = new List<TileNames>();
+    //map of tile names
+    private Dictionary<Tile.TileTypes, String> tileNameMap;
+
     [SerializeField]
     private Tilemap tilemap;
     [SerializeField]
@@ -40,6 +52,11 @@ public class TileManager : Singleton<TileManager>
 
     void Start()
     {
+        tileNameMap = new Dictionary<Tile.TileTypes, string>();
+        foreach(TileNames tn in tileNameList){
+            tileNameMap.Add(tn.tileType, tn.tileName);
+        }
+
         GenerateMap();
         CheckTiles(true);
         if(tileRuleSet == null){
@@ -302,5 +319,12 @@ public class TileManager : Singleton<TileManager>
                 changeMap.SetColor(loc, Color.red);
             }
         }
+    }
+
+    public String getTileNameString(Tile.TileTypes type){
+        if(!tileNameMap.ContainsKey(type)){
+            return "~TILENAME NOT SET~";
+        }
+        return tileNameMap[type];
     }
 }

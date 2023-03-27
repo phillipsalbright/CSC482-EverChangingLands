@@ -47,6 +47,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f0ba20ebc27f1499f4af7c029b8aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileNameList:
+  - tileType: 0
+    tileName: Desert
+  - tileType: 1
+    tileName: Grass
+  - tileType: 2
+    tileName: Mud
+  - tileType: 3
+    tileName: Forest
+  - tileType: 4
+    tileName: Dirt
+  - tileType: 5
+    tileName: Water
+  - tileType: 6
+    tileName: Deep Water
+  - tileType: 7
+    tileName: Rocks
+  - tileType: 8
+    tileName: Mountain
+  - tileType: 9
+    tileName: Peak
   tilemap: {fileID: 4575140568279203023}
   changeMap: {fileID: 4575140567931390669}
   seed: 0
@@ -160,6 +181,7 @@ MonoBehaviour:
     resourceProduced: 0
     amountProduced: 5
     acceptedTiles: 01000000
+    position: {x: 0, y: 0}
   - buildingType: 1
     isometricTile: {fileID: 11400000, guid: 8d55da771c8b3f34999dab6c044f2dda, type: 2}
     resourceCostList:
@@ -170,18 +192,21 @@ MonoBehaviour:
     resourceProduced: 2
     amountProduced: 2
     acceptedTiles: 01000000
+    position: {x: 0, y: 0}
   - buildingType: 2
     isometricTile: {fileID: 11400000, guid: c52ad04f47b9bd24bbc8a1f075aab308, type: 2}
     resourceCostList: []
     resourceProduced: 1
     amountProduced: 5
     acceptedTiles: 01000000
+    position: {x: 0, y: 0}
   - buildingType: 3
     isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
     resourceProduced: 0
     amountProduced: 0
     acceptedTiles: 01000000
+    position: {x: 0, y: 0}
 --- !u!1001 &7066629160259157315
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -487,17 +487,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &2028577322 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-  m_PrefabInstance: {fileID: 8575862916729214451}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3433b3193f7ba14ca345640b39ce2fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2955910478509742650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -666,38 +655,6 @@ PrefabInstance:
     - target: {fileID: 4575140568971549964, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: tilemap
-      value: 
-      objectReference: {fileID: 151229390}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: changeMap
-      value: 
-      objectReference: {fileID: 1707517388}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: mapSize.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: mapSize.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: biomeScale
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: tileRuleSet
-      value: 
-      objectReference: {fileID: 2028577322}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: oceanExtension.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: oceanExtension.y
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4575140568971549967, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: biomeLists.Array.data[0].tiles.Array.data[1].chance
