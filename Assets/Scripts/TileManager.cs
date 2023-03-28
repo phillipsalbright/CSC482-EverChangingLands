@@ -140,8 +140,8 @@ public class TileManager : Singleton<TileManager>
         tileOffset.y = UnityEngine.Random.Range(0f, 9999f);
         biomeOffset.x = -tileOffset.x;
         biomeOffset.y = -tileOffset.y;
-        waterOffset.x = -tileOffset.x;
-        waterOffset.y = tileOffset.y;
+        waterOffset.x = 2*tileOffset.x;
+        waterOffset.y = 2*tileOffset.y;
         width = mapSize.x / 2;
         height = mapSize.y / 2;
         for (int r = -width - oceanExtension.x; r < width + oceanExtension.x; r++)
