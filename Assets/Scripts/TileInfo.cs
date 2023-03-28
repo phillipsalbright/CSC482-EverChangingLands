@@ -15,13 +15,6 @@ public class TileInfo : Singleton<TileInfo>
         Sand,
         Mountain,
     }
-
-    public enum BiomeGroupings
-    {
-        Water,
-        Primary,
-        Secondary,
-    }
     [Serializable]
     public struct TileSwitch
     {
@@ -49,10 +42,6 @@ public class TileInfo : Singleton<TileInfo>
         public List<TileComponents> tiles;
     }
     [SerializeField]
-    private Biomes primaryBiome;
-    [SerializeField]
-    private List<Biomes> secondaryBiomeList = new List<Biomes>();
-    [SerializeField]
     private List<BiomeList> biomeLists = new List<BiomeList>();
     private Dictionary<Biomes, BiomeList> biomeDict = new Dictionary<Biomes, BiomeList>();
     private Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>> tilesDict = new Dictionary<Biomes, Dictionary<Tile.TileTypes, TileComponents>>();
@@ -60,7 +49,6 @@ public class TileInfo : Singleton<TileInfo>
     private Dictionary<Tile.TileTypes, IsometricRuleTile> isometricTiles = new Dictionary<Tile.TileTypes, IsometricRuleTile>();
     private Dictionary<Tile.TileTypes, TileComponents> tileList = new Dictionary<Tile.TileTypes, TileComponents>();
     private float biomeChanceSum = 0;
-    private float secondaryBiomeChanceSum = 0;
     [SerializeField]
     private IsometricRuleTile deepWaterTile;
     [SerializeField, Range(0,1)]
@@ -95,11 +83,8 @@ public class TileInfo : Singleton<TileInfo>
                     tileList.Add(tileComp.tileType, tileComp);
                 }
             }
-            biomeChanceSum += biomeList.chance;
-            if (secondaryBiomeList.Contains(biomeList.biome))
-            {
-                secondaryBiomeChanceSum += biomeList.chance;
-            }
+            if (biomeList.biome != Biomes.Water)
+                biomeChanceSum += biomeList.chance;
         }
     }
 
@@ -118,19 +103,14 @@ public class TileInfo : Singleton<TileInfo>
         return tileList[type].associatedResource;
     }
 
-    public Tile.TileTypes GetTileType(float biomeRand, float tileRand)
+    public Tile.TileTypes GetTileType(float waterRand, float biomeRand, float tileRand)
     {
-        biomeRand *= biomeChanceSum;
-        if (biomeRand <= biomeDict[Biomes.Water].chance)
+        Biomes biomeType = GetLandOrWater(waterRand);
+        if (biomeType == Biomes.Water)
         {
             return GetTileFromBiome(tileRand, Biomes.Water);
         }
-        else if (biomeRand <= biomeChanceSum - secondaryBiomeChanceSum)
-        {
-            return GetTileFromBiome(tileRand, primaryBiome);
-        }
-        biomeRand /= biomeChanceSum;
-        biomeRand *= secondaryBiomeChanceSum;
+        biomeRand *= biomeChanceSum;
         float totalChance = 0;
         foreach (Biomes biome in biomeDict.Keys)
         {
@@ -142,6 +122,16 @@ public class TileInfo : Singleton<TileInfo>
             }
         }
         return Tile.TileTypes.Desert;
+    }
+
+    private Biomes GetLandOrWater(float biomeRand)
+    {
+        biomeRand *= biomeChanceSum;
+        if (biomeRand <= biomeDict[Biomes.Water].chance)
+        {
+            return Biomes.Water;
+        }
+        return Biomes.Grass;
     }
 
     public Tile.TileTypes GetTileFromBiome(float rand, Biomes biome)
@@ -159,7 +149,7 @@ public class TileInfo : Singleton<TileInfo>
         return Tile.TileTypes.Grass;
     }
 
-    public Tile.TileTypes GetTileTypeWaterEdge(float biomeRand, float tileRand, Vector2 distToEdge)
+    public Tile.TileTypes GetTileTypeWaterEdge(float waterRand, float biomeRand, float tileRand, Vector2 distToEdge)
     {
         biomeRand *= biomeChanceSum;
         float distance = Mathf.Clamp(distToEdge.magnitude-deepWaterStart,0,1);
@@ -168,6 +158,11 @@ public class TileInfo : Singleton<TileInfo>
         float nonWaterChance = biomeChanceSum - distance;
         if (biomeRand < distance) {
             return GetTileFromBiomeWaterEdge(tileRand, Biomes.Water, distance);
+        }
+        Biomes biomeType = GetLandOrWater(waterRand);
+        if (biomeType == Biomes.Water)
+        {
+            return GetTileFromBiome(tileRand, Biomes.Water);
         }
         foreach (KeyValuePair<Biomes, BiomeList> biomes in biomeDict)
         {
