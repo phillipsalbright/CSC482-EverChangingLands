@@ -35,9 +35,12 @@ public class TileManager : Singleton<TileManager>
     private float tileScale;
     [SerializeField, Range(0.1f, 50), Tooltip("Smaller the number, larger the biomes")]
     private float biomeScale;
+    [SerializeField, Range(0.1f, 50), Tooltip("Smaller the number, larger the water")]
+    private float waterScale;
     private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
     private Vector2 tileOffset;
     private Vector2 biomeOffset;
+    private Vector2 waterOffset;
     [SerializeField, Tooltip("Generates surrounding ocean")]
     private bool islandMode;
     private int width;
@@ -137,6 +140,8 @@ public class TileManager : Singleton<TileManager>
         tileOffset.y = UnityEngine.Random.Range(0f, 9999f);
         biomeOffset.x = -tileOffset.x;
         biomeOffset.y = -tileOffset.y;
+        waterOffset.x = 2*tileOffset.x;
+        waterOffset.y = 2*tileOffset.y;
         width = mapSize.x / 2;
         height = mapSize.y / 2;
         for (int r = -width - oceanExtension.x; r < width + oceanExtension.x; r++)
@@ -166,15 +171,16 @@ public class TileManager : Singleton<TileManager>
         Vector2Int spawnPos = new Vector2Int(r, c);
         float tileRand = Noise.Get2DPerlin(spawnPos, mapSize, tileScale, tileOffset);
         float biomeRand = Noise.Get2DPerlin(spawnPos, mapSize, biomeScale, biomeOffset);
+        float waterRand = Noise.Get2DPerlin(spawnPos, mapSize, waterScale, waterOffset);
         Tile.TileTypes tileType;
         if (islandMode)
         {
             Vector2 dist = new Vector2(2 * (float)Mathf.Abs(spawnPos.x) / mapSize.x, 2 * (float)Mathf.Abs(spawnPos.y) / mapSize.y);
-            tileType = TileInfo.Instance.GetTileTypeWaterEdge(biomeRand, tileRand, dist);
+            tileType = TileInfo.Instance.GetTileTypeWaterEdge(waterRand, biomeRand, tileRand, dist);
         }
         else
         {
-            tileType = TileInfo.Instance.GetTileType(biomeRand, tileRand);
+            tileType = TileInfo.Instance.GetTileType(waterRand, biomeRand, tileRand);
         }
         Vector3Int spawnPos3D = new Vector3Int(spawnPos.x, spawnPos.y, 0);
         Tile t = new Tile(tileType, spawnPos3D);

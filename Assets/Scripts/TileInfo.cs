@@ -13,9 +13,7 @@ public class TileInfo : Singleton<TileInfo>
         Grass,
         Water,
         Sand,
-        LowGround,
-        MiddleGround,
-        HighGround,
+        Mountain,
     }
     [Serializable]
     public struct TileSwitch
@@ -69,6 +67,7 @@ public class TileInfo : Singleton<TileInfo>
         tilesDict.Clear();
         biomeChanceSum = 0;
         isometricTiles.Add(Tile.TileTypes.DeepWater, deepWaterTile);
+
         foreach (BiomeList biomeList in biomeLists)
         {
             biomeDict.Add(biomeList.biome, biomeList);
@@ -84,7 +83,8 @@ public class TileInfo : Singleton<TileInfo>
                     tileList.Add(tileComp.tileType, tileComp);
                 }
             }
-            biomeChanceSum += biomeList.chance;
+            if (biomeList.biome != Biomes.Water)
+                biomeChanceSum += biomeList.chance;
         }
     }
 
@@ -103,8 +103,13 @@ public class TileInfo : Singleton<TileInfo>
         return tileList[type].associatedResource;
     }
 
-    public Tile.TileTypes GetTileType(float biomeRand, float tileRand)
+    public Tile.TileTypes GetTileType(float waterRand, float biomeRand, float tileRand)
     {
+        Biomes biomeType = GetLandOrWater(waterRand);
+        if (biomeType == Biomes.Water)
+        {
+            return GetTileFromBiome(tileRand, Biomes.Water);
+        }
         biomeRand *= biomeChanceSum;
         float totalChance = 0;
         foreach (Biomes biome in biomeDict.Keys)
@@ -117,6 +122,16 @@ public class TileInfo : Singleton<TileInfo>
             }
         }
         return Tile.TileTypes.Desert;
+    }
+
+    private Biomes GetLandOrWater(float biomeRand)
+    {
+        biomeRand *= biomeChanceSum;
+        if (biomeRand <= biomeDict[Biomes.Water].chance)
+        {
+            return Biomes.Water;
+        }
+        return Biomes.Grass;
     }
 
     public Tile.TileTypes GetTileFromBiome(float rand, Biomes biome)
@@ -134,7 +149,7 @@ public class TileInfo : Singleton<TileInfo>
         return Tile.TileTypes.Grass;
     }
 
-    public Tile.TileTypes GetTileTypeWaterEdge(float biomeRand, float tileRand, Vector2 distToEdge)
+    public Tile.TileTypes GetTileTypeWaterEdge(float waterRand, float biomeRand, float tileRand, Vector2 distToEdge)
     {
         biomeRand *= biomeChanceSum;
         float distance = Mathf.Clamp(distToEdge.magnitude-deepWaterStart,0,1);
@@ -143,6 +158,11 @@ public class TileInfo : Singleton<TileInfo>
         float nonWaterChance = biomeChanceSum - distance;
         if (biomeRand < distance) {
             return GetTileFromBiomeWaterEdge(tileRand, Biomes.Water, distance);
+        }
+        Biomes biomeType = GetLandOrWater(waterRand);
+        if (biomeType == Biomes.Water)
+        {
+            return GetTileFromBiome(tileRand, Biomes.Water);
         }
         foreach (KeyValuePair<Biomes, BiomeList> biomes in biomeDict)
         {
