@@ -68,14 +68,15 @@ MonoBehaviour:
     tileName: Mountain
   - tileType: 9
     tileName: Peak
-  tilemap: {fileID: 4575140568279203023}
-  changeMap: {fileID: 4575140567931390669}
+  tilemap: {fileID: 0}
+  changeMap: {fileID: 0}
   seed: 0
   testing: 0
   mapSize: {x: 100, y: 100}
   oceanExtension: {x: 50, y: 50}
   tileScale: 20
   biomeScale: 20
+  waterScale: 15
   islandMode: 1
   tileRuleSet: {fileID: 0}
 --- !u!114 &4575140568971549967
@@ -113,8 +114,16 @@ MonoBehaviour:
       - switchTile: 5
         requiredResources: 
         requiredResourcesCount: 
+  - biome: 2
+    chance: 0.3
+    tiles:
+    - tileType: 0
+      isometricTile: {fileID: 11400000, guid: c5c211913e6ccc741b5038527f4a71ce, type: 2}
+      chance: 1
+      associatedResource: 3
+      tileSwitches: []
   - biome: 0
-    chance: 0.4
+    chance: 0.6
     tiles:
     - tileType: 4
       isometricTile: {fileID: 11400000, guid: 6286e5af240c6b540a788748743755a0, type: 2}
@@ -143,18 +152,28 @@ MonoBehaviour:
         requiredResourcesCount: 
     - tileType: 3
       isometricTile: {fileID: 11400000, guid: 9352d5d9fefc4834c89f6e8c669a43ad, type: 2}
-      chance: 0.3
+      chance: 0.4
       associatedResource: 0
       tileSwitches:
       - switchTile: 1
         requiredResources: 
         requiredResourcesCount: 
-  - biome: 2
-    chance: 0.4
+  - biome: 3
+    chance: 0.3
     tiles:
-    - tileType: 0
-      isometricTile: {fileID: 11400000, guid: c5c211913e6ccc741b5038527f4a71ce, type: 2}
-      chance: 1
+    - tileType: 7
+      isometricTile: {fileID: 11400000, guid: 200279346cd6c9d41a91a86a68b2a752, type: 2}
+      chance: 0.2
+      associatedResource: 3
+      tileSwitches: []
+    - tileType: 8
+      isometricTile: {fileID: 11400000, guid: c1e5cc5596a394e40a86cb736da02bd2, type: 2}
+      chance: 0.4
+      associatedResource: 3
+      tileSwitches: []
+    - tileType: 9
+      isometricTile: {fileID: 11400000, guid: 9d3f90192eb3adf47b0ce592929ff75f, type: 2}
+      chance: 0.3
       associatedResource: 3
       tileSwitches: []
   deepWaterTile: {fileID: 11400000, guid: 0fadce13039b1ee4ba150346abe842f6, type: 2}
@@ -267,16 +286,6 @@ PrefabInstance:
 --- !u!4 &4575140567236737286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6732775738593117253, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
-  m_PrefabInstance: {fileID: 7066629160259157315}
-  m_PrefabAsset: {fileID: 0}
---- !u!1839735485 &4575140567931390669 stripped
-Tilemap:
-  m_CorrespondingSourceObject: {fileID: 6732775739037218702, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
-  m_PrefabInstance: {fileID: 7066629160259157315}
-  m_PrefabAsset: {fileID: 0}
---- !u!1839735485 &4575140568279203023 stripped
-Tilemap:
-  m_CorrespondingSourceObject: {fileID: 6732775737489310092, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
   m_PrefabInstance: {fileID: 7066629160259157315}
   m_PrefabAsset: {fileID: 0}
 --- !u!1839735485 &7805056821990959576 stripped
