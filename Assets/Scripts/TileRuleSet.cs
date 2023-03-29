@@ -57,6 +57,8 @@ public class TileRuleSet : MonoBehaviour
 
     [SerializeField]
     private AllRules currentRuleset;
+    [SerializeField]
+    private String rsName;
 
     private Dictionary<Operators, string> operatorMap;
 
@@ -75,6 +77,18 @@ public class TileRuleSet : MonoBehaviour
         //Debug.Log(toString());
     }
 
+    public void SetupFromRSS(RuleSetSave rss){
+        SetRuleSet(rss.getRuleset());
+        setRSName(rss.getRSName());
+    }
+
+    public String getRSName(){
+        return rsName;
+    }
+    public void setRSName(String newName){
+        rsName = newName;
+    }
+
     public void SetRuleSet(AllRules ar){
         currentRuleset = ar;
     }
@@ -85,7 +99,7 @@ public class TileRuleSet : MonoBehaviour
 
     //returns a string of the entire current ruleset
     public String toString(){
-        String result = "RULESET:\n\n";
+        String result = "RULESET: " + rsName + "\n\n";
         result += allTileRulesString(currentRuleset.allTilesRules);
         foreach(Ruleset rs in currentRuleset.tileRules){
             result += ruleSetString(rs);
