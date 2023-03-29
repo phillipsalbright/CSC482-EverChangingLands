@@ -75,6 +75,10 @@ public class TileRuleSet : MonoBehaviour
         //Debug.Log(toString());
     }
 
+    public void SetRuleSet(AllRules ar){
+        currentRuleset = ar;
+    }
+
     public AllRules getRuleset(){
         return currentRuleset;
     }
