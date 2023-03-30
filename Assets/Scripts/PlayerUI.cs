@@ -36,6 +36,7 @@ public class PlayerUI : MonoBehaviour
     private Vector2 _rightStick;
 
     [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _gameOverMenu;
     [SerializeField] private GameObject _normalTurnHUD;
     [SerializeField] private GameObject _startGameHUD;
     [SerializeField] private GameObject _settlerActionHUD;
@@ -93,6 +94,10 @@ public class PlayerUI : MonoBehaviour
     private void HandleTurnChange(int newTurn)
     {
         _turnText.text = "Turn " + newTurn;
+        if (SettlerManager.Instance.GetCurrentNumberOfSettlers() <= 0)
+        {
+            SetMode(PlayerController.mode.GameOver);
+        }
     }
 
     // Update is called once per frame
@@ -335,6 +340,15 @@ public class PlayerUI : MonoBehaviour
                     }
                 }
                 _playerController.currentControllerMode = PlayerController.mode.SelectFlipTile;
+                break;
+            case PlayerController.mode.GameOver:
+                _normalTurnHUD.SetActive(false);
+                _startGameHUD.SetActive(false);
+                _settlerActionHUD.SetActive(false);
+                _buildingHUD.SetActive(false);
+                _tileFlippingHUD.SetActive(false);
+                _selectedTileToFlipHUD.SetActive(false);
+                _gameOverMenu.SetActive(true);
                 break;
         }
     }
