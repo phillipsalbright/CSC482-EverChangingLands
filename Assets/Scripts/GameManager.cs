@@ -57,11 +57,11 @@ public class GameManager : MonoBehaviour
         _turn++;
         _onTurnChanged.Invoke(_turn);
         tileManager.AdvanceTurn();
-        foreach(Settler s in FindObjectsOfType<Settler>())
+        BuildingManager.Instance.AdvanceTurn();
+        foreach (Settler s in FindObjectsOfType<Settler>())
         {
             s.StartNewTurn();
         }
-        BuildingManager.Instance.AdvanceTurn();
     }
 
     public void SelectTile(Tile tile)

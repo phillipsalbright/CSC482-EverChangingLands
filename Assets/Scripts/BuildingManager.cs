@@ -47,6 +47,9 @@ public class BuildingManager : Singleton<BuildingManager>
     [SerializeField]
     public List<Building> buildingList = new List<Building>();
 
+    [SerializeField] private AudioSource buildSound;
+    [SerializeField] private AudioSource destroySound;
+
 
     public void AdvanceTurn() {
         Debug.LogWarning("ff");
@@ -74,6 +77,10 @@ public class BuildingManager : Singleton<BuildingManager>
             if(houses.ContainsKey(p))
             {
                 houses.Remove(p);
+                if(!destroySound.isPlaying)
+                {
+                    destroySound.Play();
+                }
             }
         }
     }
@@ -131,6 +138,10 @@ public class BuildingManager : Singleton<BuildingManager>
         if(canAfford(name)){
             Building b = buildingDictionary[name];
             builtBuildings.Add(p, name);
+            if(!buildSound.isPlaying)
+            {
+                buildSound.Play();
+            }
 
             Settler settler = null;
 
