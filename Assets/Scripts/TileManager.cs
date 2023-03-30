@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 public class TileManager : Singleton<TileManager>
 {
     [Serializable]
-    public struct TileNames{
+    public struct TileNames {
         [Tooltip("tile type")]
         public Tile.TileTypes tileType;
         [Tooltip("tile name")]
@@ -31,7 +31,7 @@ public class TileManager : Singleton<TileManager>
     private Vector2Int mapSize;
     [SerializeField, Tooltip("How much deep water to add onto ends")]
     private Vector2Int oceanExtension;
-    [SerializeField, Range(0.1f,50), Tooltip("Smaller the number, larger the groups")]
+    [SerializeField, Range(0.1f, 50), Tooltip("Smaller the number, larger the groups")]
     private float tileScale;
     [SerializeField, Range(0.1f, 50), Tooltip("Smaller the number, larger the biomes")]
     private float biomeScale;
@@ -45,6 +45,10 @@ public class TileManager : Singleton<TileManager>
     private bool islandMode;
     private int width;
     private int height;
+    [SerializeField]
+    private TileInfo.Biomes baseBiome;
+    [SerializeField]
+    private List<TileInfo.Biomes> additionalBiomes;
 
     [SerializeField, Tooltip("this game's tile ruleset")]
     private TileRuleSet tileRuleSet;
@@ -150,7 +154,8 @@ public class TileManager : Singleton<TileManager>
             {
                 if (Mathf.Abs(r) < width && Mathf.Abs(c) < height)
                 {
-                    ActualMapFillIn(r, c);
+                    //ActualMapFillIn(r, c);
+                    ActualMapFillInPerlinLayers(r, c);
                 }
                 else
                 {
@@ -163,6 +168,42 @@ public class TileManager : Singleton<TileManager>
         {
             LinkTiles(tiles[pos], pos);
         }
+    }
+
+    private void ActualMapFillInPerlinLayers(int r, int c)
+    {
+        Vector2Int spawnPos = new Vector2Int(r, c);
+        float tileRand = Noise.Get2DPerlin(spawnPos, mapSize, tileScale, tileOffset);
+        float biomeRand = Noise.Get2DPerlin(spawnPos, mapSize, biomeScale, biomeOffset);
+        float waterRand = Noise.Get2DPerlin(spawnPos, mapSize, waterScale, waterOffset);
+        Tile.TileTypes tileType;
+        if (islandMode)
+        {
+            Vector2 dist = new Vector2(2 * (float)Mathf.Abs(spawnPos.x) / mapSize.x, 2 * (float)Mathf.Abs(spawnPos.y) / mapSize.y);
+            tileType = TileInfo.Instance.GetWaterOrLandTileWaterEdge(waterRand, biomeRand, tileRand, dist);
+        }
+        else
+        {
+            tileType = TileInfo.Instance.GetWaterOrLandTile(waterRand, tileRand);
+        }
+        Vector2 offsetVal = biomeOffset;
+        if (tileType != Tile.TileTypes.Water && tileType != Tile.TileTypes.DeepWater)
+        {
+            foreach (TileInfo.Biomes biome in additionalBiomes)
+            {
+                float randVal = Noise.Get2DPerlin(spawnPos, mapSize, biomeScale, offsetVal);
+                Tile.TileTypes tileTypeNew = TileInfo.Instance.GetTileTypeFromBiome(biome, randVal, tileRand);
+                offsetVal += biomeOffset;
+                if (tileTypeNew != Tile.TileTypes.Water)
+                {
+                    tileType = tileTypeNew;
+                }
+            }
+        }
+        Vector3Int spawnPos3D = new Vector3Int(spawnPos.x, spawnPos.y, 0);
+        Tile t = new Tile(tileType, spawnPos3D);
+        tiles.Add(spawnPos, t);
+        tilemap.SetTile(spawnPos3D, TileInfo.Instance.GetTile(t.GetCurrentTileType()));
     }
 
     private void ActualMapFillIn(int r, int c)

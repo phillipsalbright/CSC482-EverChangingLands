@@ -103,6 +103,12 @@ public class TileInfo : Singleton<TileInfo>
         return tileList[type].associatedResource;
     }
 
+    public Tile.TileTypes GetWaterOrLandTile(float waterRand, float tileRand)
+    {
+        Biomes biomeType = GetLandOrWater(waterRand);
+        return GetTileFromBiome(tileRand, biomeType);
+    }
+
     public Tile.TileTypes GetTileType(float waterRand, float biomeRand, float tileRand)
     {
         Biomes biomeType = GetLandOrWater(waterRand);
@@ -176,6 +182,29 @@ public class TileInfo : Singleton<TileInfo>
         return Tile.TileTypes.DeepWater;    
     }
 
+    public Tile.TileTypes GetWaterOrLandTileWaterEdge(float waterRand, float biomeRand, float tileRand, Vector2 distToEdge)
+    {
+        float distance = Mathf.Clamp(distToEdge.magnitude - deepWaterStart, 0, 1);
+        distance /= (1 - deepWaterStart);
+        if (waterRand < distance)
+        {
+            return GetWaterOrLandBiomeWaterEdge(tileRand, Biomes.Water, distance);
+        }
+        Biomes biomeType = GetLandOrWater(waterRand);
+        return GetTileFromBiome(tileRand, biomeType);
+    }
+
+    public Tile.TileTypes GetWaterOrLandBiomeWaterEdge(float rand, Biomes biome, float distance)
+    {
+        rand *= tilesChanceSumDict[biome];
+        if (rand < distance)
+        {
+            return Tile.TileTypes.DeepWater;
+        }
+        Biomes biomeType = GetLandOrWater(rand);
+        return GetTileFromBiome(rand, biomeType);
+    }
+
     public Tile.TileTypes GetTileFromBiomeWaterEdge(float rand, Biomes biome, float distance)
     {
         rand *= tilesChanceSumDict[biome];
@@ -193,6 +222,26 @@ public class TileInfo : Singleton<TileInfo>
                 return tiles.Key;
             }
         } 
+        return Tile.TileTypes.Grass;
+    }
+
+    public Tile.TileTypes GetTileTypeFromBiome(Biomes biome, float biomeRand, float tileRand)
+    {
+        if (biomeRand > biomeDict[biome].chance)
+        {
+            return Tile.TileTypes.Water;
+        }
+        Debug.Log(biomeRand + " " + biomeDict[biome].chance + " " + biome);
+        tileRand *= tilesChanceSumDict[biome];
+        float totalChance = 0;
+        foreach (KeyValuePair<Tile.TileTypes, TileComponents> tiles in tilesDict[biome])
+        {
+            totalChance += tiles.Value.chance;
+            if (tileRand <= totalChance)
+            {
+                return tiles.Key;
+            }
+        }
         return Tile.TileTypes.Grass;
     }
 
