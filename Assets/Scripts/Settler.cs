@@ -36,6 +36,7 @@ public class Settler : MonoBehaviour
         else if(wantsToDie && !deathSound.isPlaying)
         {
             wantsToDie = false;
+            MusicManager.Instance.playBGM();
             if (!BuildingManager.Instance.GetHouses().ContainsKey(housePos))
             {
                 Debug.Log("House Gone");
@@ -109,6 +110,7 @@ public class Settler : MonoBehaviour
             canCollect = false;
             if(!deathSound.isPlaying)
             {
+                MusicManager.Instance.pauseBGM();
                 Debug.Log("Death sound play");
                 deathSound.Play();
             }

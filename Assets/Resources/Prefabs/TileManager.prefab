@@ -156,7 +156,7 @@ MonoBehaviour:
     resourceCostList: []
     resourceProduced: 0
     amountProduced: 0
-    acceptedTiles: 01000000
+    acceptedTiles: 0100000004000000
   buildSound: {fileID: 2056547777777652608}
   destroySound: {fileID: 3165049210932668089}
 --- !u!82 &2056547777777652608
