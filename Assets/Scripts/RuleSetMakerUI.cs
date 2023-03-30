@@ -23,4 +23,12 @@ public class RuleSetMakerUI : MonoBehaviour
     public void LoadRuleSetToManager(){
         RuleSetManager.Instance.ReadDemoFromFile();
     }
+
+    public void ClearFiles(){
+        RuleSetManager.Instance.ClearRuleSets();
+    }
+
+    public void PurgeFiles(){
+        RuleSetManager.Instance.PurgeRuleSets();
+    }
 }
