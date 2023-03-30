@@ -786,6 +786,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+      propertyPath: rsName
+      value: Default
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[7].nonWeatherConditions.Array.data[0].goalTile
       value: 5
       objectReference: {fileID: 0}
