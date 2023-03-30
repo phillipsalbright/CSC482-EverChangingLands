@@ -184,6 +184,15 @@ public static class TileRules
         if(!terrainCounts.ContainsKey(Tile.TileTypes.Mud)){
             terrainCounts.Add(Tile.TileTypes.Mud, 0);
         }
+        if(!terrainCounts.ContainsKey(Tile.TileTypes.Rocks)){
+            terrainCounts.Add(Tile.TileTypes.Rocks, 0);
+        }
+        if(!terrainCounts.ContainsKey(Tile.TileTypes.Mountain)){
+            terrainCounts.Add(Tile.TileTypes.Mountain, 0);
+        }
+        if(!terrainCounts.ContainsKey(Tile.TileTypes.SnowPeak)){
+            terrainCounts.Add(Tile.TileTypes.SnowPeak, 0);
+        }
 
         //get the current weather
         WeatherManager.WeatherTypes currentWeather = WeatherManager.Instance.GetCurrentWeather();
