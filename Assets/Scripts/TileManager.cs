@@ -43,6 +43,8 @@ public class TileManager : Singleton<TileManager>
     private Vector2 waterOffset;
     [SerializeField, Tooltip("Generates surrounding ocean")]
     private bool islandMode;
+    [SerializeField]
+    private bool perlinLayersMode;
     private int width;
     private int height;
     [SerializeField]
@@ -154,8 +156,14 @@ public class TileManager : Singleton<TileManager>
             {
                 if (Mathf.Abs(r) < width && Mathf.Abs(c) < height)
                 {
-                    //ActualMapFillIn(r, c);
-                    ActualMapFillInPerlinLayers(r, c);
+                    if  (perlinLayersMode)
+                    {
+                        ActualMapFillInPerlinLayers(r, c);
+                    }
+                    else
+                    {
+                        ActualMapFillIn(r, c);
+                    }
                 }
                 else
                 {
@@ -180,11 +188,11 @@ public class TileManager : Singleton<TileManager>
         if (islandMode)
         {
             Vector2 dist = new Vector2(2 * (float)Mathf.Abs(spawnPos.x) / mapSize.x, 2 * (float)Mathf.Abs(spawnPos.y) / mapSize.y);
-            tileType = TileInfo.Instance.GetWaterOrLandTileWaterEdge(waterRand, biomeRand, tileRand, dist);
+            tileType = TileInfo.Instance.GetWaterOrLandTileWaterEdge(baseBiome, waterRand, biomeRand, tileRand, dist);
         }
         else
         {
-            tileType = TileInfo.Instance.GetWaterOrLandTile(waterRand, tileRand);
+            tileType = TileInfo.Instance.GetWaterOrLandTile(baseBiome, waterRand, tileRand);
         }
         Vector2 offsetVal = biomeOffset;
         if (tileType != Tile.TileTypes.Water && tileType != Tile.TileTypes.DeepWater)

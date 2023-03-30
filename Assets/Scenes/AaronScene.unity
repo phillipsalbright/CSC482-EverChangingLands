@@ -231,6 +231,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1839735485 &950851458 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 4575140567727197655, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+  m_PrefabInstance: {fileID: 4575140568396541697}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1128808034
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +702,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3186878524296449409, guid: 13b7fb191a1e1874cb5241f5015e2d36, type: 3}
+      propertyPath: selectionMap
+      value: 
+      objectReference: {fileID: 950851458}
     - target: {fileID: 3186878524296449422, guid: 13b7fb191a1e1874cb5241f5015e2d36, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -763,21 +772,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1757689914}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: baseBiome
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: changeMap
       value: 
       objectReference: {fileID: 635830947}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: biomeScale
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: islandMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: waterScale
-      value: 13.7
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: tileRuleSet
       value: 
       objectReference: {fileID: 1923787684}
+    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: perlinLayersMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: additionalBiomes.Array.size
       value: 2
