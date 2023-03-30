@@ -8,6 +8,7 @@ public class RuleSetHolder : MonoBehaviour
     public List<TileRuleSet> ruleSets;
     [SerializeField]
     public int check = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,4 +39,14 @@ public class RuleSetHolder : MonoBehaviour
         newTrs.SetupFromRSS(newRss);
         ruleSets.Add(newTrs);
     }
+
+    public void DeleteRuleSet(TileRuleSet trs){
+        ruleSets.Remove(trs);
+    }
+
+    public void ClearRuleSets(){
+        ruleSets = new List<TileRuleSet>();
+    }
+
+    
 }
