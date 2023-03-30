@@ -26,6 +26,20 @@ public class SettlerManager : Singleton<SettlerManager>
         return settlers.Count;
     }
 
+    public int GetNumberAliveSettlers()
+    {
+        int alive = 0;
+        for (int i = 0; i < settlers.Count; i++)
+        {
+            if (!settlers[i].GetComponent<Settler>().isSettlerDead())
+            {
+                alive++;
+            }
+        }
+
+        return alive;
+    }
+
     public int GetInitialNumberOfSettlers()
     {
         return initialNumberOfSettlers;
@@ -58,7 +72,7 @@ public class SettlerManager : Singleton<SettlerManager>
         if (compatableTile && !tileHasSettler)
         {
             GameObject settler = GameObject.Instantiate(settlerPrefab, Vector3.zero, Quaternion.identity);
-            settler.GetComponent<Settler>().SetInitialTileAndPosition(tile);
+            settler.GetComponent<Settler>().SetInitialTileAndPosition(tile, true);
             settlers.Add(settler);
             return true;
         }

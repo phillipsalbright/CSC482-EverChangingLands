@@ -349,6 +349,17 @@
                 },
                 {
                     "name": "",
+                    "id": "0df6c25e-237b-4236-9c7e-e110bc03138f",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MapControls",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "de19afa4-06f4-4fc1-957e-2f766be79205",
                     "path": "<Keyboard>/tab",
                     "interactions": "",

@@ -121,6 +121,7 @@ public class WeatherManager : Singleton<WeatherManager>
         weatherTurnCounts.Add(WeatherTypes.Rain, rain.minTurns);
 
         currentWeather = WeatherTypes.Sunny;
+        MusicManager.Instance.setBGMType(MusicManager.BGMType.SUNNY);
         numTurns = 1;
         GetNextWeather();
     }
@@ -138,6 +139,19 @@ public class WeatherManager : Singleton<WeatherManager>
             weatherRngTables[currentWeather] = new Dictionary<WeatherTypes, float>(defaultWeatherRngTables[currentWeather]);
             //weatherRngTables = new Dictionary<WeatherTypes, Dictionary<WeatherTypes, float>>(defaultWeatherRngTables);
             Debug.Log("Stored current weather chance: " + ToPrettyString(defaultWeatherRngTables[currentWeather]));
+
+            switch(nextWeather)
+            {
+                case WeatherTypes.Sunny:
+                    MusicManager.Instance.setBGMType(MusicManager.BGMType.SUNNY);
+                    break;
+                case WeatherTypes.Rain:
+                    MusicManager.Instance.setBGMType(MusicManager.BGMType.RAINY);
+                    break;
+                case WeatherTypes.Drought:
+                    MusicManager.Instance.setBGMType(MusicManager.BGMType.DROUGHT);
+                    break;
+            }
         }
         //Debug.Log("new current weather situation: " + string.Join(Environment.NewLine, weatherRngTables));
         currentWeather = nextWeather;
