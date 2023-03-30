@@ -151,7 +151,7 @@ public class BuildingManager : Singleton<BuildingManager>
     public void buildBuilding(BuildingName name, Vector2Int p) {
         if(canAfford(name)){
             Building b = buildingDictionary[name];
-            builtBuildings.Add(p, name);
+            builtBuildings.Add(p, b);
             if(!buildSound.isPlaying)
             {
                 buildSound.Play();

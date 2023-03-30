@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f0ba20ebc27f1499f4af7c029b8aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileNameList: []
   tilemap: {fileID: 4575140568279203023}
   changeMap: {fileID: 4575140567931390669}
   seed: 0
@@ -57,6 +58,7 @@ MonoBehaviour:
   oceanExtension: {x: 50, y: 50}
   tileScale: 20
   biomeScale: 20
+  waterScale: 0
   islandMode: 1
   tileRuleSet: {fileID: 0}
 --- !u!114 &4575140568971549967
@@ -79,7 +81,10 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 3a492980de979e547828d27f4647734f, type: 2}
       chance: 0.9
       associatedResource: 1
-      tileSwitches: []
+      tileSwitches:
+      - switchTile: 0
+        requiredResources: 
+        requiredResourcesCount: 
     - tileType: 2
       isometricTile: {fileID: 11400000, guid: 0c0ac104578f4c94f9051c5c1ac1df83, type: 2}
       chance: 0.1
@@ -135,6 +140,7 @@ MonoBehaviour:
     resourceProduced: 0
     amountProduced: 5
     acceptedTiles: 01000000
+    position: {x: 0, y: 0}
   - buildingType: 1
     isometricTile: {fileID: 11400000, guid: 8d55da771c8b3f34999dab6c044f2dda, type: 2}
     resourceCostList:
@@ -145,18 +151,21 @@ MonoBehaviour:
     resourceProduced: 2
     amountProduced: 2
     acceptedTiles: 01000000
+    position: {x: 0, y: 0}
   - buildingType: 2
     isometricTile: {fileID: 11400000, guid: c52ad04f47b9bd24bbc8a1f075aab308, type: 2}
     resourceCostList: []
     resourceProduced: 1
     amountProduced: 5
     acceptedTiles: 01000000
+    position: {x: 0, y: 0}
   - buildingType: 3
     isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
     resourceProduced: 0
     amountProduced: 0
     acceptedTiles: 0100000004000000
+    position: {x: 0, y: 0}
   buildSound: {fileID: 2056547777777652608}
   destroySound: {fileID: 3165049210932668089}
 --- !u!82 &2056547777777652608

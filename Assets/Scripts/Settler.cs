@@ -19,6 +19,8 @@ public class Settler : MonoBehaviour
     [SerializeField] private AudioSource deathSound;
     [SerializeField] private AudioSource respawnSound;
 
+    private int hunger = 5;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -103,6 +105,14 @@ public class Settler : MonoBehaviour
 
     public void StartNewTurn()
     {
+        if (ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) >= hunger)
+        {
+            ResourceManager.Instance.RemoveResource(ResourceManager.ResourceTypes.Food, hunger);
+        }
+        else
+        {
+            isDead = true;
+        }
         if(!currentTile.GetIsWalkable())
         {
             Debug.Log("Settler Dies");
