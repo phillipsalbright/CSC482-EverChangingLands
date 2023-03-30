@@ -104,16 +104,7 @@ public class Settler : MonoBehaviour
     {
         if(!currentTile.GetIsWalkable())
         {
-            Debug.Log("Settler Dies");
-            isDead = true;
-            canMove = false;
-            canCollect = false;
-            if(!deathSound.isPlaying)
-            {
-                MusicManager.Instance.pauseBGM();
-                Debug.Log("Death sound play");
-                deathSound.Play();
-            }
+            Die();
         }
         else
         {
@@ -164,6 +155,20 @@ public class Settler : MonoBehaviour
     public bool isSettlerDead()
     {
         return isDead;
+    }
+
+    public void Die()
+    {
+        Debug.Log("Settler Dies");
+        isDead = true;
+        canMove = false;
+        canCollect = false;
+        if (!deathSound.isPlaying)
+        {
+            MusicManager.Instance.pauseBGM();
+            Debug.Log("Death sound play");
+            deathSound.Play();
+        }
     }
 
     public void Respawn()
