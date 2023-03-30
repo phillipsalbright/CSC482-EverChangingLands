@@ -139,7 +139,7 @@ MonoBehaviour:
       amount: 15
     resourceProduced: 0
     amountProduced: 5
-    acceptedTiles: 01000000
+    acceptedTiles: 03000000
     position: {x: 0, y: 0}
   - buildingType: 1
     isometricTile: {fileID: 11400000, guid: 8d55da771c8b3f34999dab6c044f2dda, type: 2}
@@ -164,7 +164,7 @@ MonoBehaviour:
     resourceCostList: []
     resourceProduced: 0
     amountProduced: 0
-    acceptedTiles: 0100000004000000
+    acceptedTiles: 01000000040000000700000002000000
     position: {x: 0, y: 0}
   buildSound: {fileID: 2056547777777652608}
   destroySound: {fileID: 3165049210932668089}
