@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerUI ui;
     private Camera cam;
     private Vector2 inputVector = Vector2.zero;
-    public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile};
+    public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile, GameOver};
     public mode currentControllerMode;
 
     private float zoomInput;

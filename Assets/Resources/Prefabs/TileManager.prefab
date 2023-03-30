@@ -68,8 +68,8 @@ MonoBehaviour:
     tileName: Mountain
   - tileType: 9
     tileName: Peak
-  tilemap: {fileID: 0}
-  changeMap: {fileID: 0}
+  tilemap: {fileID: 4575140568279203023}
+  changeMap: {fileID: 4575140567931390669}
   seed: 0
   testing: 0
   mapSize: {x: 100, y: 100}
@@ -286,6 +286,16 @@ PrefabInstance:
 --- !u!4 &4575140567236737286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6732775738593117253, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
+  m_PrefabInstance: {fileID: 7066629160259157315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &4575140567931390669 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 6732775739037218702, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
+  m_PrefabInstance: {fileID: 7066629160259157315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &4575140568279203023 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 6732775737489310092, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
   m_PrefabInstance: {fileID: 7066629160259157315}
   m_PrefabAsset: {fileID: 0}
 --- !u!1839735485 &7805056821990959576 stripped
