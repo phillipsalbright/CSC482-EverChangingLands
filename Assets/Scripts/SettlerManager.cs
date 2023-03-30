@@ -58,7 +58,7 @@ public class SettlerManager : Singleton<SettlerManager>
         if (compatableTile && !tileHasSettler)
         {
             GameObject settler = GameObject.Instantiate(settlerPrefab, Vector3.zero, Quaternion.identity);
-            settler.GetComponent<Settler>().SetInitialTileAndPosition(tile);
+            settler.GetComponent<Settler>().SetInitialTileAndPosition(tile, true);
             settlers.Add(settler);
             return true;
         }

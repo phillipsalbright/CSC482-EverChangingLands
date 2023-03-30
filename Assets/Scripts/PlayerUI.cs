@@ -56,6 +56,9 @@ public class PlayerUI : MonoBehaviour
     private bool _isGamepad;
     private bool _paused = false;
 
+    [SerializeField] private AudioSource selectSound;
+    [SerializeField] private AudioSource woodCollectionSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -160,6 +163,12 @@ public class PlayerUI : MonoBehaviour
     public void ControllerSelect(InputAction.CallbackContext context)
     {
         Debug.Log("Select");
+
+        if(!selectSound.isPlaying)
+        {
+            selectSound.Play();
+        }
+
         if(context.performed)
         {
             Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);

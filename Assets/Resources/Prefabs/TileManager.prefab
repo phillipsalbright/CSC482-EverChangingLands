@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4575140568971549965}
   - component: {fileID: 4575140568971549967}
   - component: {fileID: 8398958537771632623}
+  - component: {fileID: 2056547777777652608}
+  - component: {fileID: 3165049210932668089}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: Untagged
@@ -47,27 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f0ba20ebc27f1499f4af7c029b8aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileNameList:
-  - tileType: 0
-    tileName: Desert
-  - tileType: 1
-    tileName: Grass
-  - tileType: 2
-    tileName: Mud
-  - tileType: 3
-    tileName: Forest
-  - tileType: 4
-    tileName: Dirt
-  - tileType: 5
-    tileName: Water
-  - tileType: 6
-    tileName: Deep Water
-  - tileType: 7
-    tileName: Rocks
-  - tileType: 8
-    tileName: Mountain
-  - tileType: 9
-    tileName: Peak
   tilemap: {fileID: 4575140568279203023}
   changeMap: {fileID: 4575140567931390669}
   seed: 0
@@ -76,7 +57,6 @@ MonoBehaviour:
   oceanExtension: {x: 50, y: 50}
   tileScale: 20
   biomeScale: 20
-  waterScale: 15
   islandMode: 1
   tileRuleSet: {fileID: 0}
 --- !u!114 &4575140568971549967
@@ -104,76 +84,31 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 0c0ac104578f4c94f9051c5c1ac1df83, type: 2}
       chance: 0.1
       associatedResource: 3
-      tileSwitches:
-      - switchTile: 1
-        requiredResources: 
-        requiredResourcesCount: 
-      - switchTile: 4
-        requiredResources: 
-        requiredResourcesCount: 
-      - switchTile: 5
-        requiredResources: 
-        requiredResourcesCount: 
-  - biome: 2
-    chance: 0.3
-    tiles:
-    - tileType: 0
-      isometricTile: {fileID: 11400000, guid: c5c211913e6ccc741b5038527f4a71ce, type: 2}
-      chance: 1
-      associatedResource: 3
       tileSwitches: []
   - biome: 0
-    chance: 0.6
+    chance: 0.4
     tiles:
     - tileType: 4
       isometricTile: {fileID: 11400000, guid: 6286e5af240c6b540a788748743755a0, type: 2}
       chance: 0.3
       associatedResource: 3
-      tileSwitches:
-      - switchTile: 2
-        requiredResources: 
-        requiredResourcesCount: 
-      - switchTile: 0
-        requiredResources: 
-        requiredResourcesCount: 
-      - switchTile: 1
-        requiredResources: 
-        requiredResourcesCount: 
+      tileSwitches: []
     - tileType: 1
       isometricTile: {fileID: 11400000, guid: b38135a27300bf741877bcfc78c4966d, type: 2}
       chance: 0.7
       associatedResource: 3
-      tileSwitches:
-      - switchTile: 3
-        requiredResources: 00000000
-        requiredResourcesCount: 19000000
-      - switchTile: 4
-        requiredResources: 
-        requiredResourcesCount: 
+      tileSwitches: []
     - tileType: 3
       isometricTile: {fileID: 11400000, guid: 9352d5d9fefc4834c89f6e8c669a43ad, type: 2}
-      chance: 0.4
-      associatedResource: 0
-      tileSwitches:
-      - switchTile: 1
-        requiredResources: 
-        requiredResourcesCount: 
-  - biome: 3
-    chance: 0.3
-    tiles:
-    - tileType: 7
-      isometricTile: {fileID: 11400000, guid: 200279346cd6c9d41a91a86a68b2a752, type: 2}
-      chance: 0.2
-      associatedResource: 3
-      tileSwitches: []
-    - tileType: 8
-      isometricTile: {fileID: 11400000, guid: c1e5cc5596a394e40a86cb736da02bd2, type: 2}
-      chance: 0.4
-      associatedResource: 3
-      tileSwitches: []
-    - tileType: 9
-      isometricTile: {fileID: 11400000, guid: 9d3f90192eb3adf47b0ce592929ff75f, type: 2}
       chance: 0.3
+      associatedResource: 0
+      tileSwitches: []
+  - biome: 2
+    chance: 0.4
+    tiles:
+    - tileType: 0
+      isometricTile: {fileID: 11400000, guid: c5c211913e6ccc741b5038527f4a71ce, type: 2}
+      chance: 1
       associatedResource: 3
       tileSwitches: []
   deepWaterTile: {fileID: 11400000, guid: 0fadce13039b1ee4ba150346abe842f6, type: 2}
@@ -200,7 +135,6 @@ MonoBehaviour:
     resourceProduced: 0
     amountProduced: 5
     acceptedTiles: 01000000
-    position: {x: 0, y: 0}
   - buildingType: 1
     isometricTile: {fileID: 11400000, guid: 8d55da771c8b3f34999dab6c044f2dda, type: 2}
     resourceCostList:
@@ -211,21 +145,212 @@ MonoBehaviour:
     resourceProduced: 2
     amountProduced: 2
     acceptedTiles: 01000000
-    position: {x: 0, y: 0}
   - buildingType: 2
     isometricTile: {fileID: 11400000, guid: c52ad04f47b9bd24bbc8a1f075aab308, type: 2}
     resourceCostList: []
     resourceProduced: 1
     amountProduced: 5
     acceptedTiles: 01000000
-    position: {x: 0, y: 0}
   - buildingType: 3
     isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
     resourceProduced: 0
     amountProduced: 0
-    acceptedTiles: 01000000
-    position: {x: 0, y: 0}
+    acceptedTiles: 0100000004000000
+  buildSound: {fileID: 2056547777777652608}
+  destroySound: {fileID: 3165049210932668089}
+--- !u!82 &2056547777777652608
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575140568971549962}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8da0dc90b7c40d246a38ae53b7b47c3a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &3165049210932668089
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575140568971549962}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 672ca567950980746a9444938414a003, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &7066629160259157315
 PrefabInstance:
   m_ObjectHideFlags: 0

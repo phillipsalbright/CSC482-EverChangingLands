@@ -21,8 +21,9 @@ public class House
         }
         else if (settler.isSettlerDead())
         {
-            settler.SetInitialTileAndPosition(TileManager.Instance.GetTile(location));
+            Debug.Log("Respawn Settler");
             settler.gameObject.SetActive(true);
+            settler.SetInitialTileAndPosition(TileManager.Instance.GetTile(location), false);
             settler.Respawn();
         }
     }
