@@ -109,7 +109,7 @@ public class PlayerUI : MonoBehaviour
     private void HandleTurnChange(int newTurn)
     {
         _turnText.text = "Turn " + newTurn;
-        if (SettlerManager.Instance.GetCurrentNumberOfSettlers() <= 0)
+        if (SettlerManager.Instance.GetNumberAliveSettlers() <= 0 && _playerController.currentControllerMode != PlayerController.mode.GameStart)
         {
             SetMode(PlayerController.mode.GameOver);
         }
@@ -239,7 +239,7 @@ public class PlayerUI : MonoBehaviour
                             GameManager.Instance.SelectTile(_selectedTileToFlip, 4);
                             SetMode(PlayerController.mode.SelectFlipTile);
                         }
-                    } else if (_playerController.currentControllerMode != PlayerController.mode.Paused)
+                    } else if (_playerController.currentControllerMode != PlayerController.mode.Paused && _playerController.currentControllerMode != PlayerController.mode.GameOver)
                     {
                         SetMode(PlayerController.mode.BeginTurn);
                     }
@@ -329,6 +329,7 @@ public class PlayerUI : MonoBehaviour
                 break;
             case PlayerController.mode.GameOver:
                 SwapHUD(1);
+                _playerController.currentControllerMode = PlayerController.mode.GameOver;
                 break;
             case PlayerController.mode.Paused:
                 lastMode = _playerController.currentControllerMode;

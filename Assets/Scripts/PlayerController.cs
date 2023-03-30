@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentControllerMode != mode.Paused)
+        if (currentControllerMode != mode.Paused && currentControllerMode != mode.GameOver)
         {
             transform.Translate(inputVector * _cameraSpeed * Time.deltaTime);
             transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);

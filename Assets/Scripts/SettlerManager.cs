@@ -26,6 +26,20 @@ public class SettlerManager : Singleton<SettlerManager>
         return settlers.Count;
     }
 
+    public int GetNumberAliveSettlers()
+    {
+        int alive = 0;
+        for (int i = 0; i < settlers.Count; i++)
+        {
+            if (!settlers[i].GetComponent<Settler>().isSettlerDead())
+            {
+                alive++;
+            }
+        }
+
+        return alive;
+    }
+
     public int GetInitialNumberOfSettlers()
     {
         return initialNumberOfSettlers;

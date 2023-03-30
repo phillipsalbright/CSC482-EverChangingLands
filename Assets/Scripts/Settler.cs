@@ -19,7 +19,7 @@ public class Settler : MonoBehaviour
     [SerializeField] private AudioSource deathSound;
     [SerializeField] private AudioSource respawnSound;
 
-    private int hunger = 5;
+    private int hunger = 2;
 
     // Start is called before the first frame update
     void Awake()
@@ -111,7 +111,7 @@ public class Settler : MonoBehaviour
         }
         else
         {
-            isDead = true;
+            Die();
         }
         if(!currentTile.GetIsWalkable())
         {
@@ -186,13 +186,18 @@ public class Settler : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("Settler is respawning");
-        isDead = false;
-        canMove = true;
-        canCollect = true;
-        if(!respawnSound.isPlaying)
+        if (ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) >= hunger)
         {
-            respawnSound.Play();
+            ResourceManager.Instance.RemoveResource(ResourceManager.ResourceTypes.Food, hunger);
+            Debug.Log("Settler is respawning");
+            isDead = false;
+            canMove = true;
+            canCollect = true;
+            if (!respawnSound.isPlaying)
+            {
+                respawnSound.Play();
+            }
+
         }
     }
 
