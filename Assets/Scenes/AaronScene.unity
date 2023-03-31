@@ -761,6 +761,10 @@ PrefabInstance:
       propertyPath: tileRuleSet
       value: 
       objectReference: {fileID: 1923787684}
+    - target: {fileID: 8398958537771632623, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: buildingList.Array.data[3].buildingType
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
 --- !u!1001 &7716812223843897965
