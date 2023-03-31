@@ -6,6 +6,7 @@ public class RuleSetHolder : MonoBehaviour
 {
     [SerializeField]
     public List<TileRuleSet> ruleSets;
+    private Dictionary<string, TileRuleSet> ruleSetMap;
     [SerializeField]
     public int check = 2;
 
