@@ -14,20 +14,20 @@ public class InformationHUD : MonoBehaviour
 
     void Start()
     {
-        SetInformation(Tile.TileTypes.Grass);
+        SetInformation(Tile.TileTypes.Grass, WeatherManager.WeatherTypes.Sunny);
     }
 
-    public void SetInformation(Tile.TileTypes type)
+    public void SetInformation(Tile.TileTypes type, WeatherManager.WeatherTypes weatherType)
     {
         IsometricRuleTile t = TileInfo.Instance.GetTile(type);
         tileImage.sprite = t.m_DefaultSprite;
         tileNameText.text = t.name;
-        for (int i = 0; i < t.m_TilingRules.Count; i++)
+        List<string> rules = FindObjectOfType<TileRuleSet>().toStringForTileGivenWeather(type, weatherType);
+        for (int i = 0; i < rules.Count; i++)
         {
-            Debug.LogError("biscuit" + i);
             GameObject p = Instantiate(rulePanelPrefab.gameObject, contentHolder.transform);
             p.GetComponent<RulePanel>().SetRuleNumText(i + 1);
-            p.GetComponent<RulePanel>().SetRuleDescText(t.m_TilingRules[i].ToString());
+            p.GetComponent<RulePanel>().SetRuleDescText(rules[i]);
         }
         
     }
