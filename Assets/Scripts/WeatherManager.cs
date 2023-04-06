@@ -19,6 +19,9 @@ public class WeatherManager : Singleton<WeatherManager>
         Rain,
     }
 
+    [SerializeField]
+    private GameObject rainGenerator;
+
     [Serializable]
     public struct WeatherNames{
         [Tooltip("tile type")]
@@ -144,12 +147,15 @@ public class WeatherManager : Singleton<WeatherManager>
             {
                 case WeatherTypes.Sunny:
                     MusicManager.Instance.setBGMType(MusicManager.BGMType.SUNNY);
+                    rainGenerator.SetActive(false);
                     break;
                 case WeatherTypes.Rain:
                     MusicManager.Instance.setBGMType(MusicManager.BGMType.RAINY);
+                    rainGenerator.SetActive(true);
                     break;
                 case WeatherTypes.Drought:
                     MusicManager.Instance.setBGMType(MusicManager.BGMType.DROUGHT);
+                    rainGenerator.SetActive(false);
                     break;
             }
         }
