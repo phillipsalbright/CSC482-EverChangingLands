@@ -213,10 +213,10 @@ MonoBehaviour:
     amountProduced: 5
     acceptedTiles: 01000000
     position: {x: 0, y: 0}
-  - buildingType: 3
+  - buildingType: 4
     isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
-    resourceProduced: 0
+    resourceProduced: 4
     amountProduced: 0
     acceptedTiles: 01000000040000000700000002000000
     position: {x: 0, y: 0}

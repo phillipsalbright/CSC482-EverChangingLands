@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 600615338463206054}
   - component: {fileID: 600615338463206055}
   - component: {fileID: 600615338463206052}
+  - component: {fileID: 3367787716060000840}
   m_Layer: 5
   m_Name: AvailableBuildings
   m_TagString: Untagged
@@ -440,6 +441,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3367787716060000840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600615338463206050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62bd7a7b0e7789f46a6978870cd2bb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingListObject: {fileID: 481437535649650832, guid: fc39297d2e94df343aa47e6feabf0dc5, type: 3}
+  contentObject: {fileID: 600615338933906027}
 --- !u!1 &600615338933906027
 GameObject:
   m_ObjectHideFlags: 0

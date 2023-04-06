@@ -575,6 +575,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 600615338009298161, guid: 9d0319b5a4b197546987f01b20bb4b29, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 600615338009298161, guid: 9d0319b5a4b197546987f01b20bb4b29, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 600615338009298161, guid: 9d0319b5a4b197546987f01b20bb4b29, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 600615338463206050, guid: 9d0319b5a4b197546987f01b20bb4b29, type: 3}
       propertyPath: m_Name
       value: AvailableBuildings
@@ -764,6 +776,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5274381842506390164, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: resourceTexts.Array.data[0].resourceSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0c807ecf98822b747b6d1fa8e4790a51, type: 3}
+    - target: {fileID: 5274381842506390164, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: resourceTexts.Array.data[1].resourceSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ca3eeab95947d324ea850ba0f6527bba, type: 3}
+    - target: {fileID: 5274381842506390164, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: resourceTexts.Array.data[2].resourceSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 555d6f2e49d62cb40bd32557ead7dc71, type: 3}
     - target: {fileID: 7718861319481118597, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
       propertyPath: m_IsActive
       value: 0

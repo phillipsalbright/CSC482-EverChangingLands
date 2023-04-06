@@ -265,7 +265,10 @@ public class BuildingManager : Singleton<BuildingManager>
         return (name == BuildingName.WoodWall || name == BuildingName.StoneWall);
     }
 
-
+    public Building GetBuilding(BuildingName buildingName)
+    {
+        return buildingDictionary[buildingName];
+    }
     
     // Awake is called before the first frame update
     protected override void Awake()
