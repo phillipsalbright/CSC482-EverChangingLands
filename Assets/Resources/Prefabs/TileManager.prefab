@@ -143,18 +143,33 @@ MonoBehaviour:
     - tileType: 7
       isometricTile: {fileID: 11400000, guid: 200279346cd6c9d41a91a86a68b2a752, type: 2}
       chance: 0.3
-      associatedResource: 4
-      tileSwitches: []
+      associatedResource: 3
+      tileSwitches:
+      - switchTile: 8
+        requiredResources: 03000000
+        requiredResourcesCount: 05000000
+      - switchTile: 4
+        requiredResources: 
+        requiredResourcesCount: 
     - tileType: 8
       isometricTile: {fileID: 11400000, guid: c1e5cc5596a394e40a86cb736da02bd2, type: 2}
       chance: 0.3
       associatedResource: 3
-      tileSwitches: []
+      tileSwitches:
+      - switchTile: 7
+        requiredResources: 
+        requiredResourcesCount: 
+      - switchTile: 9
+        requiredResources: 03000000
+        requiredResourcesCount: 05000000
     - tileType: 9
       isometricTile: {fileID: 11400000, guid: 9d3f90192eb3adf47b0ce592929ff75f, type: 2}
       chance: 0.3
-      associatedResource: 3
-      tileSwitches: []
+      associatedResource: 4
+      tileSwitches:
+      - switchTile: 8
+        requiredResources: 
+        requiredResourcesCount: 
   deepWaterTile: {fileID: 11400000, guid: 0fadce13039b1ee4ba150346abe842f6, type: 2}
   deepWaterStart: 0.8
 --- !u!114 &8398958537771632623
@@ -204,6 +219,15 @@ MonoBehaviour:
     resourceProduced: 0
     amountProduced: 0
     acceptedTiles: 01000000040000000700000002000000
+    position: {x: 0, y: 0}
+  - buildingType: 3
+    isometricTile: {fileID: 11400000, guid: e63871adf7fb048498658571f3640287, type: 2}
+    resourceCostList:
+    - resourceType: 0
+      amount: 10
+    resourceProduced: 3
+    amountProduced: 5
+    acceptedTiles: 0900000008000000
     position: {x: 0, y: 0}
   buildSound: {fileID: 2056547777777652608}
   destroySound: {fileID: 3165049210932668089}

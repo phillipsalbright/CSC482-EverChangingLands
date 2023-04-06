@@ -55,7 +55,6 @@ public class PlayerUI : MonoBehaviour
     private bool _paused = false;
 
     [SerializeField] private AudioSource selectSound;
-    [SerializeField] private AudioSource woodCollectionSound;
 
     // Start is called before the first frame update
     void Start()
