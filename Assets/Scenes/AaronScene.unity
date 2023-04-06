@@ -226,6 +226,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1839735485 &950851458 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 4575140567727197655, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+  m_PrefabInstance: {fileID: 4575140568396541697}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1128808034
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +549,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1923787684 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+  m_PrefabInstance: {fileID: 602890245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3433b3193f7ba14ca345640b39ce2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2955910478509742650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -676,6 +692,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3186878524296449409, guid: 13b7fb191a1e1874cb5241f5015e2d36, type: 3}
+      propertyPath: selectionMap
+      value: 
+      objectReference: {fileID: 950851458}
     - target: {fileID: 3186878524296449422, guid: 13b7fb191a1e1874cb5241f5015e2d36, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -738,13 +758,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: tilemap
+      propertyPath: tileRuleSet
       value: 
-      objectReference: {fileID: 1205284338}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: changeMap
-      value: 
-      objectReference: {fileID: 1831927091}
+      objectReference: {fileID: 1923787684}
+    - target: {fileID: 8398958537771632623, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: buildingList.Array.data[3].buildingType
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
 --- !u!1001 &7716812223843897965

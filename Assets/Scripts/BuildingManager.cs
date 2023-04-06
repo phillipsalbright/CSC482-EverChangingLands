@@ -13,6 +13,7 @@ public class BuildingManager : Singleton<BuildingManager>
         Lumber,
         Farm,
         WaterWell,
+        Mine,
         House,
         WoodWall,
         StoneWall,
