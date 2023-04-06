@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &76558527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375226562626972851, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+  m_PrefabInstance: {fileID: 511705400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &98167185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -379,62 +384,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3094991235307608120, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3094991235307608120, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.075
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564358, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564359, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: ShapeModule.m_Scale.x
-      value: 308.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564359, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 131.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641829381575564359, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
 --- !u!1001 &1051472544
@@ -549,6 +498,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7716812224341858805, guid: 6be496fad6e7c534bb35012baaabb8b6, type: 3}
+      propertyPath: rainGenerator
+      value: 
+      objectReference: {fileID: 76558527}
     - target: {fileID: 7716812224341858810, guid: 6be496fad6e7c534bb35012baaabb8b6, type: 3}
       propertyPath: m_Name
       value: WeatherSystem
