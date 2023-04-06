@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ef62dd57879ee4bbb031e7367bbab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rainGenerator: {fileID: 0}
   weatherNameList:
   - weatherType: 0
     weatherName: Sunny
@@ -76,6 +77,10 @@ MonoBehaviour:
   currentWeather: 0
   nextWeather: 0
   numTurns: 0
+  weatherImage: {fileID: 0}
+  sunnySprite: {fileID: 21300000, guid: b2ddc334820d48c43a590b6136634aa2, type: 3}
+  rainSprite: {fileID: 21300000, guid: 66bebf848ef92f249941b1ef6385c5ba, type: 3}
+  droughtSprite: {fileID: 21300000, guid: 9e52f4943b6b7b842b9677f9a7523fde, type: 3}
 --- !u!114 &8612354273160220994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sunnyBGM: {fileID: 1415494210014300226}
   rainyBGM: {fileID: 6848149278444149662}
-  droughtBGM: {fileID: 0}
+  droughtBGM: {fileID: 7156375984993144442}
 --- !u!82 &1415494210014300226
 AudioSource:
   m_ObjectHideFlags: 0

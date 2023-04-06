@@ -57,6 +57,12 @@ public class BuildingManager : Singleton<BuildingManager>
     [SerializeField] private AudioSource buildSound;
     [SerializeField] private AudioSource destroySound;
 
+    [SerializeField] private AudioSource farmSound;
+    [SerializeField] private AudioSource houseSound;
+    [SerializeField] private AudioSource lumberSound;
+    [SerializeField] private AudioSource waterSound;
+    [SerializeField] private AudioSource mineSound;
+
 
     public void AdvanceTurn() {
         Debug.LogWarning("ff");
@@ -87,6 +93,7 @@ public class BuildingManager : Singleton<BuildingManager>
         foreach (Vector2Int p in players)
         {
             builtBuildings.Remove(p);
+            TileManager.Instance.GetTile(p).setAudioSource(null);
             if(houses.ContainsKey(p)) {
                 houses.Remove(p);
                 if(!destroySound.isPlaying)
@@ -156,6 +163,27 @@ public class BuildingManager : Singleton<BuildingManager>
             if(!buildSound.isPlaying)
             {
                 buildSound.Play();
+            }
+
+            Tile tile = TileManager.Instance.GetTile(p);
+
+            switch(b.buildingType)
+            {
+                case BuildingName.Farm:
+                    tile.setAudioSource(farmSound);
+                    break;
+                case BuildingName.House:
+                    tile.setAudioSource(houseSound);
+                    break;
+                case BuildingName.Lumber:
+                    tile.setAudioSource(lumberSound);
+                    break;
+                case BuildingName.WaterWell:
+                    tile.setAudioSource(waterSound);
+                    break;
+                case BuildingName.Mine:
+                    tile.setAudioSource(mineSound);
+                    break;
             }
 
             Settler settler = null;

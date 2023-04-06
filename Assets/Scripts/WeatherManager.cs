@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Text;
 
 //  TO ADD A NEW WEATHER TYPE:
@@ -18,6 +19,9 @@ public class WeatherManager : Singleton<WeatherManager>
         Drought,
         Rain,
     }
+
+    [SerializeField]
+    private GameObject rainGenerator;
 
     [Serializable]
     public struct WeatherNames{
@@ -71,6 +75,11 @@ public class WeatherManager : Singleton<WeatherManager>
     private Dictionary<WeatherTypes, float> weatherRateChanges;
 
     private List<WeatherTypes> allWeatherTypes;
+
+    [SerializeField] private Image weatherImage;
+    [SerializeField] private Sprite sunnySprite;
+    [SerializeField] private Sprite rainSprite;
+    [SerializeField] private Sprite droughtSprite;
 
     void Start(){
 
@@ -144,12 +153,18 @@ public class WeatherManager : Singleton<WeatherManager>
             {
                 case WeatherTypes.Sunny:
                     MusicManager.Instance.setBGMType(MusicManager.BGMType.SUNNY);
+                    rainGenerator.SetActive(false);
+                    weatherImage.sprite = sunnySprite;
                     break;
                 case WeatherTypes.Rain:
                     MusicManager.Instance.setBGMType(MusicManager.BGMType.RAINY);
+                    rainGenerator.SetActive(true);
+                    weatherImage.sprite = rainSprite;
                     break;
                 case WeatherTypes.Drought:
                     MusicManager.Instance.setBGMType(MusicManager.BGMType.DROUGHT);
+                    rainGenerator.SetActive(false);
+                    weatherImage.sprite = droughtSprite;
                     break;
             }
         }
