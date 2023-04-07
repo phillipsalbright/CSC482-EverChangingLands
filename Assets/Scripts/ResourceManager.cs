@@ -12,6 +12,7 @@ public class ResourceManager : Singleton<ResourceManager>
         Water,
         Food,
         Stone,
+        Person,
         None,
     }
 
@@ -36,11 +37,19 @@ public class ResourceManager : Singleton<ResourceManager>
         base.Awake();
         foreach (ResourceTexts resourceText in resourceTexts)
         {
-            resourceTextDict.Add(resourceText.resourceType, resourceText.resourceText);
-            resourceCounts.Add(resourceText.resourceType, 10);
-            resourceText.resourceText.text = "10";
+            if (resourceText.resourceType != ResourceTypes.Person)
+            {
+                resourceTextDict.Add(resourceText.resourceType, resourceText.resourceText);
+                resourceCounts.Add(resourceText.resourceType, 10);
+                resourceText.resourceText.text = "10";
+            }
+            else
+            {
+                Debug.Log("Person");
+            }
             resourceSprites.Add(resourceText.resourceType, resourceText.resourceSprite);
         }
+        Debug.Log(resourceSprites[ResourceTypes.Person].name);
     }
 
     public bool AddResource(ResourceTypes resourceType, int amount)

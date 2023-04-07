@@ -152,6 +152,10 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void produceResources(BuildingName name) {
         //Resource Manager produce a certain resource
+        if (name == BuildingName.House)
+        {
+            return;
+        }
         ResourceManager.Instance.AddResource(buildingDictionary[name].resourceProduced, buildingDictionary[name].amountProduced);
     }
 

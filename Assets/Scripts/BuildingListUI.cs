@@ -44,10 +44,20 @@ public class BuildingListUI : MonoBehaviour
             costImages[i].gameObject.SetActive(filled);
             costs[i].gameObject.SetActive(filled);
         }
-        productionImage.sprite = ResourceManager.Instance.GetResourceSprite(building.resourceProduced);
-        production.text = building.amountProduced + "";
+        if (building.resourceProduced != ResourceManager.ResourceTypes.None)
+        {
+            productionImage.sprite = ResourceManager.Instance.GetResourceSprite(building.resourceProduced);
+            production.text = building.amountProduced + "";
+            productionImage.enabled = true;
+            production.enabled = true;
+        }
+        else
+        {
+            productionImage.enabled = false;
+            production.enabled = false;
+        }
         bool buildable = BuildingManager.Instance.canAfford(building.buildingType);
-        buildButton.enabled = buildable;
+        buildButton.interactable = buildable;
     }
 
     public void BuildBuilding()

@@ -242,7 +242,7 @@ MonoBehaviour:
     isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
     resourceProduced: 4
-    amountProduced: 0
+    amountProduced: 1
     acceptedTiles: 01000000040000000700000002000000
     position: {x: 0, y: 0}
   - buildingType: 3
@@ -253,6 +253,24 @@ MonoBehaviour:
     resourceProduced: 3
     amountProduced: 5
     acceptedTiles: 0900000008000000
+    position: {x: 0, y: 0}
+  - buildingType: 5
+    isometricTile: {fileID: 11400000, guid: e670ff71ad2d0e548acf5d7125f8d5d4, type: 2}
+    resourceCostList:
+    - resourceType: 0
+      amount: 10
+    resourceProduced: 5
+    amountProduced: 0
+    acceptedTiles: 09000000080000000100000003000000
+    position: {x: 0, y: 0}
+  - buildingType: 6
+    isometricTile: {fileID: 11400000, guid: a8ed2acdafae021419660791cc6586fb, type: 2}
+    resourceCostList:
+    - resourceType: 3
+      amount: 10
+    resourceProduced: 5
+    amountProduced: 0
+    acceptedTiles: 09000000080000000100000003000000
     position: {x: 0, y: 0}
   buildSound: {fileID: 2056547777777652608}
   destroySound: {fileID: 3165049210932668089}
