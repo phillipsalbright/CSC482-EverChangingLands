@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerUI : MonoBehaviour
+public class PlayerUI : Singleton<PlayerUI>
 {
     [SerializeField] private TMP_Text _turnText;
 
@@ -296,10 +296,11 @@ public class PlayerUI : MonoBehaviour
                 break;
             case PlayerController.mode.Building:
                 SwapHUD(5);
-                _buildingHUD.transform.Find("BuildLumberButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Lumber) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Lumber, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                _buildingHUD.transform.Find("BuildFarmButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Farm) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Farm, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                _buildingHUD.transform.Find("BuildWellButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.WaterWell) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.WaterWell, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                _buildingHUD.transform.Find("BuildHouseButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.House) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.House, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                BuildingListManager.Instance.OpenBuildingList(_selectedSettler.GetCurrentTile().GetCurrentTileType(), _selectedSettler.GetCurrentTile().GetTilePos2());
+                //_buildingHUD.transform.Find("BuildLumberButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Lumber) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Lumber, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                //_buildingHUD.transform.Find("BuildFarmButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Farm) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Farm, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                //_buildingHUD.transform.Find("BuildWellButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.WaterWell) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.WaterWell, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                //_buildingHUD.transform.Find("BuildHouseButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.House) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.House, _selectedSettler.GetCurrentTile().GetCurrentTileType());
                 _playerController.currentControllerMode = PlayerController.mode.Building;
                 break;
             case PlayerController.mode.Flipping:

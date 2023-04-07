@@ -152,6 +152,10 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void produceResources(BuildingName name) {
         //Resource Manager produce a certain resource
+        if (name == BuildingName.House)
+        {
+            return;
+        }
         ResourceManager.Instance.AddResource(buildingDictionary[name].resourceProduced, buildingDictionary[name].amountProduced);
     }
 
@@ -292,7 +296,10 @@ public class BuildingManager : Singleton<BuildingManager>
         return (name == BuildingName.WoodWall || name == BuildingName.StoneWall);
     }
 
-
+    public Building GetBuilding(BuildingName buildingName)
+    {
+        return buildingDictionary[buildingName];
+    }
     
     // Awake is called before the first frame update
     protected override void Awake()
