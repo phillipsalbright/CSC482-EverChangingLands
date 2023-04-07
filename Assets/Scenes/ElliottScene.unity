@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 1127822154}
     - target: {fileID: 4575140568971549967, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: biomeLists.Array.data[1].tiles.Array.data[1].tileSwitches.Array.data[0].requiredResourcesCount.Array.data[0]
-      value: 0
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
