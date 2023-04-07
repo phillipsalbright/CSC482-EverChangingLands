@@ -243,6 +243,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &605149092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+  m_PrefabInstance: {fileID: 8575862916729214451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3433b3193f7ba14ca345640b39ce2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1128808034
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,17 +498,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &2028577322 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-  m_PrefabInstance: {fileID: 8575862916729214451}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3433b3193f7ba14ca345640b39ce2fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2955910478509742650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,37 +668,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: tilemap
-      value: 
-      objectReference: {fileID: 151229390}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: changeMap
-      value: 
-      objectReference: {fileID: 1707517388}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: mapSize.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: mapSize.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: biomeScale
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: tileRuleSet
       value: 
-      objectReference: {fileID: 2028577322}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: oceanExtension.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
-      propertyPath: oceanExtension.y
-      value: 20
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 605149092}
     - target: {fileID: 4575140568971549967, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: biomeLists.Array.data[0].tiles.Array.data[1].chance
       value: 0.1
@@ -814,547 +786,107 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.size
-      value: 4
+      propertyPath: rsName
+      value: Default
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[0].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[0].goalTile
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[1].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[1].goalTile
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[2].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[2].goalTile
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[3].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[3].goalTile
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[4].goalTile
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[0].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[0].goalTile
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[1].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[1].goalTile
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[2].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[2].goalTile
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[3].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[3].goalTile
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[4].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[4].goalTile
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[0].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[1].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[1].goalTile
+      propertyPath: currentRuleset.tileRules.Array.data[7].nonWeatherConditions.Array.data[0].goalTile
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[2].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[3].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[3].goalTile
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[4].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[5].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[5].goalTile
+      propertyPath: currentRuleset.tileRules.Array.data[7].nonWeatherConditions.Array.data[0].conditional
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[0].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[1].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[1].goalTile
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[2].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[2].goalTile
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[3].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[4].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[4].goalTile
+      propertyPath: currentRuleset.tileRules.Array.data[7].nonWeatherConditions.Array.data[0].TilesToCheck.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[0].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[0].goalTile
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[1].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[2].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[2].goalTile
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[3].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[4].goalTile
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[0].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[0].goalTile
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[1].goalTile
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[2].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[2].goalTile
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[0].NumTiles
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[0].goalTile
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[1].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[1].goalTile
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[2].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[2].goalTile
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[3].NumTiles
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[3].goalTile
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[4].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[4].goalTile
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[1].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[3].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[1].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[2].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[3].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[4].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[2].rules.Array.data[1].ruleConditions.Array.data[1].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[1].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[3].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[4].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[5].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[2].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[3].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[4].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[1].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[3].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[1].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[2].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[3].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[4].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[1].TilesToCheck.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[1].TilesToCheck.Array.data[1]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.data[0]
-      value: 5
+      propertyPath: currentRuleset.tileRules.Array.data[7].nonWeatherConditions.Array.data[0].TilesToCheck.Array.data[0]
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.data[1]
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[3].TilesToCheck.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[3].TilesToCheck.Array.data[1]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[4].TilesToCheck.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[1].TilesToCheck.Array.data[0]
-      value: 5
+      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[6].TilesToCheck.Array.data[2]
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[1].TilesToCheck.Array.data[1]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[2].TilesToCheck.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[2].TilesToCheck.Array.data[1]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[3].TilesToCheck.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[3].TilesToCheck.Array.data[1]
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[4].TilesToCheck.Array.data[0]
-      value: 5
+      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[5].TilesToCheck.Array.data[2]
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[4].TilesToCheck.Array.data[1]
-      value: 2
+      propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[6].TilesToCheck.Array.data[1]
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[2].rules.Array.data[1].ruleConditions.Array.data[1].TilesToCheck.Array.data[1]
-      value: 2
+      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[7].TilesToCheck.Array.data[2]
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 2
+      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[1].ruleConditions.Array.data[5].TilesToCheck.Array.data[2]
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.data[1]
-      value: 5
+      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[1].ruleConditions.Array.data[6].TilesToCheck.Array.data[1]
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[1].TilesToCheck.Array.data[0]
-      value: 5
+      propertyPath: currentRuleset.tileRules.Array.data[4].rules.Array.data[1].ruleConditions.Array.data[3].TilesToCheck.Array.data[1]
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.data[1]
-      value: 4
+      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[6].TilesToCheck.Array.data[2]
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[3].TilesToCheck.Array.data[0]
-      value: 0
+      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[4].TilesToCheck.Array.data[2]
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[4].TilesToCheck.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[0].ruleConditions.Array.data[5].TilesToCheck.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[0].TilesToCheck.Array.data[1]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[1].TilesToCheck.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[2].TilesToCheck.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[3].TilesToCheck.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[3].rules.Array.data[2].ruleConditions.Array.data[4].TilesToCheck.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[1].TilesToCheck.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[3].TilesToCheck.Array.data[1]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[0].ruleConditions.Array.data[4].TilesToCheck.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[1].TilesToCheck.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[2].TilesToCheck.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[1].TilesToCheck.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[1].TilesToCheck.Array.data[1]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[2].TilesToCheck.Array.data[0]
-      value: 5
+      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[1].ruleConditions.Array.data[5].TilesToCheck.Array.data[1]
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[2].TilesToCheck.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[3].TilesToCheck.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[3].TilesToCheck.Array.data[1]
+      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[4].TilesToCheck.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[4].TilesToCheck.Array.data[0]
-      value: 3
+      propertyPath: currentRuleset.tileRules.Array.data[7].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.data[1]
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[5].rules.Array.data[2].ruleConditions.Array.data[4].TilesToCheck.Array.data[1]
+      propertyPath: currentRuleset.tileRules.Array.data[7].rules.Array.data[0].ruleConditions.Array.data[4].TilesToCheck.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+      propertyPath: currentRuleset.tileRules.Array.data[7].rules.Array.data[2].ruleConditions.Array.data[2].TilesToCheck.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+      propertyPath: currentRuleset.tileRules.Array.data[7].rules.Array.data[2].ruleConditions.Array.data[4].TilesToCheck.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+      propertyPath: currentRuleset.tileRules.Array.data[7].rules.Array.data[2].ruleConditions.Array.data[7].TilesToCheck.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+      propertyPath: currentRuleset.tileRules.Array.data[8].rules.Array.data[2].ruleConditions.Array.data[2].TilesToCheck.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741530, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}

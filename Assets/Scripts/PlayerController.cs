@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerUI ui;
     private Camera cam;
     private Vector2 inputVector = Vector2.zero;
-    public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile};
+    public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile, GameOver, Paused, viewingTileInfo};
     public mode currentControllerMode;
 
     private float zoomInput;
@@ -28,16 +28,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(inputVector * _cameraSpeed * Time.deltaTime);
-        transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);
-        float zoomScalar = 1;
-        if (this.GetComponent<PlayerInput>().currentControlScheme == "Gamepad")
+        if (currentControllerMode != mode.Paused && currentControllerMode != mode.GameOver)
         {
-            zoomScalar = 5;
+            transform.Translate(inputVector * _cameraSpeed * Time.deltaTime);
+            transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);
+            float zoomScalar = 1;
+            if (this.GetComponent<PlayerInput>().currentControlScheme == "Gamepad")
+            {
+                zoomScalar = 5;
+            }
+
+            cam.orthographicSize += zoomInput * zoomScalar * Time.deltaTime / -2;
+            cam.orthographicSize = Math.Clamp(cam.orthographicSize, sizebounds.x, sizebounds.y);
         }
-        
-        cam.orthographicSize += zoomInput * zoomScalar * Time.deltaTime / -2;
-        cam.orthographicSize = Math.Clamp(cam.orthographicSize, sizebounds.x, sizebounds.y);
+      
     }
 
     public void MovementInputChanged(InputAction.CallbackContext context)

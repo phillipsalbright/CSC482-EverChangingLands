@@ -25,8 +25,11 @@ public class ResourceManager : Singleton<ResourceManager>
     private List<ResourceTexts> resourceTexts = new List<ResourceTexts>();
     private Dictionary<ResourceTypes, TMP_Text> resourceTextDict = new Dictionary<ResourceTypes, TMP_Text>();
     private Dictionary<ResourceTypes, int> resourceCounts = new Dictionary<ResourceTypes, int>();
+
+    [SerializeField] private AudioSource woodCollectionSound;
+
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
         foreach (ResourceTexts resourceText in resourceTexts)
         {
@@ -41,6 +44,13 @@ public class ResourceManager : Singleton<ResourceManager>
         if (resourceType == ResourceTypes.None)
         {
             return false;
+        }
+        else if (resourceType == ResourceTypes.Wood)
+        {
+            if(!woodCollectionSound.isPlaying)
+            {
+                woodCollectionSound.Play();
+            }
         }
         resourceCounts[resourceType] += amount;
         UpdateUI(resourceType);

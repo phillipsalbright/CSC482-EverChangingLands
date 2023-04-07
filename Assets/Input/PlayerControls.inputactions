@@ -194,17 +194,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "cbaad869-bb17-4e18-9f44-d605342f3770",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwapView",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "1D Axis",
                     "id": "8d305d7d-de49-4f63-93a1-c022a91607dd",
                     "path": "1DAxis",
@@ -355,6 +344,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0df6c25e-237b-4236-9c7e-e110bc03138f",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MapControls",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de19afa4-06f4-4fc1-957e-2f766be79205",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MapControls",
+                    "action": "SwapView",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

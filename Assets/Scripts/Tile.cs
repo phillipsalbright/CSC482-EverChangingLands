@@ -35,6 +35,8 @@ public class Tile
     private bool isValid;
     private bool isWalkable;
 
+    private AudioSource tileSound;
+
     public Vector2Int GetTilePos2()
     {
         return new Vector2Int(tilePos.x, tilePos.y);
@@ -136,5 +138,18 @@ public class Tile
     public Tile[,] GetAdjacentTiles()
     {
         return adjacentTiles;
+    }
+
+    public void setAudioSource(AudioSource sound)
+    {
+        if(tileSound)
+        {
+            tileSound.Stop();
+        }
+        tileSound = sound;
+        if(tileSound)
+        {
+            tileSound.Play();
+        }
     }
 }
