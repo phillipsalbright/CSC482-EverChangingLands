@@ -322,7 +322,13 @@ public class TileManager : Singleton<TileManager>
 
     public Tile GetTileAtLocation(Vector2 ClickPos)
     {
-        return tiles[GetTileLocation(ClickPos)];
+        if (tiles.ContainsKey(GetTileLocation(ClickPos)))
+        {
+            return tiles[GetTileLocation(ClickPos)];
+        } else
+        {
+            return null;
+        }
     }
 
     public Dictionary<Vector2Int, Tile> GetTileDictionary()
