@@ -161,7 +161,7 @@ public class BuildingManager : Singleton<BuildingManager>
     public void buildBuilding(BuildingName name, Vector2Int p) {
         if(canAfford(name)){
             Building b = buildingDictionary[name];
-            builtBuildings.Add(p, b);
+            // builtBuildings.Add(p, b);
             if(!buildSound.isPlaying)
             {
                 buildSound.Play();
@@ -255,7 +255,11 @@ public class BuildingManager : Singleton<BuildingManager>
             foreach(ResourceCost c in b.resourceCostList){
                 ResourceManager.Instance.RemoveResource(c.resourceType, c.amount);
             }
+
+            builtBuildings.Add(p, b);
         }
+
+
     }
 
     // for placing the free initial player houses
