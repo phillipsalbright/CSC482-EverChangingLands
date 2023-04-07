@@ -44,6 +44,7 @@ public class PlayerUI : Singleton<PlayerUI>
     [SerializeField] private GameObject _buildingHUD;
     [SerializeField] private GameObject _tileFlippingHUD;
     [SerializeField] private GameObject _selectedTileToFlipHUD;
+    [SerializeField] private GameObject _viewTileInfoHUD;
     [SerializeField] private Button[] _tileFlippingButtons;
     [SerializeField] private TMP_Text setSettlerText;
     [SerializeField] private List<GameObject> huds = new List<GameObject>();
@@ -55,7 +56,6 @@ public class PlayerUI : Singleton<PlayerUI>
     private bool _paused = false;
 
     [SerializeField] private AudioSource selectSound;
-    [SerializeField] private AudioSource woodCollectionSound;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +68,7 @@ public class PlayerUI : Singleton<PlayerUI>
         huds.Add(_buildingHUD);
         huds.Add(_tileFlippingHUD);
         huds.Add(_selectedTileToFlipHUD);
+        huds.Add(_viewTileInfoHUD);
         Cursor.visible = false;
         GameManager g = GameManager.Instance;
         nextTurnButton.onClick.AddListener(g.AdvanceTurn);
@@ -237,6 +238,12 @@ public class PlayerUI : Singleton<PlayerUI>
                             GameManager.Instance.SelectTile(_selectedTileToFlip, 4);
                             SetMode(PlayerController.mode.SelectFlipTile);
                         }
+                    } else if (_playerController.currentControllerMode == PlayerController.mode.viewingTileInfo) 
+                    {
+                        Tile t = tm.GetTileAtLocation(ray.GetPoint(10f));
+                        GameManager.Instance.DeleteSelection();
+                        GameManager.Instance.SelectTile(t, 4);
+                        FindObjectOfType<InformationHUD>().SetInformation(t.GetCurrentTileType(), WeatherManager.Instance.GetCurrentWeather());
                     } else if (_playerController.currentControllerMode != PlayerController.mode.Paused && _playerController.currentControllerMode != PlayerController.mode.GameOver)
                     {
                         SetMode(PlayerController.mode.BeginTurn);
@@ -335,6 +342,10 @@ public class PlayerUI : Singleton<PlayerUI>
                 _playerController.currentControllerMode = PlayerController.mode.Paused;
                 SwapHUD(0);
                 break;
+            case PlayerController.mode.viewingTileInfo:
+                _playerController.currentControllerMode = PlayerController.mode.viewingTileInfo;
+                SwapHUD(8);
+                break;
         }
     }
 
@@ -417,6 +428,8 @@ public class PlayerUI : Singleton<PlayerUI>
 
     public void QuitGame()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene(0);
     }
 }

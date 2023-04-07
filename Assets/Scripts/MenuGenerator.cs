@@ -26,7 +26,6 @@ public class MenuGenerator : MonoBehaviour
             { 
                 Tile t = TileManager.Instance.GetTile(new Vector2Int(r, c));
                 TileBase t2 = tilemap.GetTile(new Vector3Int(r, c, 0));
-                TileData td;
                // Debug.Log(tilemap.GetSprite(new Vector3Int(r, c, 0)));
                 if (tilemap.GetSprite(new Vector3Int(r, c, 0)) != null)
                 {
