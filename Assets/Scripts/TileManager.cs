@@ -67,7 +67,6 @@ public class TileManager : Singleton<TileManager>
         }
 
         GenerateMap();
-        CheckTiles(true);
         if(tileRuleSet == null){
             Debug.Log("Ruleset was null. checking components");
             tileRuleSet = gameObject.GetComponent<TileRuleSet>();
@@ -77,6 +76,7 @@ public class TileManager : Singleton<TileManager>
             Debug.Log("ruleset not null. trying to set.");
             TileRules.SetRuleSet(tileRuleSet);
         }
+        CheckTiles(true);
     }
 
     public void AdvanceTurn()
