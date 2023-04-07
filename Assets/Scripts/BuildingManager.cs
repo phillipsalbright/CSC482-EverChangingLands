@@ -65,7 +65,6 @@ public class BuildingManager : Singleton<BuildingManager>
 
 
     public void AdvanceTurn() {
-        Debug.LogWarning("ff");
         List<Vector2Int> players = new List<Vector2Int>();
         foreach(Vector2Int p in builtBuildings.Keys) {
             Building b = builtBuildings[p];
