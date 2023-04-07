@@ -93,6 +93,18 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
 
     }
 
+    public void SetNewWeather(bool allWeather, WeatherManager.WeatherTypes newWeather = WeatherManager.WeatherTypes.Sunny){
+        nonWeather = allWeather;
+        currentWeatherType = newWeather;
+        RefreshRuleConditionsView();
+    }
+
+    public void SetNewTileType(bool allTileTypes, Tile.TileTypes newTile = Tile.TileTypes.DeepWater){
+        allTiles = allTileTypes;
+        currentTileType = newTile;
+        RefreshRuleConditionsView();
+    }
+
     public void RefreshRuleConditionsView(){
         ClearRuleConditions();
         if(allTiles){
@@ -202,6 +214,10 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
 
     public void LeaveScene(){
         rulesetCanvas.SetActive(false);
+    }
+
+    public void UpdateName(TMPro.TMP_InputField text){
+        ruleName = text.text;
     }
 
     public void SceneLeaveFailure(string reason){
