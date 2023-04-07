@@ -427,6 +427,8 @@ public class PlayerUI : MonoBehaviour
 
     public void QuitGame()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene(0);
     }
 }
