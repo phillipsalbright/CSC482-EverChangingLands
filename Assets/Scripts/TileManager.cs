@@ -121,7 +121,7 @@ public class TileManager : Singleton<TileManager>
             {
                 changeMap.SetColor(loc, Color.red);
             }
-            else
+            else if (newTileType != Tile.TileTypes.DeepWater)
             {
                 changeMap.SetColor(loc, Color.clear);
             }
@@ -391,5 +391,10 @@ public class TileManager : Singleton<TileManager>
             return "~TILENAME NOT SET~";
         }
         return tileNameMap[type];
+    }
+
+    public TileRuleSet GetTileRuleSet()
+    {
+        return tileRuleSet;
     }
 }
