@@ -121,6 +121,10 @@ public class TileManager : Singleton<TileManager>
             {
                 changeMap.SetColor(loc, Color.red);
             }
+            else
+            {
+                changeMap.SetColor(loc, Color.clear);
+            }
         }
         changeMap.gameObject.SetActive(false);
     }
@@ -298,7 +302,7 @@ public class TileManager : Singleton<TileManager>
         if (!viewingPrediction)
         {
             changeMap.gameObject.SetActive(true);
-            tilemap.gameObject.SetActive(false);
+            tilemap.gameObject.SetActive(true);
             viewingPrediction = true;
         }
         else

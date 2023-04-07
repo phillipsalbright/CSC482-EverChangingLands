@@ -219,7 +219,6 @@ MonoBehaviour:
     resourceProduced: 0
     amountProduced: 5
     acceptedTiles: 03000000
-    position: {x: 0, y: 0}
   - buildingType: 1
     isometricTile: {fileID: 11400000, guid: 8d55da771c8b3f34999dab6c044f2dda, type: 2}
     resourceCostList:
@@ -230,21 +229,18 @@ MonoBehaviour:
     resourceProduced: 2
     amountProduced: 2
     acceptedTiles: 01000000
-    position: {x: 0, y: 0}
   - buildingType: 2
     isometricTile: {fileID: 11400000, guid: c52ad04f47b9bd24bbc8a1f075aab308, type: 2}
     resourceCostList: []
     resourceProduced: 1
     amountProduced: 5
     acceptedTiles: 01000000
-    position: {x: 0, y: 0}
   - buildingType: 4
     isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
     resourceProduced: 4
     amountProduced: 1
     acceptedTiles: 01000000040000000700000002000000
-    position: {x: 0, y: 0}
   - buildingType: 3
     isometricTile: {fileID: 11400000, guid: e63871adf7fb048498658571f3640287, type: 2}
     resourceCostList:
@@ -253,7 +249,6 @@ MonoBehaviour:
     resourceProduced: 3
     amountProduced: 5
     acceptedTiles: 0900000008000000
-    position: {x: 0, y: 0}
   - buildingType: 5
     isometricTile: {fileID: 11400000, guid: e670ff71ad2d0e548acf5d7125f8d5d4, type: 2}
     resourceCostList:
@@ -262,7 +257,6 @@ MonoBehaviour:
     resourceProduced: 5
     amountProduced: 0
     acceptedTiles: 09000000080000000100000003000000
-    position: {x: 0, y: 0}
   - buildingType: 6
     isometricTile: {fileID: 11400000, guid: a8ed2acdafae021419660791cc6586fb, type: 2}
     resourceCostList:
@@ -271,7 +265,6 @@ MonoBehaviour:
     resourceProduced: 5
     amountProduced: 0
     acceptedTiles: 09000000080000000100000003000000
-    position: {x: 0, y: 0}
   buildSound: {fileID: 2056547777777652608}
   destroySound: {fileID: 3165049210932668089}
   farmSound: {fileID: 2266758979789770112}
@@ -1005,6 +998,10 @@ PrefabInstance:
     - target: {fileID: 6732775738593117255, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
       propertyPath: m_Name
       value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732775739037218697, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be689296a0894448a8b460fb2458dd9, type: 3}
