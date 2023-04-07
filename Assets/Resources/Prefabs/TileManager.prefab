@@ -54,7 +54,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f0ba20ebc27f1499f4af7c029b8aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileNameList: []
+  tileNameList:
+  - tileType: 0
+    tileName: Desert
+  - tileType: 1
+    tileName: Grass
+  - tileType: 2
+    tileName: Mud
+  - tileType: 3
+    tileName: Forest
+  - tileType: 4
+    tileName: Dirt
+  - tileType: 5
+    tileName: Water
+  - tileType: 6
+    tileName: Deep Water
+  - tileType: 7
+    tileName: Rocks
+  - tileType: 8
+    tileName: Mountain
+  - tileType: 9
+    tileName: Snow Peak
   tilemap: {fileID: 4575140568279203023}
   changeMap: {fileID: 4575140567931390669}
   seed: 0
@@ -218,7 +238,7 @@ MonoBehaviour:
     amountProduced: 5
     acceptedTiles: 01000000
     position: {x: 0, y: 0}
-  - buildingType: 3
+  - buildingType: 4
     isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
     resourceCostList: []
     resourceProduced: 0

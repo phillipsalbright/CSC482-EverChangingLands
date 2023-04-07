@@ -11,14 +11,14 @@ public class InformationHUD : MonoBehaviour
     [SerializeField] private TMP_Text tileNameText;
     [SerializeField] private RulePanel rulePanelPrefab;
     [SerializeField] private GameObject contentHolder;
-
-    void Start()
-    {
-        SetInformation(Tile.TileTypes.Grass, WeatherManager.WeatherTypes.Sunny);
-    }
+    [SerializeField] private GameObject tileInfo;
 
     public void SetInformation(Tile.TileTypes type, WeatherManager.WeatherTypes weatherType)
     {
+        foreach(Transform child in contentHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
         IsometricRuleTile t = TileInfo.Instance.GetTile(type);
         tileImage.sprite = t.m_DefaultSprite;
         tileNameText.text = t.name;
@@ -29,6 +29,12 @@ public class InformationHUD : MonoBehaviour
             p.GetComponent<RulePanel>().SetRuleNumText(i + 1);
             p.GetComponent<RulePanel>().SetRuleDescText(rules[i]);
         }
+        tileInfo.SetActive(true);
         
+    }
+
+    public void HideInfoDisplay()
+    {
+        tileInfo.SetActive(false);
     }
 }
