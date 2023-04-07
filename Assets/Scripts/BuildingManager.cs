@@ -35,7 +35,6 @@ public class BuildingManager : Singleton<BuildingManager>
 
         public List<Tile.TileTypes> acceptedTiles;
 
-        public Vector2Int position;
     }
     [Serializable]
     public struct ResourceCost
@@ -78,7 +77,7 @@ public class BuildingManager : Singleton<BuildingManager>
                     TileManager.Instance.SetTile(p, b.acceptedTiles[0]);
                 }
             }
-            if(isDestroyed(b, tType)) {
+            if(isDestroyed(b, tType, p)) {
                 players.Add(p);
                 buildingMap.SetTile( new Vector3Int(p.x, p.y, 1), null);
             } else {
@@ -241,6 +240,7 @@ public class BuildingManager : Singleton<BuildingManager>
                     wall.setCondition(2);
                 }
                 walls.Add(p, wall);
+                Debug.Log(p);
                 //Wall sets its only accepted tile as the one it was placed on
                 Tile t = TileManager.Instance.GetTile(p);
                 TileTypes tType = t.GetCurrentTileType();
@@ -251,7 +251,6 @@ public class BuildingManager : Singleton<BuildingManager>
             }
             
             buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
-            b.position = p;
             //Take away resources to build
             foreach(ResourceCost c in b.resourceCostList){
                 ResourceManager.Instance.RemoveResource(c.resourceType, c.amount);
@@ -273,9 +272,9 @@ public class BuildingManager : Singleton<BuildingManager>
         buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
     }
 
-    public bool isDestroyed(Building b, Tile.TileTypes tileType) {
+    public bool isDestroyed(Building b, Tile.TileTypes tileType, Vector2Int pos) {
         if(isWall(b.buildingType)) {
-            return !(walls[b.position].getCondition() > 0);
+            return !(walls[pos].getCondition() > 0);
         } else {
             return !b.acceptedTiles.Contains(tileType);
         }
