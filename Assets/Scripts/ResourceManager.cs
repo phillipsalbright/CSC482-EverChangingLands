@@ -12,6 +12,7 @@ public class ResourceManager : Singleton<ResourceManager>
         Water,
         Food,
         Stone,
+        Person,
         None,
     }
 
@@ -20,9 +21,11 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         public ResourceTypes resourceType;
         public TMP_Text resourceText;
+        public Sprite resourceSprite;
     }
     [SerializeField]
     private List<ResourceTexts> resourceTexts = new List<ResourceTexts>();
+    private Dictionary<ResourceTypes, Sprite> resourceSprites = new Dictionary<ResourceTypes, Sprite>();
     private Dictionary<ResourceTypes, TMP_Text> resourceTextDict = new Dictionary<ResourceTypes, TMP_Text>();
     private Dictionary<ResourceTypes, int> resourceCounts = new Dictionary<ResourceTypes, int>();
 
@@ -31,12 +34,18 @@ public class ResourceManager : Singleton<ResourceManager>
     // Start is called before the first frame update
     protected override void Awake()
     {
+        base.Awake();
         foreach (ResourceTexts resourceText in resourceTexts)
         {
-            resourceTextDict.Add(resourceText.resourceType, resourceText.resourceText);
-            resourceCounts.Add(resourceText.resourceType, 10);
-            resourceText.resourceText.text = "10";
+            if (resourceText.resourceType != ResourceTypes.Person)
+            {
+                resourceTextDict.Add(resourceText.resourceType, resourceText.resourceText);
+                resourceCounts.Add(resourceText.resourceType, 10);
+                resourceText.resourceText.text = "10";
+            }
+            resourceSprites.Add(resourceText.resourceType, resourceText.resourceSprite);
         }
+        Debug.Log(resourceSprites[ResourceTypes.Person].name);
     }
 
     public bool AddResource(ResourceTypes resourceType, int amount)
@@ -70,5 +79,10 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public int getResourceCount(ResourceTypes resourceType) {
         return resourceCounts[resourceType];
+    }
+
+    public Sprite GetResourceSprite(ResourceTypes resourceType)
+    {
+        return resourceSprites[resourceType];
     }
 }

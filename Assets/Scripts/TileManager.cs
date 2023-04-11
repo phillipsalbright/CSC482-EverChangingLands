@@ -56,7 +56,6 @@ public class TileManager : Singleton<TileManager>
     private TileRuleSet tileRuleSet;
 
     private bool viewingPrediction = false;
-    private int selectedBuilding = -1;
 
 
     void Start()
@@ -67,7 +66,6 @@ public class TileManager : Singleton<TileManager>
         }
 
         GenerateMap();
-        CheckTiles(true);
         if(tileRuleSet == null){
             Debug.Log("Ruleset was null. checking components");
             tileRuleSet = gameObject.GetComponent<TileRuleSet>();
@@ -77,6 +75,7 @@ public class TileManager : Singleton<TileManager>
             Debug.Log("ruleset not null. trying to set.");
             TileRules.SetRuleSet(tileRuleSet);
         }
+        CheckTiles(true);
     }
 
     public void AdvanceTurn()
@@ -120,6 +119,10 @@ public class TileManager : Singleton<TileManager>
             if (newTileType != kvp.Value.GetCurrentTileType())
             {
                 changeMap.SetColor(loc, Color.red);
+            }
+            else if (newTileType != Tile.TileTypes.DeepWater)
+            {
+                changeMap.SetColor(loc, Color.clear);
             }
         }
         changeMap.gameObject.SetActive(false);
@@ -298,7 +301,7 @@ public class TileManager : Singleton<TileManager>
         if (!viewingPrediction)
         {
             changeMap.gameObject.SetActive(true);
-            tilemap.gameObject.SetActive(false);
+            tilemap.gameObject.SetActive(true);
             viewingPrediction = true;
         }
         else
@@ -322,7 +325,13 @@ public class TileManager : Singleton<TileManager>
 
     public Tile GetTileAtLocation(Vector2 ClickPos)
     {
-        return tiles[GetTileLocation(ClickPos)];
+        if (tiles.ContainsKey(GetTileLocation(ClickPos)))
+        {
+            return tiles[GetTileLocation(ClickPos)];
+        } else
+        {
+            return null;
+        }
     }
 
     public Dictionary<Vector2Int, Tile> GetTileDictionary()
@@ -381,5 +390,10 @@ public class TileManager : Singleton<TileManager>
             return "~TILENAME NOT SET~";
         }
         return tileNameMap[type];
+    }
+
+    public TileRuleSet GetTileRuleSet()
+    {
+        return tileRuleSet;
     }
 }

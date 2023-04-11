@@ -124,17 +124,18 @@ public class TileRuleSet : MonoBehaviour
         {
             if (rs.tileType == type)
             {
+                foreach (RuleCondition rc in rs.nonWeatherConditions)
+                {
+                    rules.Add(ruleConditionString(rc));
+                }
                 foreach(Rule r in rs.rules)
                 {
                     if (r.weatherType == thisWeather)
                     {
-                        String conditions = "";
                         foreach(RuleCondition rc in r.ruleConditions)
                         {
                             rules.Add(ruleConditionString(rc));
                         }
-
-                        break;
                     }
                 }
 

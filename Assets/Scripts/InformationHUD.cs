@@ -22,7 +22,7 @@ public class InformationHUD : MonoBehaviour
         IsometricRuleTile t = TileInfo.Instance.GetTile(type);
         tileImage.sprite = t.m_DefaultSprite;
         tileNameText.text = t.name;
-        List<string> rules = FindObjectOfType<TileRuleSet>().toStringForTileGivenWeather(type, weatherType);
+        List<string> rules = TileManager.Instance.GetTileRuleSet().toStringForTileGivenWeather(type, weatherType);
         for (int i = 0; i < rules.Count; i++)
         {
             GameObject p = Instantiate(rulePanelPrefab.gameObject, contentHolder.transform);

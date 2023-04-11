@@ -485,7 +485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &125649863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2039,7 +2039,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: LogoGenerator
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4617574638238182606, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 3912063612403382531, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 940774259506821574, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 8607007366447225335, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 84619595188735034, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 4208786502684495103, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 4894178789372703438, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 3870007316460693251, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 1076706875417405382, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 8795871256527409509, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 887117617605657768, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 3966423125709849709, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 2851189021444917192, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 5895194065744761349, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 7677462881985745600, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 7389615377371251068, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 1212500206104908977, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 3141144843909878900, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 1839564314211996153, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 8059731894055830580, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
+    - {fileID: 6097266278544786673, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 504fc1b67c80f8548aa6abaad4c234f1, type: 3}
 --- !u!1 &797066286
 GameObject:

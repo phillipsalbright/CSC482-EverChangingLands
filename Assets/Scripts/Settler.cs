@@ -33,7 +33,6 @@ public class Settler : MonoBehaviour
     {
         if(deathSound.isPlaying)
         {
-            Debug.Log("Wants to die");
             wantsToDie = true;
         }
         else if(wantsToDie && !deathSound.isPlaying)
@@ -42,7 +41,6 @@ public class Settler : MonoBehaviour
             MusicManager.Instance.playBGM();
             if (!BuildingManager.Instance.GetHouses().ContainsKey(housePos))
             {
-                Debug.Log("House Gone");
                 SettlerManager.Instance.GetSettlers().Remove(gameObject);
                 Destroy(gameObject);
             }
