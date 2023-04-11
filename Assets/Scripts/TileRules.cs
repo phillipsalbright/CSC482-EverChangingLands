@@ -70,7 +70,7 @@ public static class TileRules
             case TileRuleSet.Operators.Less:
                 return firstNumber < secondNumber;
             case TileRuleSet.Operators.LessEquals:
-                return firstNumber < secondNumber;
+                return firstNumber <= secondNumber;
             case TileRuleSet.Operators.NotEquals:
                 return firstNumber != secondNumber;
             case TileRuleSet.Operators.Always:
@@ -192,6 +192,10 @@ public static class TileRules
         }
         if(!terrainCounts.ContainsKey(Tile.TileTypes.SnowPeak)){
             terrainCounts.Add(Tile.TileTypes.SnowPeak, 0);
+        }
+        if (!terrainCounts.ContainsKey(Tile.TileTypes.Fire))
+        {
+            terrainCounts.Add(Tile.TileTypes.Fire, 0);
         }
 
         //get the current weather

@@ -75,6 +75,8 @@ MonoBehaviour:
     tileName: Mountain
   - tileType: 9
     tileName: Snow Peak
+  - tileType: 10
+    tileName: Fire
   tilemap: {fileID: 4575140568279203023}
   changeMap: {fileID: 4575140567931390669}
   seed: 0
@@ -154,6 +156,14 @@ MonoBehaviour:
       - switchTile: 1
         requiredResources: 
         requiredResourcesCount: 
+    - tileType: 10
+      isometricTile: {fileID: 11400000, guid: 480cddc8dc1c58a48ae655623bf6ade1, type: 2}
+      chance: 0
+      associatedResource: 5
+      tileSwitches:
+      - switchTile: 4
+        requiredResources: 01000000
+        requiredResourcesCount: 01000000
   - biome: 2
     chance: 0.3
     tiles:

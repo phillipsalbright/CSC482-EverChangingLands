@@ -43,10 +43,6 @@ public class ResourceManager : Singleton<ResourceManager>
                 resourceCounts.Add(resourceText.resourceType, 10);
                 resourceText.resourceText.text = "10";
             }
-            else
-            {
-                Debug.Log("Person");
-            }
             resourceSprites.Add(resourceText.resourceType, resourceText.resourceSprite);
         }
         Debug.Log(resourceSprites[ResourceTypes.Person].name);

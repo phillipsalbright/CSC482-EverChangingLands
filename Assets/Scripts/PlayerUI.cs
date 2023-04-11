@@ -161,8 +161,6 @@ public class PlayerUI : Singleton<PlayerUI>
 
     public void ControllerSelect(InputAction.CallbackContext context)
     {
-        Debug.Log("Select");
-
         if(!selectSound.isPlaying)
         {
             selectSound.Play();
@@ -430,6 +428,11 @@ public class PlayerUI : Singleton<PlayerUI>
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        CustomMap[] customMaps = FindObjectsOfType<CustomMap>();
+        foreach(CustomMap c in customMaps)
+        {
+           Destroy(c.gameObject);
+        }
         SceneManager.LoadScene(0);
     }
 }

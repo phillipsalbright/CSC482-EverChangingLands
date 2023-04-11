@@ -18,6 +18,7 @@ public class Tile
         Rocks,
         Mountain,
         SnowPeak,
+        Fire,
     }
 
     private TileTypes currentTileType;
@@ -80,7 +81,7 @@ public class Tile
     public void SetCurrentTileType(TileTypes tileType)
     {
         currentTileType = tileType;
-        isWalkable = currentTileType != Tile.TileTypes.Water && currentTileType != Tile.TileTypes.DeepWater;
+        isWalkable = currentTileType != Tile.TileTypes.Water && currentTileType != Tile.TileTypes.DeepWater && currentTileType != Tile.TileTypes.Fire;
     }
 
     //sets the current tile's terrain and recall forecast methods
