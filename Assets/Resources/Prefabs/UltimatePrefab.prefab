@@ -174,6 +174,14 @@ PrefabInstance:
       propertyPath: tileRuleSet
       value: 
       objectReference: {fileID: 5702794896452022349}
+    - target: {fileID: 4979231979629391543, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a9f70f51d5372449874d084bb5fcea7, type: 3}
+    - target: {fileID: 8398958537771632623, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: mineSound
+      value: 
+      objectReference: {fileID: 4773836896319362129}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
 --- !u!4 &4046467070421952490 stripped
@@ -186,6 +194,11 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 4575140567727197655, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
   m_PrefabInstance: {fileID: 529694433912290022}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &4773836896319362129 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4979231979629391543, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+  m_PrefabInstance: {fileID: 529694433912290022}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1234673183152099293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -193,6 +206,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4046467070816816918}
     m_Modifications:
+    - target: {fileID: 2955910477416688897, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955910477416688897, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2955910477991509544, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
       propertyPath: m_Name
       value: PlayerController
@@ -239,6 +260,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2955910477991509551, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955910478405731226, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955910478405731226, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955910478405731226, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955910478497619723, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955910478497619723, guid: 8246b680b13656e42b78d01f176ecb6f, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
