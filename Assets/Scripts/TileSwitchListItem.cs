@@ -33,6 +33,7 @@ public class TileSwitchListItem : MonoBehaviour
         tileType = tileSwitch.switchTile;
         tileNameText.text = tileType.ToString();
         tileImage.sprite = TileInfo.Instance.GetTileSprite(tileType);
+        bool switchable = true;
         for (int i = 0; i < costImages.Count && i < costs.Count; i++)
         {
             bool filled = false;
@@ -42,6 +43,10 @@ public class TileSwitchListItem : MonoBehaviour
                 int resourceCost = tileSwitch.requiredResourcesCount[i];
                 costImages[i].sprite = ResourceManager.Instance.GetResourceSprite(resourceType);
                 costs[i].text = resourceCost + "";
+                if (ResourceManager.Instance.getResourceCount(resourceType) < resourceCost)
+                {
+                    switchable = false;
+                }
                 filled = true;
             }
             costImages[i].gameObject.SetActive(filled);
@@ -61,7 +66,7 @@ public class TileSwitchListItem : MonoBehaviour
             productionImage.enabled = false;
             production.enabled = false;
         }
-        bool switchable = ResourceManager.Instance.getResourceCount(resourceProduced) >= resourceAmountProduced;
+        //bool switchable = ResourceManager.Instance.getResourceCount(resourceProduced) >= resourceAmountProduced;
         switchButton.interactable = switchable;
     }
 

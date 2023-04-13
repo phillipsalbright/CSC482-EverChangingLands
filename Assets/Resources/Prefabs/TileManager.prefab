@@ -111,6 +111,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 3a492980de979e547828d27f4647734f, type: 2}
       chance: 0.9
       associatedResource: 1
+      associatedResourceAmount: 5
       tileSwitches:
       - switchTile: 0
         requiredResources: 
@@ -119,6 +120,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 0c0ac104578f4c94f9051c5c1ac1df83, type: 2}
       chance: 0.1
       associatedResource: 3
+      associatedResourceAmount: 0
       tileSwitches: []
   - biome: 0
     chance: 0.6
@@ -127,6 +129,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 6286e5af240c6b540a788748743755a0, type: 2}
       chance: 0.3
       associatedResource: 3
+      associatedResourceAmount: 5
       tileSwitches:
       - switchTile: 2
         requiredResources: 
@@ -141,6 +144,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: b38135a27300bf741877bcfc78c4966d, type: 2}
       chance: 0.7
       associatedResource: 3
+      associatedResourceAmount: 2
       tileSwitches:
       - switchTile: 3
         requiredResources: 00000000
@@ -152,6 +156,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 9352d5d9fefc4834c89f6e8c669a43ad, type: 2}
       chance: 0.4
       associatedResource: 0
+      associatedResourceAmount: 6
       tileSwitches:
       - switchTile: 1
         requiredResources: 
@@ -160,6 +165,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 480cddc8dc1c58a48ae655623bf6ade1, type: 2}
       chance: 0
       associatedResource: 5
+      associatedResourceAmount: 0
       tileSwitches:
       - switchTile: 4
         requiredResources: 01000000
@@ -171,6 +177,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: c5c211913e6ccc741b5038527f4a71ce, type: 2}
       chance: 1
       associatedResource: 3
+      associatedResourceAmount: 0
       tileSwitches: []
   - biome: 3
     chance: 0.3
@@ -179,6 +186,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: 200279346cd6c9d41a91a86a68b2a752, type: 2}
       chance: 0.3
       associatedResource: 3
+      associatedResourceAmount: 8
       tileSwitches:
       - switchTile: 8
         requiredResources: 03000000
@@ -190,6 +198,7 @@ MonoBehaviour:
       isometricTile: {fileID: 11400000, guid: c1e5cc5596a394e40a86cb736da02bd2, type: 2}
       chance: 0.3
       associatedResource: 3
+      associatedResourceAmount: 10
       tileSwitches:
       - switchTile: 7
         requiredResources: 
@@ -200,7 +209,8 @@ MonoBehaviour:
     - tileType: 9
       isometricTile: {fileID: 11400000, guid: 9d3f90192eb3adf47b0ce592929ff75f, type: 2}
       chance: 0.3
-      associatedResource: 4
+      associatedResource: 3
+      associatedResourceAmount: 10
       tileSwitches:
       - switchTile: 8
         requiredResources: 

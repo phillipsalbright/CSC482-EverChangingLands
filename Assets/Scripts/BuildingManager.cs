@@ -146,7 +146,8 @@ public class BuildingManager : Singleton<BuildingManager>
         return b.acceptedTiles.Contains(tile);
     }
 
-    // Check if a given tile has a building already on it
+    // Check if a given tile has a building already on it, reversed from what it should be for some dumbass reason
+    //RETURNS TRUE IF NO BUILDING, FALSE if THERE IS A BUILDING
     public bool hasBuilding(Tile tile)
     {
         return !(buildingMap.GetTile(new Vector3Int(tile.GetTilePos2().x, tile.GetTilePos2().y, 1)));
