@@ -13359,6 +13359,7 @@ MonoBehaviour:
   setSettlerText: {fileID: 4891089637819053983}
   huds: []
   selectSound: {fileID: 7291864447620966176}
+  infoSound: {fileID: 6001257281863202495}
 --- !u!82 &7291864447620966176
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13465,7 +13466,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9768fdad755a4ed4f8610aaac2a7946b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e7b49a398d8f44a40add5d75199d04bb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

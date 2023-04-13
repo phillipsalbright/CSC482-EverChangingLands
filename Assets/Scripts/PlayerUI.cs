@@ -56,6 +56,7 @@ public class PlayerUI : Singleton<PlayerUI>
     private bool _paused = false;
 
     [SerializeField] private AudioSource selectSound;
+    [SerializeField] private AudioSource infoSound;
 
     // Start is called before the first frame update
     void Start()
@@ -146,12 +147,16 @@ public class PlayerUI : Singleton<PlayerUI>
     {
         previewElement.SetActive(true);
         nextTurnButton.gameObject.SetActive(false);
+        infoSound.Stop();
+        infoSound.Play();
     }
 
     public void NoPredictionView()
     {
         previewElement.SetActive(false);
         nextTurnButton.gameObject.SetActive(true);
+        infoSound.Stop();
+        infoSound.Play();
     }
 
     public void MoveCursorGamepad(InputAction.CallbackContext context)
