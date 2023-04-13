@@ -282,6 +282,7 @@ public class PlayerUI : Singleton<PlayerUI>
                 _settlerActionHUD.transform.Find("CollectResourceButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanCollect();
                 _settlerActionHUD.transform.Find("BuildStructureButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
                 _settlerActionHUD.transform.Find("FlipTileButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanFlip();
+                _settlerActionHUD.transform.Find("FlipTileButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
                 _playerController.currentControllerMode = PlayerController.mode.SettlerActions;
                 GameManager.Instance.DeleteSelection();
                 GameManager.Instance.SelectTile(_selectedSettler.GetCurrentTile(), 3);
@@ -411,6 +412,11 @@ public class PlayerUI : Singleton<PlayerUI>
                 UnpauseGame();
             }
         }
+    }
+
+    public void DestroyBuilding()
+    {
+        
     }
 
     public void UnpauseGame()
