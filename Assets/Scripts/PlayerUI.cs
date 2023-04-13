@@ -308,7 +308,8 @@ public class PlayerUI : Singleton<PlayerUI>
                 break;
             case PlayerController.mode.SelectFlipTile:
                 SwapHUD(7);
-                List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
+                TileSwitchManager.Instance.OpenTileManager(_selectedTileToFlip.GetCurrentTileType(), _selectedTileToFlip.GetTilePos2());
+                /*List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
                 for (int i = 0; i < _tileFlippingButtons.Length; i++)
                 {
                     if (i < switches.Count)
@@ -328,7 +329,7 @@ public class PlayerUI : Singleton<PlayerUI>
                     {
                         _tileFlippingButtons[i].gameObject.SetActive(false);
                     }
-                }
+                }*/
                 _playerController.currentControllerMode = PlayerController.mode.SelectFlipTile;
                 break;
             case PlayerController.mode.GameOver:
@@ -393,6 +394,16 @@ public class PlayerUI : Singleton<PlayerUI>
         for (int i = 0; i < switches[newTile].requiredResources.Count; i++)
         {
             ResourceManager.Instance.RemoveResource(switches[newTile].requiredResources[i], switches[newTile].requiredResourcesCount[i]);
+        }
+        SetMode(2);
+    }
+
+    public void SwapTile(TileInfo.TileSwitch tileSwitch)
+    {
+        _selectedSettler.FlipTile(_selectedTileToFlip, tileSwitch.switchTile);
+        for (int i = 0; i < tileSwitch.requiredResources.Count; i++)
+        {
+            ResourceManager.Instance.RemoveResource(tileSwitch.requiredResources[i], tileSwitch.requiredResourcesCount[i]);
         }
         SetMode(2);
     }

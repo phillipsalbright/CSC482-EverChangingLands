@@ -78,6 +78,10 @@ public class ResourceManager : Singleton<ResourceManager>
     }
 
     public int getResourceCount(ResourceTypes resourceType) {
+        if (resourceType == ResourceTypes.None)
+        {
+            return 0;
+        }
         return resourceCounts[resourceType];
     }
 
