@@ -287,6 +287,7 @@ public class PlayerUI : Singleton<PlayerUI>
                 _settlerActionHUD.transform.Find("CollectResourceButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanCollect();
                 _settlerActionHUD.transform.Find("BuildStructureButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
                 _settlerActionHUD.transform.Find("FlipTileButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanFlip();
+                _settlerActionHUD.transform.Find("DestroyBuildingButton").gameObject.GetComponent<Button>().interactable = !BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
                 _playerController.currentControllerMode = PlayerController.mode.SettlerActions;
                 GameManager.Instance.DeleteSelection();
                 GameManager.Instance.SelectTile(_selectedSettler.GetCurrentTile(), 3);
@@ -300,10 +301,6 @@ public class PlayerUI : Singleton<PlayerUI>
             case PlayerController.mode.Building:
                 SwapHUD(5);
                 BuildingListManager.Instance.OpenBuildingList(_selectedSettler.GetCurrentTile().GetCurrentTileType(), _selectedSettler.GetCurrentTile().GetTilePos2());
-                //_buildingHUD.transform.Find("BuildLumberButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Lumber) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Lumber, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                //_buildingHUD.transform.Find("BuildFarmButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Farm) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Farm, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                //_buildingHUD.transform.Find("BuildWellButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.WaterWell) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.WaterWell, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                //_buildingHUD.transform.Find("BuildHouseButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.House) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.House, _selectedSettler.GetCurrentTile().GetCurrentTileType());
                 _playerController.currentControllerMode = PlayerController.mode.Building;
                 break;
             case PlayerController.mode.Flipping:
@@ -427,6 +424,11 @@ public class PlayerUI : Singleton<PlayerUI>
                 UnpauseGame();
             }
         }
+    }
+
+    public void DestroyBuilding()
+    {
+        BuildingManager.Instance.destroyBuilding(_selectedSettler.GetCurrentTile().GetTilePos2());
     }
 
     public void UnpauseGame()
