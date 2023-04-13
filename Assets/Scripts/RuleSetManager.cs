@@ -37,8 +37,10 @@ public class RuleSetManager : Singleton<RuleSetManager>
                 Debug.LogWarning("Failed to load existing directory file. creating new");
                 fileDirectory = new RuleSetFileDirectorySave(directoryFilepath);
                 WriteStarterRuleSets();
+                ReadRulesFromDirectory(fileDirectory);
             }
             else{
+                WriteStarterRuleSets();
                 ReadRulesFromDirectory(fileDirectory);
             }
         }
@@ -46,6 +48,7 @@ public class RuleSetManager : Singleton<RuleSetManager>
             Debug.Log("No directory file found. creating new");
             fileDirectory = new RuleSetFileDirectorySave(directoryFilepath);
             WriteStarterRuleSets();
+            ReadRulesFromDirectory(fileDirectory);
         }
     }
 
