@@ -48,7 +48,10 @@ MonoBehaviour:
   demo: {fileID: 0}
   ruleSets: {fileID: 5472942778381217905}
   starterRuleSets:
-  - {fileID: 0}
+  - {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+  - {fileID: 5773451436006099389, guid: 5d1f4eff0e15c3a4f8390c9d669f4eb0, type: 3}
+  - {fileID: 1090568727628176596, guid: 2dd7592d798aa6446813afa24e47ec89, type: 3}
+  - {fileID: 4465550843234885294, guid: 5a34b5488d47262438ec9afedd4be2ce, type: 3}
   rsIO: {fileID: 0}
   directoryFilepath: tileRuleSet_directory_save_vtecl
 --- !u!114 &5472942778381217905

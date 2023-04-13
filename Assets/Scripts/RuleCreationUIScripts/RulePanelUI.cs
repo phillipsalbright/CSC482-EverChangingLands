@@ -51,6 +51,9 @@ public class RulePanelUI : MonoBehaviour
             case Tile.TileTypes.Rocks:
                 goalTileDropDown.value = 8;
                 break;
+            case Tile.TileTypes.Fire:
+                goalTileDropDown.value = 9;
+                break;
             default:
                 goalTileDropDown.value = 0;
                 break;
@@ -112,6 +115,9 @@ public class RulePanelUI : MonoBehaviour
                     break;
                 case Tile.TileTypes.Rocks:
                     tilesToCheckToggles[8].isOn = true;
+                    break;
+                case Tile.TileTypes.Fire:
+                    tilesToCheckToggles[9].isOn = true;
                     break;
             }
         }
@@ -215,6 +221,14 @@ public class RulePanelUI : MonoBehaviour
             RemoveTileType(Tile.TileTypes.Mud);
         }
     }
+    public void ToggleFire(Toggle toggle){
+        if(toggle.isOn){
+            AddTileType(Tile.TileTypes.Fire);
+        }
+        else{
+            RemoveTileType(Tile.TileTypes.Fire);
+        }
+    }
 
     public void OperatorDropDownChange(TMPro.TMP_Dropdown dropdown){
         int loc = dropdown.value;
@@ -272,6 +286,9 @@ public class RulePanelUI : MonoBehaviour
                 break;
             case 8:
                 SetGoalTile(Tile.TileTypes.Rocks);
+                break;
+            case 9:
+                SetGoalTile(Tile.TileTypes.Fire);
                 break;
         }
     }

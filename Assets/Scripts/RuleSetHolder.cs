@@ -36,12 +36,18 @@ public class RuleSetHolder : MonoBehaviour
     }
 
     public void AddNewRuleSetToList(TileRuleSet newTrs){
+        if(ruleSetMap.ContainsKey(newTrs.getRSName())){
+            return;
+        }
         ruleSets.Add(newTrs);
         ruleSetMap.Add(newTrs.getRSName(),newTrs);
     }
     public void AddNewRuleSetToList(RuleSetSave newRss){
         TileRuleSet newTrs = gameObject.AddComponent<TileRuleSet>();
         newTrs.SetupFromRSS(newRss);
+        if(ruleSetMap.ContainsKey(newTrs.getRSName())){
+            return;
+        }
         ruleSets.Add(newTrs);
         ruleSetMap.Add(newTrs.getRSName(),newTrs);
     }
