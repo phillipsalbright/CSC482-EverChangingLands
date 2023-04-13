@@ -281,7 +281,7 @@ MonoBehaviour:
   houseSound: {fileID: 2778596363647512107}
   lumberSound: {fileID: 8867532325113804934}
   waterSound: {fileID: 4184839031336353330}
-  mineSound: {fileID: 0}
+  mineSound: {fileID: 4979231979629391543}
 --- !u!82 &2056547777777652608
 AudioSource:
   m_ObjectHideFlags: 0
@@ -292,7 +292,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8da0dc90b7c40d246a38ae53b7b47c3a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0d5a1bbb41f68904ebd152a047829a56, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -868,7 +868,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9a9f70f51d5372449874d084bb5fcea7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

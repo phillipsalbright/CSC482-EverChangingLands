@@ -160,6 +160,10 @@ public class Settler : MonoBehaviour
 
     public Tile GetCurrentTile()
     {
+        if(isDead)
+        {
+            return null;
+        }
         return currentTile;
     }
 

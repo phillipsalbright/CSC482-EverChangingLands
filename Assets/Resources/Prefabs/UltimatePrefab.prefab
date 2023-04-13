@@ -122,6 +122,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4046467070816816918}
     m_Modifications:
+    - target: {fileID: 2056547777777652608, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4aa250025256306448aee3e9247d09b5, type: 3}
     - target: {fileID: 4575140568971549962, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: m_Name
       value: TileManager
@@ -173,7 +177,15 @@ PrefabInstance:
     - target: {fileID: 4575140568971549965, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
       propertyPath: tileRuleSet
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5702794896452022349}
+    - target: {fileID: 4979231979629391543, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a9f70f51d5372449874d084bb5fcea7, type: 3}
+    - target: {fileID: 8398958537771632623, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+      propertyPath: mineSound
+      value: 
+      objectReference: {fileID: 4773836896319362129}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
 --- !u!4 &4046467070421952490 stripped
@@ -184,6 +196,11 @@ Transform:
 --- !u!1839735485 &4046467071566690097 stripped
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 4575140567727197655, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
+  m_PrefabInstance: {fileID: 529694433912290022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &4773836896319362129 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4979231979629391543, guid: 03b1ffc9b26ba254ca58c5959cc6ae9a, type: 3}
   m_PrefabInstance: {fileID: 529694433912290022}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1234673183152099293
