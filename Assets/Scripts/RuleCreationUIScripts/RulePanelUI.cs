@@ -7,7 +7,116 @@ public class RulePanelUI : MonoBehaviour
 {
     [SerializeField, Tooltip("the rulecondition for this panel")]
     private TileRuleSet.RuleCondition thisRC;
+    [SerializeField, Tooltip("the inputfield for number of tiles requirement")]
+    private TMPro.TMP_InputField numTilesInput;
+    [SerializeField, Tooltip("the dropdown for the operators")]
+    private TMPro.TMP_Dropdown operatorDropDown;
+    [SerializeField, Tooltip("the dropdown for goal tile")]
+    private TMPro.TMP_Dropdown goalTileDropDown;
+    [SerializeField, Tooltip("the toggles for tiles to check")]
+    private List<Toggle> tilesToCheckToggles;
 
+    public void Setup(){
+        if(tilesToCheckToggles == null){
+            tilesToCheckToggles = new List<Toggle>();
+        }
+        numTilesInput.text = thisRC.NumTiles.ToString();
+        
+        switch (thisRC.goalTile)
+        {
+            case Tile.TileTypes.DeepWater:
+                goalTileDropDown.value = 0;
+                break;
+            case Tile.TileTypes.Water:
+                goalTileDropDown.value = 1;
+                break;
+            case Tile.TileTypes.Forest:
+                goalTileDropDown.value = 2;
+                break;
+            case Tile.TileTypes.Grass:
+                goalTileDropDown.value = 3;
+                break;
+            case Tile.TileTypes.Desert:
+                goalTileDropDown.value = 4;
+                break;
+            case Tile.TileTypes.Dirt:
+                goalTileDropDown.value = 5;
+                break;
+            case Tile.TileTypes.SnowPeak:
+                goalTileDropDown.value = 6;
+                break;
+            case Tile.TileTypes.Mountain:
+                goalTileDropDown.value = 7;
+                break;
+            case Tile.TileTypes.Rocks:
+                goalTileDropDown.value = 8;
+                break;
+            default:
+                goalTileDropDown.value = 0;
+                break;
+        }
+
+        switch(thisRC.conditional){
+            case TileRuleSet.Operators.Always:
+                operatorDropDown.value = 0;
+                break;
+            case TileRuleSet.Operators.Greater:
+                operatorDropDown.value = 1;
+                break;
+            case TileRuleSet.Operators.Less:
+                operatorDropDown.value = 2;
+                break;
+            case TileRuleSet.Operators.LessEquals:
+                operatorDropDown.value = 3;
+                break;
+            case TileRuleSet.Operators.GreaterEquals:
+                operatorDropDown.value = 4;
+                break;
+            case TileRuleSet.Operators.Equals:
+                operatorDropDown.value = 5;
+                break;
+            case TileRuleSet.Operators.NotEquals:
+                operatorDropDown.value = 6;
+                break;
+            default:
+                operatorDropDown.value = 0;
+                break;
+        }
+
+        foreach(Tile.TileTypes thisTileTypes in thisRC.TilesToCheck){
+            switch (thisTileTypes)
+            {
+                case Tile.TileTypes.DeepWater:
+                    tilesToCheckToggles[0].isOn = true;
+                    break;
+                case Tile.TileTypes.Water:
+                    tilesToCheckToggles[1].isOn = true;
+                    break;
+                case Tile.TileTypes.Forest:
+                    tilesToCheckToggles[2].isOn = true;
+                    break;
+                case Tile.TileTypes.Grass:
+                    tilesToCheckToggles[3].isOn = true;
+                    break;
+                case Tile.TileTypes.Desert:
+                    tilesToCheckToggles[4].isOn = true;
+                    break;
+                case Tile.TileTypes.Dirt:
+                    tilesToCheckToggles[5].isOn = true;
+                    break;
+                case Tile.TileTypes.SnowPeak:
+                    tilesToCheckToggles[6].isOn = true;
+                    break;
+                case Tile.TileTypes.Mountain:
+                    tilesToCheckToggles[7].isOn = true;
+                    break;
+                case Tile.TileTypes.Rocks:
+                    tilesToCheckToggles[8].isOn = true;
+                    break;
+            }
+        }
+        
+    }
 
     public void setRC(TileRuleSet.RuleCondition newRC){
         thisRC = newRC;
@@ -167,8 +276,14 @@ public class RulePanelUI : MonoBehaviour
         }
     }
 
-    public void ChangeNumTile(TMPro.TMP_Text text){
-        int result = int.Parse(text.text);
+    public void ChangeNumTile(TMPro.TMP_InputField text){
+        int result = 0;
+        try{
+            result = int.Parse(text.text);
+        }
+        catch(System.Exception e){
+            return;
+        }
         if(result < 0){
             result = 0;
             text.text = 0.ToString();

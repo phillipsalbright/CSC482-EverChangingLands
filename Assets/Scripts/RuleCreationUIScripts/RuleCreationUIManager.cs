@@ -7,6 +7,10 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     [Header("ui pieces")]
     [SerializeField, Tooltip("The canvas to be used for the ruleset creation")]
     private GameObject rulesetCanvas;
+    [SerializeField, Tooltip("The canvas to be used before ruleset creation")]
+    private GameObject rulesetMenuCanvas;
+    [SerializeField, Tooltip("The main menu dropdown")]
+    private TMPro.TMP_Dropdown rulesetSelectionDropDown;
     [SerializeField, Tooltip("the content holder for the rulesets")]
     private GameObject contentHolder;
     [SerializeField, Tooltip("the rulecondition panel prefab")]
@@ -35,11 +39,26 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     [SerializeField, Tooltip("the currently selected weather type")]
     private WeatherManager.WeatherTypes currentWeatherType = WeatherManager.WeatherTypes.Sunny;
     
+    void Start(){
+        //StartCreatingRuleSet();
+    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetupMainMenu(){
+        LeaveScene();
+        rulesetMenuCanvas.GetComponent<RuleMainMenuCanvas>().Setup();
+    }
+
+    public void StartRSCreator(string trsName, string newRSString){
+        if(trsName ==  newRSString){
+            StartCreationScene();
+        }
+        else{
+            TileRuleSet ruleSetToUse = RuleSetManager.Instance.GetRuleSetByName(trsName);
+            if(ruleSetToUse == null){
+                return;
+            }
+            StartEditingRuleSet(ruleSetToUse, trsName);
+        }
     }
 
 
@@ -50,6 +69,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
         currentWeatherType = WeatherManager.WeatherTypes.Sunny;
         errorText.text = "";
         rulesetCanvas.SetActive(true);
+        rulesetMenuCanvas.SetActive(false);
         
     }
 
@@ -86,6 +106,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
                 thisRule.ruleConditions = new List<TileRuleSet.RuleCondition>();
                 thisRS.rules.Add(thisRule);
             }
+            trs.tileRules.Add(thisRS);
         }
         StartCreationScene();
         RefreshRuleConditionsView();
@@ -106,6 +127,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     }
 
     public void RefreshRuleConditionsView(){
+        Debug.Log("refresh rules view");
         ClearRuleConditions();
         if(allTiles){
             if(nonWeather){
@@ -142,6 +164,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     }
 
     public void ClearRuleConditions(){
+        Debug.Log("clear rules");
         while(rcPanels.Count > 0){
             GameObject thisGO = rcPanels[0];
             rcPanels.RemoveAt(0);
@@ -150,8 +173,11 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     }
 
     public void DisplayRuleConditions(List<TileRuleSet.RuleCondition> rcs){
-        foreach(TileRuleSet.RuleCondition rc in rcs){
-            CreateNewPanel(rc);
+        // foreach(TileRuleSet.RuleCondition rc in rcs){
+        //     CreateNewPanel(rc);
+        // }
+        for(int i = 0; i < rcs.Count; i ++){
+            CreateNewPanel(rcs[i]);
         }
 
     }
@@ -160,6 +186,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
         GameObject newPanel = Instantiate(rcPanelPrefab,contentHolder.transform);
         rcPanels.Add(newPanel);
         newPanel.GetComponent<RulePanelUI>().setRC(rc);
+        newPanel.GetComponent<RulePanelUI>().Setup();
     }
 
     public void AddNewRuleCondition(){
@@ -172,6 +199,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
         GameObject thisPanel = rcPanels[index];
         rcPanels.RemoveAt(index);
         currentRCs.RemoveAt(index);
+        Destroy(thisPanel);
     }
 
     public void DeleteRuleCondition(GameObject rcPanel){
@@ -205,7 +233,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
         }
         bool saveSuccess = RuleSetManager.Instance.CreateRuleSet(trs, ruleName);
         if(saveSuccess){
-            LeaveScene();
+            SetupMainMenu();
         }
         else{
             SceneLeaveFailure("Ruleset with name " + ruleName + " already exists");
@@ -214,6 +242,11 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
 
     public void LeaveScene(){
         rulesetCanvas.SetActive(false);
+        rulesetMenuCanvas.SetActive(true);
+    }
+    public void BackToMain(){
+        rulesetCanvas.SetActive(false);
+        rulesetMenuCanvas.SetActive(false);
     }
 
     public void UpdateName(TMPro.TMP_InputField text){

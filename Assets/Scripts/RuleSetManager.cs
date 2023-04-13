@@ -169,5 +169,13 @@ public class RuleSetManager : Singleton<RuleSetManager>
         rsIO.DeleteFile(trs.getRSName());
     }
 
+    public TileRuleSet GetRuleSetByName(string trsName){
+        return ruleSets.GetRuleSetByName(trsName);
+    }
+
+    public List<TileRuleSet> GetAllRuleSets(){
+        return ruleSets.GetAllRuleSets();
+    }
+
     // private void ApplyChanges()
 }

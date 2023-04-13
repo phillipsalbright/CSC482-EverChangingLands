@@ -2248,7 +2248,7 @@ GameObject:
   - component: {fileID: 4148743222924268253}
   - component: {fileID: 6462108061322613471}
   m_Layer: 0
-  m_Name: InputField (TMP)
+  m_Name: numTilesInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2393,13 +2393,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4965341170670706360}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 8812485513182467676}
+        m_TargetAssemblyTypeName: RulePanelUI, Assembly-CSharp
+        m_MethodName: ChangeNumTile
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 6462108061322613471}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_InputField, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3600,6 +3600,19 @@ MonoBehaviour:
     conditional: 0
     NumTiles: 0
     goalTile: 0
+  numTilesInput: {fileID: 6462108061322613471}
+  operatorDropDown: {fileID: 3425273969380485798}
+  goalTileDropDown: {fileID: 2792267112026449424}
+  tilesToCheckToggles:
+  - {fileID: 8682722219394661661}
+  - {fileID: 8658239032094824305}
+  - {fileID: 3568289681422788727}
+  - {fileID: 2422498034819629648}
+  - {fileID: 8878632952149456659}
+  - {fileID: 294544631480704522}
+  - {fileID: 6514620982701461188}
+  - {fileID: 6324285537435450557}
+  - {fileID: 7762744350935061586}
 --- !u!1 &4999895136935860646
 GameObject:
   m_ObjectHideFlags: 0
@@ -4386,10 +4399,10 @@ RectTransform:
   m_Father: {fileID: 8676629116972172492}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 317.31168, y: 68.89999}
-  m_SizeDelta: {x: 36.1693, y: 21.175}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -21, y: -11}
+  m_SizeDelta: {x: 40, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7196443036735633576
 CanvasRenderer:
@@ -4673,7 +4686,7 @@ GameObject:
   - component: {fileID: 2583578564137289824}
   - component: {fileID: 2792267112026449424}
   m_Layer: 0
-  m_Name: Dropdown
+  m_Name: GoalTileDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4811,13 +4824,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4965341170670706360}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 8812485513182467676}
+        m_TargetAssemblyTypeName: RulePanelUI, Assembly-CSharp
+        m_MethodName: GoalTileDropDownChange
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 2792267112026449424}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Dropdown, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6553,7 +6566,7 @@ GameObject:
   - component: {fileID: 1577989513879786539}
   - component: {fileID: 3425273969380485798}
   m_Layer: 0
-  m_Name: Dropdown
+  m_Name: OperatorDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
