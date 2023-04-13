@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 ybounds;
     [SerializeField] private Vector2 sizebounds;
     [SerializeField] private PlayerUI ui;
+    [SerializeField] private ParticleSystem rainGenerator;
     private Camera cam;
     private Vector2 inputVector = Vector2.zero;
     public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile, GameOver, Paused, viewingTileInfo};
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
             cam.orthographicSize += zoomInput * zoomScalar * Time.deltaTime / -2;
             cam.orthographicSize = Math.Clamp(cam.orthographicSize, sizebounds.x, sizebounds.y);
+            rainGenerator.shape.scale.Set(cam.orthographicSize, 1, 1);
         }
       
     }
