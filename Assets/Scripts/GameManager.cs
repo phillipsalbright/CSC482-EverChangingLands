@@ -60,11 +60,11 @@ public class GameManager : MonoBehaviour
         _turn++;
         _onTurnChanged.Invoke(_turn);
         tileManager.AdvanceTurn();
-        foreach(Settler s in FindObjectsOfType<Settler>())
+        BuildingManager.Instance.AdvanceTurn();
+        foreach (Settler s in FindObjectsOfType<Settler>())
         {
             s.StartNewTurn();
         }
-        BuildingManager.Instance.AdvanceTurn();
     }
 
     public void SelectTile(Tile tile, int colorindex)
@@ -165,10 +165,14 @@ public class GameManager : MonoBehaviour
             {
                 if((Mathf.Abs(i) + Mathf.Abs(j)) <= maxMoveDistance)
                 {
-                    Tile t = tileManager.GetTileDictionary()[new Vector2Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j)];
+                    if (tileManager.GetTileDictionary().ContainsKey(new Vector2Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j)))
+                    {
+                        Tile t = tileManager.GetTileDictionary()[new Vector2Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j)];
 
-                    tiles.Add(t);
-                    selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticles[0]);
+                        tiles.Add(t);
+                        selectionMap.SetTile(new Vector3Int(tile.GetTilePosition().x + i, tile.GetTilePosition().y + j, 0), reticles[0]);
+
+                    }
                 }
             }
         }
@@ -178,10 +182,14 @@ public class GameManager : MonoBehaviour
             Tile atTile = toVisit[0];
             foreach(Tile neighbor in atTile.GetAdjacentTiles())
             {
-                bool compatibleTile = neighbor.GetCurrentTileType() != Tile.TileTypes.Water && neighbor.GetCurrentTileType() != Tile.TileTypes.DeepWater;
-                if(!visited.Contains(neighbor) && tiles.Contains(neighbor) && compatibleTile)
+                if (neighbor != null)
                 {
-                    toVisit.Add(neighbor);
+                    bool compatibleTile = neighbor.GetCurrentTileType() != Tile.TileTypes.Water && neighbor.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+                    if (!visited.Contains(neighbor) && tiles.Contains(neighbor) && compatibleTile)
+                    {
+                        toVisit.Add(neighbor);
+                    }
+
                 }
             }
 

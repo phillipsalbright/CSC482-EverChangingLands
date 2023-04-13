@@ -13,6 +13,7 @@ public class BuildingManager : Singleton<BuildingManager>
         Lumber,
         Farm,
         WaterWell,
+        Mine,
         House,
         WoodWall,
         StoneWall,
@@ -34,7 +35,6 @@ public class BuildingManager : Singleton<BuildingManager>
 
         public List<Tile.TileTypes> acceptedTiles;
 
-        public Vector2Int position;
     }
     [Serializable]
     public struct ResourceCost
@@ -53,9 +53,17 @@ public class BuildingManager : Singleton<BuildingManager>
     [SerializeField]
     public List<Building> buildingList = new List<Building>();
 
+    [SerializeField] private AudioSource buildSound;
+    [SerializeField] private AudioSource destroySound;
+
+    [SerializeField] private AudioSource farmSound;
+    [SerializeField] private AudioSource houseSound;
+    [SerializeField] private AudioSource lumberSound;
+    [SerializeField] private AudioSource waterSound;
+    [SerializeField] private AudioSource mineSound;
+
 
     public void AdvanceTurn() {
-        Debug.LogWarning("ff");
         List<Vector2Int> players = new List<Vector2Int>();
         foreach(Vector2Int p in builtBuildings.Keys) {
             Building b = builtBuildings[p];
@@ -69,9 +77,8 @@ public class BuildingManager : Singleton<BuildingManager>
                     TileManager.Instance.SetTile(p, b.acceptedTiles[0]);
                 }
             }
-            if(isDestroyed(b, tType)) {
+            if(isDestroyed(b, tType, p)) {
                 players.Add(p);
-                buildingMap.SetTile( new Vector3Int(p.x, p.y, 1), null);
             } else {
                 produceResources(name);
             }
@@ -82,16 +89,25 @@ public class BuildingManager : Singleton<BuildingManager>
 
         foreach (Vector2Int p in players)
         {
-            builtBuildings.Remove(p);
-            if(houses.ContainsKey(p)) {
-                houses.Remove(p);
-            }
-            if(walls.ContainsKey(p)) {
-                walls.Remove(p);
-            }
+            destroyBuilding(p);
         }
     }
 
+    public void destroyBuilding(Vector2Int p) {
+        builtBuildings.Remove(p);
+        buildingMap.SetTile( new Vector3Int(p.x, p.y, 1), null);
+        TileManager.Instance.GetTile(p).setAudioSource(null);
+        if(houses.ContainsKey(p)) {
+            houses.Remove(p);
+            if(!destroySound.isPlaying)
+            {
+                destroySound.Play();
+            }
+        }
+        if(walls.ContainsKey(p)) {
+            walls.Remove(p);
+        }
+    }
     public List<BuildingName> getAvailableBuildings(Tile.TileTypes tileType) {
         List<BuildingName> list = new List<BuildingName>();
         foreach(Building b in buildingList) {
@@ -138,13 +154,42 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void produceResources(BuildingName name) {
         //Resource Manager produce a certain resource
+        if (name == BuildingName.House)
+        {
+            return;
+        }
         ResourceManager.Instance.AddResource(buildingDictionary[name].resourceProduced, buildingDictionary[name].amountProduced);
     }
 
     public void buildBuilding(BuildingName name, Vector2Int p) {
         if(canAfford(name)){
             Building b = buildingDictionary[name];
-            builtBuildings.Add(p, b);
+            // builtBuildings.Add(p, b);
+            if(!buildSound.isPlaying)
+            {
+                buildSound.Play();
+            }
+
+            Tile tile = TileManager.Instance.GetTile(p);
+
+            switch(b.buildingType)
+            {
+                case BuildingName.Farm:
+                    tile.setAudioSource(farmSound);
+                    break;
+                case BuildingName.House:
+                    tile.setAudioSource(houseSound);
+                    break;
+                case BuildingName.Lumber:
+                    tile.setAudioSource(lumberSound);
+                    break;
+                case BuildingName.WaterWell:
+                    tile.setAudioSource(waterSound);
+                    break;
+                case BuildingName.Mine:
+                    tile.setAudioSource(mineSound);
+                    break;
+            }
 
             Settler settler = null;
 
@@ -198,6 +243,7 @@ public class BuildingManager : Singleton<BuildingManager>
                     wall.setCondition(2);
                 }
                 walls.Add(p, wall);
+                Debug.Log(p);
                 //Wall sets its only accepted tile as the one it was placed on
                 Tile t = TileManager.Instance.GetTile(p);
                 TileTypes tType = t.GetCurrentTileType();
@@ -208,12 +254,15 @@ public class BuildingManager : Singleton<BuildingManager>
             }
             
             buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
-            b.position = p;
             //Take away resources to build
             foreach(ResourceCost c in b.resourceCostList){
                 ResourceManager.Instance.RemoveResource(c.resourceType, c.amount);
             }
+
+            builtBuildings.Add(p, b);
         }
+
+
     }
 
     // for placing the free initial player houses
@@ -230,9 +279,9 @@ public class BuildingManager : Singleton<BuildingManager>
         buildingMap.SetTile(new Vector3Int(p.x, p.y, 1), b.isometricTile);
     }
 
-    public bool isDestroyed(Building b, Tile.TileTypes tileType) {
+    public bool isDestroyed(Building b, Tile.TileTypes tileType, Vector2Int pos) {
         if(isWall(b.buildingType)) {
-            return !(walls[b.position].getCondition() > 0);
+            return !(walls[pos].getCondition() > 0);
         } else {
             return !b.acceptedTiles.Contains(tileType);
         }
@@ -253,7 +302,10 @@ public class BuildingManager : Singleton<BuildingManager>
         return (name == BuildingName.WoodWall || name == BuildingName.StoneWall);
     }
 
-
+    public Building GetBuilding(BuildingName buildingName)
+    {
+        return buildingDictionary[buildingName];
+    }
     
     // Awake is called before the first frame update
     protected override void Awake()

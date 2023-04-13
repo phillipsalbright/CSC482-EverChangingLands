@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     private GameObject startPanel;
     [SerializeField]
     private CustomMap customMap;
+
     public void StartGame()
     {
         Destroy(customMap.gameObject);

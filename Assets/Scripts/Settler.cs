@@ -13,7 +13,13 @@ public class Settler : MonoBehaviour
     private bool canCollect = true;
     private bool canFlip = true;
     private bool isDead = false;
+    private bool wantsToDie = false;
     private Vector2Int housePos;
+
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private AudioSource respawnSound;
+
+    private int hunger = 2;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,19 +31,32 @@ public class Settler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(deathSound.isPlaying)
+        {
+            wantsToDie = true;
+        }
+        else if(wantsToDie && !deathSound.isPlaying)
+        {
+            wantsToDie = false;
+            MusicManager.Instance.playBGM();
+            if (!BuildingManager.Instance.GetHouses().ContainsKey(housePos))
+            {
+                SettlerManager.Instance.GetSettlers().Remove(gameObject);
+                Destroy(gameObject);
+            }
+            gameObject.SetActive(false);
+        }
     }
 
-    public void SetInitialTileAndPosition(Tile tile)
+    public void SetInitialTileAndPosition(Tile tile, bool canMove)
     {
         if(!sprite.enabled)
         {
             sprite.enabled = true;
         }
         currentTile = tile;
-        canMove = true;
-        canCollect = false;
-        canFlip = true;
+        this.canMove = canMove;
+        canCollect = true;
 
         positionInTilemap = tile.GetTilePos2();
         housePos = positionInTilemap;
@@ -84,20 +103,17 @@ public class Settler : MonoBehaviour
 
     public void StartNewTurn()
     {
-
+        if (ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) >= hunger)
+        {
+            ResourceManager.Instance.RemoveResource(ResourceManager.ResourceTypes.Food, hunger);
+        }
+        else
+        {
+            Die();
+        }
         if(!currentTile.GetIsWalkable())
         {
-            Debug.Log("Settler Dies");
-            isDead = true;
-            canMove = false;
-            canCollect = false;
-            if(!BuildingManager.Instance.GetHouses().ContainsKey(housePos))
-            {
-                Debug.Log("House Gone");
-                SettlerManager.Instance.GetSettlers().Remove(gameObject);
-                Destroy(gameObject);
-            }
-            gameObject.SetActive(false);
+            Die();
         }
         else
         {
@@ -122,7 +138,8 @@ public class Settler : MonoBehaviour
         if (this.canCollect)
         {
             //Now that most tiles have a resource, this if statement stops water from being collected
-            if(!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5) || true)
+            Tile.TileTypes tileType = this.GetCurrentTile().GetCurrentTileType();
+            if (!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(tileType), TileInfo.Instance.GetResourceAmountProduced(tileType)) || true)
             {
                 bool collectedWater = false;
                 for (int i = 0; i < 2; i++)
@@ -132,7 +149,7 @@ public class Settler : MonoBehaviour
 
                         if (!collectedWater && this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
                         {
-                            ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+                            ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, TileInfo.Instance.GetResourceAmountProduced(Tile.TileTypes.Water));
                             collectedWater = true;
                         }
                     }
@@ -144,6 +161,10 @@ public class Settler : MonoBehaviour
 
     public Tile GetCurrentTile()
     {
+        if(isDead)
+        {
+            return null;
+        }
         return currentTile;
     }
 
@@ -152,11 +173,35 @@ public class Settler : MonoBehaviour
         return isDead;
     }
 
+    public void Die()
+    {
+        Debug.Log("Settler Dies");
+        isDead = true;
+        canMove = false;
+        canCollect = false;
+        if (!deathSound.isPlaying)
+        {
+            MusicManager.Instance.pauseBGM();
+            Debug.Log("Death sound play");
+            deathSound.Play();
+        }
+    }
+
     public void Respawn()
     {
-        isDead = false;
-        canMove = true;
-        canCollect = true;
+        if (ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) >= hunger)
+        {
+            ResourceManager.Instance.RemoveResource(ResourceManager.ResourceTypes.Food, hunger);
+            Debug.Log("Settler is respawning");
+            isDead = false;
+            canMove = true;
+            canCollect = true;
+            if (!respawnSound.isPlaying)
+            {
+                respawnSound.Play();
+            }
+
+        }
     }
 
     public void SetHousePos(Vector2Int pos)

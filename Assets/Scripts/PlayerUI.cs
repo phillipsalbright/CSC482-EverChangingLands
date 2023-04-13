@@ -2,16 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerUI : MonoBehaviour
+public class PlayerUI : Singleton<PlayerUI>
 {
     [SerializeField] private TMP_Text _turnText;
 
@@ -35,6 +34,8 @@ public class PlayerUI : MonoBehaviour
 
     private Vector2 _rightStick;
 
+    private PlayerController.mode lastMode;
+
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _gameOverMenu;
     [SerializeField] private GameObject _normalTurnHUD;
@@ -43,8 +44,10 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject _buildingHUD;
     [SerializeField] private GameObject _tileFlippingHUD;
     [SerializeField] private GameObject _selectedTileToFlipHUD;
+    [SerializeField] private GameObject _viewTileInfoHUD;
     [SerializeField] private Button[] _tileFlippingButtons;
     [SerializeField] private TMP_Text setSettlerText;
+    [SerializeField] private List<GameObject> huds = new List<GameObject>();
 
     private Tile _selectedTileToFlip;
     private int _settlersToPlace;
@@ -52,9 +55,21 @@ public class PlayerUI : MonoBehaviour
     private bool _isGamepad;
     private bool _paused = false;
 
+    [SerializeField] private AudioSource selectSound;
+    [SerializeField] private AudioSource infoSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        huds.Add(_pauseMenu);
+        huds.Add(_gameOverMenu);
+        huds.Add(_normalTurnHUD);
+        huds.Add(_startGameHUD);
+        huds.Add(_settlerActionHUD);
+        huds.Add(_buildingHUD);
+        huds.Add(_tileFlippingHUD);
+        huds.Add(_selectedTileToFlipHUD);
+        huds.Add(_viewTileInfoHUD);
         Cursor.visible = false;
         GameManager g = GameManager.Instance;
         nextTurnButton.onClick.AddListener(g.AdvanceTurn);
@@ -94,7 +109,7 @@ public class PlayerUI : MonoBehaviour
     private void HandleTurnChange(int newTurn)
     {
         _turnText.text = "Turn " + newTurn;
-        if (SettlerManager.Instance.GetCurrentNumberOfSettlers() <= 0)
+        if (SettlerManager.Instance.GetNumberAliveSettlers() <= 0 && _playerController.currentControllerMode != PlayerController.mode.GameStart)
         {
             SetMode(PlayerController.mode.GameOver);
         }
@@ -132,12 +147,16 @@ public class PlayerUI : MonoBehaviour
     {
         previewElement.SetActive(true);
         nextTurnButton.gameObject.SetActive(false);
+        infoSound.Stop();
+        infoSound.Play();
     }
 
     public void NoPredictionView()
     {
         previewElement.SetActive(false);
         nextTurnButton.gameObject.SetActive(true);
+        infoSound.Stop();
+        infoSound.Play();
     }
 
     public void MoveCursorGamepad(InputAction.CallbackContext context)
@@ -147,7 +166,11 @@ public class PlayerUI : MonoBehaviour
 
     public void ControllerSelect(InputAction.CallbackContext context)
     {
-        Debug.Log("Select");
+        if(!selectSound.isPlaying)
+        {
+            selectSound.Play();
+        }
+
         if(context.performed)
         {
             Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);
@@ -218,7 +241,13 @@ public class PlayerUI : MonoBehaviour
                             GameManager.Instance.SelectTile(_selectedTileToFlip, 4);
                             SetMode(PlayerController.mode.SelectFlipTile);
                         }
-                    } else
+                    } else if (_playerController.currentControllerMode == PlayerController.mode.viewingTileInfo) 
+                    {
+                        Tile t = tm.GetTileAtLocation(ray.GetPoint(10f));
+                        GameManager.Instance.DeleteSelection();
+                        GameManager.Instance.SelectTile(t, 4);
+                        FindObjectOfType<InformationHUD>().SetInformation(t.GetCurrentTileType(), WeatherManager.Instance.GetCurrentWeather());
+                    } else if (_playerController.currentControllerMode != PlayerController.mode.Paused && _playerController.currentControllerMode != PlayerController.mode.GameOver)
                     {
                         SetMode(PlayerController.mode.BeginTurn);
                     }
@@ -244,31 +273,16 @@ public class PlayerUI : MonoBehaviour
         switch (newMode)
         {
             case PlayerController.mode.BeginTurn:
-                _normalTurnHUD.SetActive(true);
-                _startGameHUD.SetActive(false);
-                _settlerActionHUD.SetActive(false);
-                _buildingHUD.SetActive(false);
-                _tileFlippingHUD.SetActive(false);
-                _selectedTileToFlipHUD.SetActive(false);
+                SwapHUD(2);
                 GameManager.Instance.DeleteSelection();
                 _playerController.currentControllerMode = PlayerController.mode.BeginTurn;
                 break;
             case PlayerController.mode.GameStart:
-                _normalTurnHUD.SetActive(false);
-                _startGameHUD.SetActive(true);
-                _settlerActionHUD.SetActive(false);
-                _buildingHUD.SetActive(false);
-                _tileFlippingHUD.SetActive(false);
-                _selectedTileToFlipHUD.SetActive(false);
+                SwapHUD(3);
                 _playerController.currentControllerMode = PlayerController.mode.GameStart;
                 break;
             case PlayerController.mode.SettlerActions:
-                _normalTurnHUD.SetActive(false);
-                _startGameHUD.SetActive(false);
-                _settlerActionHUD.SetActive(true);
-                _buildingHUD.SetActive(false);
-                _tileFlippingHUD.SetActive(false);
-                _selectedTileToFlipHUD.SetActive(false);
+                SwapHUD(4);
                 _settlerActionHUD.transform.Find("MoveSettlerButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanMove();
                 _settlerActionHUD.transform.Find("CollectResourceButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanCollect();
                 _settlerActionHUD.transform.Find("BuildStructureButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
@@ -278,47 +292,29 @@ public class PlayerUI : MonoBehaviour
                 GameManager.Instance.SelectTile(_selectedSettler.GetCurrentTile(), 3);
                 break;
             case PlayerController.mode.MovingSettler:
-                _normalTurnHUD.SetActive(false);
-                _startGameHUD.SetActive(false);
-                _settlerActionHUD.SetActive(false);
-                _buildingHUD.SetActive(false);
-                _tileFlippingHUD.SetActive(false);
-                _selectedTileToFlipHUD.SetActive(false);
+                SwapHUD(-1);
                 GameObject.FindObjectOfType<GameManager>().DisplayMoveTiles(_selectedSettler.GetCurrentTile());
 
                 _playerController.currentControllerMode = PlayerController.mode.MovingSettler;
                 break;
             case PlayerController.mode.Building:
-                _normalTurnHUD.SetActive(false);
-                _startGameHUD.SetActive(false);
-                _settlerActionHUD.SetActive(false);
-                _buildingHUD.SetActive(true);
-                _tileFlippingHUD.SetActive(false);
-                _selectedTileToFlipHUD.SetActive(false);
-                _buildingHUD.transform.Find("BuildLumberButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Lumber) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Lumber, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                _buildingHUD.transform.Find("BuildFarmButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Farm) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Farm, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                _buildingHUD.transform.Find("BuildWellButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.WaterWell) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.WaterWell, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                _buildingHUD.transform.Find("BuildHouseButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.House) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.House, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                SwapHUD(5);
+                BuildingListManager.Instance.OpenBuildingList(_selectedSettler.GetCurrentTile().GetCurrentTileType(), _selectedSettler.GetCurrentTile().GetTilePos2());
+                //_buildingHUD.transform.Find("BuildLumberButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Lumber) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Lumber, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                //_buildingHUD.transform.Find("BuildFarmButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Farm) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Farm, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                //_buildingHUD.transform.Find("BuildWellButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.WaterWell) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.WaterWell, _selectedSettler.GetCurrentTile().GetCurrentTileType());
+                //_buildingHUD.transform.Find("BuildHouseButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.House) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.House, _selectedSettler.GetCurrentTile().GetCurrentTileType());
                 _playerController.currentControllerMode = PlayerController.mode.Building;
                 break;
             case PlayerController.mode.Flipping:
-                _normalTurnHUD.SetActive(false);
-                _startGameHUD.SetActive(false);
-                _settlerActionHUD.SetActive(false);
-                _buildingHUD.SetActive(false);
-                _tileFlippingHUD.SetActive(true);
-                _selectedTileToFlipHUD.SetActive(false);
+                SwapHUD(6);
                 GameManager.Instance.DisplayFlipTiles(_selectedSettler.GetCurrentTile());
                 _playerController.currentControllerMode = PlayerController.mode.Flipping;
                 break;
             case PlayerController.mode.SelectFlipTile:
-                _normalTurnHUD.SetActive(false);
-                _startGameHUD.SetActive(false);
-                _settlerActionHUD.SetActive(false);
-                _buildingHUD.SetActive(false);
-                _tileFlippingHUD.SetActive(false);
-                _selectedTileToFlipHUD.SetActive(true);
-                List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
+                SwapHUD(7);
+                TileSwitchManager.Instance.OpenTileManager(_selectedTileToFlip.GetCurrentTileType(), _selectedTileToFlip.GetTilePos2());
+                /*List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
                 for (int i = 0; i < _tileFlippingButtons.Length; i++)
                 {
                     if (i < switches.Count)
@@ -338,18 +334,35 @@ public class PlayerUI : MonoBehaviour
                     {
                         _tileFlippingButtons[i].gameObject.SetActive(false);
                     }
-                }
+                }*/
                 _playerController.currentControllerMode = PlayerController.mode.SelectFlipTile;
                 break;
             case PlayerController.mode.GameOver:
-                _normalTurnHUD.SetActive(false);
-                _startGameHUD.SetActive(false);
-                _settlerActionHUD.SetActive(false);
-                _buildingHUD.SetActive(false);
-                _tileFlippingHUD.SetActive(false);
-                _selectedTileToFlipHUD.SetActive(false);
-                _gameOverMenu.SetActive(true);
+                SwapHUD(1);
+                _playerController.currentControllerMode = PlayerController.mode.GameOver;
                 break;
+            case PlayerController.mode.Paused:
+                lastMode = _playerController.currentControllerMode;
+                _playerController.currentControllerMode = PlayerController.mode.Paused;
+                SwapHUD(0);
+                break;
+            case PlayerController.mode.viewingTileInfo:
+                _playerController.currentControllerMode = PlayerController.mode.viewingTileInfo;
+                SwapHUD(8);
+                break;
+        }
+    }
+
+    public void SwapHUD(int index)
+    {
+        for (int i = 0; i < huds.Count; i++)
+        {
+            huds[i].SetActive(false);
+        }
+
+        if (index >= 0 && index < huds.Count)
+        {
+            huds[index].SetActive(true);
         }
     }
 
@@ -390,8 +403,52 @@ public class PlayerUI : MonoBehaviour
         SetMode(2);
     }
 
+    public void SwapTile(TileInfo.TileSwitch tileSwitch)
+    {
+        _selectedSettler.FlipTile(_selectedTileToFlip, tileSwitch.switchTile);
+        for (int i = 0; i < tileSwitch.requiredResources.Count; i++)
+        {
+            ResourceManager.Instance.RemoveResource(tileSwitch.requiredResources[i], tileSwitch.requiredResourcesCount[i]);
+        }
+        SetMode(2);
+    }
+
     public void PauseGame(InputAction.CallbackContext context)
     {
+        if (context.performed)
+        {
+            if (!_paused)
+            {
+                SetMode(PlayerController.mode.Paused);
+                _paused = true;
+            }
+            else
+            {
+                UnpauseGame();
+            }
+        }
+    }
 
+    public void UnpauseGame()
+    {
+        SetMode(lastMode);
+        _paused = false;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        CustomMap[] customMaps = FindObjectsOfType<CustomMap>();
+        foreach(CustomMap c in customMaps)
+        {
+           Destroy(c.gameObject);
+        }
+        SceneManager.LoadScene(0);
     }
 }

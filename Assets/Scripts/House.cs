@@ -19,10 +19,11 @@ public class House
             Debug.Log("No Settler so Spawning New One");
             SettlerManager.Instance.AddSettlerAtTile(TileManager.Instance.GetTile(location));
         }
-        else if (settler.isSettlerDead())
+        else if (settler.isSettlerDead() && ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) > 2)
         {
-            settler.SetInitialTileAndPosition(TileManager.Instance.GetTile(location));
+            Debug.Log("Respawn Settler");
             settler.gameObject.SetActive(true);
+            settler.SetInitialTileAndPosition(TileManager.Instance.GetTile(location), false);
             settler.Respawn();
         }
     }

@@ -18,6 +18,7 @@ public class Tile
         Rocks,
         Mountain,
         SnowPeak,
+        Fire,
     }
 
     private TileTypes currentTileType;
@@ -34,6 +35,8 @@ public class Tile
     private Vector3Int tilePos;
     private bool isValid;
     private bool isWalkable;
+
+    private AudioSource tileSound;
 
     public Vector2Int GetTilePos2()
     {
@@ -78,7 +81,7 @@ public class Tile
     public void SetCurrentTileType(TileTypes tileType)
     {
         currentTileType = tileType;
-        isWalkable = currentTileType != Tile.TileTypes.Water && currentTileType != Tile.TileTypes.DeepWater;
+        isWalkable = currentTileType != Tile.TileTypes.Water && currentTileType != Tile.TileTypes.DeepWater && currentTileType != Tile.TileTypes.Fire;
     }
 
     //sets the current tile's terrain and recall forecast methods
@@ -136,5 +139,18 @@ public class Tile
     public Tile[,] GetAdjacentTiles()
     {
         return adjacentTiles;
+    }
+
+    public void setAudioSource(AudioSource sound)
+    {
+        if(tileSound)
+        {
+            tileSound.Stop();
+        }
+        tileSound = sound;
+        if(tileSound)
+        {
+            tileSound.Play();
+        }
     }
 }
