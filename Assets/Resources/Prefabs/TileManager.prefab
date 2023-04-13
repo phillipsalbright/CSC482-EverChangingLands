@@ -241,13 +241,19 @@ MonoBehaviour:
     acceptedTiles: 01000000
   - buildingType: 2
     isometricTile: {fileID: 11400000, guid: c52ad04f47b9bd24bbc8a1f075aab308, type: 2}
-    resourceCostList: []
+    resourceCostList:
+    - resourceType: 3
+      amount: 5
     resourceProduced: 1
     amountProduced: 5
-    acceptedTiles: 01000000
+    acceptedTiles: 010000000400000002000000
   - buildingType: 4
     isometricTile: {fileID: 11400000, guid: 866d56516447ee444bc88057ec12f409, type: 2}
-    resourceCostList: []
+    resourceCostList:
+    - resourceType: 0
+      amount: 10
+    - resourceType: 3
+      amount: 5
     resourceProduced: 4
     amountProduced: 1
     acceptedTiles: 01000000040000000700000002000000
@@ -266,7 +272,7 @@ MonoBehaviour:
       amount: 10
     resourceProduced: 5
     amountProduced: 0
-    acceptedTiles: 09000000080000000100000003000000
+    acceptedTiles: 00000000040000000100000003000000
   - buildingType: 6
     isometricTile: {fileID: 11400000, guid: a8ed2acdafae021419660791cc6586fb, type: 2}
     resourceCostList:
@@ -274,7 +280,7 @@ MonoBehaviour:
       amount: 10
     resourceProduced: 5
     amountProduced: 0
-    acceptedTiles: 09000000080000000100000003000000
+    acceptedTiles: 010000000300000004000000070000000000000002000000
   buildSound: {fileID: 2056547777777652608}
   destroySound: {fileID: 3165049210932668089}
   farmSound: {fileID: 2266758979789770112}
@@ -292,7 +298,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0d5a1bbb41f68904ebd152a047829a56, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4aa250025256306448aee3e9247d09b5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -495,9 +501,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -591,9 +597,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -687,9 +693,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -783,9 +789,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -879,9 +885,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
