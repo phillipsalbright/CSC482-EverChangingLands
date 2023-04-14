@@ -274,6 +274,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2352091737104270609, guid: 78111db8a9b567346807c7c924c1581b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352091737104270609, guid: 78111db8a9b567346807c7c924c1581b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352091737104270609, guid: 78111db8a9b567346807c7c924c1581b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000009298325
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352091738187314971, guid: 78111db8a9b567346807c7c924c1581b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352091738187314971, guid: 78111db8a9b567346807c7c924c1581b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352091738187314971, guid: 78111db8a9b567346807c7c924c1581b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4046467070421952491, guid: 78111db8a9b567346807c7c924c1581b, type: 3}
       propertyPath: tileRuleSet
       value: 

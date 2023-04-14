@@ -52,6 +52,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+      propertyPath: rsName
+      value: phillips
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.size
       value: 11
       objectReference: {fileID: 0}
