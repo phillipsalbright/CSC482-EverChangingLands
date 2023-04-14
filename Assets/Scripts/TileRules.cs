@@ -108,7 +108,7 @@ public static class TileRules
         }
         //then, check all rules that affect the current tile regardless of weather
         List<TileRuleSet.RuleCondition> allWeatherConditions;
-        if(AllTileInspectorRules.TryGetValue(weather, out allWeatherConditions)){
+        if(AllWeatherInspectorRules.TryGetValue(currentType, out allWeatherConditions)){
             foreach(TileRuleSet.RuleCondition wrc in allWeatherConditions){
                 int count = 0;
                 foreach(Tile.TileTypes type in wrc.TilesToCheck){

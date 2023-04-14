@@ -1,283 +1,647 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5402990482387675511
-PrefabInstance:
+--- !u!1 &4465550843234885293
+GameObject:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741528, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: rsName
-      value: phillips
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].tileType
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].nonWeatherConditions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[0].weatherType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[1].weatherType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[2].weatherType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].nonWeatherConditions.Array.data[0].NumTiles
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].nonWeatherConditions.Array.data[0].goalTile
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[0].ruleConditions.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[0].ruleConditions.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[1].ruleConditions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[2].ruleConditions.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].nonWeatherConditions.Array.data[0].conditional
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[0].ruleConditions.Array.data[2].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[0].ruleConditions.Array.data[2].goalTile
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[6].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[6].goalTile
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[7].NumTiles
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[7].goalTile
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[0].ruleConditions.Array.data[0].NumTiles
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[0].ruleConditions.Array.data[0].goalTile
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[1].ruleConditions.Array.data[0].NumTiles
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[1].ruleConditions.Array.data[0].goalTile
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[2].ruleConditions.Array.data[0].NumTiles
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[2].ruleConditions.Array.data[0].goalTile
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].nonWeatherConditions.Array.data[0].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[0].ruleConditions.Array.data[2].conditional
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[6].conditional
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[7].conditional
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[0].ruleConditions.Array.data[0].conditional
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[1].ruleConditions.Array.data[0].conditional
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[2].ruleConditions.Array.data[0].conditional
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].nonWeatherConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].nonWeatherConditions.Array.data[0].TilesToCheck.Array.data[1]
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[6].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[7].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[1].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[2].ruleConditions.Array.data[0].TilesToCheck.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.data[0]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[0].ruleConditions.Array.data[2].TilesToCheck.Array.data[1]
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[6].TilesToCheck.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[6].TilesToCheck.Array.data[1]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[6].TilesToCheck.Array.data[2]
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[7].TilesToCheck.Array.data[0]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[0].rules.Array.data[1].ruleConditions.Array.data[7].TilesToCheck.Array.data[1]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[0].ruleConditions.Array.data[0].TilesToCheck.Array.data[1]
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[1].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[1].ruleConditions.Array.data[0].TilesToCheck.Array.data[1]
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[2].ruleConditions.Array.data[0].TilesToCheck.Array.data[0]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: currentRuleset.tileRules.Array.data[10].rules.Array.data[2].ruleConditions.Array.data[0].TilesToCheck.Array.data[1]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8575862916341741530, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
-      propertyPath: m_Name
-      value: PhillipsRules
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4465550843234885295}
+  - component: {fileID: 4465550843234885294}
+  m_Layer: 0
+  m_Name: PhillipsRules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4465550843234885295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4465550843234885293}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4465550843234885294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4465550843234885293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3433b3193f7ba14ca345640b39ce2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRuleset:
+    allTilesRules:
+      nonWeatherConditions:
+      - TilesToCheck: 06000000
+        conditional: 0
+        NumTiles: 0
+        goalTile: 5
+      rules: []
+    tileRules:
+    - tileType: 3
+      nonWeatherConditions:
+      - TilesToCheck: 03000000
+        conditional: 1
+        NumTiles: 4
+        goalTile: 1
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 0a000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 10
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 0400000000000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 080000000900000007000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 10
+        - TilesToCheck: 0500000003000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 3
+        - TilesToCheck: 0a000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 10
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+    - tileType: 1
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 3
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 0000000004000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 080000000700000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 3
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 0000000004000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 090000000800000007000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
+        - TilesToCheck: 0900000008000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 7
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 7
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 3
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 2
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 0500000003000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 3
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+    - tileType: 5
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 0500000002000000
+          conditional: 4
+          NumTiles: 2
+          goalTile: 2
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 0500000002000000
+          conditional: 3
+          NumTiles: 1
+          goalTile: 4
+        - TilesToCheck: 0500000002000000
+          conditional: 3
+          NumTiles: 3
+          goalTile: 2
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0500000002000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 2
+    - tileType: 2
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 5
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 5
+        - TilesToCheck: 0000000004000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 080000000900000007000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 5
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 1
+        - TilesToCheck: 090000000800000007000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 7
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 5
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 5
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+    - tileType: 0
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 0800000009000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 0100000003000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+    - tileType: 4
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 0
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 090000000800000007000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+        - TilesToCheck: 0900000008000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 0
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 090000000800000007000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 7
+        - TilesToCheck: 0900000008000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 7
+        - TilesToCheck: 09000000
+          conditional: 1
+          NumTiles: 1
+          goalTile: 7
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 0
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 2
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+        - TilesToCheck: 0900000008000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 7
+    - tileType: 6
+      nonWeatherConditions:
+      - TilesToCheck: 
+        conditional: 6
+        NumTiles: 0
+        goalTile: 6
+      rules:
+      - weatherType: 0
+        ruleConditions: []
+      - weatherType: 1
+        ruleConditions: []
+      - weatherType: 2
+        ruleConditions: []
+    - tileType: 7
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 07000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 8
+        - TilesToCheck: 0200000005000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 07000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 8
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+        - TilesToCheck: 00000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 07000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 8
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 2
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 2
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 4
+        - TilesToCheck: 05000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 3
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 3
+          goalTile: 1
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 1
+    - tileType: 8
+      nonWeatherConditions:
+      - TilesToCheck: 08000000
+        conditional: 1
+        NumTiles: 4
+        goalTile: 9
+      - TilesToCheck: 05000000
+        conditional: 1
+        NumTiles: 3
+        goalTile: 7
+      - TilesToCheck: 03000000
+        conditional: 1
+        NumTiles: 3
+        goalTile: 7
+      - TilesToCheck: 00000000
+        conditional: 1
+        NumTiles: 3
+        goalTile: 7
+      rules:
+      - weatherType: 0
+        ruleConditions: []
+      - weatherType: 1
+        ruleConditions: []
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0500000002000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 7
+        - TilesToCheck: 0300000001000000
+          conditional: 1
+          NumTiles: 2
+          goalTile: 7
+        - TilesToCheck: 01000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 4
+        - TilesToCheck: 03000000
+          conditional: 1
+          NumTiles: 4
+          goalTile: 1
+    - tileType: 9
+      nonWeatherConditions:
+      - TilesToCheck: 0800000009000000
+        conditional: 4
+        NumTiles: 1
+        goalTile: 8
+      rules:
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 0800000009000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 8
+      - weatherType: 1
+        ruleConditions:
+        - TilesToCheck: 0800000009000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 8
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0800000009000000
+          conditional: 4
+          NumTiles: 1
+          goalTile: 8
+    - tileType: 10
+      nonWeatherConditions: []
+      rules:
+      - weatherType: 2
+        ruleConditions:
+        - TilesToCheck: 0a000000
+          conditional: 1
+          NumTiles: 0
+          goalTile: 4
+      - weatherType: 1
+        ruleConditions: []
+      - weatherType: 0
+        ruleConditions:
+        - TilesToCheck: 0a00000003000000
+          conditional: 3
+          NumTiles: 2
+          goalTile: 4
+  rsName: phillips
