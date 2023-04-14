@@ -138,7 +138,8 @@ public class Settler : MonoBehaviour
         if (this.canCollect)
         {
             //Now that most tiles have a resource, this if statement stops water from being collected
-            if(!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(this.GetCurrentTile().GetCurrentTileType()), 5) || true)
+            Tile.TileTypes tileType = this.GetCurrentTile().GetCurrentTileType();
+            if (!ResourceManager.Instance.AddResource(TileInfo.Instance.GetTileResourceTypes(tileType), TileInfo.Instance.GetResourceAmountProduced(tileType)) || true)
             {
                 bool collectedWater = false;
                 for (int i = 0; i < 2; i++)
@@ -148,7 +149,7 @@ public class Settler : MonoBehaviour
 
                         if (!collectedWater && this.GetCurrentTile().GetAdjacentTiles()[i, j].GetCurrentTileType() == Tile.TileTypes.Water)
                         {
-                            ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, 5);
+                            ResourceManager.Instance.AddResource(ResourceManager.ResourceTypes.Water, TileInfo.Instance.GetResourceAmountProduced(Tile.TileTypes.Water));
                             collectedWater = true;
                         }
                     }
@@ -160,6 +161,10 @@ public class Settler : MonoBehaviour
 
     public Tile GetCurrentTile()
     {
+        if(isDead)
+        {
+            return null;
+        }
         return currentTile;
     }
 

@@ -31,6 +31,7 @@ public class TileInfo : Singleton<TileInfo>
         public float chance;
 
         public ResourceManager.ResourceTypes associatedResource;
+        public int associatedResourceAmount;
         public List<TileSwitch> tileSwitches;
     }
     [Serializable]
@@ -259,5 +260,20 @@ public class TileInfo : Singleton<TileInfo>
     public List<TileSwitch> GetTileSwitches(Tile.TileTypes tileType)
     {
         return tileList[tileType].tileSwitches;
+    }
+
+    public Sprite GetTileSprite(Tile.TileTypes tileType)
+    {
+        return tileList[tileType].isometricTile.m_DefaultSprite;
+    }
+
+    public ResourceManager.ResourceTypes GetResourceProduced(Tile.TileTypes tileType)
+    {
+        return tileList[tileType].associatedResource;
+    }
+
+    public int GetResourceAmountProduced(Tile.TileTypes tileType)
+    {
+        return tileList[tileType].associatedResourceAmount;
     }
 }

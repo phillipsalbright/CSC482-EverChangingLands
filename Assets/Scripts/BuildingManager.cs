@@ -79,7 +79,6 @@ public class BuildingManager : Singleton<BuildingManager>
             }
             if(isDestroyed(b, tType, p)) {
                 players.Add(p);
-                buildingMap.SetTile( new Vector3Int(p.x, p.y, 1), null);
             } else {
                 produceResources(name);
             }
@@ -90,21 +89,25 @@ public class BuildingManager : Singleton<BuildingManager>
 
         foreach (Vector2Int p in players)
         {
-            builtBuildings.Remove(p);
-            TileManager.Instance.GetTile(p).setAudioSource(null);
-            if(houses.ContainsKey(p)) {
-                houses.Remove(p);
-                if(!destroySound.isPlaying)
-                {
-                    destroySound.Play();
-                }
-            }
-            if(walls.ContainsKey(p)) {
-                walls.Remove(p);
-            }
+            destroyBuilding(p);
         }
     }
 
+    public void destroyBuilding(Vector2Int p) {
+        builtBuildings.Remove(p);
+        buildingMap.SetTile( new Vector3Int(p.x, p.y, 1), null);
+        TileManager.Instance.GetTile(p).setAudioSource(null);
+        if(houses.ContainsKey(p)) {
+            houses.Remove(p);
+            if(!destroySound.isPlaying)
+            {
+                destroySound.Play();
+            }
+        }
+        if(walls.ContainsKey(p)) {
+            walls.Remove(p);
+        }
+    }
     public List<BuildingName> getAvailableBuildings(Tile.TileTypes tileType) {
         List<BuildingName> list = new List<BuildingName>();
         foreach(Building b in buildingList) {
@@ -143,7 +146,8 @@ public class BuildingManager : Singleton<BuildingManager>
         return b.acceptedTiles.Contains(tile);
     }
 
-    // Check if a given tile has a building already on it
+    // Check if a given tile has a building already on it, reversed from what it should be for some dumbass reason
+    //RETURNS TRUE IF NO BUILDING, FALSE if THERE IS A BUILDING
     public bool hasBuilding(Tile tile)
     {
         return !(buildingMap.GetTile(new Vector3Int(tile.GetTilePos2().x, tile.GetTilePos2().y, 1)));

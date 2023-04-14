@@ -207,7 +207,7 @@
                 {
                     "name": "negative",
                     "id": "2a7300c2-bcd5-4bf6-886c-b33e788f46e8",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "MapControls",
@@ -218,7 +218,7 @@
                 {
                     "name": "positive",
                     "id": "c29020ff-bcce-4e0c-af50-763b4f8467eb",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "MapControls",
@@ -240,7 +240,7 @@
                 {
                     "name": "negative",
                     "id": "7045a480-fcff-43c3-8af8-02b6fc017140",
-                    "path": "<Gamepad>/dpad/up",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -251,7 +251,7 @@
                 {
                     "name": "positive",
                     "id": "678860d4-f0d0-4626-9cdd-7368a1661f60",
-                    "path": "<Gamepad>/dpad/down",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -360,11 +360,33 @@
                 },
                 {
                     "name": "",
+                    "id": "001d9a9d-6aa2-4122-88b1-2c7e46ea58e2",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MapControls",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "de19afa4-06f4-4fc1-957e-2f766be79205",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "MapControls",
+                    "action": "SwapView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1028823c-34a8-4cd2-b0bc-7d2f7167a431",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "SwapView",
                     "isComposite": false,
                     "isPartOfComposite": false

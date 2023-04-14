@@ -10,7 +10,7 @@ public class RuleSetManager : Singleton<RuleSetManager>
     
     [SerializeField]
     private TileRuleSet demo;
-    [SerializeField, Tooltip("the rulesets that should come packaged with the game")]
+    [SerializeField, Tooltip("the ruleset holder")]
     private RuleSetHolder ruleSets;
     [SerializeField, Tooltip("the rulesets that should come packaged with the game")]
     private List<TileRuleSet> starterRuleSets;
@@ -37,8 +37,10 @@ public class RuleSetManager : Singleton<RuleSetManager>
                 Debug.LogWarning("Failed to load existing directory file. creating new");
                 fileDirectory = new RuleSetFileDirectorySave(directoryFilepath);
                 WriteStarterRuleSets();
+                ReadRulesFromDirectory(fileDirectory);
             }
             else{
+                WriteStarterRuleSets();
                 ReadRulesFromDirectory(fileDirectory);
             }
         }
@@ -46,6 +48,7 @@ public class RuleSetManager : Singleton<RuleSetManager>
             Debug.Log("No directory file found. creating new");
             fileDirectory = new RuleSetFileDirectorySave(directoryFilepath);
             WriteStarterRuleSets();
+            ReadRulesFromDirectory(fileDirectory);
         }
     }
 
@@ -118,7 +121,7 @@ public class RuleSetManager : Singleton<RuleSetManager>
         return true;
     }
 
-    private bool CreateRuleSet(TileRuleSet trs){
+    public bool CreateRuleSet(TileRuleSet trs){
         if(fileDirectory.ContainsRuleSetName(trs.getRSName())){
             Debug.LogWarning("tried to save over ruleset with existing name: " + trs.getRSName());
             return false;
@@ -129,6 +132,12 @@ public class RuleSetManager : Singleton<RuleSetManager>
         bool s2 = rsIO.WriteDirectory(directoryFilepath, fileDirectory);
 
         return s1 && s2;
+    }
+    public bool CreateRuleSet(TileRuleSet.AllRules ar, string rulesName){
+        TileRuleSet thisTRS = ruleSets.gameObject.AddComponent<TileRuleSet>();
+        thisTRS.setRSName(rulesName);
+        thisTRS.SetRuleSet(ar);
+        return CreateRuleSet(thisTRS);
     }
 
     private bool OverwriteRuleSet(TileRuleSet trs){
@@ -161,6 +170,14 @@ public class RuleSetManager : Singleton<RuleSetManager>
         fileDirectory.DeleteRuleSet(trs);
         rsIO.WriteDirectory(directoryFilepath, fileDirectory);
         rsIO.DeleteFile(trs.getRSName());
+    }
+
+    public TileRuleSet GetRuleSetByName(string trsName){
+        return ruleSets.GetRuleSetByName(trsName);
+    }
+
+    public List<TileRuleSet> GetAllRuleSets(){
+        return ruleSets.GetAllRuleSets();
     }
 
     // private void ApplyChanges()

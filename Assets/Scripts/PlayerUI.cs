@@ -56,6 +56,7 @@ public class PlayerUI : Singleton<PlayerUI>
     private bool _paused = false;
 
     [SerializeField] private AudioSource selectSound;
+    [SerializeField] private AudioSource infoSound;
 
     // Start is called before the first frame update
     void Start()
@@ -146,12 +147,16 @@ public class PlayerUI : Singleton<PlayerUI>
     {
         previewElement.SetActive(true);
         nextTurnButton.gameObject.SetActive(false);
+        infoSound.Stop();
+        infoSound.Play();
     }
 
     public void NoPredictionView()
     {
         previewElement.SetActive(false);
         nextTurnButton.gameObject.SetActive(true);
+        infoSound.Stop();
+        infoSound.Play();
     }
 
     public void MoveCursorGamepad(InputAction.CallbackContext context)
@@ -282,6 +287,7 @@ public class PlayerUI : Singleton<PlayerUI>
                 _settlerActionHUD.transform.Find("CollectResourceButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanCollect();
                 _settlerActionHUD.transform.Find("BuildStructureButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
                 _settlerActionHUD.transform.Find("FlipTileButton").gameObject.GetComponent<Button>().interactable = _selectedSettler.GetCanFlip();
+                _settlerActionHUD.transform.Find("DestroyBuildingButton").gameObject.GetComponent<Button>().interactable = !BuildingManager.Instance.hasBuilding(_selectedSettler.GetCurrentTile());
                 _playerController.currentControllerMode = PlayerController.mode.SettlerActions;
                 GameManager.Instance.DeleteSelection();
                 GameManager.Instance.SelectTile(_selectedSettler.GetCurrentTile(), 3);
@@ -295,10 +301,6 @@ public class PlayerUI : Singleton<PlayerUI>
             case PlayerController.mode.Building:
                 SwapHUD(5);
                 BuildingListManager.Instance.OpenBuildingList(_selectedSettler.GetCurrentTile().GetCurrentTileType(), _selectedSettler.GetCurrentTile().GetTilePos2());
-                //_buildingHUD.transform.Find("BuildLumberButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Lumber) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Lumber, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                //_buildingHUD.transform.Find("BuildFarmButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.Farm) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.Farm, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                //_buildingHUD.transform.Find("BuildWellButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.WaterWell) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.WaterWell, _selectedSettler.GetCurrentTile().GetCurrentTileType());
-                //_buildingHUD.transform.Find("BuildHouseButton").gameObject.GetComponent<Button>().interactable = BuildingManager.Instance.canAfford(BuildingManager.BuildingName.House) && BuildingManager.Instance.canBuild(BuildingManager.BuildingName.House, _selectedSettler.GetCurrentTile().GetCurrentTileType());
                 _playerController.currentControllerMode = PlayerController.mode.Building;
                 break;
             case PlayerController.mode.Flipping:
@@ -308,7 +310,8 @@ public class PlayerUI : Singleton<PlayerUI>
                 break;
             case PlayerController.mode.SelectFlipTile:
                 SwapHUD(7);
-                List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
+                TileSwitchManager.Instance.OpenTileManager(_selectedTileToFlip.GetCurrentTileType(), _selectedTileToFlip.GetTilePos2());
+                /*List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
                 for (int i = 0; i < _tileFlippingButtons.Length; i++)
                 {
                     if (i < switches.Count)
@@ -328,7 +331,7 @@ public class PlayerUI : Singleton<PlayerUI>
                     {
                         _tileFlippingButtons[i].gameObject.SetActive(false);
                     }
-                }
+                }*/
                 _playerController.currentControllerMode = PlayerController.mode.SelectFlipTile;
                 break;
             case PlayerController.mode.GameOver:
@@ -397,6 +400,16 @@ public class PlayerUI : Singleton<PlayerUI>
         SetMode(2);
     }
 
+    public void SwapTile(TileInfo.TileSwitch tileSwitch)
+    {
+        _selectedSettler.FlipTile(_selectedTileToFlip, tileSwitch.switchTile);
+        for (int i = 0; i < tileSwitch.requiredResources.Count; i++)
+        {
+            ResourceManager.Instance.RemoveResource(tileSwitch.requiredResources[i], tileSwitch.requiredResourcesCount[i]);
+        }
+        SetMode(2);
+    }
+
     public void PauseGame(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -411,6 +424,11 @@ public class PlayerUI : Singleton<PlayerUI>
                 UnpauseGame();
             }
         }
+    }
+
+    public void DestroyBuilding()
+    {
+        BuildingManager.Instance.destroyBuilding(_selectedSettler.GetCurrentTile().GetTilePos2());
     }
 
     public void UnpauseGame()
