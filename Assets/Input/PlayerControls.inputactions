@@ -360,6 +360,17 @@
                 },
                 {
                     "name": "",
+                    "id": "001d9a9d-6aa2-4122-88b1-2c7e46ea58e2",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MapControls",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "de19afa4-06f4-4fc1-957e-2f766be79205",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
