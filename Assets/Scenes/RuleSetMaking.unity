@@ -979,6 +979,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -46.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3206959122593736013, guid: 336f87d03c0f47043b06607435c13bca, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206959122593736013, guid: 336f87d03c0f47043b06607435c13bca, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206959122593736013, guid: 336f87d03c0f47043b06607435c13bca, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206959122593736013, guid: 336f87d03c0f47043b06607435c13bca, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206959122593736013, guid: 336f87d03c0f47043b06607435c13bca, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3262197297093745958, guid: 336f87d03c0f47043b06607435c13bca, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1881,8 +1901,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1096792113}
     - target: {fileID: 5472942778381217911, guid: 209b29a977f85e142855c15bc9680f32, type: 3}
+      propertyPath: starterRuleSets.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5472942778381217911, guid: 209b29a977f85e142855c15bc9680f32, type: 3}
       propertyPath: starterRuleSets.Array.data[0]
       value: 
       objectReference: {fileID: 1096792113}
+    - target: {fileID: 5472942778381217911, guid: 209b29a977f85e142855c15bc9680f32, type: 3}
+      propertyPath: starterRuleSets.Array.data[2]
+      value: 
+      objectReference: {fileID: 4465550843234885294, guid: 5a34b5488d47262438ec9afedd4be2ce, type: 3}
+    - target: {fileID: 5472942778381217911, guid: 209b29a977f85e142855c15bc9680f32, type: 3}
+      propertyPath: starterRuleSets.Array.data[3]
+      value: 
+      objectReference: {fileID: 1090568727628176596, guid: 2dd7592d798aa6446813afa24e47ec89, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209b29a977f85e142855c15bc9680f32, type: 3}
