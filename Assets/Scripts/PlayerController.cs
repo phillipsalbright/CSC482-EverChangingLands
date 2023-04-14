@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 ybounds;
     [SerializeField] private Vector2 sizebounds;
     [SerializeField] private PlayerUI ui;
-    [SerializeField] private ParticleSystem rainGenerator;
+    [SerializeField] private GameObject rainGenerator;
+    ParticleSystemShapeType boxShape = ParticleSystemShapeType.Box;
+    Vector3 defaultBoxSize = Vector3.zero;
+    float defaultOrthographicSize = 0;
     private Camera cam;
     private Vector2 inputVector = Vector2.zero;
     public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile, GameOver, Paused, viewingTileInfo};
@@ -24,6 +27,8 @@ public class PlayerController : MonoBehaviour
     {
         cam = this.GetComponent<Camera>();
         ui = GetComponentInChildren<PlayerUI>();
+        defaultOrthographicSize = cam.orthographicSize;
+        defaultBoxSize = rainGenerator.GetComponent<ParticleSystem>().shape.scale;
     }
 
     // Update is called once per frame
@@ -41,9 +46,13 @@ public class PlayerController : MonoBehaviour
 
             cam.orthographicSize += zoomInput * zoomScalar * Time.deltaTime / -2;
             cam.orthographicSize = Math.Clamp(cam.orthographicSize, sizebounds.x, sizebounds.y);
-            rainGenerator.shape.scale.Set(cam.orthographicSize, 1, 1);
+            var rainShape = rainGenerator.GetComponent<ParticleSystem>().shape;
+            rainShape.shapeType = boxShape;
+            float scaleSize = cam.orthographicSize / defaultOrthographicSize;
+            rainShape.scale = new Vector3(scaleSize * defaultBoxSize.x, scaleSize * defaultBoxSize.y , 1);
+            Debug.Log(rainGenerator.GetComponent<ParticleSystem>().shape.scale);
         }
-      
+        
     }
 
     public void MovementInputChanged(InputAction.CallbackContext context)
