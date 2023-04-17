@@ -5,6 +5,8 @@ using UnityEngine;
 public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
 {
     [Header("ui pieces")]
+    [SerializeField, Tooltip("The main menu script")]
+    private MainMenu mainMenuScript;
     [SerializeField, Tooltip("The canvas to be used for the ruleset creation")]
     private GameObject rulesetCanvas;
     [SerializeField, Tooltip("The canvas to be used before ruleset creation")]
@@ -39,8 +41,18 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     [SerializeField, Tooltip("the currently selected weather type")]
     private WeatherManager.WeatherTypes currentWeatherType = WeatherManager.WeatherTypes.Sunny;
     
-    void Start(){
-        //StartCreatingRuleSet();
+    // void Start(){
+    //     //StartCreatingRuleSet();
+    //     RuleCreationUIManager.Instance.CallThisToExist();
+        
+    // }
+
+    public void CallThisToExist(){
+        //do nothing
+        if(mainMenuScript != null){
+            mainMenuScript.SetRCUIMan(this);
+        }
+        Debug.Log("I am beggin you");
     }
 
     public void SetupMainMenu(){
@@ -74,6 +86,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     }
 
     public void StartEditingRuleSet(TileRuleSet ruleSet, string rsName = null){
+        Debug.Log("start editing");
         StartCreationScene();
         if(rsName == null){
             rsName = ruleSet.getRSName();
@@ -83,7 +96,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     }
 
     public void StartCreatingRuleSet(){
-        
+        Debug.Log("start creating");
         trs = new TileRuleSet.AllRules();
         trs.allTilesRules = new TileRuleSet.AllTilesRuleset();
         trs.allTilesRules.nonWeatherConditions = new List<TileRuleSet.RuleCondition>();
@@ -241,12 +254,19 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     }
 
     public void LeaveScene(){
+        if(rulesetCanvas == null){
+            Debug.LogWarning("Literally how");
+            gameObject.name = "This thing sucks ass";
+        }
         rulesetCanvas.SetActive(false);
         rulesetMenuCanvas.SetActive(true);
     }
     public void BackToMain(){
         rulesetCanvas.SetActive(false);
         rulesetMenuCanvas.SetActive(false);
+        if(mainMenuScript != null){
+            mainMenuScript.ReturnFromCreationCanvas();
+        }
     }
 
     public void UpdateName(TMPro.TMP_InputField text){
