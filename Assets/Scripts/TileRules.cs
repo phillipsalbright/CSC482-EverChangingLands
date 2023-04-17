@@ -512,4 +512,11 @@ public static class TileRules
         }
         return currentType;
     }
+
+    public static string getRSName(){
+        if(!useInspectorRules || ruleSet == null){
+            return "USING DEFAULT RULESET. NO RULESET ASSIGNED. PLEASE ASSIGN A RULESET, THE DEFAULT RULESET SHOULD NOT BE USED";
+        }
+        return ruleSet.getRSName();
+    }
 }
