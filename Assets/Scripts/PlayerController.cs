@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
             rainShape.shapeType = boxShape;
             float scaleSize = cam.orthographicSize / defaultOrthographicSize;
             rainShape.scale = new Vector3(scaleSize * defaultBoxSize.x, scaleSize * defaultBoxSize.y , 1);
-            Debug.Log(rainGenerator.GetComponent<ParticleSystem>().shape.scale);
         }
         
     }
