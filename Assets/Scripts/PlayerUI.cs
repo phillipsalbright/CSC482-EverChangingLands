@@ -346,6 +346,7 @@ public class PlayerUI : Singleton<PlayerUI>
             case PlayerController.mode.viewingTileInfo:
                 _playerController.currentControllerMode = PlayerController.mode.viewingTileInfo;
                 SwapHUD(8);
+                FindObjectOfType<InformationHUD>().SetAllTileInformation(WeatherManager.Instance.GetCurrentWeather());
                 break;
         }
     }

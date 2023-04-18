@@ -16,6 +16,10 @@ PrefabInstance:
       value: Sinking Island
       objectReference: {fileID: 0}
     - target: {fileID: 4465550843234885294, guid: 5a34b5488d47262438ec9afedd4be2ce, type: 3}
+      propertyPath: currentRuleset.allTilesRules.nonWeatherConditions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465550843234885294, guid: 5a34b5488d47262438ec9afedd4be2ce, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[0].nonWeatherConditions.Array.size
       value: 2
       objectReference: {fileID: 0}

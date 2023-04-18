@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +10,7 @@ public class InformationHUD : MonoBehaviour
     [SerializeField] private RulePanel rulePanelPrefab;
     [SerializeField] private GameObject contentHolder;
     [SerializeField] private GameObject tileInfo;
+    [SerializeField] private GameObject allTileContentHolder;
 
     public void SetInformation(Tile.TileTypes type, WeatherManager.WeatherTypes weatherType)
     {
@@ -31,6 +30,22 @@ public class InformationHUD : MonoBehaviour
         }
         tileInfo.SetActive(true);
         
+    }
+
+    public void SetAllTileInformation(WeatherManager.WeatherTypes weatherType)
+    {
+        foreach (Transform child in allTileContentHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        List<string> rules = TileManager.Instance.GetTileRuleSet().toStringForAllTileConditions(weatherType);
+        for (int i = 0; i < rules.Count; i++)
+        {
+            GameObject p = Instantiate(rulePanelPrefab.gameObject, allTileContentHolder.transform);
+            p.GetComponent<RulePanel>().SetRuleNumText(i + 1);
+            p.GetComponent<RulePanel>().SetRuleDescText(rules[i]);
+        }
+       // tileInfo.SetActive(true);
     }
 
     public void HideInfoDisplay()
