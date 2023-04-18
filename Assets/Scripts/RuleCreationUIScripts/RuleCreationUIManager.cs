@@ -5,6 +5,8 @@ using UnityEngine;
 public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
 {
     [Header("ui pieces")]
+    [SerializeField, Tooltip("The main menu script")]
+    private MainMenu mainMenuScript;
     [SerializeField, Tooltip("The canvas to be used for the ruleset creation")]
     private GameObject rulesetCanvas;
     [SerializeField, Tooltip("The canvas to be used before ruleset creation")]
@@ -19,6 +21,15 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     private List<GameObject> rcPanels;
     [SerializeField, Tooltip("the error text area")]
     private TMPro.TextMeshProUGUI errorText;
+    [SerializeField, Tooltip("The container for Tile panel objects")]
+    private GameObject tilePanelHolder;
+    [SerializeField, Tooltip("the container for weather panel objects")]
+    private GameObject weatherPanelHolder;
+    [Header("colors")]
+    [SerializeField, Tooltip("the default background color")]
+    private Color defaultColor = Color.black;
+    [SerializeField, Tooltip("the selected color")]
+    private Color selectedColor = Color.red;
     [Header("other settings")]
     [SerializeField, Tooltip("Current list of ruleconditions")]
     private List<TileRuleSet.RuleCondition> currentRCs;
@@ -39,8 +50,18 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     [SerializeField, Tooltip("the currently selected weather type")]
     private WeatherManager.WeatherTypes currentWeatherType = WeatherManager.WeatherTypes.Sunny;
     
-    void Start(){
-        //StartCreatingRuleSet();
+    // void Start(){
+    //     //StartCreatingRuleSet();
+    //     RuleCreationUIManager.Instance.CallThisToExist();
+        
+    // }
+
+    public void CallThisToExist(){
+        //do nothing
+        if(mainMenuScript != null){
+            mainMenuScript.SetRCUIMan(this);
+        }
+        Debug.Log("I am beggin you");
     }
 
     public void SetupMainMenu(){
@@ -48,9 +69,17 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
         rulesetMenuCanvas.GetComponent<RuleMainMenuCanvas>().Setup();
     }
 
+    public void SetDefaultColor(Color startColor){
+        if(defaultColor != Color.black){
+            return;
+        }
+        defaultColor = startColor;
+    }
+
     public void StartRSCreator(string trsName, string newRSString){
+        Debug.Log("starting rs creator with name: " + trsName + ", and default: " + newRSString);
         if(trsName ==  newRSString){
-            StartCreationScene();
+            StartCreatingRuleSet();
         }
         else{
             TileRuleSet ruleSetToUse = RuleSetManager.Instance.GetRuleSetByName(trsName);
@@ -70,10 +99,12 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
         errorText.text = "";
         rulesetCanvas.SetActive(true);
         rulesetMenuCanvas.SetActive(false);
-        
+        SetTilePanelSelected(0);
+        SetWeatherPanelSelected(0);
     }
 
     public void StartEditingRuleSet(TileRuleSet ruleSet, string rsName = null){
+        Debug.Log("start editing");
         StartCreationScene();
         if(rsName == null){
             rsName = ruleSet.getRSName();
@@ -83,7 +114,7 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     }
 
     public void StartCreatingRuleSet(){
-        
+        Debug.Log("start creating");
         trs = new TileRuleSet.AllRules();
         trs.allTilesRules = new TileRuleSet.AllTilesRuleset();
         trs.allTilesRules.nonWeatherConditions = new List<TileRuleSet.RuleCondition>();
@@ -114,16 +145,18 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
 
     }
 
-    public void SetNewWeather(bool allWeather, WeatherManager.WeatherTypes newWeather = WeatherManager.WeatherTypes.Sunny){
+    public void SetNewWeather(GameObject panelSelected, bool allWeather, WeatherManager.WeatherTypes newWeather = WeatherManager.WeatherTypes.Sunny){
         nonWeather = allWeather;
         currentWeatherType = newWeather;
         RefreshRuleConditionsView();
+        SetWeatherPanelSelected(panelSelected);
     }
 
-    public void SetNewTileType(bool allTileTypes, Tile.TileTypes newTile = Tile.TileTypes.DeepWater){
+    public void SetNewTileType(GameObject panelSelected, bool allTileTypes, Tile.TileTypes newTile = Tile.TileTypes.DeepWater){
         allTiles = allTileTypes;
         currentTileType = newTile;
         RefreshRuleConditionsView();
+        SetTilePanelSelected(panelSelected);
     }
 
     public void RefreshRuleConditionsView(){
@@ -210,6 +243,33 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
         DeleteRuleCondition(deleteIndex);
     }
 
+    public void MoveRCUp(GameObject rcPanel){
+        int moveIndex = rcPanels.IndexOf(rcPanel);
+        if(moveIndex <= 0){
+            return;
+        }
+        setnewIndex(rcPanel, moveIndex, moveIndex-1);
+    }
+
+    public void MoveRCDown(GameObject rcPanel){
+        int moveIndex = rcPanels.IndexOf(rcPanel);
+        if(moveIndex >= currentRCs.Count - 1){
+            return;
+        }
+        setnewIndex(rcPanel, moveIndex, moveIndex + 1);
+    }
+
+    public void setnewIndex(GameObject rcPanel, int startIndex, int endIndex){
+        rcPanels.RemoveAt(startIndex);
+        rcPanels.Insert(endIndex, rcPanel);
+
+        currentRCs.RemoveAt(startIndex);
+        currentRCs.Insert(endIndex, rcPanel.GetComponent<RulePanelUI>().getRC());
+
+        rcPanel.transform.SetSiblingIndex(endIndex + 1);
+
+    }
+
     public void UpdateRuleCondition(GameObject rcPanel){
         int updateIndex = rcPanels.IndexOf(rcPanel);
         if(updateIndex < 0){
@@ -241,12 +301,19 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     }
 
     public void LeaveScene(){
+        if(rulesetCanvas == null){
+            Debug.LogWarning("Literally how");
+            gameObject.name = "This thing sucks ass";
+        }
         rulesetCanvas.SetActive(false);
         rulesetMenuCanvas.SetActive(true);
     }
     public void BackToMain(){
         rulesetCanvas.SetActive(false);
         rulesetMenuCanvas.SetActive(false);
+        if(mainMenuScript != null){
+            mainMenuScript.ReturnFromCreationCanvas();
+        }
     }
 
     public void UpdateName(TMPro.TMP_InputField text){
@@ -256,5 +323,39 @@ public class RuleCreationUIManager : Singleton<RuleCreationUIManager>
     public void SceneLeaveFailure(string reason){
         Debug.LogWarning(reason);
         errorText.text = reason;
+    }
+
+    public void ClearTileColors(){
+        foreach(RulePanelTileUI rpt in tilePanelHolder.transform.GetComponentsInChildren<RulePanelTileUI>()){
+            rpt.ChangeColor(defaultColor);
+        }
+    }
+
+    public void ClearWeatherColors(){
+        foreach(RulePanelWeatherUI rpw in weatherPanelHolder.transform.GetComponentsInChildren<RulePanelWeatherUI>()){
+            rpw.ChangeColor(defaultColor);
+        }
+    }
+
+    public void SetTilePanelSelected(GameObject selected){
+        ClearTileColors();
+        selected.GetComponent<RulePanelTileUI>().ChangeColor(selectedColor);
+    }
+    public void SetTilePanelSelected(int selectedIndex){
+        tilePanelHolder.transform.position = new Vector3(tilePanelHolder.transform.position.x, -50, tilePanelHolder.transform.position.z);
+        GameObject tilePanelToStart = tilePanelHolder.transform.GetChild(0).gameObject;
+        if(defaultColor == Color.black){
+            defaultColor = tilePanelToStart.GetComponent<RulePanelTileUI>().GetColor();
+        }
+        SetTilePanelSelected(tilePanelToStart);
+    }
+
+    public void SetWeatherPanelSelected(GameObject selected){
+        ClearWeatherColors();
+        selected.GetComponent<RulePanelWeatherUI>().ChangeColor(selectedColor);
+    }
+
+    public void SetWeatherPanelSelected(int selectedIndex){
+        SetWeatherPanelSelected(weatherPanelHolder.transform.GetChild(0).gameObject);
     }
 }

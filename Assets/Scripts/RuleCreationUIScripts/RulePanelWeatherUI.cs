@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RulePanelWeatherUI : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class RulePanelWeatherUI : MonoBehaviour
     private WeatherManager.WeatherTypes weatherType = WeatherManager.WeatherTypes.Sunny;
     
     public void ChangeWeatherType(){
-        RuleCreationUIManager.Instance.SetNewWeather(allWeather, weatherType);
+        RuleCreationUIManager.Instance.SetNewWeather(gameObject, allWeather, weatherType);
+    }
+
+    public void ChangeColor(Color newColor){
+        gameObject.GetComponent<Image>().color = newColor;
+    }
+
+    public Color GetColor(){
+        return gameObject.GetComponent<Image>().color;
     }
 }

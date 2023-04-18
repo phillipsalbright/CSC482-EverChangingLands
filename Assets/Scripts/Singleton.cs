@@ -21,6 +21,7 @@ public class Singleton<T> : MonoBehaviour where T: Component
                 {
                     GameObject go = new GameObject();
                     _instance = go.AddComponent<T>();
+                    Debug.Log("Generating new singleton");
                 }
             }
             return _instance;

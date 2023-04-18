@@ -7,7 +7,7 @@ public class RuleSetMakerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //RuleCreationUIManager.Instance.CallThisToExist();
     }
 
     // Update is called once per frame

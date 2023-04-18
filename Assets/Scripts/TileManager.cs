@@ -66,6 +66,13 @@ public class TileManager : Singleton<TileManager>
         }
 
         GenerateMap();
+        CustomMap customMap = FindObjectOfType<CustomMap>();
+        if (customMap != null)
+        {
+            if(customMap.getRS() != null){
+                tileRuleSet = customMap.getRS();
+            }
+        }
         if(tileRuleSet == null){
             Debug.Log("Ruleset was null. checking components");
             tileRuleSet = gameObject.GetComponent<TileRuleSet>();
@@ -75,6 +82,7 @@ public class TileManager : Singleton<TileManager>
             Debug.Log("ruleset not null. trying to set.");
             TileRules.SetRuleSet(tileRuleSet);
         }
+        Debug.Log("doing initial rule path with ruleset: " + TileRules.getRSName());
         CheckTiles(true);
     }
 

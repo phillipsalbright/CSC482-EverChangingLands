@@ -344,4 +344,9 @@ public class RulePanelUI : MonoBehaviour
     public void DeleteThis(){
         RuleCreationUIManager.Instance.DeleteRuleCondition(gameObject);
     }
+    public void MoveUp(){
+        RuleCreationUIManager.Instance.MoveRCUp(gameObject);
+    }public void MoveDown(){
+        RuleCreationUIManager.Instance.MoveRCDown(gameObject);
+    }
 }
