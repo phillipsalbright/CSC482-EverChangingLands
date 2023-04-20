@@ -325,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[0].NumTiles
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[0].ruleConditions.Array.data[1].NumTiles
@@ -361,7 +361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[0].NumTiles
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[1].ruleConditions.Array.data[1].NumTiles
@@ -397,7 +397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[2].ruleConditions.Array.data[1].NumTiles
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8575862916341741529, guid: 56793b7aa41dd6045ab799c0cbc8ba05, type: 3}
       propertyPath: currentRuleset.tileRules.Array.data[1].rules.Array.data[2].ruleConditions.Array.data[2].NumTiles
