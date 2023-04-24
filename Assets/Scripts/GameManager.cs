@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private UnityEvent<int> _onTurnChanged = new();
     private int _turn = 0;
     private Tile selectedTile;
+    private bool gameWon = false;
     [SerializeField] private Tilemap selectionMap;
     [SerializeField] private TileBase[] reticles;
     /**
@@ -57,6 +58,13 @@ public class GameManager : MonoBehaviour
 
     public void AdvanceTurn()
     {
+        foreach (Settler s in FindObjectsOfType<Settler>())
+        {
+            if (s.GetCanCollect())
+            {
+                s.CollectResource();
+            }
+        }
         _turn++;
         _onTurnChanged.Invoke(_turn);
         tileManager.AdvanceTurn();
@@ -64,6 +72,11 @@ public class GameManager : MonoBehaviour
         foreach (Settler s in FindObjectsOfType<Settler>())
         {
             s.StartNewTurn();
+        }
+
+        if (!(hasGameBeenWon()) && settlerManager.GetNumberAliveSettlers() >= 10)
+        {
+            setGameWon();
         }
     }
 
@@ -106,24 +119,6 @@ public class GameManager : MonoBehaviour
 
     public void DisplayFlipTiles(Tile tile)
     {
-        //TileBase tileBase = ResourceManager.Instance.getResourceCount(ResourceManager.ResourceTypes.Food) > 5 ? reticles[2] : reticles[0];
-        // TileBase tileBase = reticles[2];
-        /**
-       selectionMap.SetTile(tile.GetTilePosition(), tileBase);
-       if(tileBase == reticles[2])
-       {
-           tile.SetIsValid(true);
-       }
-
-       foreach(Tile t in tile.GetAdjacentTiles())
-       {
-           selectionMap.SetTile(t.GetTilePosition(), tileBase);
-           if(tileBase == reticles[2])
-           {
-               t.SetIsValid(true);
-           }
-       }
-       */
         if (BuildingManager.Instance.hasBuilding(tile))
         {   
             selectionMap.SetTile(tile.GetTilePosition(), reticles[2]);
@@ -219,11 +214,15 @@ public class GameManager : MonoBehaviour
 
     }
 
-    
-
-    // Update is called once per frame
-    void Update()
+    public bool hasGameBeenWon()
     {
-        
+        return gameWon;
+    }
+
+    public void setGameWon()
+    {
+        gameWon = true;
+        Debug.LogError("GameWon");
+        FindObjectOfType<PlayerUI>().SetMode(PlayerController.mode.GameWon);
     }
 }

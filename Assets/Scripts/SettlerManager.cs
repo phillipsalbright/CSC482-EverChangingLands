@@ -15,12 +15,6 @@ public class SettlerManager : Singleton<SettlerManager>
         settlers = new List<GameObject>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public int GetCurrentNumberOfSettlers()
     {
         return settlers.Count;
@@ -36,7 +30,7 @@ public class SettlerManager : Singleton<SettlerManager>
                 alive++;
             }
         }
-
+        Debug.LogError(alive);
         return alive;
     }
 
