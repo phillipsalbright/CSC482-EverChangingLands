@@ -14,6 +14,8 @@ public class PlayerUI : Singleton<PlayerUI>
 {
     [SerializeField] private TMP_Text _turnText;
 
+    [SerializeField] private TMP_Text _settlerText;
+
     [SerializeField] private Button nextTurnButton;
 
     [SerializeField] private GameObject previewElement;
@@ -45,6 +47,8 @@ public class PlayerUI : Singleton<PlayerUI>
     [SerializeField] private GameObject _tileFlippingHUD;
     [SerializeField] private GameObject _selectedTileToFlipHUD;
     [SerializeField] private GameObject _viewTileInfoHUD;
+    [SerializeField] private GameObject _winScreenHUD;
+    [SerializeField] private GameObject _tutorialHUD;
     [SerializeField] private Button[] _tileFlippingButtons;
     [SerializeField] private TMP_Text setSettlerText;
     [SerializeField] private List<GameObject> huds = new List<GameObject>();
@@ -70,6 +74,8 @@ public class PlayerUI : Singleton<PlayerUI>
         huds.Add(_tileFlippingHUD);
         huds.Add(_selectedTileToFlipHUD);
         huds.Add(_viewTileInfoHUD);
+        huds.Add(_winScreenHUD);
+        huds.Add(_tutorialHUD);
         Cursor.visible = false;
         GameManager g = GameManager.Instance;
         nextTurnButton.onClick.AddListener(g.AdvanceTurn);
@@ -173,6 +179,8 @@ public class PlayerUI : Singleton<PlayerUI>
 
         if(context.performed)
         {
+            _hoverCursorImage.gameObject.SetActive(true);
+            _normalCursorImage.gameObject.SetActive(false);
             Ray ray = Camera.main.ScreenPointToRay(_cursorPosition);
             ray.direction = new Vector3(0, 0, 1);
             int layer_mask = LayerMask.GetMask("Settler");
@@ -187,7 +195,6 @@ public class PlayerUI : Singleton<PlayerUI>
             EventSystem.current.RaycastAll(p, raycastResult);
             if (raycastResult.Count <= 0)
             {
-                //SetMode(PlayerController.mode.BeginTurn);
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer_mask) && (_playerController.currentControllerMode == PlayerController.mode.BeginTurn || _playerController.currentControllerMode == PlayerController.mode.SettlerActions))
                 {
                     Settler s = hit.transform.gameObject.GetComponent<Settler>();
@@ -247,7 +254,8 @@ public class PlayerUI : Singleton<PlayerUI>
                         GameManager.Instance.DeleteSelection();
                         GameManager.Instance.SelectTile(t, 4);
                         FindObjectOfType<InformationHUD>().SetInformation(t.GetCurrentTileType(), WeatherManager.Instance.GetCurrentWeather());
-                    } else if (_playerController.currentControllerMode != PlayerController.mode.Paused && _playerController.currentControllerMode != PlayerController.mode.GameOver)
+                    } else if (_playerController.currentControllerMode != PlayerController.mode.Paused && _playerController.currentControllerMode != PlayerController.mode.GameOver && 
+                            _playerController.currentControllerMode != PlayerController.mode.GameWon && _playerController.currentControllerMode != PlayerController.mode.Tutorial)
                     {
                         SetMode(PlayerController.mode.BeginTurn);
                     }
@@ -263,13 +271,20 @@ public class PlayerUI : Singleton<PlayerUI>
                 Debug.Log(raycastResult[0]);
                 raycastResult[0].gameObject.GetComponentInParent<Button>().onClick.Invoke();
             }
-
-           
         }
+        else
+        {
+            _hoverCursorImage.gameObject.SetActive(false);
+            _normalCursorImage.gameObject.SetActive(true);
+        }
+
+        _settlerText.text = "Settlers: " + SettlerManager.Instance.GetNumberAliveSettlers();
     }
 
     public void SetMode(PlayerController.mode newMode)
     {
+
+        Debug.Log("glompy" + newMode);
         switch (newMode)
         {
             case PlayerController.mode.BeginTurn:
@@ -311,27 +326,6 @@ public class PlayerUI : Singleton<PlayerUI>
             case PlayerController.mode.SelectFlipTile:
                 SwapHUD(7);
                 TileSwitchManager.Instance.OpenTileManager(_selectedTileToFlip.GetCurrentTileType(), _selectedTileToFlip.GetTilePos2());
-                /*List<TileInfo.TileSwitch> switches = TileInfo.Instance.GetTileSwitches(_selectedTileToFlip.GetCurrentTileType());
-                for (int i = 0; i < _tileFlippingButtons.Length; i++)
-                {
-                    if (i < switches.Count)
-                    {
-                        _tileFlippingButtons[i].gameObject.SetActive(true);
-                        _tileFlippingButtons[i].gameObject.GetComponentInChildren<TMP_Text>().text = Enum.GetName(typeof(Tile.TileTypes), switches[i].switchTile);
-                        _tileFlippingButtons[i].interactable = true;
-                        for (int j = 0; j < switches[i].requiredResources.Count; j++)
-                        {
-                            if (switches[i].requiredResourcesCount[j] > ResourceManager.Instance.getResourceCount(switches[i].requiredResources[j]))
-                            {
-                                _tileFlippingButtons[i].interactable = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        _tileFlippingButtons[i].gameObject.SetActive(false);
-                    }
-                }*/
                 _playerController.currentControllerMode = PlayerController.mode.SelectFlipTile;
                 break;
             case PlayerController.mode.GameOver:
@@ -347,6 +341,14 @@ public class PlayerUI : Singleton<PlayerUI>
                 _playerController.currentControllerMode = PlayerController.mode.viewingTileInfo;
                 SwapHUD(8);
                 FindObjectOfType<InformationHUD>().SetAllTileInformation(WeatherManager.Instance.GetCurrentWeather());
+                break;
+            case PlayerController.mode.GameWon:
+                _playerController.currentControllerMode = PlayerController.mode.GameWon;
+                SwapHUD(9);
+                break;
+            case PlayerController.mode.Tutorial:
+                _playerController.currentControllerMode = PlayerController.mode.Tutorial;
+                SwapHUD(10);
                 break;
         }
     }
