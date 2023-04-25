@@ -512,6 +512,7 @@ GameObject:
   m_Component:
   - component: {fileID: 135645491}
   - component: {fileID: 135645492}
+  - component: {fileID: 4460251403457546045}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -557,7 +558,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -574,6 +575,19 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &4460251403457546045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135645490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99736a3a5803db9478773cc2add24d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filename: forcast.mp4
 --- !u!1 &201507968
 GameObject:
   m_ObjectHideFlags: 0
@@ -6009,6 +6023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1569341380}
   - component: {fileID: 1569341381}
+  - component: {fileID: 5654636694573632196}
   m_Layer: 0
   m_Name: Video Player (1)
   m_TagString: Untagged
@@ -6054,7 +6069,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -6071,6 +6086,19 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &5654636694573632196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569341379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99736a3a5803db9478773cc2add24d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filename: rules.mp4
 --- !u!1 &1603273695
 GameObject:
   m_ObjectHideFlags: 0
@@ -8331,6 +8359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5933161673760613547}
   - component: {fileID: 3687154989075897646}
+  - component: {fileID: 3839890323853479684}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -8381,7 +8410,7 @@ VideoPlayer:
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
-  m_Url: 
+  m_Url: file://G:/Unity Projects/CSC482-EverChangingLands/Assets/Resources/TutorialImages/4a583da172fbf94ed05aacc36566376d.mp4
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
@@ -8391,6 +8420,19 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &3839890323853479684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124612526313550516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99736a3a5803db9478773cc2add24d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filename: 4a583da172fbf94ed05aacc36566376d.mp4
 --- !u!1 &861008228222162775
 GameObject:
   m_ObjectHideFlags: 0
@@ -8499,7 +8541,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8.2
+  m_fontSize: 6.45
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8818,6 +8860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7016573995288532832}
   - component: {fileID: 2592189063953657876}
+  - component: {fileID: 5581222985148059766}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -8863,7 +8906,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -8880,6 +8923,19 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &5581222985148059766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924464890505307988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99736a3a5803db9478773cc2add24d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filename: placing.mp4
 --- !u!1 &2727904432641488108
 GameObject:
   m_ObjectHideFlags: 0
@@ -9315,7 +9371,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 29.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
