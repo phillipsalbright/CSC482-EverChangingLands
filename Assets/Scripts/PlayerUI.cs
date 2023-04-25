@@ -48,6 +48,7 @@ public class PlayerUI : Singleton<PlayerUI>
     [SerializeField] private GameObject _selectedTileToFlipHUD;
     [SerializeField] private GameObject _viewTileInfoHUD;
     [SerializeField] private GameObject _winScreenHUD;
+    [SerializeField] private GameObject _tutorialHUD;
     [SerializeField] private Button[] _tileFlippingButtons;
     [SerializeField] private TMP_Text setSettlerText;
     [SerializeField] private List<GameObject> huds = new List<GameObject>();
@@ -74,6 +75,7 @@ public class PlayerUI : Singleton<PlayerUI>
         huds.Add(_selectedTileToFlipHUD);
         huds.Add(_viewTileInfoHUD);
         huds.Add(_winScreenHUD);
+        huds.Add(_tutorialHUD);
         Cursor.visible = false;
         GameManager g = GameManager.Instance;
         nextTurnButton.onClick.AddListener(g.AdvanceTurn);
@@ -252,7 +254,8 @@ public class PlayerUI : Singleton<PlayerUI>
                         GameManager.Instance.DeleteSelection();
                         GameManager.Instance.SelectTile(t, 4);
                         FindObjectOfType<InformationHUD>().SetInformation(t.GetCurrentTileType(), WeatherManager.Instance.GetCurrentWeather());
-                    } else if (_playerController.currentControllerMode != PlayerController.mode.Paused && _playerController.currentControllerMode != PlayerController.mode.GameOver && _playerController.currentControllerMode != PlayerController.mode.GameWon)
+                    } else if (_playerController.currentControllerMode != PlayerController.mode.Paused && _playerController.currentControllerMode != PlayerController.mode.GameOver && 
+                            _playerController.currentControllerMode != PlayerController.mode.GameWon && _playerController.currentControllerMode != PlayerController.mode.Tutorial)
                     {
                         SetMode(PlayerController.mode.BeginTurn);
                     }
@@ -342,6 +345,10 @@ public class PlayerUI : Singleton<PlayerUI>
             case PlayerController.mode.GameWon:
                 _playerController.currentControllerMode = PlayerController.mode.GameWon;
                 SwapHUD(9);
+                break;
+            case PlayerController.mode.Tutorial:
+                _playerController.currentControllerMode = PlayerController.mode.Tutorial;
+                SwapHUD(10);
                 break;
         }
     }

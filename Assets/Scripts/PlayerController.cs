@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     float defaultOrthographicSize = 0;
     private Camera cam;
     private Vector2 inputVector = Vector2.zero;
-    public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile, GameOver, Paused, viewingTileInfo, GameWon};
+    public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile, GameOver, Paused, viewingTileInfo, GameWon, Tutorial};
     public mode currentControllerMode;
 
     private float zoomInput;

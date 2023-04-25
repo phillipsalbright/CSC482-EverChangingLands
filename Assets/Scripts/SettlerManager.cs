@@ -30,7 +30,6 @@ public class SettlerManager : Singleton<SettlerManager>
                 alive++;
             }
         }
-        Debug.LogError(alive);
         return alive;
     }
 
