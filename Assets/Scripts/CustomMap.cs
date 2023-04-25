@@ -28,6 +28,8 @@ public class CustomMap : MonoBehaviour
     [SerializeField]
     private TMP_InputField mapY;
     bool firstAwake = true;
+    [SerializeField]
+    private TileRuleSet trs = null;
 
     // Start is called before the first frame update
     void Awake()
@@ -81,5 +83,15 @@ public class CustomMap : MonoBehaviour
     public float GetTileScale()
     {
         return tileScale;
+    }
+
+    public TileRuleSet getRS(){
+        return trs;
+    }
+
+    public void setRS(TileRuleSet newTRS){
+        trs = gameObject.AddComponent<TileRuleSet>();
+        trs.setRSName(newTRS.getRSName());
+        trs.SetRuleSet(newTRS.getRuleset());
     }
 }

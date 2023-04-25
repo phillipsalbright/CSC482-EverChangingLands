@@ -117,6 +117,29 @@ public class TileRuleSet : MonoBehaviour
         return result;
     }
 
+    public List<String> toStringForAllTileConditions(WeatherManager.WeatherTypes thisWeather)
+    {
+        List<String> rules = new List<string>();
+        foreach (RuleCondition rc in currentRuleset.allTilesRules.nonWeatherConditions)
+        {
+            rules.Add(ruleConditionString(rc));
+        }
+        foreach (Rule r in currentRuleset.allTilesRules.rules)
+        {
+            if (r.weatherType == thisWeather)
+            {
+                foreach (RuleCondition rc in r.ruleConditions)
+                {
+                    rules.Add(ruleConditionString(rc));
+                }
+
+            }
+
+        }
+
+        return rules;
+    }
+
     public List<String> toStringForTileGivenWeather(Tile.TileTypes type, WeatherManager.WeatherTypes thisWeather)
     {
         List<String> rules = new List<string>();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RulePanelTileUI : MonoBehaviour
 {
@@ -10,6 +11,20 @@ public class RulePanelTileUI : MonoBehaviour
     public Tile.TileTypes thisTileType = Tile.TileTypes.DeepWater;
 
     public void ChangeTileType(){
-        RuleCreationUIManager.Instance.SetNewTileType(allTiles, thisTileType);
+        RuleCreationUIManager.Instance.SetNewTileType(gameObject, allTiles, thisTileType);
     } 
+
+    public void ChangeColor(Color newColor){
+        gameObject.GetComponent<Image>().color = newColor;
+    }
+
+    public Color GetColor(){
+        return gameObject.GetComponent<Image>().color;
+    }
+
+    void Start(){
+        if(allTiles){
+            RuleCreationUIManager.Instance.SetDefaultColor(GetColor());
+        }
+    }
 }
