@@ -37,11 +37,16 @@ public class ResourceManager : Singleton<ResourceManager>
         base.Awake();
         foreach (ResourceTexts resourceText in resourceTexts)
         {
-            if (resourceText.resourceType != ResourceTypes.Person)
+            if (resourceText.resourceType != ResourceTypes.Person && resourceText.resourceType != ResourceTypes.Food)
             {
                 resourceTextDict.Add(resourceText.resourceType, resourceText.resourceText);
                 resourceCounts.Add(resourceText.resourceType, 10);
                 resourceText.resourceText.text = "10";
+            } else if (resourceText.resourceType == ResourceTypes.Food)
+            {
+                resourceTextDict.Add(resourceText.resourceType, resourceText.resourceText);
+                resourceCounts.Add(resourceText.resourceType, 20);
+                resourceText.resourceText.text = "20";
             }
             resourceSprites.Add(resourceText.resourceType, resourceText.resourceSprite);
         }
@@ -62,6 +67,7 @@ public class ResourceManager : Singleton<ResourceManager>
             }
         }
         resourceCounts[resourceType] += amount;
+        resourceCounts[resourceType] = Mathf.Min(120, resourceCounts[resourceType]);
         UpdateUI(resourceType);
         return true;
     }

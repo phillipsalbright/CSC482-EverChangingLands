@@ -49,7 +49,6 @@ public class PlayerUI : Singleton<PlayerUI>
     [SerializeField] private GameObject _viewTileInfoHUD;
     [SerializeField] private GameObject _winScreenHUD;
     [SerializeField] private GameObject _tutorialHUD;
-    [SerializeField] private Button[] _tileFlippingButtons;
     [SerializeField] private TMP_Text setSettlerText;
     [SerializeField] private List<GameObject> huds = new List<GameObject>();
 

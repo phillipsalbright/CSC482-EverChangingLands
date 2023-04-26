@@ -12,7 +12,6 @@ public class TutorialHUD : MonoBehaviour
     {
         currentPage = (currentPage + 1) % pages.Length;
         OpenPage(currentPage);
-        Debug.Log("pressed");
     }
 
     public void MoveBack()

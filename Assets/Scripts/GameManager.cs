@@ -15,14 +15,6 @@ public class GameManager : MonoBehaviour
     private bool gameWon = false;
     [SerializeField] private Tilemap selectionMap;
     [SerializeField] private TileBase[] reticles;
-    /**
-    [SerializeField] private TileBase reticleRedTile;
-    [SerializeField] private TileBase reticleGreenTile;
-    [SerializeField] private TileBase reticleYellowTile;
-    [SerializeField] private TileBase reticleBlueTile;
-    [SerializeField] private TileBase reticlePurpleTile;
-    [SerializeField] private TileBase reticleOrangeTile;
-    */
 
     public static GameManager Instance
     {
@@ -119,6 +111,13 @@ public class GameManager : MonoBehaviour
 
     public void DisplayFlipTiles(Tile tile)
     {
+        foreach (Tile t in tileManager.GetTileDictionary().Values)
+        {
+            t.SetIsValid(false);
+        }
+        selectionMap.SetTile(tile.GetTilePosition(), reticles[2]);
+        tile.SetIsValid(true);
+        /** same deal as below
         if (BuildingManager.Instance.hasBuilding(tile))
         {   
             selectionMap.SetTile(tile.GetTilePosition(), reticles[2]);
@@ -129,9 +128,14 @@ public class GameManager : MonoBehaviour
             selectionMap.SetTile(tile.GetTilePosition(), reticles[0]);
             tile.SetIsValid(false);
         }
+        */
+
 
         foreach (Tile t in tile.GetAdjacentTiles())
         {
+            selectionMap.SetTile(t.GetTilePosition(), reticles[2]);
+            t.SetIsValid(true);
+            /** used to now allow flipping tile on building, i think its good to allow it so got rid of this
             if (BuildingManager.Instance.hasBuilding(t))
             {
                 selectionMap.SetTile(t.GetTilePosition(), reticles[2]);
@@ -142,6 +146,7 @@ public class GameManager : MonoBehaviour
                 selectionMap.SetTile(t.GetTilePosition(), reticles[0]);
                 t.SetIsValid(false);
             }
+            */
         }
   
     }
