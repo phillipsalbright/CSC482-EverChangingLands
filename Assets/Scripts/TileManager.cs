@@ -346,7 +346,7 @@ public class TileManager : Singleton<TileManager>
     {
         return tiles;
     }
-
+    
     public Tilemap GetTilemap()
     {
         return tilemap;
@@ -373,7 +373,8 @@ public class TileManager : Singleton<TileManager>
     {
         tiles[pos].PlayerChangeTileType(newTile);
         tilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), TileInfo.Instance.GetTile(newTile));
-        FillChangeMap();
+        CheckTiles(false);
+       // FillChangeMap(); 
     }
 
     public void FillChangeMap()
