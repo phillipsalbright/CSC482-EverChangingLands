@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         if (currentControllerMode != mode.Paused && currentControllerMode != mode.GameOver)
         {
             transform.Translate(inputVector * _cameraSpeed * Time.deltaTime);
-            transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);
+            //transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);
             float zoomScalar = 1;
             if (this.GetComponent<PlayerInput>().currentControlScheme == "Gamepad")
             {
