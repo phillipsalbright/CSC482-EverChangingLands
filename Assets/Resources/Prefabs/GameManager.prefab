@@ -45,10 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac959598e0f0e1f43986076de1f42e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingFoodCount: 100
-  _startingWoodCount: 100
   selectionMap: {fileID: 0}
-  reticleTile: {fileID: 11400000, guid: 008d9c91db30e4a49ab816973e19f0f2, type: 2}
+  reticles:
+  - {fileID: 11400000, guid: 008d9c91db30e4a49ab816973e19f0f2, type: 2}
+  - {fileID: 11400000, guid: 0ab67ca57b882174fbf2f591d8928a77, type: 2}
+  - {fileID: 11400000, guid: b6765181700e23f48a90960d247946b3, type: 2}
+  - {fileID: 11400000, guid: da599ca76cd20454a8c2e7ac59feea95, type: 2}
+  - {fileID: 11400000, guid: 9f5780ba764b3974eb48bc5743ec1b48, type: 2}
+  - {fileID: 11400000, guid: f476f9a2c0caef7418af9ff332abfa26, type: 2}
 --- !u!114 &1525271557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,3 +68,4 @@ MonoBehaviour:
   settlers: []
   initialNumberOfSettlers: 3
   settlerPrefab: {fileID: 4285547668261436011, guid: 080fd1dd2e80b6a4cb8f574ee619ccd5, type: 3}
+  maxSettlerMovement: 5

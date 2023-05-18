@@ -12,8 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 ybounds;
     [SerializeField] private Vector2 sizebounds;
     [SerializeField] private PlayerUI ui;
+    [SerializeField] private GameObject rainGenerator;
+    ParticleSystemShapeType boxShape = ParticleSystemShapeType.Box;
+    Vector3 defaultBoxSize = Vector3.zero;
+    float defaultOrthographicSize = 0;
     private Camera cam;
     private Vector2 inputVector = Vector2.zero;
+    public enum mode { GameStart, BeginTurn, SettlerActions, MovingSettler, Building, Flipping, SelectFlipTile, GameOver, Paused, viewingTileInfo, GameWon, Tutorial};
+    public mode currentControllerMode;
 
     private float zoomInput;
     // Start is called before the first frame update
@@ -21,21 +27,31 @@ public class PlayerController : MonoBehaviour
     {
         cam = this.GetComponent<Camera>();
         ui = GetComponentInChildren<PlayerUI>();
+        defaultOrthographicSize = cam.orthographicSize;
+        defaultBoxSize = rainGenerator.GetComponent<ParticleSystem>().shape.scale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(inputVector * _cameraSpeed * Time.deltaTime);
-        transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);
-        float zoomScalar = 1;
-        if (this.GetComponent<PlayerInput>().currentControlScheme == "Gamepad")
+        if (currentControllerMode != mode.Paused && currentControllerMode != mode.GameOver)
         {
-            zoomScalar = 5;
+            transform.Translate(inputVector * _cameraSpeed * Time.deltaTime);
+            //transform.position = new Vector3(Math.Clamp(transform.position.x, xbounds.x, xbounds.y), Math.Clamp(transform.position.y, ybounds.x, ybounds.y), transform.position.z);
+            float zoomScalar = 1;
+            if (this.GetComponent<PlayerInput>().currentControlScheme == "Gamepad")
+            {
+                zoomScalar = 5;
+            }
+
+            cam.orthographicSize += zoomInput * zoomScalar * Time.deltaTime / -2;
+            cam.orthographicSize = Math.Clamp(cam.orthographicSize, sizebounds.x, sizebounds.y);
+            var rainShape = rainGenerator.GetComponent<ParticleSystem>().shape;
+            rainShape.shapeType = boxShape;
+            float scaleSize = cam.orthographicSize / defaultOrthographicSize;
+            rainShape.scale = new Vector3(scaleSize * defaultBoxSize.x, scaleSize * defaultBoxSize.y , 1);
         }
         
-        cam.orthographicSize += zoomInput * zoomScalar * Time.deltaTime / -2;
-        cam.orthographicSize = Math.Clamp(cam.orthographicSize, sizebounds.x, sizebounds.y);
     }
 
     public void MovementInputChanged(InputAction.CallbackContext context)

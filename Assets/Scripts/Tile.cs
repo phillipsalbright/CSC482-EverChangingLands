@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using Mono.Cecil;
 using UnityEngine;
 
 public class Tile
@@ -14,6 +15,10 @@ public class Tile
         Dirt,
         Water,
         DeepWater,
+        Rocks,
+        Mountain,
+        SnowPeak,
+        Fire,
     }
 
     private TileTypes currentTileType;
@@ -28,17 +33,42 @@ public class Tile
     private bool tileChanging = false;
 
     private Vector3Int tilePos;
+    private bool isValid;
+    private bool isWalkable;
+
+    private AudioSource tileSound;
+
+    public Vector2Int GetTilePos2()
+    {
+        return new Vector2Int(tilePos.x, tilePos.y);
+    }
 
     public Tile(TileTypes currentTileType, Vector3Int tileLoc)
     {
         SetCurrentTileType(currentTileType);
         SetNextTileType(currentTileType);
         tilePos = tileLoc;
+        isValid = false;
     }
 
     public Vector3Int GetTilePosition()
     {
         return tilePos;
+    }
+
+    public void SetIsValid(bool valid)
+    {
+        isValid = valid;
+    }
+
+    public bool GetIsValid()
+    {
+        return isValid;
+    }
+
+    public bool GetIsWalkable()
+    {
+        return isWalkable;
     }
 
     //checks if the tile will change terrain next turn. use for forecasting
@@ -51,6 +81,7 @@ public class Tile
     public void SetCurrentTileType(TileTypes tileType)
     {
         currentTileType = tileType;
+        isWalkable = currentTileType != Tile.TileTypes.Water && currentTileType != Tile.TileTypes.DeepWater && currentTileType != Tile.TileTypes.Fire;
     }
 
     //sets the current tile's terrain and recall forecast methods
@@ -108,5 +139,18 @@ public class Tile
     public Tile[,] GetAdjacentTiles()
     {
         return adjacentTiles;
+    }
+
+    public void setAudioSource(AudioSource sound)
+    {
+        if(tileSound)
+        {
+            tileSound.Stop();
+        }
+        tileSound = sound;
+        if(tileSound)
+        {
+            tileSound.Play();
+        }
     }
 }

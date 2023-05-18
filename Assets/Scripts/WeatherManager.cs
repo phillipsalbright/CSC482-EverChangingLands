@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Text;
 
 //  TO ADD A NEW WEATHER TYPE:
@@ -12,11 +13,27 @@ using System.Text;
 
 public class WeatherManager : Singleton<WeatherManager>
 {
+    
     public enum WeatherTypes{
         Sunny,
         Drought,
         Rain,
     }
+
+    [SerializeField]
+    private GameObject rainGenerator;
+
+    [Serializable]
+    public struct WeatherNames{
+        [Tooltip("tile type")]
+        public WeatherTypes weatherType;
+        [Tooltip("tile name")]
+        public string weatherName;
+    }
+    [Tooltip("tile name mapping"), SerializeField]
+    private List<WeatherNames> weatherNameList = new List<WeatherNames>();
+    //map of tile names
+    private Dictionary<WeatherTypes, String> weatherNameMap;
 
 [Serializable]
     public struct weatherRngVals{
@@ -59,7 +76,20 @@ public class WeatherManager : Singleton<WeatherManager>
 
     private List<WeatherTypes> allWeatherTypes;
 
+    [SerializeField] private Image weatherImage;
+    [SerializeField] private Sprite sunnySprite;
+    [SerializeField] private Sprite rainSprite;
+    [SerializeField] private Sprite droughtSprite;
+
     void Start(){
+
+        weatherNameMap = new Dictionary<WeatherTypes, string>();
+        foreach(WeatherNames wn in weatherNameList){
+            weatherNameMap.Add(wn.weatherType, wn.weatherName);
+        }
+
+
+
         allWeatherTypes = new List<WeatherTypes>(0);
         allWeatherTypes.Add(WeatherTypes.Sunny);
         allWeatherTypes.Add(WeatherTypes.Rain);
@@ -100,6 +130,7 @@ public class WeatherManager : Singleton<WeatherManager>
         weatherTurnCounts.Add(WeatherTypes.Rain, rain.minTurns);
 
         currentWeather = WeatherTypes.Sunny;
+        MusicManager.Instance.setBGMType(MusicManager.BGMType.SUNNY);
         numTurns = 1;
         GetNextWeather();
     }
@@ -117,6 +148,25 @@ public class WeatherManager : Singleton<WeatherManager>
             weatherRngTables[currentWeather] = new Dictionary<WeatherTypes, float>(defaultWeatherRngTables[currentWeather]);
             //weatherRngTables = new Dictionary<WeatherTypes, Dictionary<WeatherTypes, float>>(defaultWeatherRngTables);
             Debug.Log("Stored current weather chance: " + ToPrettyString(defaultWeatherRngTables[currentWeather]));
+
+            switch(nextWeather)
+            {
+                case WeatherTypes.Sunny:
+                    MusicManager.Instance.setBGMType(MusicManager.BGMType.SUNNY);
+                    rainGenerator.SetActive(false);
+                    weatherImage.sprite = sunnySprite;
+                    break;
+                case WeatherTypes.Rain:
+                    MusicManager.Instance.setBGMType(MusicManager.BGMType.RAINY);
+                    rainGenerator.SetActive(true);
+                    weatherImage.sprite = rainSprite;
+                    break;
+                case WeatherTypes.Drought:
+                    MusicManager.Instance.setBGMType(MusicManager.BGMType.DROUGHT);
+                    rainGenerator.SetActive(false);
+                    weatherImage.sprite = droughtSprite;
+                    break;
+            }
         }
         //Debug.Log("new current weather situation: " + string.Join(Environment.NewLine, weatherRngTables));
         currentWeather = nextWeather;
@@ -169,4 +219,11 @@ public class WeatherManager : Singleton<WeatherManager>
     str.Append("}");
     return str.ToString();
 }
+
+public String getWeatherNameString(WeatherTypes type){
+        if(!weatherNameMap.ContainsKey(type)){
+            return "~WEATHER NOT SET~";
+        }
+        return weatherNameMap[type];
+    }
 }

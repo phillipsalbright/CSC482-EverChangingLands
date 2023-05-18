@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettlerManager : MonoBehaviour
+public class SettlerManager : Singleton<SettlerManager>
 {
     [SerializeField] private List<GameObject> settlers;
     [SerializeField] private int initialNumberOfSettlers = 3;
     [SerializeField] private GameObject settlerPrefab;
+    [SerializeField] private int maxSettlerMovement = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -14,15 +15,22 @@ public class SettlerManager : MonoBehaviour
         settlers = new List<GameObject>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public int GetCurrentNumberOfSettlers()
     {
         return settlers.Count;
+    }
+
+    public int GetNumberAliveSettlers()
+    {
+        int alive = 0;
+        for (int i = 0; i < settlers.Count; i++)
+        {
+            if (!settlers[i].GetComponent<Settler>().isSettlerDead())
+            {
+                alive++;
+            }
+        }
+        return alive;
     }
 
     public int GetInitialNumberOfSettlers()
@@ -30,10 +38,21 @@ public class SettlerManager : MonoBehaviour
         return initialNumberOfSettlers;
     }
 
-    public void AddSettlerAtTile(Tile tile, Vector2 pos)
+    public int GetMaxSettlerMovement()
     {
-        bool compatableTile = tile.GetCurrentTileType() != Tile.TileTypes.Water && tile.GetCurrentTileType() != Tile.TileTypes.DeepWater;
+        return maxSettlerMovement;
+    }
+
+    public List<GameObject> GetSettlers()
+    {
+        return settlers;
+    }
+
+    public bool AddSettlerAtTile(Tile tile)
+    {
+        bool compatableTile = tile.GetIsWalkable() && tile.GetCurrentTileType() != Tile.TileTypes.Desert && tile.GetCurrentTileType() != Tile.TileTypes.Forest;
         bool tileHasSettler = false;
+
         foreach(GameObject s in settlers)
         {
             if(s.GetComponent<Settler>().GetCurrentTile() == tile)
@@ -46,8 +65,22 @@ public class SettlerManager : MonoBehaviour
         if (compatableTile && !tileHasSettler)
         {
             GameObject settler = GameObject.Instantiate(settlerPrefab, Vector3.zero, Quaternion.identity);
-            settler.GetComponent<Settler>().SetCurrentTileAndPosition(tile, pos);
+            settler.GetComponent<Settler>().SetInitialTileAndPosition(tile, true);
             settlers.Add(settler);
+            return true;
         }
+        return false;
+    }
+
+    public Settler GetSettlerAtPos(Vector2Int pos)
+    {
+        foreach(GameObject go in settlers)
+        {
+            if(go.GetComponent<Settler>().GetCurrentTile().GetTilePos2() == pos)
+            {
+                return go.GetComponent<Settler>();
+            }
+        }
+        return null;
     }
 }
