@@ -11,6 +11,8 @@ using System;
      */
 public class RuleSetIO : MonoBehaviour
 {
+    [SerializeField, Tooltip("the filepath name for the RuleSet folder")]
+    private string folderName = "RuleSets";
     public bool WriteToFile(TileRuleSet trs, string filename = null, bool overwrite = true){
         RuleSetSave rss = new RuleSetSave(trs);
         if(trs == null){
