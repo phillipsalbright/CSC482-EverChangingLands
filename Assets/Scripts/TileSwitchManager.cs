@@ -16,6 +16,13 @@ public class TileSwitchManager : Singleton<TileSwitchManager>
     {
         List<TileInfo.TileSwitch> tileSwitches = TileInfo.Instance.GetTileSwitches(tileType);
         int i = 0;
+        foreach (GameObject o in tileObjects)
+        {
+            Destroy(o);
+        }
+
+        tileLists = new List<TileSwitchListItem>();
+        tileObjects = new List<GameObject>();
         foreach (TileInfo.TileSwitch tileSwitch in tileSwitches)
         {
             if (i < tileObjects.Count)
